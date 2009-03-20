@@ -1,0 +1,9 @@
+  <ul>
+	<% for participant in @participants %>
+		<li><%= participant.name %> | <%= link_to_remote 'Remove', :update => 'participants', :url => {:action => 'remove_participant', :id => @process_pattern, :participant  => participant} %></li>
+	<% end %>
+	</ul>
+		<% unless @selectable_participants.empty? %>
+  <%= select(:participant, :name, @selectable_participants.collect{|p| [p.name, p.id]}, {:include_blank => true}) %>
+<%= link_to_remote 'Add', :update  => 'participants', :url  => {:action => 'add_participant', :id  => @process_pattern}, :with  => "'participant=' + $('participant_name').value" %>
+<% end %>

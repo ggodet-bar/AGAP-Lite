@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+
+/*@import "stylesheets/generic.css";*/
+
+h1 {
+	margin-bottom: 1.5em;
+}
+
+
+
+h2 {
+	color: #0000bb;
+	font-size: 1.8em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	}
+
+p {
+	margin-bottom: 0.6em;
+}
+
+div.errorExplanation {
+	border: solid #DD0000;
+	padding: 5px;
+	background-color: #EEDDDD;
+}
+
+div.errorExplanation h2 {
+	color: #DD0000;
+}
+
+#method_image {
+//	border: solid #FF0000;
+	
+}
+
+#copyright_notice {
+	margin-top: 10em;
+	text-align: center;
+	font-size: 0.8em;
+	color: #666666;
+}
+
+div#update_field {
+	border: solid thin #0000DD;
+	background-color: #EEEEFF;
+	padding: 10px;
+}
+
+div#update_field h3 {
+	color: #0000cc;
+	text-indent: 0px;
+	margin-bottom: 0.3em;
+	font-size: 1.2em;
+}
+		
+h3 {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #555;
+	text-indent: 1.8em;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+	}
+
+dd {
+	font-size: 1.3em;
+	font-weight: bold;
+	color: #555;
+	text-indent: 4em;
+	margin-bottom: 1em;
+	}
+	
+dt {
+	margin-bottom: 1.5em;
+	}
+	
+div.rubrique {
+	margin: 0 0 2em 2em;
+	}
+	
+li.item {
+	list-style-type: disc;
+}

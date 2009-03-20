@@ -1,0 +1,36 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+first_pattern:
+   author: "Bob Le Poulpe"
+   classification: "Farniente"
+   pattern_system_id: a_test_pattern_system
+
+second_pattern:
+  author: "Bob Le Poulpe"
+  classification: Regarder en l'air et penser au week-end
+  pattern_system_id: a_test_pattern_system
+  context_patterns: first_pattern
+
+updated_pattern:
+      author: "Bob Le Poulpe"
+      classification: "Rien fiche"
+      pattern_system_id: a_test_pattern_system
+      
+   # t.string   "author"
+   # t.string   "classification"
+   # t.string   "processContext"
+   # t.string   "productContext"
+   # t.text     "problem"
+   # t.text     "forces"
+   # t.string   "process_model_uri"
+   # t.text     "process_solution"
+   # t.text     "product_solution"
+   # t.string   "uses"
+   # t.string   "requires"
+   # t.string   "alternative"
+   # t.datetime "created_at"
+   # t.datetime "updated_at"
+   # t.string   "name"
+   # t.integer  "pattern_system_id"
+   # t.text     "application_case"
+   # t.text     "application_consequence"

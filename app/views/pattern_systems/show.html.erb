@@ -1,0 +1,70 @@
+<h1><%= @pattern_system.name %></h1>
+<h2><%= t :updates %></h2>
+<div id="update_field">
+<%= @pattern_system.update_field %>
+</div>
+<h2><%= t :author %></h2>
+<%= @pattern_system.author %>
+
+<h2><%= t :characteristics %></h2>
+<%= @pattern_system.characteristics %>
+
+<h2><%= t :root_pattern %></h2>
+<% if @root_pattern.nil? %>
+	<%= image_tag 'UnknownImage.png', :width  => 100 %>
+<% else %>
+	<%= link_to(@root_pattern.name,{:controller => "process_patterns", :action => "show", :id =>@root_pattern}, :class  => 'crawlable') %>
+<% end %>
+
+<h2><%= t :patterns_list %></h2>
+<ul>
+<% for pattern in @patterns_list%>
+<li><%= link_to(pattern.name, {:controller => "process_patterns", :action => "show", :id =>pattern}, :class  => 'crawlable') %></li>
+<% end %>
+</ul>
+
+	
+<h2>Participants</h2>
+
+<% if @participant.nil? %>
+<ul>
+	<% for participant in @pattern_system.participants%>
+		<li><b><%= participant.name %>:</b><%= link_to "Edit participant", :action=> "edit_participant", :id => participant %> |
+											<%= link_to "Delete participant", :action  => "destroy_participant", :id  => participant%>
+		<br /><%= participant.description%></li>
+	<% end %>
+</ul>
+
+<%= link_to "Add a new participant", :action=> "new_participant", :id => @pattern_system %> <br />
+
+<% else %>
+	<% if @isEditing %>
+		<% form_for @participant, :url  => {:action  => "update_participant", :id => @participant} do |p| %>
+		<label for="name">Name of participant:</label>
+		<%= p.text_field :name %><br />
+		<label for="description">Description of the participant's role:</label>
+		<%= p.text_area(:description, :class  => "mceEditor") %>
+		<%= p.submit "Update participant" %>
+		<% end %>
+	<% else %>
+		<% form_for @participant, :url  => {:action  => "create_participant", :id => @pattern_system} do |p| %>
+		<label for="name">Name of participant:</label>
+		<%= p.text_field :name %><br />
+		<label for="description">Description of the participant's role:</label>
+		<%= p.text_area(:description, :class  => "mceEditor") %>
+		<%= p.submit "Create participant" %>
+		<% end %>
+	<% end %>
+
+
+
+<% end %>
+
+
+
+
+
+<%= link_to "Add new process pattern", :controller => "process_patterns", :action => "new", :id => @pattern_system %><br />
+
+<%= link_to 'Edit', edit_pattern_system_path(@pattern_system) %> |
+<%= link_to 'Back', pattern_systems_path %>

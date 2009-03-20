@@ -1,0 +1,19 @@
+# Read about fixt   ures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+a_test_pattern_system:
+   name: A Great pattern system for doing stuff!
+   author: Bob le poulpe
+   root_pattern_id: first_pattern
+   participant_id: acheteur, vendeur
+
+   # t.string   "author"
+   # t.string   "name"
+   # t.string   "root_pattern_id"
+   # t.datetime "created_at"
+   # t.datetime "updated_at"
+   # t.integer  "participant_id"
+   # t.text     "characteristics"
+   # t.text     "update_field"
+
+# two:
+#   column: value
