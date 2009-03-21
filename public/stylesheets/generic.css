@@ -16,8 +16,30 @@ div#selection {
 	visibility: hidden;
 }
 
+#method_image {
+	display:block;
+	position: relative;
+}
+
+#method_image dd {
+  position:absolute;
+  padding:0;
+  margin:0;
+  border: solid thin #ff0000;
+}
+
 div#pattern_choice {
 	visibility: hidden;
+	width: 200px;
+	height: 200px;
+	padding: 10px;
+	background: #dddddd;
+	overflow: auto;
+	border: solid thin #000000;
+}
+
+div#pattern_choice li {
+	margin-left: 10px;
 }
 
 div.handle {

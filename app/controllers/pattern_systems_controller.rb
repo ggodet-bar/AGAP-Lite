@@ -91,13 +91,12 @@ class PatternSystemsController < ApplicationController
     end
     @participants_list = @pattern_system.participants
     session[:pattern_system_id] = params[:id]
+    @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:id])
     unless @pattern_system.root_pattern_id.nil?
       @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
-    end
-    @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:id])
-    unless @root_pattern.nil?
       @patterns_list = @patterns_list - @root_pattern.to_a
     end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @pattern_system }

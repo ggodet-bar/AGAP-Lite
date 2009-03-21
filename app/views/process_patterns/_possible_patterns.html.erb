@@ -1,0 +1,5 @@
+<ul>
+<% for pattern in @pattern_system.process_patterns %>
+  <li><%= link_to_function pattern.name, "registerArea(#{@process_pattern.id}, #{pattern.id}, #{x}, #{y}, #{w}, #{h})"  %></li>
+<% end %>
+</ul>

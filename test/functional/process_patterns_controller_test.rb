@@ -2,13 +2,13 @@ require 'test_helper'
 
 class ProcessPatternsControllerTest < ActionController::TestCase
   test "should get new" do
-    get :new, {:pattern_system_id  => pattern_systems(:a_test_pattern_system)}
+    get :new, {}, {:pattern_system_id  => pattern_systems(:a_test_pattern_system).id}
     assert_response :success
   end
 
   test "should create process_pattern" do
     assert_difference('ProcessPattern.count') do
-      post :create, :process_pattern => process_patterns(:second_pattern)
+      post :create, {:process_pattern => process_patterns(:second_pattern)}, {:pattern_system_id  => pattern_systems(:a_test_pattern_system).id}
     end
 
     assert_redirected_to process_pattern_path(assigns(:process_pattern))
@@ -25,7 +25,7 @@ class ProcessPatternsControllerTest < ActionController::TestCase
   end
 
   test "should update process_pattern" do
-    put :update, {:id => process_patterns(:first_pattern).id, :process_pattern => process_patterns(:updated_pattern)}, {:pattern_system_id  => pattern_systems(:a_test_pattern_system), :participants => {}}
+    put :update, {:id => process_patterns(:first_pattern).id, :process_pattern => process_patterns(:updated_pattern)}, {:pattern_system_id  => pattern_systems(:a_test_pattern_system).id, :participants => [participants(:vendeur).id, participants(:acheteur).id]}
     assert_redirected_to process_pattern_path(assigns(:process_pattern))
   end
 
@@ -34,6 +34,10 @@ class ProcessPatternsControllerTest < ActionController::TestCase
       delete :destroy, {:id => process_patterns(:first_pattern).id}, {:pattern_system_id  => pattern_systems(:a_test_pattern_system)}
     end
 
-    assert_redirected_to pattern_systems_path
+    assert_redirected_to pattern_systems(:a_test_pattern_system)
+  end
+  
+  test "should route to pattern_system" do
+    assert_routing '/process_patterns', :controller => 'pattern_systems', :action => 'show', :id  => pattern_systems(:a_test_pattern_system).id
   end
 end

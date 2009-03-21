@@ -44,10 +44,14 @@
 	
 
 	<% else %>
-	<%= image_tag @image.public_filename, :ismap  => true, :usemap  => 'testMap' %>
-	<map name="testMap">
-		
-	</map>
+	<!-- <%= image_tag @image.public_filename, :ismap  => true, :usemap  => 'testMap'%> -->
+	<dl id="method_image" style=<%= "\"background: url(\'#{ @image.public_filename}\') no-repeat; width: #{@image.width}px; height: #{@image.height}px;\""%> >
+		<% for map in @maps %>
+			<dd style=<%= "\"left: #{map.x_corner}px; top: #{map.y_corner}px;width: #{map.width}px; height: #{map.height}px;\"" %>>
+			<a style=<%= "\"display: block; width: #{map.width}px; height: #{map.height}px;text-decoration: none;\" href= \"/process_patterns/#{map.pattern_id}\" class=\"crawlable\""%>></a>
+			</dd>
+		<% end %>
+	</dl>
 	<% end %>
 
 	<!-- <h3><%= t :process_model %></h3>

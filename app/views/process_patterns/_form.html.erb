@@ -1,3 +1,6 @@
+<% unless @process_pattern.mappable_image.nil? %> 
+	<%= javascript_tag "observeThisPage(#{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
+<% end %>
   <p>
 	Author name: <%= f.text_field	:author %>
   </p>
@@ -38,9 +41,12 @@
 <h2>Solution</h2>
 	<h3>Process image</h3>
 	<% unless @process_pattern.mappable_image.nil? %>
-	<%= image_tag @process_pattern.mappable_image.public_filename, :id => 'method_image' %>
+	<dl id="method_image">
+	</dl>
+<!--	<%= image_tag @process_pattern.mappable_image.public_filename, :id => 'method_image' %> -->
 	<%= image_tag 'AddMapArea.png', :size  => "50x50", :id => 'plus_sign'%>
 	<%= image_tag 'ValidateMapArea.png', :size  =>  "50x50", :id  => 'validate_area'%>
+
 	<% end %>
 	<br />
 	<% fields_for :mappable_image do |m| %>

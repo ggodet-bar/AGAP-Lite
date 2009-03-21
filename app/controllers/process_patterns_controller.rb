@@ -4,14 +4,16 @@ class ProcessPatternsController < ApplicationController
   before_filter :load_system
   
   def choose_pattern
-    render :inline  =>  "
-    <ul>
-    <% for pattern in @pattern_system.process_patterns %>
-      <li><%= link_to_function pattern.name, alert(\'#{pattern.name}\') %></li>
-    <% end %>
-    </ul>
-    "
-    puts 'POUEEEET'
+    respond_to do |format|
+      format.html {
+        render :partial  => 'possible_patterns', :locals => {:x => params[:x], :y => params[:y], :w => params[:w], :h => params[:h]}
+      }
+    end
+  end
+  
+  def save_map
+    # puts params[:pattern_id]
+    session[:maps] << {:pattern_id  => params[:pattern_id], :x_corner => params[:x], :y_corner => params[:y], :width => params[:w], :height => params[:h]}
   end
   
   def add_participant
@@ -54,7 +56,7 @@ class ProcessPatternsController < ApplicationController
   
   def index
     respond_to do |format|
-      format.html {redirect_to :controller  => 'pattern_systems'}
+      format.html {redirect_to :controller  => 'pattern_systems', :action  => 'show', :id  => session[:pattern_system_id]}
     end
   end
 
@@ -64,6 +66,9 @@ class ProcessPatternsController < ApplicationController
     @image = MappableImage.find_by_process_pattern_id(params[:id])
     @participants = @process_pattern.participants
     @use_patterns = @process_pattern.use_patterns
+    unless @image.nil?
+      @maps = @image.maps
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @process_pattern }
@@ -75,6 +80,7 @@ class ProcessPatternsController < ApplicationController
   def new
     @process_pattern = ProcessPattern.new
     session[:participants] = []
+    session[:maps] = []
     @participants = []
     @selectable_participants = @pattern_system.participants
     unless params[:id].nil?
@@ -95,6 +101,7 @@ class ProcessPatternsController < ApplicationController
     if @participants.nil?
        @participants = []
     end
+    session[:maps] = []
     @selectable_participants = @pattern_system.participants - @participants
   end
 
@@ -148,6 +155,16 @@ class ProcessPatternsController < ApplicationController
     @participants = @process_pattern.participants
     @selectable_participants = @pattern_system.participants - @participants
     @mappable_image = @process_pattern.mappable_image
+    
+    unless session[:maps].nil?
+      session[:maps].each {|map|
+      puts map
+      @aMap = Map.new(map)
+        # unless @aMap.new_record?
+      @mappable_image.maps << @aMap
+        # end
+      }
+    end
     if params[:process_pattern][:context_patterns].nil? or params[:process_pattern][:context_patterns] == [""]
       params[:process_pattern][:context_patterns] = []
     else
@@ -163,12 +180,13 @@ class ProcessPatternsController < ApplicationController
       unless params[:mappable_image].nil?
         if @mappable_image.nil?
           @mappable_image = MappableImage.create(params[:mappable_image])
-          puts "Creating image"
           puts params[:mappable_image]
         else 
-          puts "Updating image"
+          puts 'Updating image (and maps !)'
           proceedUpdate = @mappable_image.update_attributes(params[:mappable_image])
         end
+        
+        
         @process_pattern.mappable_image = @mappable_image
       end
       
