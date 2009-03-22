@@ -24,3 +24,7 @@ en:
   root_pattern: "Root pattern"
   editing_pattern: "Editing pattern"
   updates: "Updates"
+  update: "Update"
+  create: "Create"
+  add: "Add"
+  upload_a_file: "Upload a file"

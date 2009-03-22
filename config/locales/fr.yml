@@ -21,3 +21,7 @@ fr:
     root_pattern: "Patron racine"
     editing_pattern: "Édition du patron"
     updates: "Mises à jour"
+    update: "Mettre à jour"
+    create: "Créer"
+    add: "Ajouter"
+    upload_a_file: "Charger un fichier"

@@ -2,10 +2,10 @@
 	<%= javascript_tag "observeThisPage(#{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
 <% end %>
   <p>
-	Author name: <%= f.text_field	:author %>
+	<%= t :author %> <%= f.text_field	:author %>
   </p>
 <h2>Interface</h2>
-	<h3>Name</h3>
+	<h3><%= t :name %></h3>
 	<%= f.text_field :name %>
 	
 	<h3>Participants</h3>
@@ -17,21 +17,21 @@
 		</ul>
 		<% unless @selectable_participants.empty? %>
 		<%= select(:participant, :name, @selectable_participants.collect{|p| [p.name, p.id]}, {:include_blank => true}) %>
-		<%= link_to_remote "Add", :update  => 'participants', :url  => {:action => "add_participant", :id  => @process_pattern}, :with  => "'participant=' + $('participant_name').value" %>
+		<%= link_to_remote t(:add), :update  => 'participants', :url  => {:action => "add_participant", :id  => @process_pattern}, :with  => "'participant=' + $('participant_name').value" %>
 		<% end %>
 	
 </div>	
 	<h3>Classification</h3>
 	<%= f.text_area(:classification, :class => "mceEditor") %>
 	
-	<h3>Context</h3>
-		<h4>Process context</h4>
+	<h3><%= t :context %></h3>
+		<h4><%= t :process_context %></h4>
 <%= select("process_pattern", :context_patterns, @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true, :selected  => @context_patterns}, :multiple  =>  true) %>
 		
-		<h4>Product context</h4>
+		<h4><%= t :product_context %></h4>
 		<%= f.text_field :productContext %><br />
 	
-	<h3>Problem</h3>
+	<h3><%= t :problem %></h3>
 	<%= f.text_area(:problem, :class => "mceEditor") %>
 	
 	<h3>Forces</h3>
@@ -39,9 +39,12 @@
 	
 	
 <h2>Solution</h2>
-	<h3>Process image</h3>
+	<h3><%= t :process_image %></h3>
 	<% unless @process_pattern.mappable_image.nil? %>
 	<dl id="method_image">
+		<div id="overlay" ></div>
+		<div id="selection"><div class="handle" id="tl_rect"></div><div class="handle" id="tr_rect"></div><div class="handle" id="bl_rect"></div><div class="handle" id="br_rect"></div></div>
+		<div id="pattern_choice"></div>
 	</dl>
 <!--	<%= image_tag @process_pattern.mappable_image.public_filename, :id => 'method_image' %> -->
 	<%= image_tag 'AddMapArea.png', :size  => "50x50", :id => 'plus_sign'%>
@@ -50,27 +53,25 @@
 	<% end %>
 	<br />
 	<% fields_for :mappable_image do |m| %>
-		<label for="uploaded_data">Upload a file:</label>
+		<label for="uploaded_data"><%= t :upload_a_file %> :</label>
 		<%= m.file_field	:uploaded_data %>
 	<% end %>
-	<div id="overlay" ></div>
-	<div id="selection"><div class="handle" id="tl_rect"></div><div class="handle" id="tr_rect"></div><div class="handle" id="bl_rect"></div><div class="handle" id="br_rect"></div></div>
-	<div id="pattern_choice"></div>
 
-	<h3>Process model</h3>
+
+	<h3><%= t :process_model %></h3>
 	
 	
-	<h3>Process solution</h3>
+	<h3><%= t :process_solution %></h3>
 	<%= f.text_area(:process_solution, :class => "mceEditor") %>
 	
-	<h3>Product solution</h3>
+	<h3><%= t :product_solution %></h3>
 	<%= f.text_area(:product_solution, :class => "mceEditor") %> 
  
 
-	<h3>Application Case</h3>
+	<h3><%= t :application_case %></h3>
 	<%= f.text_area(:application_case, :class => "mceEditor") %>
 	
-	<h3>Application Consequence</h3>
+	<h3><%= t :application_consequence %></h3>
 	<%= f.text_area(:application_consequence, :class => "mceEditor") %>
 	
 	
