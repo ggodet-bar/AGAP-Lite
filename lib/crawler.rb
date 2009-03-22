@@ -139,7 +139,7 @@ puts "\n--- DONE! Wrote " + fragments.length.to_s + " patterns ---\n\n"
 base_path = "/Users/godetg/Desktop/PatternSystem"
 project_path = "/Users/godetg/Documents/RadAgap/public/"
 
-puts "Copying images and stylesheet"
+puts "Copying images and stylesheets"
 FileUtils.rm_r base_path + "/images"
 FileUtils.rm_r base_path + "/stylesheets"
 FileUtils.cp_r project_path + "images", base_path + "/images"
