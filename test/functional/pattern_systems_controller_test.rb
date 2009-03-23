@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class PatternSystemsControllerTest < ActionController::TestCase
+  fixtures :process_patterns
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -26,7 +28,7 @@ class PatternSystemsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, :id => pattern_systems(:a_test_pattern_system).id
+    get :edit, {:id => pattern_systems(:a_test_pattern_system).id}
     assert_response :success
   end
 

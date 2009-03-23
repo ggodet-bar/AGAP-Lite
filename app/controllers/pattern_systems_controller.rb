@@ -94,7 +94,7 @@ class PatternSystemsController < ApplicationController
     @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:id])
     unless @pattern_system.root_pattern_id.nil?
       @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
-      @patterns_list = @patterns_list - @root_pattern.to_a
+      @patterns_list = @patterns_list - Array(@root_pattern)
     end
     
     respond_to do |format|
@@ -117,8 +117,10 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/1/edit
   def edit
     @pattern_system = PatternSystem.find(params[:id])
-    @root_pattern_idd = @pattern_system.root_pattern_id
-    puts @root_pattern_idd
+    unless @pattern_system.root_pattern_id.nil? or @pattern_system.root_pattern_id == ""
+      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
+    end
+    # puts @root_pattern_idd
     
   end
 

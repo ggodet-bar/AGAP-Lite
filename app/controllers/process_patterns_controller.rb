@@ -30,7 +30,7 @@ class ProcessPatternsController < ApplicationController
   
   def remove_participant
     @participants = Participant.find(session[:participants])
-    @participants = @participants - Participant.find(params[:participant]).to_a
+    @participants = @participants - Array(Participant.find(params[:participant]))
     @selectable_participants = @pattern_system.participants - @participants
     session[:participants] = @participants
     respond_to do |format|
@@ -55,8 +55,9 @@ class ProcessPatternsController < ApplicationController
   # end
   
   def index
+    # puts 'Pattern id : ' + session[:pattern_system_id]
     respond_to do |format|
-      format.html {redirect_to :controller  => 'pattern_systems', :action  => 'show', :id  => session[:pattern_system_id]}
+      format.html {session[:pattern_system_id].nil? ? redirect_to(:controller  => 'pattern_systems', :action => 'index') : redirect_to(:controller  => 'pattern_systems', :action  => 'show', :id  => session[:pattern_system_id])}
     end
   end
 
@@ -220,7 +221,9 @@ private
   end
 
   def load_system
-      @pattern_system = PatternSystem.find(session[:pattern_system_id])
-      @patterns_list = ProcessPattern.find_all_by_pattern_system_id(session[:pattern_system_id])
+      unless session[:pattern_system_id].nil?
+        @pattern_system = PatternSystem.find(session[:pattern_system_id])
+        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(session[:pattern_system_id])
+      end
   end
 end

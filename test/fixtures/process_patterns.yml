@@ -1,19 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 first_pattern:
-   author: "Bob Le Poulpe"
-   classification: "Farniente"
+   author: Bob Le Poulpe
+   classification: Farniente
    pattern_system_id: a_test_pattern_system
 
 second_pattern:
-  author: "Bob Le Poulpe"
+  author: Bob Le Poulpe
   classification: Regarder en l'air et penser au week-end
   pattern_system_id: a_test_pattern_system
   context_patterns: first_pattern
 
 updated_pattern:
-  author: "Bob Le Poulpe"
-  classification: "Rien fiche"
+  author: Bob Le Poulpe
+  classification: Rien fiche
   pattern_system_id: a_test_pattern_system
   participants: vendeur
       

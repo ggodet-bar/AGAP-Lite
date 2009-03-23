@@ -3,7 +3,7 @@
 a_test_pattern_system:
    name: A Great pattern system for doing stuff!
    author: Bob le poulpe
-   root_pattern_id: first_pattern
+   root_pattern_id: <%= Fixtures.identify(:first_pattern) %>
    participant_id: acheteur, vendeur
 
    # t.string   "author"
