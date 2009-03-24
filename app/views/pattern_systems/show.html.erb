@@ -3,27 +3,35 @@
 <div id="update_field">
 <%= @pattern_system.update_field %>
 </div>
+<div class="block">
 <h2><%= t :author %></h2>
 <%= @pattern_system.author %>
+</div>
 
+<div class="block">
 <h2><%= t :characteristics %></h2>
 <%= @pattern_system.characteristics %>
+</div>
 
+<div class="block">
 <h2><%= t :root_pattern %></h2>
 <% if @root_pattern.nil? %>
 	<%= image_tag 'UnknownImage.png', :width  => 100 %>
 <% else %>
 	<%= link_to(@root_pattern.name,{:controller => "process_patterns", :action => "show", :id =>@root_pattern}, :class  => 'crawlable') %>
 <% end %>
+</div>
 
+<div class="block">
 <h2><%= t :patterns_list %></h2>
 <ul>
 <% for pattern in @patterns_list%>
 <li><%= link_to(pattern.name, {:controller => "process_patterns", :action => "show", :id =>pattern}, :class  => 'crawlable') %></li>
 <% end %>
 </ul>
+</div>
 
-	
+<div class="block">
 <h2>Participants</h2>
 
 <% if @participant.nil? %>
@@ -59,12 +67,13 @@
 
 
 <% end %>
+</div>
 
 
-
-
+<div class="block">
 
 <%= link_to t(:add_new_pattern), :controller => "process_patterns", :action => "new", :id => @pattern_system %><br />
 
 <%= link_to t(:edit), edit_pattern_system_path(@pattern_system) %> |
 <%= link_to t(:back), pattern_systems_path %>
+</div>

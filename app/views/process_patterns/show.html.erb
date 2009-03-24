@@ -4,6 +4,8 @@
   <p>
 	<%= t :author %> : <%= @process_pattern.author %>
   </p>
+
+<div class="block">
 <h2>Interface</h2>
 	<h3><%= t :name %></h3>
 	<%= @process_pattern.name %>
@@ -34,8 +36,9 @@
 	
 	<h3>Forces</h3>
 	<%= @process_pattern.forces %>
-	
-	
+</div>	
+
+<div class="block">
 <h2>Solution</h2>
 
 	<h3><%= t :process_image %></h3>
@@ -70,6 +73,8 @@
 	
 	<h3><%= t :application_consequence %></h3>
 	<%= @process_pattern.application_consequence %>
+</div>
+<div class="block">
 
 <h2>Relations</h2>
 	<h3><%= t :uses %></h3>
@@ -81,7 +86,7 @@
 	<!-- <h3><%= t :requires %></h3>
 	
 	<h3>Alternative</h3> -->
-
+</div>
 
 <%= link_to t(:edit), edit_process_pattern_path(@process_pattern) %> |
 <%= link_to t(:delete), @process_pattern, :confirm => 'Are you sure?', :method => :delete%>
