@@ -29,30 +29,30 @@
 <% if @participant.nil? %>
 <ul>
 	<% for participant in @pattern_system.participants%>
-		<li><b><%= participant.name %>:</b><%= link_to "Edit participant", :action=> "edit_participant", :id => participant %> |
-											<%= link_to "Delete participant", :action  => "destroy_participant", :id  => participant%>
+		<li><b><%= participant.name %>:</b><%= link_to t(:edit_participant), :action=> "edit_participant", :id => participant %> |
+											<%= link_to t(:delete_participant), :action  => "destroy_participant", :id  => participant%>
 		<br /><%= participant.description%></li>
 	<% end %>
 </ul>
 
-<%= link_to "Add a new participant", :action=> "new_participant", :id => @pattern_system %> <br />
+<%= link_to t(:add_new_participant), :action=> "new_participant", :id => @pattern_system %> <br />
 
 <% else %>
 	<% if @isEditing %>
 		<% form_for @participant, :url  => {:action  => "update_participant", :id => @participant} do |p| %>
-		<label for="name">Name of participant:</label>
+		<label for="name"><%= t(:name_of_participant)%> :</label>
 		<%= p.text_field :name %><br />
-		<label for="description">Description of the participant's role:</label>
+		<label for="description"><%= t(:description_of_participant_role) %> :</label>
 		<%= p.text_area(:description, :class  => "mceEditor") %>
-		<%= p.submit "Update participant" %>
+		<%= p.submit t(:update_participant) %>
 		<% end %>
 	<% else %>
 		<% form_for @participant, :url  => {:action  => "create_participant", :id => @pattern_system} do |p| %>
-		<label for="name">Name of participant:</label>
+		<label for="name"><%= t(:name_of_participant)%> :</label>
 		<%= p.text_field :name %><br />
-		<label for="description">Description of the participant's role:</label>
+		<label for="description"><%= t(:description_of_participant_role) %> :</label>
 		<%= p.text_area(:description, :class  => "mceEditor") %>
-		<%= p.submit "Create participant" %>
+		<%= p.submit t(:create_participant) %>
 		<% end %>
 	<% end %>
 
@@ -64,7 +64,7 @@
 
 
 
-<%= link_to "Add new process pattern", :controller => "process_patterns", :action => "new", :id => @pattern_system %><br />
+<%= link_to t(:add_new_pattern), :controller => "process_patterns", :action => "new", :id => @pattern_system %><br />
 
-<%= link_to 'Edit', edit_pattern_system_path(@pattern_system) %> |
-<%= link_to 'Back', pattern_systems_path %>
+<%= link_to t(:edit), edit_pattern_system_path(@pattern_system) %> |
+<%= link_to t(:back), pattern_systems_path %>

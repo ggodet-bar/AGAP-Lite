@@ -71,30 +71,6 @@ li {
 	margin-bottom: 0.5em;
 }
 
-/*div#patternList {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 200px;
-	height: 96.3%;
-	padding-top: 30px;
-	padding-right: 50px;
-	margin-bottom: 80px;
-	padding-left: 8px;
-	//border: solid #0000FF;
-	border-right: solid #CCCCCC;
-	overflow: auto;
-}*/
-
-/*div#header{
-	position: relative;
-	background: url('/images/bordure_top.png') repeat-x;
-	width: 100%;
-	margin-top: 0;
-	padding-top: 0;
-	height: 50px;
-}*/
-
 div#header{
 	position: relative;
 	background-color: #353333;
@@ -117,7 +93,11 @@ div#content{
 	position: relative;
 	float: left;
 	width: 60%;
-	margin-bottom: -140px;
+	height: 100%;
+	min-height: 100%;
+	height: auto !important;
+	padding-bottom: 50px;
+	margin-bottom: -120px;
 	min-width: 600px;
 	margin-left: 10%;
 	margin-top: 20px;
@@ -142,7 +122,7 @@ div#patternList {
 }
 
 .clearfooter {
-   height: 300px;
+   height: 120px;
    clear: both;
 }
 
