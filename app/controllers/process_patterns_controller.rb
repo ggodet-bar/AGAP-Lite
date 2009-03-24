@@ -55,7 +55,6 @@ class ProcessPatternsController < ApplicationController
   # end
   
   def index
-    # puts 'Pattern id : ' + session[:pattern_system_id]
     respond_to do |format|
       format.html {session[:pattern_system_id].nil? ? redirect_to(:controller  => 'pattern_systems', :action => 'index') : redirect_to(:controller  => 'pattern_systems', :action  => 'show', :id  => session[:pattern_system_id])}
     end

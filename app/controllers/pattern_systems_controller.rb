@@ -1,5 +1,4 @@
 class PatternSystemsController < ApplicationController
-  
 
 
   def new_participant
@@ -92,7 +91,7 @@ class PatternSystemsController < ApplicationController
     @participants_list = @pattern_system.participants
     session[:pattern_system_id] = params[:id]
     @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:id])
-    unless @pattern_system.root_pattern_id.nil?
+    unless @pattern_system.root_pattern_id.nil? or @pattern_system.root_pattern_id.empty?
       @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
       @patterns_list = @patterns_list - Array(@root_pattern)
     end

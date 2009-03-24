@@ -26,6 +26,11 @@ class PatternSystemsControllerTest < ActionController::TestCase
     get :show, :id => pattern_systems(:a_test_pattern_system).id
     assert_response :success
   end
+  
+  test "should show new pattern system" do
+    get :show, :id => pattern_systems(:a_new_pattern_system).id
+    assert_response :success
+  end
 
   test "should get edit" do
     get :edit, {:id => pattern_systems(:a_test_pattern_system).id}
