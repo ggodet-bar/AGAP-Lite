@@ -4,12 +4,14 @@
 
 h1 {
 	margin-bottom: 1.5em;
+	line-height: 1.2em;
+/*	font-family: sans-serif;*/
 }
 
 
 
 h2 {
-	color: #0000bb;
+	color: #24A; /* #0000bb; */
 	font-size: 1.8em;
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -35,20 +37,20 @@ div.errorExplanation h2 {
 }
 
 #copyright_notice {
-	margin-top: 10em;
+/*	margin-top: 10em;*/
 	text-align: center;
 	font-size: 0.8em;
-	color: #666666;
+	color: #AAA;
 }
 
 div#update_field {
-	border: solid thin #0000DD;
+	border: solid thin #24A;
 	background-color: #EEEEFF;
 	padding: 10px;
 }
 
 div#update_field h3 {
-	color: #0000cc;
+	color: #24A;
 	text-indent: 0px;
 	margin-bottom: 0.3em;
 	font-size: 1.2em;

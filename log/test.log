@@ -1152,3 +1152,1657 @@ Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-23 18:27:04)
   [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-23 17:27:04' WHERE "id" = 136429197[0m
 Redirected to #<ProcessPattern:0x2104404>
 Completed in 14ms (DB: 4) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:20:49) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:20:49', NULL, NULL, NULL, '2009-03-24 10:20:49')[0m
+Redirected to #<PatternSystem:0x2356874>
+Completed in 8ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:20:49) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.2ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (67.3ms)
+Completed in 72ms (View: 71, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (0.8ms)
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 7ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:20:49) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x2298630>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:20:49) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.3ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:20:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:20:49')[0m
+Redirected to #<ProcessPattern:0x227d394>
+Completed in 18ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:20:49) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.2ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to actionshowid#<PatternSystem:0x21f9044>controllerpattern_systems
+Completed in 6ms (DB: 2) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.8ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.6ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.2ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (5.5ms)
+Completed in 18ms (View: 11, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.3ms)
+Completed in 7ms (View: 5, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to actionshowid266846996controllerpattern_systems
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:20:49) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (1.9ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 12ms (View: 7, DB: 4) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:20:49) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (17.9ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:20:49', 136429197, '2009-03-24 10:20:49')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:20:49', 136429197, '2009-03-24 10:20:49')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:20:50' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x210415c>
+Completed in 31ms (DB: 21) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:22:59) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:22:59', NULL, NULL, NULL, '2009-03-24 10:22:59')[0m
+Redirected to #<PatternSystem:0x2354dd0>
+Completed in 9ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:22:59) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.3ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (63.6ms)
+Completed in 69ms (View: 67, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  [4;36;1mPatternSystem Load (0.5ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (0.8ms)
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 425311881) [0m
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/425311881]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 6ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:22:59) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x227d768>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:22:59) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (5.1ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:22:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:22:59')[0m
+Redirected to #<ProcessPattern:0x225ad1c>
+Completed in 29ms (DB: 6) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:22:59) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.2ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21d2d54>
+Completed in 5ms (DB: 2) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.1ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.5ms)
+Completed in 12ms (View: 7, DB: 2) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.1ms)
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:22:59) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.5ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:22:59) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.6ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (1.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:22:59', 136429197, '2009-03-24 10:22:59')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:22:59', 136429197, '2009-03-24 10:22:59')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:22:59' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20e1238>
+Completed in 15ms (DB: 5) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:23:54) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:23:54', NULL, NULL, NULL, '2009-03-24 10:23:54')[0m
+Redirected to #<PatternSystem:0x2354dd0>
+Completed in 7ms (DB: 4) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:23:54) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.3ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (85.7ms)
+Completed in 91ms (View: 90, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  [4;36;1mPatternSystem Load (0.6ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (1.2ms)
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 425311881) [0m
+Completed in 6ms (View: 3, DB: 1) | 200 OK [http://test.host/pattern_systems/425311881]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 6ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:23:54) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x227d740>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:23:54) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.4ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:23:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:23:54')[0m
+Redirected to #<ProcessPattern:0x225abdc>
+Completed in 17ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:23:54) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.2ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21d2d2c>
+Completed in 6ms (DB: 2) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.8ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.5ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.2ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (4.6ms)
+Completed in 16ms (View: 9, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.0ms)
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:23:54) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:23:54) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (18.0ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:23:54', 136429197, '2009-03-24 10:23:54')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:23:54', 136429197, '2009-03-24 10:23:54')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:23:54' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20e11c0>
+Completed in 35ms (DB: 21) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:24:13) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.4ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:24:13', NULL, NULL, NULL, '2009-03-24 10:24:13')[0m
+Redirected to #<PatternSystem:0x2354bdc>
+Completed in 6ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:24:13) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.3ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (66.4ms)
+Completed in 72ms (View: 70, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  [4;36;1mPatternSystem Load (0.6ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (1.1ms)
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 425311881) [0m
+Completed in 5ms (View: 3, DB: 1) | 200 OK [http://test.host/pattern_systems/425311881]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.9ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 89ms (View: 3, DB: 2) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:24:13) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x227d54c>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:24:13) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.3ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:24:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:24:13')[0m
+Redirected to #<ProcessPattern:0x2259e30>
+Completed in 18ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.6ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:24:13) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.6ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.3ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21d2b24>
+Completed in 9ms (DB: 4) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.1ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.3ms)
+Completed in 12ms (View: 7, DB: 2) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.0ms)
+Completed in 6ms (View: 4, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:24:13) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.5ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:24:13) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (58.9ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:24:13', 136429197, '2009-03-24 10:24:13')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:24:13', 136429197, '2009-03-24 10:24:13')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:24:13' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20e0fb8>
+Completed in 75ms (DB: 62) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:24:31) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:24:31', NULL, NULL, NULL, '2009-03-24 10:24:31')[0m
+Redirected to #<PatternSystem:0x2354bdc>
+Completed in 8ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:24:31) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.2ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (65.0ms)
+Completed in 70ms (View: 68, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  [4;36;1mPatternSystem Load (0.5ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (0.8ms)
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 425311881) [0m
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/425311881]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 6ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:24:31) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x227d574>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:24:31) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.4ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:24:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:24:31')[0m
+Redirected to #<ProcessPattern:0x2259e6c>
+Completed in 18ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:24:31) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.2ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21d2b60>
+Completed in 6ms (DB: 2) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.7ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.5ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.1ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (4.8ms)
+Completed in 16ms (View: 9, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (2.9ms)
+Completed in 6ms (View: 4, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:24:31) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:24:32) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.7ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:24:31', 136429197, '2009-03-24 10:24:31')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:24:31', 136429197, '2009-03-24 10:24:31')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:24:32' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20e1030>
+Completed in 12ms (DB: 3) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:32:27) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:32:27', NULL, NULL, NULL, '2009-03-24 10:32:27')[0m
+Redirected to #<PatternSystem:0x2354b78>
+Completed in 9ms (DB: 4) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:32:27) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.3ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.5ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.5ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (6.6ms)
+Completed in 13ms (View: 11, DB: 2) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  [4;36;1mPatternSystem Load (0.6ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 4ms (View: 3, DB: 1) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (1.4ms)
+Completed in 4ms (View: 4, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 0) [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 7ms (View: 3, DB: 2) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:32:27) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x2289ea0>
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:32:27) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.3ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:32:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:32:27')[0m
+Redirected to #<ProcessPattern:0x2264d30>
+Completed in 18ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.6ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:32:27) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.6ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.3ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21de640>
+Completed in 9ms (DB: 4) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.8ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.6ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.1ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.9ms)
+Completed in 15ms (View: 8, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.6ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.0ms)
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:32:27) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:32:27) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.8ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:32:27', 136429197, '2009-03-24 10:32:27')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:32:27', 136429197, '2009-03-24 10:32:27')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:32:27' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20ec41c>
+Completed in 12ms (DB: 4) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:32:54) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:32:54', NULL, NULL, NULL, '2009-03-24 10:32:54')[0m
+Redirected to #<PatternSystem:0x2354b78>
+Completed in 9ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:32:54) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.3ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (3.9ms)
+Completed in 8ms (View: 6, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (0.8ms)
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 0) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 7ms (View: 3, DB: 2) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:32:54) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x2289ea0>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:32:54) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.4ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:32:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:32:54')[0m
+Redirected to #<ProcessPattern:0x2264d30>
+Completed in 18ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.6ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:32:54) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.5ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.3ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21de640>
+Completed in 10ms (DB: 4) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.7ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.6ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.2ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (5.5ms)
+Completed in 18ms (View: 10, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.0ms)
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.5ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:32:54) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:32:54) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.7ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:32:54', 136429197, '2009-03-24 10:32:54')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:32:54', 136429197, '2009-03-24 10:32:54')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:32:54' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20ec41c>
+Completed in 11ms (DB: 3) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:33:07) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:33:07', NULL, NULL, NULL, '2009-03-24 10:33:07')[0m
+Redirected to #<PatternSystem:0x2354b78>
+Completed in 9ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:33:07) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.4ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 3ms (DB: 2) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (4.0ms)
+Completed in 8ms (View: 7, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (0.8ms)
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 425311881) [0m
+Completed in 4ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/425311881]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 6ms (View: 2, DB: 1) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:33:07) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x227d484>
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:33:07) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.3ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:33:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:33:07')[0m
+Redirected to #<ProcessPattern:0x2259674>
+Completed in 18ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:33:07) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.2ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21d2a5c>
+Completed in 6ms (DB: 2) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.8ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.5ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.3ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.1ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (4.1ms)
+Completed in 15ms (View: 8, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.2ms)
+Completed in 6ms (View: 5, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:33:07) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:33:07) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.7ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:33:07', 136429197, '2009-03-24 10:33:07')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:33:07', 136429197, '2009-03-24 10:33:07')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:33:07' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20e0ef0>
+Completed in 11ms (DB: 3) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+
+
+Processing PatternSystemsController#create (for 0.0.0.0 at 2009-03-24 11:33:19) [POST]
+  Parameters: {"pattern_system"=>{}}
+  [4;35;1mPatternSystem Create (0.5ms)[0m   [0mINSERT INTO "pattern_systems" ("name", "root_pattern_id", "participant_id", "updated_at", "author", "update_field", "characteristics", "created_at") VALUES(NULL, NULL, NULL, '2009-03-24 10:33:19', NULL, NULL, NULL, '2009-03-24 10:33:19')[0m
+Redirected to #<PatternSystem:0x2354b78>
+Completed in 9ms (DB: 3) | 302 Found [http://test.host/pattern_systems?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#destroy (for 0.0.0.0 at 2009-03-24 11:33:19) [DELETE]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mPatternSystem Destroy (0.4ms)[0m   [0;1mDELETE FROM "pattern_systems" WHERE "id" = 266846996[0m
+Redirected to http://test.host/pattern_systems
+Completed in 2ms (DB: 2) | 302 Found [http://test.host/pattern_systems/266846996]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "pattern_systems" [0m
+  [4;36;1mPatternSystem Load (0.7ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#edit (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.5ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/edit
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered pattern_systems/_form (5.6ms)
+Completed in 11ms (View: 9, DB: 2) | 200 OK [http://test.host/pattern_systems/266846996/edit]
+
+
+Processing PatternSystemsController#index (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems]
+
+
+Processing PatternSystemsController#new (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/new
+Rendered pattern_systems/_form (0.8ms)
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://test.host/pattern_systems/new]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  Parameters: {"id"=>"425311881"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 425311881) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '425311881') [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 0) [0m
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#show (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  Parameters: {"id"=>"266846996"}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = '266846996') [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+Rendering template within layouts/pattern_systems
+Rendering pattern_systems/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Completed in 6ms (View: 2, DB: 2) | 200 OK [http://test.host/pattern_systems/266846996]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing PatternSystemsController#update (for 0.0.0.0 at 2009-03-24 11:33:19) [PUT]
+  Parameters: {"pattern_system"=>{}, "id"=>"266846996"}
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+Redirected to #<PatternSystem:0x2289ef0>
+Completed in 2ms (DB: 1) | 302 Found [http://test.host/pattern_systems/266846996?]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#create (for 0.0.0.0 at 2009-03-24 11:33:19) [POST]
+  Parameters: {"process_pattern"=>{"name"=>"Yay, a great name fo' sure"}}
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Create (0.3ms)[0m   [0;1mINSERT INTO "process_patterns" ("name", "uses", "updated_at", "process_solution", "product_solution", "application_case", "application_consequence", "requires", "author", "processContext", "productContext", "classification", "alternative", "pattern_system_id", "forces", "problem", "process_model_uri", "created_at") VALUES('Yay, a great name fo'' sure', NULL, '2009-03-24 10:33:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 266846996, NULL, NULL, NULL, '2009-03-24 10:33:19')[0m
+Redirected to #<ProcessPattern:0x2264d80>
+Completed in 20ms (DB: 1) | 302 Found [http://test.host/process_patterns?process_pattern%5Bname%5D=Yay%2C+a+great+name+fo%27+sure]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;35;1mProcessPattern Load (0.5ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#destroy (for 0.0.0.0 at 2009-03-24 11:33:19) [DELETE]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.6ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.4ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Destroy (0.3ms)[0m   [0;1mDELETE FROM "process_patterns" WHERE "id" = 136429197[0m
+Redirected to controllerpattern_systemsactionshowid#<PatternSystem:0x21de690>
+Completed in 9ms (DB: 4) | 302 Found [http://test.host/process_patterns/136429197]
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "process_patterns" [0m
+  [4;36;1mProcessPattern Load (0.8ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.4ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#edit (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.6ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.5ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.2ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.2ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mParticipant Load (0.1ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/edit
+  [4;35;1mMappableImage Load (0.1ms)[0m   [0mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (3.8ms)
+Completed in 14ms (View: 8, DB: 3) | 200 OK [http://test.host/process_patterns/136429197/edit]
+  [4;35;1mPatternSystem Load (0.3ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#new (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/new
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns".pattern_system_id = 266846996) [0m
+Rendered process_patterns/_form (2.9ms)
+Completed in 6ms (View: 4, DB: 1) | 200 OK [http://test.host/process_patterns/new]
+  [4;36;1mPatternSystem Load (0.3ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#index (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+Redirected to controllerpattern_systemsactionshowid266846996
+Completed in 1ms (DB: 1) | 302 Found [http://test.host/process_patterns]
+  [4;35;1mProcessPattern Load (0.4ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+
+
+Processing ProcessPatternsController#show (for 0.0.0.0 at 2009-03-24 11:33:19) [GET]
+  Parameters: {"id"=>"136429197"}
+  [4;35;1mProcessPattern Load (0.3ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;36;1mPatternSystem Load (0.2ms)[0m   [0;1mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images"."process_pattern_id" = '136429197') LIMIT 1[0m
+Rendering template within layouts/process_patterns
+Rendering process_patterns/show
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+Completed in 8ms (View: 5, DB: 2) | 200 OK [http://test.host/process_patterns/136429197]
+  [4;36;1mProcessPattern Load (0.4ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" WHERE ("participants"."id" = 98935976) [0m
+  [4;35;1mParticipant Load (0.2ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" = 795762444) [0m
+
+
+Processing ProcessPatternsController#update (for 0.0.0.0 at 2009-03-24 11:33:19) [PUT]
+  Parameters: {"process_pattern"=>{"name"=>"This is a stupid pattern name"}, "id"=>"136429197"}
+  [4;36;1mProcessPattern Load (0.3ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."id" = 136429197) [0m
+  [4;35;1mPatternSystem Load (0.2ms)[0m   [0mSELECT * FROM "pattern_systems" WHERE ("pattern_systems"."id" = 266846996) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" WHERE ("process_patterns"."pattern_system_id" = 266846996) [0m
+  [4;35;1mParticipant Load (0.6ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants"."id" IN (98935976,795762444)) [0m
+  [4;36;1mParticipant Load (0.2ms)[0m   [0;1mSELECT * FROM "participants" INNER JOIN "participations" ON "participants".id = "participations".participant_id WHERE ("participations".process_pattern_id = 136429197 ) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (98935976, '2009-03-24 10:33:19', 136429197, '2009-03-24 10:33:19')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO "participations" ("participant_id", "updated_at", "process_pattern_id", "created_at") VALUES (795762444, '2009-03-24 10:33:19', 136429197, '2009-03-24 10:33:19')[0m
+  [4;35;1mParticipant Load (0.1ms)[0m   [0mSELECT * FROM "participants" WHERE ("participants".pattern_system_id = 266846996) [0m
+  [4;36;1mMappableImage Load (0.1ms)[0m   [0;1mSELECT * FROM "mappable_images" WHERE ("mappable_images".process_pattern_id = 136429197) LIMIT 1[0m
+  [4;35;1mProcessPattern Load (0.1ms)[0m   [0mSELECT * FROM "process_patterns" INNER JOIN "context_patterns" ON "process_patterns".id = "context_patterns".target_pattern_id WHERE ("context_patterns".source_pattern_id = 136429197 ) [0m
+  [4;36;1mProcessPattern Load (0.1ms)[0m   [0;1mSELECT * FROM "process_patterns" INNER JOIN "use_patterns" ON "process_patterns".id = "use_patterns".target_pattern_id WHERE ("use_patterns".source_pattern_id = 136429197 ) [0m
+  [4;35;1mProcessPattern Update (0.1ms)[0m   [0mUPDATE "process_patterns" SET "name" = 'This is a stupid pattern name', "updated_at" = '2009-03-24 10:33:19' WHERE "id" = 136429197[0m
+Redirected to #<ProcessPattern:0x20ec610>
+Completed in 11ms (DB: 3) | 302 Found [http://test.host/process_patterns/136429197?process_pattern%5Bname%5D=This+is+a+stupid+pattern+name]

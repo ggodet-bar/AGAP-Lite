@@ -9,12 +9,14 @@
  <%= include_tiny_mce_if_needed %>
 </head>
 <body>
-<div id="Content">
+<div id="header"></div>
+<div id="content">
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield  %>
 
 </div>
+<div class="clearfooter"></div>
 
 <div id="copyright_notice">©2009, Laboratoire d'Informatique de Grenoble<br />Contact: Guillaume.Godet-Bar@imag.fr</div>
 </body>
