@@ -140,6 +140,7 @@ div#copyright_notice{
 div#patternList li {
 	text-indent: 0em;
 	font-size: 0.9em;
+	text-align: left;
 }
 
 div#patternList h3 {
