@@ -9,7 +9,7 @@ a_test_pattern_system:
 a_new_pattern_system:
     name: Un système de patrons sans son root_pattern
     author: Bob le poulpe
-    root_pattern_id:
+    root_pattern_id: ''
    # t.string   "author"
    # t.string   "name"
    # t.string   "root_pattern_id"
