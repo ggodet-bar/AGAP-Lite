@@ -1,0 +1,13 @@
+<h1>Editing pattern_system</h1>
+
+<% form_for(@pattern_system) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'form', :locals => {:f => f} %>  
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @pattern_system %> |
+<%= link_to 'Back', pattern_systems_path %>

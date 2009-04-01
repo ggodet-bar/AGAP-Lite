@@ -1,0 +1,92 @@
+	<h1><%= @process_pattern.name %></h1>
+	
+
+  <p>
+	<%= t :author %> : <%= @process_pattern.author %>
+  </p>
+
+<div class="block">
+<h2>Interface</h2>
+	<h3><%= t :name %></h3>
+	<%= @process_pattern.name %>
+	
+	<h3>Participants</h3>
+	<ul>
+		<% for participant in @process_pattern.participants %>
+			<li><%= participant.name%></li>
+		<% end %>
+	</ul>
+	
+	<h3>Classification</h3>
+	<%= @process_pattern.classification %>
+	
+	<h3><%= t :context %></h3>
+		<h4><%= t :process_context %></h4>
+		<ul>
+		<% for context_pattern in @process_pattern.context_patterns %>
+			<li><%= link_to context_pattern.name, context_pattern, :class  => 'crawlable' %></li>
+		<% end %>
+		</ul>
+		
+	<!--	<h4><%= t :product_context %></h4>
+		<%= @process_pattern.productContext %> -->
+	
+	<h3><%= t :problem %></h3>
+	<%= @process_pattern.problem %>
+	
+	<h3>Forces</h3>
+	<%= @process_pattern.forces %>
+</div>	
+
+<div class="block">
+<h2>Solution</h2>
+
+	<h3><%= t :process_image %></h3>
+	<% if @image.nil? %>
+	<%= image_tag 'UnknownImage.png', :width  => 100 %>
+	
+
+	<% else %>
+	<!-- <%= image_tag @image.public_filename, :ismap  => true, :usemap  => 'testMap'%> -->
+	<dl id="method_image" style=<%= "\"background: url(\'#{ @image.public_filename}\') no-repeat; width: #{@image.width}px; height: #{@image.height}px;\""%> >
+		<% for map in @maps %>
+			<dd style=<%= "\"left: #{map.x_corner}px; top: #{map.y_corner}px;width: #{map.width}px; height: #{map.height}px;\"" %>>
+			<a style=<%= "\"display: block; width: #{map.width}px; height: #{map.height}px;text-decoration: none;\" href= \"/process_patterns/#{map.pattern_id}\" class=\"crawlable\""%>></a>
+			</dd>
+		<% end %>
+	</dl>
+	<% end %>
+
+	<!-- <h3><%= t :process_model %></h3>
+	<% if @model.nil? %>
+	<%= image_tag 'UnknownImage.png', :width  => 100 %>
+	<% end %> -->
+
+	<h3><%= t :process_solution %></h3>
+	<%= @process_pattern.process_solution %>
+	
+	<h3><%= t :product_solution %></h3>
+	<%= @process_pattern.product_solution %>
+ 
+	<h3><%= t :application_case %></h3>
+	<%= @process_pattern.application_case %>
+	
+	<h3><%= t :application_consequence %></h3>
+	<%= @process_pattern.application_consequence %>
+</div>
+<div class="block">
+
+<h2>Relations</h2>
+	<h3><%= t :uses %></h3>
+	<ul>
+	<% for use_pattern in @use_patterns %>
+		<li><%= link_to use_pattern.name, use_pattern, :class  => 'crawlable' %></li>
+	<% end %>
+	</ul>
+	<!-- <h3><%= t :requires %></h3>
+	
+	<h3>Alternative</h3> -->
+</div>
+
+<%= link_to t(:edit), edit_process_pattern_path(@process_pattern) %> |
+<%= link_to t(:delete), @process_pattern, :confirm => 'Are you sure?', :method => :delete%>

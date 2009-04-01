@@ -1,0 +1,152 @@
+* {
+	margin: 0;
+	padding: 0;
+	
+}
+
+div#overlay {
+	visibility: hidden;
+}
+
+div#selection {
+	visibility: hidden;
+}
+
+#validate_area {
+	visibility: hidden;
+}
+
+#method_image {
+	display:block;
+	position: relative;
+}
+
+#method_image dd {
+  position:absolute;
+  padding:0;
+  margin:0;
+  border: solid thin #ff0000;
+}
+
+div#pattern_choice {
+	visibility: hidden;
+	width: 200px;
+	height: 200px;
+	padding: 10px;
+	background: #dddddd;
+	overflow: auto;
+	border: solid thin #000000;
+}
+
+div#pattern_choice li {
+	margin-left: 10px;
+}
+
+div.handle {
+	visibility: hidden;
+	background: #000000;
+	width: 10px;
+	height: 10px;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.03em;
+	line-height: 1.5em;
+
+/*	margin: 4em auto 8em auto ;*/
+	text-align: justify;
+	
+}
+
+li {
+	margin-left: 4em;
+	margin-bottom: 0.5em;
+}
+
+div#header{
+	position: relative;
+	background-color: #353333;
+	width: 100%;
+	margin-top: 0;
+	padding-top: 15px;
+/*	padding-left: 10px;*/
+	height: 40px;
+}
+
+div#header span {
+	margin-left: 20px;
+	color: #ffffff;
+	font-size: 0.85em;
+}
+
+div#header a {
+	color: #37e;
+}
+
+div#content{
+	position: relative;
+	float: left;
+	width: 55%;
+	height: 100%;
+	min-height: 100%;
+	height: auto !important;
+	padding-bottom: 50px;
+	margin-bottom: -120px;
+	min-width: 450px;
+	margin-left: 18em;
+	margin-top: 20px;
+/*	padding-left: 10%;*/
+}
+
+div.block {
+	margin-top: 4em;
+}
+
+div#patternList {
+	position: relative;
+	float: right;
+/*	position: fixed;*/
+/*	left: 0px;
+	top: 0px;*/
+	width: 18%;
+/*	height: 96.3%;*/
+	padding-top: 30px;
+	padding-right: 50px;
+	padding-bottom: 80px;
+	padding-left: 8px;
+	//border: solid #0000FF;
+	border-left: solid #CCCCCC;
+/*	overflow: auto;*/
+}
+
+.clearfooter {
+   height: 120px;
+   clear: both;
+}
+
+div#copyright_notice{
+	height: 120px;
+	width: 100%;
+	padding-top: 20px;
+	background-color: #353333;
+}
+
+div#patternList li {
+	text-indent: 0em;
+	font-size: 0.9em;
+	text-align: left;
+}
+
+div#patternList h3 {
+	color: #24A;
+	font-size: 1.2em;
+}
+
