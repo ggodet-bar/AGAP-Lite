@@ -10,6 +10,18 @@ second_pattern:
   classification: Regarder en l'air et penser au week-end
   pattern_system_id: a_test_pattern_system
   context_patterns: first_pattern
+  
+third_pattern:
+    author: Bob Le Poulpe
+    classification: Activité
+    pattern_system_id: a_test_pattern_system
+    context_patterns: second_pattern
+
+fourth_pattern:
+    author: Bob Le Poulpe
+    classification: Phase
+    pattern_system_id: a_test_pattern_system
+    context_patterns: third_pattern
 
 updated_pattern:
   author: Bob Le Poulpe

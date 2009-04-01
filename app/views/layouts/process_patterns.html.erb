@@ -11,7 +11,14 @@
 </head>
 <body>
 	<div id="header"><span>
-	<%= link_to((t :back_to_system), {:controller  => "pattern_systems", :action  => "show", :id  =>  session[:pattern_system_id]}, :class  => 'crawlable') %> </span></div>
+	<%= link_to((t :back_to_system), {:controller  => "pattern_systems", :action  => "show", :id  =>  session[:pattern_system_id]}, :class  => 'crawlable') %> | 
+	<% unless @process_pattern.nil? %>
+		<% for ancester in @process_pattern.ancesters %>
+			<%= link_to(ancester.name, ancester, :class => 'crawlable') + " > "%>
+		<% end %>
+		<%= @process_pattern.name %>
+	<% end %>
+	</span></div>
 	<div id="content">
 <p style="color: green"><%= flash[:notice] %></p>
 
@@ -21,7 +28,11 @@
 	<h3><%= t :patterns_list %></h3>
 	<ul>
 		<% for pattern in @patterns_list %>
+			<% if pattern.id == @process_pattern.id %>
+		<li><%= h(pattern.name) %></li>
+			<% else %>
 		<li><%= link_to(h(pattern.name), pattern, :class  => 'crawlable') %></li>
+			<% end %>
 		<% end %>
 	</ul>
 </div>

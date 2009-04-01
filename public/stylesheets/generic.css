@@ -76,13 +76,15 @@ div#header{
 	background-color: #353333;
 	width: 100%;
 	margin-top: 0;
-	padding-top: 10px;
+	padding-top: 15px;
 /*	padding-left: 10px;*/
 	height: 40px;
 }
 
 div#header span {
 	margin-left: 20px;
+	color: #ffffff;
+	font-size: 0.85em;
 }
 
 div#header a {

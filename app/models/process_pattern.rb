@@ -12,4 +12,23 @@ class ProcessPattern < ActiveRecord::Base
                         :interface => ['participant', 'classification', 'processContext', 'productContext', 'problem', 'forces'],
                         :solution => ['process_image_id', 'process_model_url', 'process_solution', 'product_solution'],
                         :relations => ['uses', 'requires', 'alternative']}
+               
+  # Return the list of ancesters of current pattern (which is not included in the list).
+  # The ancesters are ordered from the root of the pattern system down to the most immediate pattern
+  # (provided that the processContext attribute was correctly filled).             
+  def ancesters
+    explored_pattern = ProcessPattern.find(context_patterns).first
+    ancesters = []
+    until explored_pattern.nil? do
+      ancesters << ProcessPattern.find(explored_pattern)
+      context_patterns_list = explored_pattern.context_patterns
+      if context_patterns_list.nil?
+        explored_pattern = nil
+      else
+        explored_pattern = context_patterns_list.first
+      end
+    end 
+    
+    ancesters.reverse
+  end
 end
