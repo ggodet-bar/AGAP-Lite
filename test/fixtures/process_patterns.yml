@@ -22,12 +22,6 @@ fourth_pattern:
     classification: Phase
     pattern_system_id: a_test_pattern_system
     context_patterns: third_pattern
-
-updated_pattern:
-  author: Bob Le Poulpe
-  classification: Rien fiche
-  pattern_system_id: a_test_pattern_system
-  participants: vendeur
       
    # t.string   "author"
    # t.string   "classification"

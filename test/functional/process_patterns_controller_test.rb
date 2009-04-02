@@ -14,6 +14,16 @@ class ProcessPatternsControllerTest < ActionController::TestCase
     assert_redirected_to process_pattern_path(assigns(:process_pattern))
   end
 
+  test "should save new image with new process_pattern" do
+    assert_difference(['ProcessPattern.count','MappableImage.count']) do
+        post :create, {
+                        :process_pattern => {:name => "A pattern name"},
+                        :mappable_image => {:filename => "A/Dummy/Path", :width => 120, :height => 180, :size => 2000, :content_type => 'png'}
+                      }, {:pattern_system_id  => pattern_systems(:a_test_pattern_system).id}
+    end
+    assert_redirected_to process_pattern_path(assigns(:process_pattern))
+  end
+
   test "should show process_pattern" do
     get :show, {:id => process_patterns(:first_pattern).id}, {:pattern_system_id  => pattern_systems(:a_test_pattern_system).id}
     assert_response :success
