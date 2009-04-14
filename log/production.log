@@ -1,0 +1,343 @@
+# Logfile created on Mon Apr 06 14:11:38 +0200 2009
+
+Processing ProcessPatternsController#edit (for 127.0.0.1 at 2009-04-06 14:11:44) [GET]
+  Parameters: {"id"=>"136429226"}
+
+
+ActiveRecord::StatementInvalid (Could not find table 'process_patterns'):
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite3_adapter.rb:29:in `table_structure'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.2.2/lib/active_support/core_ext/object/misc.rb:39:in `returning'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite3_adapter.rb:28:in `table_structure'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite_adapter.rb:189:in `columns'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:1220:in `columns'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:1228:in `columns_hash'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:1520:in `find_one'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:1511:in `find_from_ids'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:590:in `find'
+    /app/controllers/process_patterns_controller.rb:231:in `find_pattern'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:178:in `send'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:178:in `evaluate_method'
+    /Library/Ruby/Gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:166:in `call'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:225:in `call'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:629:in `run_before_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:615:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/rescue.rb:136:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:606:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session_management.rb:134:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:159:in `process_client'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:158:in `each'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:158:in `process_client'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `initialize'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `new'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:268:in `initialize'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:268:in `new'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:268:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:282:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:281:in `each'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:281:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/command.rb:212:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/bin/mongrel_rails:19:in `load'
+    /usr/bin/mongrel_rails:19
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-06 14:11:50) [GET]
+
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract_adapter.rb:188:in `log'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite_adapter.rb:132:in `execute'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite_adapter.rb:372:in `catch_schema_changes'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite_adapter.rb:132:in `execute'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/sqlite_adapter.rb:275:in `select'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/database_statements.rb:7:in `select_all_without_query_cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:60:in `select_all'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:81:in `cache_sql'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:60:in `select_all'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:635:in `find_by_sql'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:1490:in `find_every'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:589:in `find'
+    /app/controllers/pattern_systems_controller.rb:70:in `index'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `perform_action_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:617:in `call_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/rescue.rb:136:in `perform_action_without_caching'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+    /Library/Ruby/Gems/1.8/gems/activerecord-2.2.2/lib/active_record/query_cache.rb:8:in `cache'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `send'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `process_without_filters'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:606:in `process_without_session_management_support'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session_management.rb:134:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
+    /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:159:in `process_client'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:158:in `each'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:158:in `process_client'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `initialize'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `new'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:285:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:268:in `initialize'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:268:in `new'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel.rb:268:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:282:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:281:in `each'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/configurator.rb:281:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/command.rb:212:in `run'
+    /Library/Ruby/Gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/bin/mongrel_rails:19:in `load'
+    /usr/bin/mongrel_rails:19
+
+Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:20) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:20) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:20) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:20) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:20) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:24) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PatternSystemsController#index (for 127.0.0.1 at 2009-04-14 01:40:31) [GET]
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: pattern_systems: SELECT * FROM "pattern_systems" ):
+  app/controllers/pattern_systems_controller.rb:8:in `index'
+  passenger (2.1.3) lib/phusion_passenger/rack/request_handler.rb:65:in `process_request'
+  passenger (2.1.3) lib/phusion_passenger/abstract_request_handler.rb:197:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:340:in `start_request_handler'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:298:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/utils.rb:176:in `safe_fork'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:296:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:149:in `start'
+  passenger (2.1.3) lib/phusion_passenger/railz/application_spawner.rb:192:in `start'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:260:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:121:in `lookup_or_add'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:254:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:75:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server_collection.rb:74:in `synchronize'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rails_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:148:in `spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/spawn_manager.rb:285:in `handle_spawn_application'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `__send__'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:332:in `main_loop'
+  passenger (2.1.3) lib/phusion_passenger/abstract_server.rb:182:in `start_synchronously'
+
+Rendering rescues/layout (internal_server_error)

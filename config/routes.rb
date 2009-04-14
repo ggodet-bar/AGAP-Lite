@@ -1,8 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :pattern_systems
+  # map.resources :pattern_systems
   
-  map.resources :process_patterns
-
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -20,7 +18,11 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
   # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+    map.resources :pattern_systems do |pat_system|
+       #:has_many => [ :process_patterns]
+       pat_system.resources :process_patterns
+       pat_system.resources :participants
+    end
   
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
@@ -36,12 +38,18 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => "pattern_systems"
-
+  
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
+  # map.with_options  :controller => 'process_patterns' do |pattern|
+  #   
+  # end
+  
+  # map.connect 'pattern_systems/:short_name', :controller => 'pattern_systems', :action => 'find_by_short_name'
+  
   map.connect ':controller/:action'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

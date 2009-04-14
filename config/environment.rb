@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -47,8 +47,8 @@ Rails::Initializer.run do |config|
 
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.
-  # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
-  # config.i18n.default_locale = :de
+  config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'app', 'locales', '*.{rb,yml}')]
+  config.i18n.default_locale = :fr
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
@@ -59,8 +59,6 @@ Rails::Initializer.run do |config|
     :secret      => 'bec302d981b893c9822567ef3ab4fec6f037c23defa9e8d85c9cdd8702acb5125efbd58a0d1e55011146bd53b08e2a45d20ae2949994397d3586d7a50a227ded'
   }
 
-  # Just playing a bit with I18n
-  config.i18n.default_locale = :fr
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information

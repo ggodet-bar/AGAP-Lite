@@ -2,22 +2,14 @@
 
 a_test_pattern_system:
    name: A Great pattern system for doing stuff!
+   short_name: test_system
    author: Bob le poulpe
    root_pattern_id: <%= Fixtures.identify(:first_pattern) %>
    participant_id: acheteur, vendeur
 
+
 a_new_pattern_system:
     name: Un système de patrons sans son root_pattern
+    short_name: new_system
     author: Bob le poulpe
     root_pattern_id: ''
-   # t.string   "author"
-   # t.string   "name"
-   # t.string   "root_pattern_id"
-   # t.datetime "created_at"
-   # t.datetime "updated_at"
-   # t.integer  "participant_id"
-   # t.text     "characteristics"
-   # t.text     "update_field"
-
-# two:
-#   column: value
