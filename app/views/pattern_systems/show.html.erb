@@ -18,7 +18,7 @@
 <% if @root_pattern.nil? %>
 	<%= image_tag 'UnknownImage.png', :width  => 100 %>
 <% else %>
-	<%= link_to(@root_pattern.name,{:controller => "process_patterns", :action => "show", :id =>@root_pattern}, :class  => 'crawlable') %>
+	<%= link_to(@root_pattern.name,[@pattern_system, @root_pattern], :class  => 'crawlable') %>
 <% end %>
 </div>
 
@@ -26,7 +26,7 @@
 <h2><%= t :patterns_list %></h2>
 <ul>
 <% for pattern in @patterns_list%>
-<li><%= link_to(pattern.name, {:controller => "process_patterns", :action => "show", :id =>pattern}, :class  => 'crawlable') %></li>
+<li><%= link_to(pattern.name,[@pattern_system, pattern], :class  => 'crawlable') %></li>
 <% end %>
 </ul>
 </div>
@@ -37,17 +37,17 @@
 <% if @participant.nil? %>
 <ul>
 	<% for participant in @pattern_system.participants%>
-		<li><b><%= participant.name %>:</b><%= link_to t(:edit_participant), :action=> "edit_participant", :id => participant %> |
-											<%= link_to t(:delete_participant), :action  => "destroy_participant", :id  => participant%>
+		<li><b><%= participant.name %>:</b><%= link_to t(:edit_participant), edit_pattern_system_participant_path(@pattern_system, participant) %> |
+											<%= link_to t(:delete_participant), [@pattern_system, participant], :method => :delete %>
 		<br /><%= participant.description%></li>
 	<% end %>
 </ul>
 
-<%= link_to t(:add_new_participant), :action=> "new_participant", :id => @pattern_system %> <br />
+<%= link_to t(:add_new_participant), new_pattern_system_participant_path(@pattern_system) %> <br />
 
 <% else %>
 	<% if @isEditing %>
-		<% form_for @participant, :url  => {:action  => "update_participant", :id => @participant} do |p| %>
+		<% form_for [@pattern_system, @participant], :method => :put do |p| %>
 		<label for="name"><%= t(:name_of_participant)%> :</label>
 		<%= p.text_field :name %><br />
 		<label for="description"><%= t(:description_of_participant_role) %> :</label>
@@ -55,7 +55,7 @@
 		<%= p.submit t(:update_participant) %>
 		<% end %>
 	<% else %>
-		<% form_for @participant, :url  => {:action  => "create_participant", :id => @pattern_system} do |p| %>
+		<% form_for [@pattern_system, @participant], :method => :post do |p| %>
 		<label for="name"><%= t(:name_of_participant)%> :</label>
 		<%= p.text_field :name %><br />
 		<label for="description"><%= t(:description_of_participant_role) %> :</label>
@@ -72,7 +72,7 @@
 
 <div class="block">
 
-<%= link_to t(:add_new_pattern), :controller => "process_patterns", :action => "new", :id => @pattern_system %><br />
+<%= link_to t(:add_new_pattern), new_pattern_system_process_pattern_path(@pattern_system) %><br />
 
 <%= link_to t(:edit), edit_pattern_system_path(@pattern_system) %> |
 <%= link_to t(:back), pattern_systems_path %>

@@ -14,9 +14,12 @@ class ApplicationController < ActionController::Base
                                 :encoding => 'html',
                                 :theme  => 'advanced',
                                 # :document_base_url  => '/public',
-                                # :relative_urls  => :true,
-                                :convert_urls  => :false
+                                :relative_urls  => :false,
+                                :convert_urls  => :false,
+                                :plugins => %w{ upimage },
+                                :theme_advanced_buttons1_add  => 'upimage'
                               }
+  I18n.locale = :fr
   
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters

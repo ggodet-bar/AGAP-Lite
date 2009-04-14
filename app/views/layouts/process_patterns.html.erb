@@ -4,17 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title><%= @pattern_system.name %></title>
+  <title><%= @process_pattern.name %></title>
   <%= stylesheet_link_tag 'generic', 'styles' %>
   <%= javascript_include_tag :defaults %>
   <%= include_tiny_mce_if_needed %>
 </head>
 <body>
 	<div id="header"><span>
-	<%= link_to((t :back_to_system), {:controller  => "pattern_systems", :action  => "show", :id  =>  session[:pattern_system_id]}, :class  => 'crawlable') %> | 
+	
+	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
 	<% unless @process_pattern.nil? %>
 		<% for ancester in @process_pattern.ancesters %>
-			<%= link_to(ancester.name, ancester, :class => 'crawlable') + " > "%>
+			<%= link_to(ancester.name, [@pattern_system, ancester], :class => 'crawlable') + " > "%>
 		<% end %>
 		<%= @process_pattern.name %>
 	<% end %>
@@ -31,7 +32,7 @@
 			<% if pattern.id == @process_pattern.id %>
 		<li><%= h(pattern.name) %></li>
 			<% else %>
-		<li><%= link_to(h(pattern.name), pattern, :class  => 'crawlable') %></li>
+		<li><%= link_to(h(pattern.name), [@pattern_system, pattern], :class  => 'crawlable') %></li>
 			<% end %>
 		<% end %>
 	</ul>

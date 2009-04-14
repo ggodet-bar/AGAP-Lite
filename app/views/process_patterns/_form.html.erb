@@ -1,4 +1,5 @@
-<% unless @process_pattern.mappable_image.nil? %> 
+<% unless @process_pattern.new_record? or @process_pattern.nil? or @process_pattern.mappable_image.nil? %> 
+	<% puts @process_pattern.id %>
 	<%= javascript_tag "observeThisPage(#{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
 <% end %>
   <p>
@@ -46,7 +47,6 @@
 		<div id="selection"><div class="handle" id="tl_rect"></div><div class="handle" id="tr_rect"></div><div class="handle" id="bl_rect"></div><div class="handle" id="br_rect"></div></div>
 		<div id="pattern_choice"></div>
 	</dl>
-<!--	<%= image_tag @process_pattern.mappable_image.public_filename, :id => 'method_image' %> -->
 	<%= image_tag 'AddMapArea.png', :size  => "50x50", :id => 'plus_sign'%>
 	<%= image_tag 'ValidateMapArea.png', :size  =>  "50x50", :id  => 'validate_area'%>
 

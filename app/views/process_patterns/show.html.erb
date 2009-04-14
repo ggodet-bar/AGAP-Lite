@@ -24,7 +24,7 @@
 		<h4><%= t :process_context %></h4>
 		<ul>
 		<% for context_pattern in @process_pattern.context_patterns %>
-			<li><%= link_to context_pattern.name, context_pattern, :class  => 'crawlable' %></li>
+			<li><%= link_to context_pattern.name, [@pattern_system, context_pattern], :class  => 'crawlable' %></li>
 		<% end %>
 		</ul>
 		
@@ -44,14 +44,11 @@
 	<h3><%= t :process_image %></h3>
 	<% if @image.nil? %>
 	<%= image_tag 'UnknownImage.png', :width  => 100 %>
-	
-
 	<% else %>
-	<!-- <%= image_tag @image.public_filename, :ismap  => true, :usemap  => 'testMap'%> -->
 	<dl id="method_image" style=<%= "\"background: url(\'#{ @image.public_filename}\') no-repeat; width: #{@image.width}px; height: #{@image.height}px;\""%> >
 		<% for map in @maps %>
 			<dd style=<%= "\"left: #{map.x_corner}px; top: #{map.y_corner}px;width: #{map.width}px; height: #{map.height}px;\"" %>>
-			<a style=<%= "\"display: block; width: #{map.width}px; height: #{map.height}px;text-decoration: none;\" href= \"/process_patterns/#{map.pattern_id}\" class=\"crawlable\""%>></a>
+			<a style=<%= "\"display: block; width: #{map.width}px; height: #{map.height}px;text-decoration: none;\" href= \"/pattern_systems/#{@pattern_system.short_name}/process_patterns/#{map.pattern_id}\" class=\"crawlable\""%>></a>
 			</dd>
 		<% end %>
 	</dl>
@@ -80,7 +77,7 @@
 	<h3><%= t :uses %></h3>
 	<ul>
 	<% for use_pattern in @use_patterns %>
-		<li><%= link_to use_pattern.name, use_pattern, :class  => 'crawlable' %></li>
+		<li><%= link_to use_pattern.name, [@pattern_system, use_pattern], :class  => 'crawlable' %></li>
 	<% end %>
 	</ul>
 	<!-- <h3><%= t :requires %></h3>
@@ -88,5 +85,5 @@
 	<h3>Alternative</h3> -->
 </div>
 
-<%= link_to t(:edit), edit_process_pattern_path(@process_pattern) %> |
-<%= link_to t(:delete), @process_pattern, :confirm => 'Are you sure?', :method => :delete%>
+<%= link_to t(:edit), edit_pattern_system_process_pattern_path(@pattern_system, @process_pattern) %> |
+<%= link_to t(:delete), [@pattern_system, @process_pattern], :confirm => 'Are you sure?', :method => :delete%>

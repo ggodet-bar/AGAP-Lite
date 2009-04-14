@@ -1,10 +1,10 @@
 <h1><%= t(:new_pattern)%></h1>
 
-<% form_for(@process_pattern, :html => {:multipart => true}) do |f| %>
+<% form_for([@pattern_system, @process_pattern], :html => {:multipart => true}) do |f| %>
   <%= f.error_messages %>
 	<%= render :partial => 'form', :locals => {:f => f} %>
 
 	  <p>
-	    <%= f.submit t :create %>
+	    <%= f.submit t(:create) %>
 	  </p>
 	<% end %>

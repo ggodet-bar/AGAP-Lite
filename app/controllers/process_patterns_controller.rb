@@ -1,7 +1,36 @@
 class ProcessPatternsController < ApplicationController
   
-  before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant]  
+  before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_upload, :tmp_images]  
   before_filter :load_system
+  
+  # GET /process_patterns/tmp_images
+  def tmp_images
+    @images = MappableImage.all
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def tmp_upload
+    puts params[:image]
+    unless params[:image]
+      flash[:error] = 'You SUCK!'
+    end
+    @image = MappableImage.new(params[:image])
+    puts @image.public_filename
+    if @image.save
+      puts 'Save successful'
+    else
+      puts 'You SUCK!'
+    end
+    responds_to_parent do
+      render :update do |page|
+        page << 'ExampleDialog.insert_image(\'' + @image.public_filename + '\');'
+      end
+      # format.js { puts 'successful render'}
+      
+    end
+  end
   
   def choose_pattern
     respond_to do |format|
@@ -56,7 +85,7 @@ class ProcessPatternsController < ApplicationController
   
   def index
     respond_to do |format|
-      format.html {session[:pattern_system_id].nil? ? redirect_to(:controller  => 'pattern_systems', :action => 'index') : redirect_to(:controller  => 'pattern_systems', :action  => 'show', :id  => session[:pattern_system_id])}
+      format.html {redirect_to @pattern_system}
     end
   end
 
@@ -82,6 +111,7 @@ class ProcessPatternsController < ApplicationController
     session[:participants] = []
     session[:maps] = []
     @participants = []
+    # @selectable_participants = @pattern_system.participants ? @pattern_system.participants : []
     @selectable_participants = @pattern_system.participants
     unless params[:id].nil?
       session[:pattern_system_id] = params[:id]
@@ -131,15 +161,13 @@ class ProcessPatternsController < ApplicationController
     # unless @mappable_image[:uploaded_data].nil?
       @process_pattern.mappable_image = @mappable_image
     # end
-    unless session[:pattern_system_id].nil?
-        currentPatSystem = PatternSystem.find(session[:pattern_system_id])
-        currentPatSystem.process_patterns << @process_pattern
-    end
+
+    @pattern_system.process_patterns << @process_pattern
     respond_to do |format|
       if @process_pattern.save
         flash[:notice] = 'Process pattern was successfully created.'
         session[:participants] = nil
-        format.html { redirect_to(@process_pattern) }
+        format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { render :xml => @process_pattern, :status => :created, :location => @process_pattern }
       else
         format.html { render :action => "new" }
@@ -193,7 +221,7 @@ class ProcessPatternsController < ApplicationController
       if  proceedUpdate and @process_pattern.update_attributes(params[:process_pattern])
             flash[:notice] = 'Process pattern was successfully updated.'
             session[:participants] = nil
-            format.html { redirect_to(@process_pattern) }
+            format.html { redirect_to([@pattern_system, @process_pattern]) }
             format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -208,7 +236,7 @@ class ProcessPatternsController < ApplicationController
     @process_pattern.destroy
 
     respond_to do |format|
-      format.html { redirect_to :controller  => "pattern_systems", :action => "show", :id  => session[:pattern_system_id] }
+      format.html { redirect_to @pattern_system}
       format.xml  { head :ok }
     end
   end
@@ -220,9 +248,7 @@ private
   end
 
   def load_system
-      unless session[:pattern_system_id].nil?
-        @pattern_system = PatternSystem.find(session[:pattern_system_id])
-        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(session[:pattern_system_id])
-      end
+        @pattern_system = PatternSystem.find_by_short_name(params[:pattern_system_id])
+        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:pattern_system_id])
   end
 end

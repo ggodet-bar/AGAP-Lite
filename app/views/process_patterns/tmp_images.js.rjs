@@ -1,0 +1,3 @@
+# page.replace_html 'images', :partial => 'images_insert', :locals => {:images => @images}
+# page.assign 'pattern_id', @process_pattern.id
+page.replace_html 'form_content', :partial => "image_form", :locals => {:images => @images}

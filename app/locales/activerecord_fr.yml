@@ -1,0 +1,21 @@
+fr:
+    activerecord:
+        models:
+            process_pattern: patron
+            pattern_system: système de patrons
+        attributes:
+            process_pattern:
+                name: Nom
+                author: Auteur
+            pattern_system:
+                name: Nom
+                author: Auteur
+        errors:
+            messages:
+                blank: "ne peut être vide"
+                taken: "est déjà enregistré"
+            template:
+                header:
+                    one: "Une erreur a interdit la sauvegarde de ce {{model}}"
+                    other: "{{count}} erreurs ont interdit la sauvegarde de ce {{model}}"
+                body: "Il y a eu un problème avec le(s) champ(s) suivant(s):"

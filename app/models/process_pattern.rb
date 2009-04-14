@@ -1,5 +1,6 @@
 class ProcessPattern < ActiveRecord::Base
-  validates_presence_of :name
+  validates_presence_of :name, :author
+  validates_uniqueness_of :name, :scope => :pattern_system_id
   
   belongs_to  :pattern_system
   has_one     :mappable_image, :dependent => :destroy
