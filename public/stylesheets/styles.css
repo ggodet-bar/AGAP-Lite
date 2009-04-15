@@ -40,6 +40,9 @@ div.errorExplanation {
 
 div.errorExplanation h2 {
 	color: #DD0000;
+	float: right;
+	margin-top: -0.8em;
+	margin-right: -8.7em;
 }
 
 #method_image {

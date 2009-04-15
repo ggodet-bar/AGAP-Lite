@@ -6,6 +6,7 @@ en:
   author_name: "Author name"
   author: "Author(s)"
   name: "Name"
+  short_name: "Short name"
   context: "Context"
   process_context: "Process context"
   product_context: "Product context"
@@ -43,3 +44,4 @@ en:
   update_participant: "Update participant"
   create_participant: "Create participant"
   description_of_participant_role: "Description of the participant's role"
+  successful_pattern_creation: Process pattern was successfully created.

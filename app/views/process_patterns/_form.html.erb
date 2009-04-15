@@ -2,9 +2,12 @@
 	<% puts @process_pattern.id %>
 	<%= javascript_tag "observeThisPage(#{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
 <% end %>
-  <p>
-	<%= t :author %> <%= f.text_field	:author %>
-  </p>
+
+<table>
+	<tr>
+		<td><%= t :author %></td><td><%= f.text_field	:author %></td>
+	</tr>
+</table>
 <h2>Interface</h2>
 	<h3><%= t :name %></h3>
 	<%= f.text_field :name %>
@@ -40,6 +43,7 @@
 	
 	
 <h2>Solution</h2>
+
 	<h3><%= t :process_image %></h3>
 	<% unless @process_pattern.mappable_image.nil? %>
 	<dl id="method_image">

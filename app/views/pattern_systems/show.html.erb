@@ -48,6 +48,7 @@
 <% else %>
 	<% if @isEditing %>
 		<% form_for [@pattern_system, @participant], :method => :put do |p| %>
+		<%= error_messages_for 'participant', :object => @participant %>
 		<label for="name"><%= t(:name_of_participant)%> :</label>
 		<%= p.text_field :name %><br />
 		<label for="description"><%= t(:description_of_participant_role) %> :</label>
@@ -56,6 +57,7 @@
 		<% end %>
 	<% else %>
 		<% form_for [@pattern_system, @participant], :method => :post do |p| %>
+		<%= error_messages_for 'participant', :object => @participant %>
 		<label for="name"><%= t(:name_of_participant)%> :</label>
 		<%= p.text_field :name %><br />
 		<label for="description"><%= t(:description_of_participant_role) %> :</label>

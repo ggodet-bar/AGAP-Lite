@@ -14,6 +14,7 @@ require 'zip/zipfilesystem'
 require 'highline/import'
 require 'net/sftp'
 require 'net/ssh'
+require 'tempfile'
 
 def rec_compress(aZipFile, aBasePath, anInitialPath)
     Dir[aBasePath + '/**'].each do |file|
@@ -25,6 +26,8 @@ def rec_compress(aZipFile, aBasePath, anInitialPath)
     end
 end
 
+# Utilisé à terme pour gérer le transfert du système de patrons de manière transparente
+# temp_file = Tempfile.new('pat_system')
 
 stack = ["http://0.0.0.0:3000/pattern_systems/266846998"]
 visited = Hash.new
@@ -140,8 +143,10 @@ base_path = "/Users/godetg/Desktop/PatternSystem"
 project_path = "/Users/godetg/Documents/RadAgap/public/"
 
 puts "Copying images and stylesheets"
+# Nettoyage des fichiers temporaires (à supprimer)
 FileUtils.rm_r base_path + "/images"
 FileUtils.rm_r base_path + "/stylesheets"
+# Copie des données dans le dossier temporaire
 FileUtils.cp_r project_path + "images", base_path + "/images"
 FileUtils.cp_r project_path + "stylesheets", base_path + "/stylesheets"
 

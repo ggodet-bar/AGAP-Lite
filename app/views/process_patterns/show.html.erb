@@ -43,6 +43,7 @@
 
 	<h3><%= t :process_image %></h3>
 	<% if @image.nil? %>
+
 	<%= image_tag 'UnknownImage.png', :width  => 100 %>
 	<% else %>
 	<dl id="method_image" style=<%= "\"background: url(\'#{ @image.public_filename}\') no-repeat; width: #{@image.width}px; height: #{@image.height}px;\""%> >

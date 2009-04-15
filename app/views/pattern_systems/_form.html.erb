@@ -1,7 +1,14 @@
-<p>
-	<%= t :author %> <%= f.text_field	:author %><br />
-	<%= t :name %><%= f.text_field	:name %>
-</p>
+<table>
+	<tr>
+		<td><%= t :author %></td><td><%= f.text_field	:author %></td>
+	</tr>
+	<tr>
+		<td><%= t :name %></td><td><%= f.text_field	:name %></td>
+	</tr>
+	<tr>
+		<td><%= t :short_name %></td><td><%= f.text_field :short_name %></td>
+	</tr>
+</table>
 	<h3><%= t :updates %></h3>
 	<%= f.text_area(:update_field, :class => "mceEditor") %>
 

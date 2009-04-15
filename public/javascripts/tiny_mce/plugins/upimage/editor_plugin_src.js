@@ -40,10 +40,10 @@
 			
 			
 			// Register example button
-			ed.addButton('upimage', {
+			ed.addButton('image', {
 				title : 'upimage.desc',
 				cmd : 'mceExample',
-				image : url + '/img/example.gif'
+				// image : url + '/img/example.gif'
 			});
 			// Add a node change handler, selects the button in the UI when a image is selected
 			// ed.onNodeChange.add(function(ed, cm, n) {

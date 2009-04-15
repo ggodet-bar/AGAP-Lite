@@ -25,6 +25,10 @@ var ExampleDialog = {
 		// $('images').setStyle({overflow: 'auto'}) ;
 	},
 	
+	aTest : function() {
+		alert('pouet') ;
+	},
+	
 	insert_image : function(filename) {
 		tinyMCEPopup.editor.execCommand('mceInsertContent', false, '<img src=\'' + filename + '\' />') ;
 		alert('did insert!') ;

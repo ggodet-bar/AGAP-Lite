@@ -6,8 +6,6 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems.xml
   def index
     @pattern_systems = PatternSystem.find(:all)
-    
-    # session[:pattern_system_id] = nil
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pattern_systems }
@@ -17,18 +15,15 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/1
   # GET /pattern_systems/1.xml
   def show
-    # @pattern_system = PatternSystem.find(params[:id])
-    unless flash[:participant].nil?
+    if flash[:participant]
       @participant=flash[:participant]
     end
-    if flash[:isEditing].nil? or !flash[:isEditing]
-      @isEditing = false
-    else
-      @isEditing = true
-    end
+    @isEditing = flash[:isEditing]
+
+    puts @isEditing
+
     @participants_list = @pattern_system.participants
-    # session[:pattern_system_id] = params[:id]
-    @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:id])
+    @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system)
     unless @pattern_system.root_pattern_id.nil? or @pattern_system.root_pattern_id.empty?
       @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
       @patterns_list = @patterns_list - Array(@root_pattern)
@@ -53,12 +48,7 @@ class PatternSystemsController < ApplicationController
 
   # GET /pattern_systems/1/edit
   def edit
-    # @pattern_system = PatternSystem.find(params[:id])
-    unless @pattern_system.root_pattern_id.nil? or @pattern_system.root_pattern_id == ""
-      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
-    end
-    # puts @root_pattern_idd
-    
+      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id) unless @pattern_system.root_pattern_id.blank?
   end
 
   # POST /pattern_systems
@@ -67,7 +57,7 @@ class PatternSystemsController < ApplicationController
     @pattern_system = PatternSystem.new(params[:pattern_system])
     respond_to do |format|
       if @pattern_system.save
-        flash[:notice] = 'PatternSystem was successfully created.'
+        flash[:notice] = t(:successful_creation, :model => PatternSystem.human_name)
         format.html { redirect_to(@pattern_system) }
         format.xml  { render :xml => @pattern_system, :status => :created, :location => @pattern_system }
       else
@@ -79,12 +69,10 @@ class PatternSystemsController < ApplicationController
 
   # PUT /pattern_systems/1
   # PUT /pattern_systems/1.xml
-  def update
-    # @pattern_system = PatternSystem.find(params[:id])
-    
+  def update    
     respond_to do |format|
       if @pattern_system.update_attributes(params[:pattern_system])
-        flash[:notice] = 'PatternSystem was successfully updated.'
+        flash[:notice] = t(:successful_update, :model => PatternSystem.human_name)
         format.html { redirect_to(@pattern_system) }
         format.xml  { head :ok }
       else
@@ -97,10 +85,9 @@ class PatternSystemsController < ApplicationController
   # DELETE /pattern_systems/1
   # DELETE /pattern_systems/1.xml
   def destroy
-    # @pattern_system = PatternSystem.find(params[:id])
     @pattern_system.destroy
-
     respond_to do |format|
+      flash[:notice] = t(:successful_delete, :model => PatternSystem.human_name)
       format.html { redirect_to(pattern_systems_url) }
       format.xml  { head :ok }
     end

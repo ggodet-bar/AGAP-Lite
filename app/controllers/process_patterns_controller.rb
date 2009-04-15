@@ -95,7 +95,7 @@ class ProcessPatternsController < ApplicationController
     @image = MappableImage.find_by_process_pattern_id(params[:id])
     @participants = @process_pattern.participants
     @use_patterns = @process_pattern.use_patterns
-    unless @image.nil?
+    if @image
       @maps = @image.maps
     end
     respond_to do |format|
@@ -149,7 +149,10 @@ class ProcessPatternsController < ApplicationController
       params[:process_pattern][:use_patterns] = ProcessPattern.find(params[:process_pattern][:use_patterns])
     end
     @process_pattern = ProcessPattern.new(params[:process_pattern])
-    @mappable_image = MappableImage.new(params[:mappable_image])
+    if params[:mappable_image]
+      @mappable_image = MappableImage.new(params[:mappable_image])
+      @process_pattern.mappable_image = @mappable_image
+    end
     
     if session[:participants].nil?
       @participants = []
@@ -158,14 +161,11 @@ class ProcessPatternsController < ApplicationController
     end
     @selectable_participants = @pattern_system.participants - @participants
     @process_pattern.participants = @participants
-    # unless @mappable_image[:uploaded_data].nil?
-      @process_pattern.mappable_image = @mappable_image
-    # end
-
+    
     @pattern_system.process_patterns << @process_pattern
     respond_to do |format|
       if @process_pattern.save
-        flash[:notice] = 'Process pattern was successfully created.'
+        flash[:notice] = t(:successful_creation, :model => ProcessPattern.human_name)
         session[:participants] = nil
         format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { render :xml => @process_pattern, :status => :created, :location => @process_pattern }
@@ -188,9 +188,7 @@ class ProcessPatternsController < ApplicationController
       session[:maps].each {|map|
       puts map
       @aMap = Map.new(map)
-        # unless @aMap.new_record?
       @mappable_image.maps << @aMap
-        # end
       }
     end
     if params[:process_pattern][:context_patterns].nil? or params[:process_pattern][:context_patterns] == [""]
@@ -219,7 +217,7 @@ class ProcessPatternsController < ApplicationController
       end
       
       if  proceedUpdate and @process_pattern.update_attributes(params[:process_pattern])
-            flash[:notice] = 'Process pattern was successfully updated.'
+            flash[:notice] = t(:successful_update, :model => ProcessPattern.human_name)
             session[:participants] = nil
             format.html { redirect_to([@pattern_system, @process_pattern]) }
             format.xml  { head :ok }
@@ -236,6 +234,7 @@ class ProcessPatternsController < ApplicationController
     @process_pattern.destroy
 
     respond_to do |format|
+      flash[:notice] = t(:successful_delete, :model => ProcessPattern.human_name)
       format.html { redirect_to @pattern_system}
       format.xml  { head :ok }
     end

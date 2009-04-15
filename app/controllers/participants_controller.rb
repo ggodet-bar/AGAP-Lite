@@ -6,7 +6,6 @@ class ParticipantsController < ApplicationController
   # GET /pattern_systems/1/participants/new
   # GET /pattern_systems/1/participants/new.xml
   def new
-    # @pattern_system = PatternSystem.find(params[:pattern_system_id])
     flash[:participant] = Participant.new
     respond_to do |format|
        format.html {redirect_to(@pattern_system)}
@@ -14,17 +13,20 @@ class ParticipantsController < ApplicationController
   end
   
   def create
-    # @pattern_system = PatternSystem.find(params[:pattern_system_id])
     @participant = Participant.new(params[:participant])
     respond_to do |format|
       if @participant.save
         @pattern_system.participants << @participant
         @pattern_system.save
-        flash[:notice] = 'Participant was successfully created.'
+        flash[:notice] = t(:successful_creation, :model => Participant.human_name)
         format.html { redirect_to(@pattern_system) }
   #      format.xml  { render :xml => @pattern_system, :status => :created, :location => @pattern_system }
       else
-        format.html { redirect_to(@pattern_system) }
+        format.html {
+          flash[:participant] = @participant
+          flash[:isEditing] = true
+          redirect_to(@pattern_system)
+        }
    #     format.xml  { render :xml => @pattern_system.errors, :status => :unprocessable_entity }
       end
     end
@@ -45,11 +47,15 @@ class ParticipantsController < ApplicationController
 
     respond_to do |format|
       if @participant.update_attributes(params[:participant])
-        flash[:notice] = 'Participant was successfully updated.'
+        flash[:notice] = t(:successful_update, :model => Participant.human_name)
         format.html { redirect_to(@pattern_system) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html {
+          flash[:participant] = @participant
+          flash[:isEditing] = true
+          redirect_to(@pattern_system)
+        }
         format.xml  { render :xml => @participant.errors, :status => :unprocessable_entity }
       end
     end
@@ -62,7 +68,7 @@ class ParticipantsController < ApplicationController
     @participant.destroy
     
     respond_to do |format|
-      flash[:notice] = 'Participant was successfully deleted.'
+      flash[:notice] = t(:successful_delete, :model => Participant.human_name)
       format.html { redirect_to(@pattern_system) }
       format.xml  { head :ok }
     end
