@@ -1,22 +1,31 @@
 class ProcessPatternsController < ApplicationController
   
-  before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_upload, :tmp_images]  
+  before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_images]  
   before_filter :load_system
   
   # GET /process_patterns/tmp_images
   def tmp_images
-    @images = MappableImage.all
-    respond_to do |format|
-      format.js
+    puts 'tmp_images called'
+    @images = MappableImage.all.select{|image| image.process_pattern.pattern_system.short_name == @pattern_system.short_name}
+    @images.each do |image|
+      puts image.public_filename
+    end
+    render :update do |page|
+      # page << "var pat_system_id = '#{@pattern_system.short_name}';"
+      page.replace_html :form_content, :partial => "image_form", :locals => {:images => @images}
     end
   end
   
   def tmp_upload
+    puts 'tmp_upload called'
     puts params[:image]
-    unless params[:image]
-      flash[:error] = 'You SUCK!'
-    end
+    puts @pattern_system.short_name
     @image = MappableImage.new(params[:image])
+    
+    # TODO  On doit trouver un moyen de "raccrocher" TEMPORAIREMENT l'image à son process_pattern
+    # (éventuellement en modifiant le lien PatternSystem>ProcessPattern>MappableImage en PatternSystem>MappableImage)
+    
+    puts @image.process_pattern
     puts @image.public_filename
     if @image.save
       puts 'Save successful'

@@ -23,6 +23,6 @@ class MappableImage < ActiveRecord::Base
   
 private
   def parent_pattern_name
-    self.process_pattern.pattern_system.short_name
+    process_pattern.pattern_system.short_name
   end
 end

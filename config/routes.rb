@@ -18,8 +18,11 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
   # Sample resource route with sub-resources:
+  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_images.js', :controller => 'process_patterns', :action => 'tmp_images'
+  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_upload.js', :controller => 'process_patterns', :action => 'tmp_upload'
+  
+  
     map.resources :pattern_systems do |pat_system|
-       #:has_many => [ :process_patterns]
        pat_system.resources :process_patterns
        pat_system.resources :participants
     end
@@ -50,7 +53,9 @@ ActionController::Routing::Routes.draw do |map|
   
   # map.connect 'pattern_systems/:short_name', :controller => 'pattern_systems', :action => 'find_by_short_name'
   
+  
   map.connect ':controller/:action'
+  map.connect ':controller/:action.:format'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
