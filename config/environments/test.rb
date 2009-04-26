@@ -4,7 +4,7 @@
 # test suite.  You never need to work with it otherwise.  Remember that
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs.  Don't rely on the data there!
-config.cache_classes = false
+config.cache_classes = true
 
 # Log error messages when you accidentally call methods on nil.
 config.whiny_nils = true
@@ -20,3 +20,7 @@ config.action_controller.allow_forgery_protection    = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+
+config.gem "thoughtbot-factory_girl",
+            :lib    => "factory_girl",
+            :source => "http://gems.github.com"

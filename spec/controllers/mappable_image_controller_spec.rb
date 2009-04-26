@@ -8,4 +8,7 @@ describe MappableImageController do
     (1+1).should == 2
   end
   
+  it "should allow adding a map to the image"
+  
+  it "should link a new image to the pattern system at upload time"
 end

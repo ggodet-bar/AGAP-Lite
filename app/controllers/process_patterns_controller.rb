@@ -200,19 +200,19 @@ class ProcessPatternsController < ApplicationController
       @mappable_image.maps << @aMap
       }
     end
-    if params[:process_pattern][:context_patterns].nil? or params[:process_pattern][:context_patterns] == [""]
+    if params[:process_pattern][:context_patterns].blank? or params[:process_pattern][:context_patterns] == [""]
       params[:process_pattern][:context_patterns] = []
     else
       params[:process_pattern][:context_patterns] = ProcessPattern.find(params[:process_pattern][:context_patterns])
     end
-    if params[:process_pattern][:use_patterns].nil? or params[:process_pattern][:use_patterns] == [""]
+    if params[:process_pattern][:use_patterns].blank? or params[:process_pattern][:use_patterns] == [""]
       params[:process_pattern][:use_patterns] = []
     else
       params[:process_pattern][:use_patterns] = ProcessPattern.find(params[:process_pattern][:use_patterns])
     end
     respond_to do |format|
       proceedUpdate = true
-      unless params[:mappable_image].nil?
+      unless params[:mappable_image].blank?
         if @mappable_image.nil?
           @mappable_image = MappableImage.create(params[:mappable_image])
           puts params[:mappable_image]

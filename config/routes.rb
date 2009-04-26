@@ -22,6 +22,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_upload.js', :controller => 'process_patterns', :action => 'tmp_upload'
   
   
+  # Named routes
+  map.clone_pattern_system 'pattern_systems/:pattern_system_id/clone', :controller => 'pattern_systems', :action => 'clone'
+  
     map.resources :pattern_systems do |pat_system|
        pat_system.resources :process_patterns
        pat_system.resources :participants

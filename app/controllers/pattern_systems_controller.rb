@@ -93,6 +93,11 @@ class PatternSystemsController < ApplicationController
     end
   end
   
+  
+  def clone
+    # @pattern_system.clone
+    redirect_to(pattern_systems_path(@pattern_system))
+  end
 private
   def load_system
       @pattern_system = PatternSystem.find_by_short_name(params[:id])
