@@ -9,18 +9,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090412154219) do
+ActiveRecord::Schema.define(:version => 20090427145450) do
 
   create_table "context_patterns", :id => false, :force => true do |t|
     t.integer "source_pattern_id"
     t.integer "target_pattern_id"
   end
 
+  create_table "image_associations", :force => true do |t|
+    t.integer  "process_pattern_id", :null => false
+    t.integer  "mappable_image_id",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "mappable_images", :force => true do |t|
     t.string   "filename"
     t.integer  "width"
     t.integer  "height"
-    t.integer  "process_pattern_id"
+    t.integer  "pattern_system_id"
     t.integer  "map_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,9 +42,10 @@ ActiveRecord::Schema.define(:version => 20090412154219) do
     t.integer  "y_corner"
     t.integer  "width"
     t.integer  "height"
-    t.integer  "pattern_id"
+    t.integer  "target_pattern_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "process_pattern_id"
   end
 
   create_table "participants", :force => true do |t|

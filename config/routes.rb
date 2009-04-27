@@ -18,8 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
   # Sample resource route with sub-resources:
-  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_images.js', :controller => 'process_patterns', :action => 'tmp_images'
-  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_upload.js', :controller => 'process_patterns', :action => 'tmp_upload'
+  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_images/:id.js', :controller => 'process_patterns', :action => 'tmp_images'
+  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_upload/:id.js', :controller => 'process_patterns', :action => 'tmp_upload'
   
   
   # Named routes

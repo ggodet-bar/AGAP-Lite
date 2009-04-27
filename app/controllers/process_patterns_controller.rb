@@ -6,27 +6,20 @@ class ProcessPatternsController < ApplicationController
   # GET /process_patterns/tmp_images
   def tmp_images
     puts 'tmp_images called'
-    @images = MappableImage.all.select{|image| image.process_pattern.pattern_system.short_name == @pattern_system.short_name}
-    @images.each do |image|
-      puts image.public_filename
-    end
+    @images = MappableImage.all.select{|image| image.pattern_system.short_name == @pattern_system.short_name}
+    # @images.each do |image|
+    #   puts image.public_filename
+    # end
     render :update do |page|
       # page << "var pat_system_id = '#{@pattern_system.short_name}';"
-      page.replace_html :form_content, :partial => "image_form", :locals => {:images => @images}
+      page.replace_html :form_content, :partial => "image_form", :locals => {:id => params[:id]}
     end
   end
   
   def tmp_upload
     puts 'tmp_upload called'
-    puts params[:image]
-    puts @pattern_system.short_name
     @image = MappableImage.new(params[:image])
-    
-    # TODO  On doit trouver un moyen de "raccrocher" TEMPORAIREMENT l'image à son process_pattern
-    # (éventuellement en modifiant le lien PatternSystem>ProcessPattern>MappableImage en PatternSystem>MappableImage)
-    
-    puts @image.process_pattern
-    puts @image.public_filename
+    @image.pattern_system = @pattern_system
     if @image.save
       puts 'Save successful'
     else
@@ -34,10 +27,8 @@ class ProcessPatternsController < ApplicationController
     end
     responds_to_parent do
       render :update do |page|
-        page << 'ExampleDialog.insert_image(\'' + @image.public_filename + '\');'
-      end
-      # format.js { puts 'successful render'}
-      
+        page << 'UpImage.insert_image(\'' + @image.public_filename + '\');'
+      end      
     end
   end
   
@@ -50,7 +41,6 @@ class ProcessPatternsController < ApplicationController
   end
   
   def save_map
-    # puts params[:pattern_id]
     session[:maps] << {:pattern_id  => params[:pattern_id], :x_corner => params[:x], :y_corner => params[:y], :width => params[:w], :height => params[:h]}
   end
   
@@ -101,7 +91,7 @@ class ProcessPatternsController < ApplicationController
   # GET /process_patterns/1
   # GET /process_patterns/1.xml
   def show
-    @image = MappableImage.find_by_process_pattern_id(params[:id])
+    @image = @process_pattern.mappable_image
     @participants = @process_pattern.participants
     @use_patterns = @process_pattern.use_patterns
     if @image
@@ -147,23 +137,22 @@ class ProcessPatternsController < ApplicationController
   # POST /process_patterns
   # POST /process_patterns.xml
   def create
-    if params[:process_pattern][:context_patterns].nil? or params[:process_pattern][:context_patterns] == [""]
+    if params[:process_pattern][:context_patterns].blank? or params[:process_pattern][:context_patterns] == [""]
       params[:process_pattern][:context_patterns] = []
     else
       params[:process_pattern][:context_patterns] = ProcessPattern.find(params[:process_pattern][:context_patterns])
     end
-    if params[:process_pattern][:use_patterns].nil? or params[:process_pattern][:use_patterns] == [""]
+    if params[:process_pattern][:use_patterns].blank? or params[:process_pattern][:use_patterns] == [""]
       params[:process_pattern][:use_patterns] = []
     else
       params[:process_pattern][:use_patterns] = ProcessPattern.find(params[:process_pattern][:use_patterns])
     end
     @process_pattern = ProcessPattern.new(params[:process_pattern])
-    if params[:mappable_image]
-      @mappable_image = MappableImage.new(params[:mappable_image])
-      @process_pattern.mappable_image = @mappable_image
+    unless params[:mappable_image].blank?
+      @process_pattern.mappable_image = MappableImage.create(params[:mappable_image])
     end
     
-    if session[:participants].nil?
+    if session[:participants].blank?
       @participants = []
     else
       @participants = Participant.find(session[:participants])
@@ -173,6 +162,7 @@ class ProcessPatternsController < ApplicationController
     
     @pattern_system.process_patterns << @process_pattern
     respond_to do |format|
+      # puts @participants.errors.full_messages
       if @process_pattern.save
         flash[:notice] = t(:successful_creation, :model => ProcessPattern.human_name)
         session[:participants] = nil
@@ -192,10 +182,8 @@ class ProcessPatternsController < ApplicationController
     @participants = @process_pattern.participants
     @selectable_participants = @pattern_system.participants - @participants
     @mappable_image = @process_pattern.mappable_image
-    
-    unless session[:maps].nil?
+    unless session[:maps].blank?
       session[:maps].each {|map|
-      puts map
       @aMap = Map.new(map)
       @mappable_image.maps << @aMap
       }
@@ -211,26 +199,33 @@ class ProcessPatternsController < ApplicationController
       params[:process_pattern][:use_patterns] = ProcessPattern.find(params[:process_pattern][:use_patterns])
     end
     respond_to do |format|
-      proceedUpdate = true
-      unless params[:mappable_image].blank?
-        if @mappable_image.nil?
-          @mappable_image = MappableImage.create(params[:mappable_image])
-          puts params[:mappable_image]
+      proceedUpdate = @process_pattern.update_attributes(params[:process_pattern])
+      if params[:mappable_image].blank?  
+        if @mappable_image.blank?
+          @mappable_image = MappableImage.new(params[:mappable_image])
+          @mappable_image.pattern_system = @pattern_system
+          proceedUpdate &= @mappable_image.save
         else 
-          puts 'Updating image (and maps !)'
-          proceedUpdate = @mappable_image.update_attributes(params[:mappable_image])
+          logger.info 'Updating image (and maps !)'
+          proceedUpdate &= @mappable_image.update_attributes(params[:mappable_image])
         end
         
         
-        @process_pattern.mappable_image = @mappable_image
+        unless @mappable_image.blank?
+          @process_pattern.mappable_image = @mappable_image
+          @pattern_system.mappable_images << @mappable_image
+          proceedUpdate &= @pattern_system.save
+        end
+        
       end
       
-      if  proceedUpdate and @process_pattern.update_attributes(params[:process_pattern])
+      if  proceedUpdate
             flash[:notice] = t(:successful_update, :model => ProcessPattern.human_name)
             session[:participants] = nil
             format.html { redirect_to([@pattern_system, @process_pattern]) }
             format.xml  { head :ok }
       else
+        # puts @mappable_image.errors.full_messages
         format.html { render :action => "edit" }
         format.xml  { render :xml => @process_pattern.errors, :status => :unprocessable_entity }
       end

@@ -1,15 +1,15 @@
-<% unless @process_pattern.new_record? or @process_pattern.nil? or @process_pattern.mappable_image.nil? %> 
+<% unless @process_pattern.new_record? or @process_pattern.nil? or @process_pattern.mappable_image.blank? %> 
 	<% puts @process_pattern.id %>
 	<%= javascript_tag "observeThisPage(#{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
 <% end %>
 
 <table>
 	<tr>
-		<td><%= t :author %></td><td><%= f.text_field	:author %></td>
+		<td><%= f.label :author, t(:author) %></td><td><%= f.text_field	:author %></td>
 	</tr>
 </table>
 <h2>Interface</h2>
-	<h3><%= t :name %></h3>
+	<h3><%= f.label :name, t(:name) %></h3>
 	<%= f.text_field :name %>
 	
 	<h3>Participants</h3>
@@ -25,7 +25,7 @@
 		<% end %>
 	
 </div>	
-	<h3>Classification</h3>
+	<h3><%= f.label :classification, "Classification" %></h3>
 	<%= f.text_area(:classification, :class => "mceEditor") %>
 	
 	<h3><%= t :context %></h3>
@@ -35,7 +35,7 @@
 		<h4><%= t :product_context %></h4>
 		<%= f.text_field :productContext %><br />
 	
-	<h3><%= t :problem %></h3>
+	<h3><%= f.label :problem, t(:problem)%></h3>
 	<%= f.text_area(:problem, :class => "mceEditor") %>
 	
 	<h3>Forces</h3>
@@ -45,7 +45,7 @@
 <h2>Solution</h2>
 
 	<h3><%= t :process_image %></h3>
-	<% unless @process_pattern.mappable_image.nil? %>
+	<% unless @process_pattern.mappable_image.blank? %>
 	<dl id="method_image">
 		<div id="overlay" ></div>
 		<div id="selection"><div class="handle" id="tl_rect"></div><div class="handle" id="tr_rect"></div><div class="handle" id="bl_rect"></div><div class="handle" id="br_rect"></div></div>
@@ -57,7 +57,7 @@
 	<% end %>
 	<br />
 	<% fields_for :mappable_image do |m| %>
-		<label for="uploaded_data"><%= t :upload_a_file %> :</label>
+		<%= m.label :uploaded_data, t(:upload_a_file) %> :</label>
 		<%= m.file_field	:uploaded_data %>
 	<% end %>
 

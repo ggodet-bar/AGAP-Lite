@@ -42,7 +42,7 @@
 <h2>Solution</h2>
 
 	<h3><%= t :process_image %></h3>
-	<% if @image.nil? %>
+	<% if @image.blank? %>
 
 	<%= image_tag 'UnknownImage.png', :width  => 100 %>
 	<% else %>

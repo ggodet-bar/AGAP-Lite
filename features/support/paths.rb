@@ -15,7 +15,10 @@ module NavigationHelpers
       pat = ProcessPattern.find_by_name($1)
       sys_pat = pat.pattern_system
       edit_pattern_system_process_pattern_path(sys_pat, pat)
-      
+    
+    when /the page of the pattern system "([^\"]*)"/
+      sys_pat = PatternSystem.find_by_name($1)
+      pattern_system_path(sys_pat)
       
     # Add more mappings here.
     # Here is a more fancy example:

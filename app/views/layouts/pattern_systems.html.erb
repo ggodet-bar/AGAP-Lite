@@ -9,7 +9,11 @@
  <%= include_tiny_mce_if_needed %>
 </head>
 <body>
-<div id="header"></div>
+<div id="header"><span>
+	<% unless controller.action_name == 'index' %>
+		<%= link_to((t :back_to_systems_list), pattern_systems_path) %>
+	<% end %>
+</span></div>
 <div id="content">
 <p style="color: green"><%= flash[:notice] %></p>
 

@@ -17,6 +17,7 @@ en:
   uses: "Uses"
   requires: "Requires"
   back_to_system: "Back to system"
+  back_to_systems_list: "Back to the list of pattern systems"
   process_image: "Process representation"
   process_model: "Process model"
   process_solution: "Process solution"

@@ -20,7 +20,7 @@ class PatternSystemsController < ApplicationController
     end
     @isEditing = flash[:isEditing]
 
-    puts @isEditing
+    # puts @isEditing
 
     @participants_list = @pattern_system.participants
     @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system)

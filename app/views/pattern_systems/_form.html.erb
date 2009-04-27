@@ -1,12 +1,12 @@
 <table>
 	<tr>
-		<td><%= t :author %></td><td><%= f.text_field	:author %></td>
+		<td><%= f.label :author, t(:author)%></td><td><%= f.text_field	:author %></td>
 	</tr>
 	<tr>
-		<td><%= t :name %></td><td><%= f.text_field	:name %></td>
+		<td><%= f.label :name, t(:name) %></td><td><%= f.text_field	:name %></td>
 	</tr>
 	<tr>
-		<td><%= t :short_name %></td><td><%= f.text_field :short_name %></td>
+		<td><%= f.label :short_name, t(:short_name) %></td><td><%= f.text_field :short_name %></td>
 	</tr>
 </table>
 	<h3><%= t :updates %></h3>

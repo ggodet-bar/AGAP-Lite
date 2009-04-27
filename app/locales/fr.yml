@@ -14,6 +14,7 @@ fr:
     uses: "Utilise"
     requires: "Nécessite"
     back_to_system: "Retour au système"
+    back_to_systems_list: "Retour aux systèmes de patrons"
     process_image: "Représentation du processus"
     process_model: "Modèle du processus"
     process_solution: "Démarche solution"

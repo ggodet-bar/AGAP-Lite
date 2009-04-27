@@ -3,7 +3,8 @@ class ProcessPattern < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :pattern_system_id
   
   belongs_to  :pattern_system
-  has_one     :mappable_image, :dependent => :destroy
+  has_one     :image_association
+  has_one     :mappable_image, :through => :image_association
   has_many    :maps, :through  => :mappable_image
   has_and_belongs_to_many :participants, :class_name  => "Participant", :join_table => "participations", :foreign_key => "process_pattern_id", :association_foreign_key  => "participant_id"
   has_and_belongs_to_many :use_patterns, :class_name => "ProcessPattern", :join_table => "use_patterns", :foreign_key => "source_pattern_id", :association_foreign_key => "target_pattern_id"
