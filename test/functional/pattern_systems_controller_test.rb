@@ -2,6 +2,10 @@ require 'test_helper'
 
 class PatternSystemsControllerTest < ActionController::TestCase
 
+  def setup
+    @pattern_system = Factory(:pattern_system)
+  end
+
   test "should refuse to save duplicate system" do
     post :create, {:pattern_system => {:name => "A pattern system name", :author => "Bob le poulpe"}}
     assert_no_difference('PatternSystem.count') do
@@ -38,29 +42,28 @@ class PatternSystemsControllerTest < ActionController::TestCase
   end
 
   test "should show pattern_system" do
-    get :show, :id => Factory(:pattern_system).short_name
+    get :show, :id => @pattern_system.short_name
     assert_response :success
   end
   
   test "should show new pattern system" do
-    get :show, :id => Factory(:pattern_system).short_name
+    get :show, :id => @pattern_system.short_name
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, {:id => Factory(:pattern_system).short_name}
+    get :edit, {:id => @pattern_system.short_name}
     assert_response :success
   end
 
   test "should update pattern_system" do
-    put :update, :id => Factory(:pattern_system).short_name, :pattern_system => { }
+    put :update, :id => @pattern_system.short_name, :pattern_system => { }
     assert_redirected_to pattern_system_path(assigns(:pattern_system))
   end
 
   test "should destroy pattern_system" do
-    pattern_system = Factory(:pattern_system)
     assert_difference('PatternSystem.count', -1) do
-      delete :destroy, :id => pattern_system.short_name
+      delete :destroy, :id => @pattern_system.short_name
     end
 
     assert_redirected_to pattern_systems_path

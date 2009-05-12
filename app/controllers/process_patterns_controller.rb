@@ -3,15 +3,13 @@ class ProcessPatternsController < ApplicationController
   before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_images]  
   before_filter :load_system
   
+
+  
   # GET /process_patterns/tmp_images
   def tmp_images
-    puts 'tmp_images called'
-    @images = MappableImage.all.select{|image| image.pattern_system.short_name == @pattern_system.short_name}
-    # @images.each do |image|
-    #   puts image.public_filename
-    # end
+    @images = MappableImage.all.select{|image| 
+      image.pattern_system.short_name == @pattern_system.short_name}
     render :update do |page|
-      # page << "var pat_system_id = '#{@pattern_system.short_name}';"
       page.replace_html :form_content, :partial => "image_form", :locals => {:id => params[:id]}
     end
   end
@@ -32,6 +30,9 @@ class ProcessPatternsController < ApplicationController
     end
   end
   
+  
+  # TODO Passer un Hash (vérifier compatibilité Rails/Prototype) des patterns disponibles directement
+  # (on économise ainsi une requête au serveur) 
   def choose_pattern
     respond_to do |format|
       format.html {
@@ -41,7 +42,14 @@ class ProcessPatternsController < ApplicationController
   end
   
   def save_map
-    session[:maps] << {:pattern_id  => params[:pattern_id], :x_corner => params[:x], :y_corner => params[:y], :width => params[:w], :height => params[:h]}
+    respond_to do |wants|
+      wants.js {
+        render :update do |page|
+          # page.replace_html "effect_test2", "I should see pouet"
+          session[:maps] << {:target_pattern_id  => params[:target_pattern_id], :x_corner => params[:x], :y_corner => params[:y], :width => params[:w], :height => params[:h]}
+        end
+      }
+    end
   end
   
   def add_participant
@@ -67,20 +75,6 @@ class ProcessPatternsController < ApplicationController
           }
     end
   end
-  
-  # GET /process_patterns
-  # GET /process_patterns.xml
-  # def index
-  #   unless params[:id].nil?
-  #     session[:pattern_system_id] = params[:id]
-  #   end
-  #   @process_patterns = ProcessPattern.find_all_by_pattern_system_id(session[:pattern_system_id])
-  #   @pattern_system_name = @pattern_system.name
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.xml  { render :xml => @process_patterns }
-  #   end
-  # end
   
   def index
     respond_to do |format|
@@ -110,11 +104,11 @@ class ProcessPatternsController < ApplicationController
     session[:participants] = []
     session[:maps] = []
     @participants = []
-    # @selectable_participants = @pattern_system.participants ? @pattern_system.participants : []
     @selectable_participants = @pattern_system.participants
     unless params[:id].nil?
       session[:pattern_system_id] = params[:id]
     end
+    @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true' ? true : false
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @process_pattern }
@@ -132,24 +126,26 @@ class ProcessPatternsController < ApplicationController
     end
     session[:maps] = []
     @selectable_participants = @pattern_system.participants - @participants
+    @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true' ? true : false
   end
 
   # POST /process_patterns
   # POST /process_patterns.xml
   def create
-    if params[:process_pattern][:context_patterns].blank? or params[:process_pattern][:context_patterns] == [""]
-      params[:process_pattern][:context_patterns] = []
-    else
-      params[:process_pattern][:context_patterns] = ProcessPattern.find(params[:process_pattern][:context_patterns])
-    end
-    if params[:process_pattern][:use_patterns].blank? or params[:process_pattern][:use_patterns] == [""]
-      params[:process_pattern][:use_patterns] = []
-    else
-      params[:process_pattern][:use_patterns] = ProcessPattern.find(params[:process_pattern][:use_patterns])
-    end
+    params[:process_pattern][:context_patterns] = params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:context_patterns][1..-2].empty? ? 
+        [] :
+        params[:process_pattern][:context_patterns][1..-2].split(',').collect{ |pattern_id|  
+        ProcessPattern.find(pattern_id)}
+    params[:process_pattern][:use_patterns] = params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:use_patterns][1..-2].empty? ?
+        [] : 
+        params[:process_pattern][:use_patterns][1..-2].split(',').collect{ |pattern_id|  
+           ProcessPattern.find(pattern_id)}
     @process_pattern = ProcessPattern.new(params[:process_pattern])
     unless params[:mappable_image].blank?
-      @process_pattern.mappable_image = MappableImage.create(params[:mappable_image])
+      @mappable_image = MappableImage.new(params[:mappable_image])
+      @mappable_image.pattern_system = @pattern_system
+      @mappable_image.save
+      @process_pattern.mappable_image = @mappable_image
     end
     
     if session[:participants].blank?
@@ -187,20 +183,15 @@ class ProcessPatternsController < ApplicationController
       @aMap = Map.new(map)
       @mappable_image.maps << @aMap
       }
+      session[:maps] = nil
     end
-    if params[:process_pattern][:context_patterns].blank? or params[:process_pattern][:context_patterns] == [""]
-      params[:process_pattern][:context_patterns] = []
-    else
-      params[:process_pattern][:context_patterns] = ProcessPattern.find(params[:process_pattern][:context_patterns])
-    end
-    if params[:process_pattern][:use_patterns].blank? or params[:process_pattern][:use_patterns] == [""]
-      params[:process_pattern][:use_patterns] = []
-    else
-      params[:process_pattern][:use_patterns] = ProcessPattern.find(params[:process_pattern][:use_patterns])
-    end
+    params[:process_pattern][:context_patterns] = params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:context_patterns][1..-2].empty? ? [] : params[:process_pattern][:context_patterns][1..-2].split(',').collect{ |pattern_id|  
+        ProcessPattern.find(pattern_id)}
+       params[:process_pattern][:use_patterns] = params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:use_patterns][1..-2].empty? ? [] : params[:process_pattern][:use_patterns][1..-2].split(',').collect{ |pattern_id|  
+           ProcessPattern.find(pattern_id)}
     respond_to do |format|
       proceedUpdate = @process_pattern.update_attributes(params[:process_pattern])
-      if params[:mappable_image].blank?  
+      unless params[:mappable_image].blank? || params[:mappable_image][:uploaded_data].blank?
         if @mappable_image.blank?
           @mappable_image = MappableImage.new(params[:mappable_image])
           @mappable_image.pattern_system = @pattern_system
@@ -209,7 +200,6 @@ class ProcessPatternsController < ApplicationController
           logger.info 'Updating image (and maps !)'
           proceedUpdate &= @mappable_image.update_attributes(params[:mappable_image])
         end
-        
         
         unless @mappable_image.blank?
           @process_pattern.mappable_image = @mappable_image
@@ -225,7 +215,7 @@ class ProcessPatternsController < ApplicationController
             format.html { redirect_to([@pattern_system, @process_pattern]) }
             format.xml  { head :ok }
       else
-        # puts @mappable_image.errors.full_messages
+        puts @mappable_image.errors.full_messages
         format.html { render :action => "edit" }
         format.xml  { render :xml => @process_pattern.errors, :status => :unprocessable_entity }
       end
@@ -252,6 +242,6 @@ private
 
   def load_system
         @pattern_system = PatternSystem.find_by_short_name(params[:pattern_system_id])
-        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(params[:pattern_system_id])
+        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system.id)
   end
 end

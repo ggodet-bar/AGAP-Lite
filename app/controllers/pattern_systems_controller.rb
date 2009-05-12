@@ -24,8 +24,8 @@ class PatternSystemsController < ApplicationController
 
     @participants_list = @pattern_system.participants
     @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system)
-    unless @pattern_system.root_pattern_id.nil? or @pattern_system.root_pattern_id.empty?
-      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id)
+    unless @pattern_system.root_pattern.blank?
+      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern)
       @patterns_list = @patterns_list - Array(@root_pattern)
     end
     
@@ -48,13 +48,16 @@ class PatternSystemsController < ApplicationController
 
   # GET /pattern_systems/1/edit
   def edit
-      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern_id) unless @pattern_system.root_pattern_id.blank?
+      @root_pattern = @pattern_system.root_pattern unless @pattern_system.root_pattern.blank?
+      @noob_mode = cookies[:noob_mode] == 'true' ? true : false
   end
 
   # POST /pattern_systems
   # POST /pattern_systems.xml
   def create
     @pattern_system = PatternSystem.new(params[:pattern_system])
+    @noob_mode = cookies[:noob_mode] == 'true' ? true : false
+    
     respond_to do |format|
       if @pattern_system.save
         flash[:notice] = t(:successful_creation, :model => PatternSystem.human_name)
@@ -69,7 +72,8 @@ class PatternSystemsController < ApplicationController
 
   # PUT /pattern_systems/1
   # PUT /pattern_systems/1.xml
-  def update    
+  def update
+    params[:pattern_system][:root_pattern] = params[:pattern_system][:root_pattern].blank? ? nil : ProcessPattern.find(params[:pattern_system][:root_pattern])
     respond_to do |format|
       if @pattern_system.update_attributes(params[:pattern_system])
         flash[:notice] = t(:successful_update, :model => PatternSystem.human_name)
@@ -95,8 +99,38 @@ class PatternSystemsController < ApplicationController
   
   
   def clone
-    # @pattern_system.clone
-    redirect_to(pattern_systems_path(@pattern_system))
+    respond_to do |wants|
+      wants.html { render :partial => "clone_system_form", :locals => {:id => @pattern_system.short_name}}
+    end
+  end
+  
+  def create_cloned_system
+    begin  
+      @new_system = @pattern_system.clone_with(params[:name].blank? ? nil : params[:name], params[:short_name].blank? ? nil : params[:short_name], params[:author].blank? ? nil : params[:author])
+    rescue RuntimeError
+      flash[:error] = "Could not clone system. Please check if the name and/or short_name are unique."
+    end
+    respond_to do |wants|
+      if !@new_system.nil? && @new_system.save
+        flash[:notice] = "Pattern System was cloned."
+        wants.js {
+          render :update do |page|
+                      page.insert_html :bottom, "pattern_systems_list", :partial => "pattern_system", :locals => {:pattern_system => @new_system}
+                      page.replace_html "notices", flash[:notice]
+                      page[:clone_form].hide
+                    end
+          }
+      else
+        wants.html {
+            render :update do |page|
+              page['notices'].setStyle(:color  => "#f00")
+              page.replace_html "notices", flash[:error]
+              page.replace_html "pattern_form_#{@pattern_system.short_name}", :partial => "clone_system_form"
+              page[:clone_form].reset
+            end
+          }
+       end
+    end
   end
 private
   def load_system

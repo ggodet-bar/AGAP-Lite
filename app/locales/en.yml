@@ -2,7 +2,6 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
   author_name: "Author name"
   author: "Author(s)"
   name: "Name"
@@ -45,4 +44,11 @@ en:
   update_participant: "Update participant"
   create_participant: "Create participant"
   description_of_participant_role: "Description of the participant's role"
-  successful_pattern_creation: Process pattern was successfully created.
+  settings: Settings
+  beginer_mode: Beginner mode
+  disable_helpers: "Disabling the beginner mode will turn off the display of all the application helpers!"
+  enable_helpers: "Enabling the beginner mode will turn on the display of the helpers."
+  close: Close
+  successful_creation: "{{model}} was successfully created."
+  successful_update: "{{model}} was successfully updated."
+  successful_delete: "{{model}} was successfully deleted."

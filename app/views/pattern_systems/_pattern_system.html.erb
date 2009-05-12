@@ -1,0 +1,12 @@
+<tr>
+	<td><%= pattern_system.name %></td>
+  <td><%= link_to t(:show), pattern_system %></td>
+	<td><%= link_to_remote 'Clone', :update => "pattern_form_#{pattern_system.short_name}", :url => clone_pattern_system_path(pattern_system) %></td>
+  <td><%= link_to t(:edit), edit_pattern_system_path(pattern_system) %></td>
+  <td><%= link_to t(:delete), pattern_system, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>
+<tr>
+	<td>
+		<div id="pattern_form_<%= "#{pattern_system.short_name}" %>"></div>
+	</td>
+</tr>

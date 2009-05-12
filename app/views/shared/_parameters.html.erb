@@ -1,0 +1,12 @@
+<h2 style="margin-left: 0; float: none; padding-left: 0;"><%= t(:beginner_mode)%></h2>
+<div id="param_buttons">
+	<div id="off_position"></div>
+ <div id="on_position"></div>
+ <%= image_tag "/images/param_button_front.png", :id => "param_front_button" %>
+</div>
+
+
+<div id="params_caution">
+	<p id="params_caution_text"></p>
+</div>
+<p style="float:right;"><%= link_to_function t(:close), "new Effect.Fade('params');"%></p>

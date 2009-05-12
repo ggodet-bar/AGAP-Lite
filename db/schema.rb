@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090427145450) do
+ActiveRecord::Schema.define(:version => 20090511091558) do
 
   create_table "context_patterns", :id => false, :force => true do |t|
     t.integer "source_pattern_id"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20090427145450) do
   create_table "pattern_systems", :force => true do |t|
     t.string   "author"
     t.string   "name"
-    t.string   "root_pattern_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "participant_id"
@@ -95,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20090427145450) do
     t.integer  "pattern_system_id"
     t.text     "application_case"
     t.text     "application_consequence"
+    t.boolean  "is_root_pattern",         :default => false
   end
 
   create_table "product_patterns", :force => true do |t|

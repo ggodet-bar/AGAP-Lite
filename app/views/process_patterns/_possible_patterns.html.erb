@@ -1,5 +1,5 @@
 <ul>
-<% for pattern in @pattern_system.process_patterns %>
-  <li><%= link_to_function pattern.name, "registerArea(#{@process_pattern.id}, #{pattern.id}, #{x}, #{y}, #{w}, #{h})"  %></li>
+<% for pattern in @pattern_system.process_patterns.select{|pat| pat != @process_pattern} %>
+  <li><%= link_to_function pattern.name, "registerArea(\"#{@pattern_system.short_name}\", #{@process_pattern.id}, #{pattern.id}, #{x}, #{y}, #{w}, #{h})"  %></li>
 <% end %>
 </ul>

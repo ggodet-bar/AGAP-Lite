@@ -1,6 +1,5 @@
 <% unless @process_pattern.new_record? or @process_pattern.nil? or @process_pattern.mappable_image.blank? %> 
-	<% puts @process_pattern.id %>
-	<%= javascript_tag "observeThisPage(#{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
+	<%= javascript_tag "observeThisPage(\"#{@pattern_system.short_name}\", #{@process_pattern.id}, \"#{@process_pattern.mappable_image.public_filename}\", #{@process_pattern.mappable_image.width.to_s}, #{@process_pattern.mappable_image.height.to_s})" %>
 <% end %>
 
 <table>
@@ -8,20 +7,39 @@
 		<td><%= f.label :author, t(:author) %></td><td><%= f.text_field	:author %></td>
 	</tr>
 </table>
+
 <h2>Interface</h2>
-	<h3><%= f.label :name, t(:name) %></h3>
+	<h3><%= f.label :name, t(:name) %>
+	<% if @noob_mode %>
+	<%= link_to_function "?", "new Effect.toggle('effect_test1', 'slide', { duration : 0.2})", :class => "question_mark"%>
+	<% end %></h3>
+	<% if @noob_mode %>
+	<div id="effect_test1" class="helper_info" style="display:none">
+	<p>Some blah blah about the wonderful name attribute. Check it out someplace and some other time!</p>	
+	</div>
+	<% end %>
 	<%= f.text_field :name %>
-	
-	<h3>Participants</h3>
+
+
+	<h3>Participants
+	<% if @noob_mode %>
+		<%= link_to_function "?", "new Effect.toggle('effect_test2', 'slide', { duration : 0.2})", :class => "question_mark"%>
+	<% end %>
+	</h3>
+	<% if @noob_mode %>
+	<div id="effect_test2" class="helper_info" style="display:none">
+	<p>Some blah blah about the wonderful participants attribute. Check it out someplace and some other time!</p>	
+	</div>
+	<% end %>
 	<div id="participants">
 		<ul>
 		<% for participant in @participants %>
-			<li><%= participant.name %> | <%= link_to_remote 'Remove', :update => 'participants', :url => {:action => 'remove_participant', :id => @process_pattern, :participant  => participant} %></li>
+			<li><%= participant.name %> | <%= link_to_remote 'Remove', :update => 'participants', :url => {:pattern_system_id => @pattern_system.short_name, :action => 'remove_participant', :id => @process_pattern, :participant  => participant} %></li>
 		<% end %>
 		</ul>
 		<% unless @selectable_participants.empty? %>
 		<%= select(:participant, :name, @selectable_participants.collect{|p| [p.name, p.id]}, {:include_blank => true}) %>
-		<%= link_to_remote t(:add), :update  => 'participants', :url  => {:action => "add_participant", :id  => @process_pattern}, :with  => "'participant=' + $('participant_name').value" %>
+		<%= link_to_remote t(:add), :update  => 'participants', :url  => {:pattern_system_id => @pattern_system.short_name, :action => "add_participant", :id  => @process_pattern}, :with  => "'participant=' + $('participant_name').value" %>
 		<% end %>
 	
 </div>	
@@ -84,8 +102,8 @@
 	<%= select("process_pattern", :use_patterns, @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true, :selected  => @use_patterns}, :multiple  =>  true) %>
 	
 	<h3><%= t :requires %></h3>
-		<%= select("pattern_system", "root_pattern_id", @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true}, :multiple  =>  true) %>
+		<%= select("pattern_system", "root_pattern", @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true}, :multiple  =>  true) %>
 	
 	<h3>Alternative</h3>
-		<%= select("pattern_system", "root_pattern_id", @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true}, :multiple  =>  true) %>
+		<%= select("pattern_system", "root_pattern", @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true}, :multiple  =>  true) %>
   </p>

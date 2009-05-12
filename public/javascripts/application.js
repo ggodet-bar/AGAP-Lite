@@ -1,10 +1,10 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-function observeThisPage(current_pattern_id, image_path, width, height) {
+function observeThisPage(pattern_system_name, current_pattern_id, image_path, width, height) {
 Event.observe(window, 'load', function(){
 	var image = $('method_image') ;
-	
+	// alert(image_path) ;
 	image.setStyle({
 		display: 'block',
 		height: height + 'px',
@@ -207,7 +207,7 @@ Event.observe(window, 'load', function(){
 				visibility: 'visible'
 			}) ;
 			
-			var url = '/process_patterns/choose_pattern/' + current_pattern_id ;
+			var url = '/pattern_systems/' + pattern_system_name + '/process_patterns/choose_pattern/' + current_pattern_id ;
 			var param = {x: rect_x,	y: rect_y,	w: rect_w, h: rect_h} ;
 			// alert('Should display pattern choice' + rect_w) ;
 			$('pattern_choice').setStyle({
@@ -238,7 +238,7 @@ function calcHeight(new_y, old_y, old_h) {
 	return calcWidth(new_y, old_y, old_h) ;
 }
 
-function registerArea(current_pattern_id, pattern_id, x, y, w, h) {
+function registerArea(pattern_system_name, current_pattern_id, pattern_id, x, y, w, h) {
 	
 	
 	var new_dd = new Element('dd', {id: "dd_" + pattern_id}) ;
@@ -259,8 +259,61 @@ function registerArea(current_pattern_id, pattern_id, x, y, w, h) {
 		visibility: 'hidden'
 	});
 	
-	var param = {pattern_id: pattern_id, x: x, y: y, w: w, h: h} ;
-	var url = '/process_patterns/save_map/' + current_pattern_id ;
-	// alert(param);
-	new Ajax.Request(url, {parameters: param, method: 'get', onSucess: alert("Map has been added!")}) ;
+	var param = {target_pattern_id: pattern_id, x: x, y: y, w: w, h: h} ;
+	var url = '/pattern_systems/' + pattern_system_name + '/process_patterns/save_map/' + current_pattern_id ;
+	new Ajax.Request(url, {parameters: param, method: 'get'}) ;
 }
+
+
+//
+// getPageSize()
+// Returns array with page width, height and window width, height
+// Core code from - quirksmode.org
+// Edit for Firefox by pHaez
+//
+function getPageSize(){
+	
+	var xScroll, yScroll;
+	
+	if (window.innerHeight && window.scrollMaxY) {	
+		xScroll = document.body.scrollWidth;
+		yScroll = window.innerHeight + window.scrollMaxY;
+	} else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
+		xScroll = document.body.scrollWidth;
+		yScroll = document.body.scrollHeight;
+	} else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari
+		xScroll = document.body.offsetWidth;
+		yScroll = document.body.offsetHeight;
+	}
+	
+	var windowWidth, windowHeight;
+	if (self.innerHeight) {	// all except Explorer
+		windowWidth = self.innerWidth;
+		windowHeight = self.innerHeight;
+	} else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+		windowWidth = document.documentElement.clientWidth;
+		windowHeight = document.documentElement.clientHeight;
+	} else if (document.body) { // other Explorers
+		windowWidth = document.body.clientWidth;
+		windowHeight = document.body.clientHeight;
+	}	
+	
+	// for small pages with total height less then height of the viewport
+	if(yScroll < windowHeight){
+		pageHeight = windowHeight;
+	} else { 
+		pageHeight = yScroll;
+	}
+
+	// for small pages with total width less then width of the viewport
+	if(xScroll < windowWidth){	
+		pageWidth = windowWidth;
+	} else {
+		pageWidth = xScroll;
+	}
+
+
+	arrayPageSize = new Array(pageWidth,pageHeight,windowWidth,windowHeight) 
+	return arrayPageSize;
+}
+

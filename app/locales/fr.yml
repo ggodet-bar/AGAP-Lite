@@ -1,5 +1,4 @@
 fr:
-    hello: "Bonjour, monde !"
     author_name: "Nom de l'auteur"
     author: "Auteur(s)"
     name: "Nom"
@@ -45,3 +44,8 @@ fr:
     successful_creation: "Le {{model}} a été créé avec succès."
     successful_update: "Le {{model}} a été actualisé."
     successful_delete: "Le {{model}} a été supprimé."
+    settings: "Paramètres"
+    beginner_mode: "Mode débutant"
+    disable_helpers: "La désactivation du mode débutant supprimera l'affichage des aides !"
+    enable_helpers: "L'activation du mode débutant affichera les aides."
+    close: Fermer

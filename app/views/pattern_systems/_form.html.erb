@@ -9,12 +9,30 @@
 		<td><%= f.label :short_name, t(:short_name) %></td><td><%= f.text_field :short_name %></td>
 	</tr>
 </table>
-	<h3><%= t :updates %></h3>
+	<h3><%= t :updates %>
+		<% if @noob_mode %>
+		<%= link_to_function "?", "new Effect.toggle('effect_test1', 'slide', { duration : 0.2})", :class => "question_mark"%>
+		<% end %>
+	</h3>
+	<% if @noob_mode %>
+	<div id="effect_test1" class="helper_info" style="display:none">
+	<p>Some blah blah about the wonderful updates attribute. Check it out someplace and some other time!</p>	
+	</div>
+	<% end %>
 	<%= f.text_area(:update_field, :class => "mceEditor") %>
 
 
-	<h3><%= t :characteristics %></h3>
+	<h3><%= t :characteristics %>
+		<% if @noob_mode %>
+		<%= link_to_function "?", "new Effect.toggle('effect_test2', 'slide', { duration : 0.2})", :class => "question_mark"%>
+		<% end %>
+	</h3>
+	<% if @noob_mode %>
+	<div id="effect_test2" class="helper_info" style="display:none">
+	<p>Some blah blah about the wonderful characteristics attribute. Check it out someplace and some other time!</p>	
+	</div>
+	<% end %>
 	<%= f.text_area(:characteristics, :class => "mceEditor") %>
 	
 	<h3><%= t :root_pattern %></h3>
-	<%= select("pattern_system", :root_pattern_id, @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true, :selected  => (@root_pattern.nil? ? "" : @root_pattern.id)})%>
+	<%= select("pattern_system", :root_pattern, @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true, :selected  => (@root_pattern.nil? ? "" : @root_pattern.id)})%>
