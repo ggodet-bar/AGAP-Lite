@@ -192,8 +192,16 @@ class ProcessPatternsController < ApplicationController
         params[:process_pattern][:context_patterns] << ProcessPattern.find(pattern_id) unless pattern_id.split.empty?
       }      
     end
-       params[:process_pattern][:use_patterns] = (params[:process_pattern][:use_patterns].blank? || params[:process_pattern][:use_patterns][1..-2].empty?) ? [] : params[:process_pattern][:use_patterns][1..-2].split(',').collect{ |pattern_id|  
-           ProcessPattern.find(pattern_id)}
+    unless params[:process_pattern][:use_patterns].blank?
+      use_patterns = params[:process_pattern][:use_patterns]
+      params[:process_pattern][:use_patterns] = []
+      use_patterns.each{ |pattern_id|
+        params[:process_pattern][:use_patterns] << ProcessPattern.find(pattern_id) unless pattern_id.split.empty?
+      }      
+    end
+    # TODO Généraliser l'algorithme et modifier ci-dessous
+       # params[:process_pattern][:use_patterns] = (params[:process_pattern][:use_patterns].blank? || params[:process_pattern][:use_patterns][1..-2].empty?) ? [] : params[:process_pattern][:use_patterns][1..-2].split(',').collect{ |pattern_id|  
+       #     ProcessPattern.find(pattern_id)}
     respond_to do |format|
       proceedUpdate = @process_pattern.update_attributes(params[:process_pattern])
       unless params[:mappable_image].blank? || params[:mappable_image][:uploaded_data].blank?
