@@ -4,7 +4,9 @@ Given /^a pattern system "([^\"]*)" with the name "([^\"]*)" and the author "([^
   PatternSystem.transaction do
     PatternSystem.destroy_all
   end
+  PatternSystem.count.should ==  0
   Factory(:pattern_system, :short_name => short_name, :name => name, :author => author)
+  PatternSystem.count.should ==  1
 end
 
 Given /^the locale is "([^\"]*)"$/ do |locale|
@@ -12,12 +14,13 @@ Given /^the locale is "([^\"]*)"$/ do |locale|
 end
 
 When /^I add a pattern "([^\"]*)" with author "([^\"]*)" to the pattern system "([^\"]*)"$/ do |pat_name, pat_author, sys_pat_name|
-  pat = Factory(:process_pattern, :name => pat_name, :author => pat_author)
-  pat.should_not be_new_record
-  sys = PatternSystem.find_by_short_name(sys_pat_name)
-  sys.process_patterns = Array(pat)
-  sys.save.should be_true
-  sys.process_patterns.should_not be_empty
+  visit new_pattern_system_process_pattern_path(PatternSystem.find_by_short_name(sys_pat_name))
+  lambda {
+    fill_in "Name", :with => pat_name
+    fill_in "Author(s)", :with => pat_author
+    click_button  "Create"
+    # On n'utilise pas la factory, qui créée automatiquement des liens vers mappable_image et pattern_system
+  }.should change(ProcessPattern, :count).by(1)
 end
 
 When /^I clone the pattern system "([^\"]*)"$/ do |short_name|
@@ -59,7 +62,7 @@ Then /^There should be ([0-9]+) (.*) in the records$/ do |nb_el, model_name|
     when "map", "maps"
       count = Map.count
     else
-      puts "Update the models configuration!"
+      puts "Update the pattern steps configuration!"
   end 
   count.should == nb_el.to_i
 end

@@ -3,6 +3,7 @@ Factory.define :process_pattern do |pat|
   pat.author  "Bob le poulpe"
   pat.association :pattern_system
   pat.association :mappable_image
+  pat.is_root_pattern false
 end
 
 Factory.define :pattern_system do |sys|

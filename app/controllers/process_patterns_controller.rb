@@ -19,14 +19,13 @@ class ProcessPatternsController < ApplicationController
     @image = MappableImage.new(params[:image])
     @image.pattern_system = @pattern_system
     if @image.save
-      puts 'Save successful'
+      responds_to_parent do
+        render :update do |page|
+          page << 'UpImage.insert_image(\'' + @image.public_filename + '\');'
+        end
+      end
     else
-      puts 'You SUCK!'
-    end
-    responds_to_parent do
-      render :update do |page|
-        page << 'UpImage.insert_image(\'' + @image.public_filename + '\');'
-      end      
+      logger.error "Error while attempting to save image #{@image.filename} inside the pattern system #{@pattern_system.short_name}."
     end
   end
   
@@ -45,7 +44,6 @@ class ProcessPatternsController < ApplicationController
     respond_to do |wants|
       wants.js {
         render :update do |page|
-          # page.replace_html "effect_test2", "I should see pouet"
           session[:maps] << {:target_pattern_id  => params[:target_pattern_id], :x_corner => params[:x], :y_corner => params[:y], :width => params[:w], :height => params[:h]}
         end
       }
@@ -185,9 +183,16 @@ class ProcessPatternsController < ApplicationController
       }
       session[:maps] = nil
     end
-    params[:process_pattern][:context_patterns] = params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:context_patterns][1..-2].empty? ? [] : params[:process_pattern][:context_patterns][1..-2].split(',').collect{ |pattern_id|  
-        ProcessPattern.find(pattern_id)}
-       params[:process_pattern][:use_patterns] = params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:use_patterns][1..-2].empty? ? [] : params[:process_pattern][:use_patterns][1..-2].split(',').collect{ |pattern_id|  
+    # params[:process_pattern][:context_patterns] = (params[:process_pattern][:context_patterns].blank? || params[:process_pattern][:context_patterns][1..-2].empty?) ? [] : params[:process_pattern][:context_patterns][1..-2].split(',').collect{ |pattern_id|  
+    #     ProcessPattern.find(pattern_id)}
+    unless params[:process_pattern][:context_patterns].blank?
+      context_patterns = params[:process_pattern][:context_patterns]
+      params[:process_pattern][:context_patterns] = []
+      context_patterns.each{ |pattern_id|
+        params[:process_pattern][:context_patterns] << ProcessPattern.find(pattern_id) unless pattern_id.split.empty?
+      }      
+    end
+       params[:process_pattern][:use_patterns] = (params[:process_pattern][:use_patterns].blank? || params[:process_pattern][:use_patterns][1..-2].empty?) ? [] : params[:process_pattern][:use_patterns][1..-2].split(',').collect{ |pattern_id|  
            ProcessPattern.find(pattern_id)}
     respond_to do |format|
       proceedUpdate = @process_pattern.update_attributes(params[:process_pattern])

@@ -1,9 +1,0 @@
-# page.assign 'filename', 
-# page << 'ExampleDialog.insert_image(\'' + @image.public_filename + '\');'
-# render :update do |page|
-  page << ' <script type="text/javascript">'
-  # page.call 'ExampleDialog.insert_image', @image.public_filename
-  page << 'ExampleDialog.insert_image(\'' + @image.public_filename + '\');'
-  page << ' </script>'
-  # page << 'ExampleDialog.insert_image(\'' + @image.public_filename + '\');'
-# end 

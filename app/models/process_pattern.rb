@@ -1,5 +1,5 @@
 class ProcessPattern < ActiveRecord::Base
-  validates_presence_of :name, :author
+ # validates_presence_of :name, :author
 
 #  TODO : Implémenter à l'aide des méthodes validate_on_create et validate
 #  validates_uniqueness_of :name, :scope => :pattern_system_id
@@ -33,5 +33,17 @@ class ProcessPattern < ActiveRecord::Base
     end 
     
     ancesters.reverse
+  end
+
+protected
+  def validate
+    errors.add_on_empty %w( name  author  )
+    # NB The current pattern is not yet saved in the DB, so we need to check if there is ONE other pattern with the same name
+    is_valid = true
+    existing_pat = ProcessPattern.find_all_by_name(attributes['name']) - Array(self)
+    existing_pat.each do |pat| 
+      is_valid &= pat.pattern_system.nil? || pat.pattern_system.id != attributes['pattern_system_id']
+    end unless existing_pat.blank?
+    errors.add(:name, :taken) unless is_valid
   end
 end

@@ -47,7 +47,7 @@
 	<%= f.text_area(:classification, :class => "mceEditor") %>
 	
 	<h3><%= t :context %></h3>
-		<h4><%= t :process_context %></h4>
+		<h4><%= f.label :context_patterns, t(:process_context) %></h4>
 <%= select("process_pattern", :context_patterns, @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true, :selected  => @context_patterns}, :multiple  =>  true) %>
 		
 		<h4><%= t :product_context %></h4>

@@ -19,9 +19,6 @@ class PatternSystemsController < ApplicationController
       @participant=flash[:participant]
     end
     @isEditing = flash[:isEditing]
-
-    # puts @isEditing
-
     @participants_list = @pattern_system.participants
     @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system)
     unless @pattern_system.root_pattern.blank?
@@ -111,7 +108,7 @@ class PatternSystemsController < ApplicationController
       flash[:error] = "Could not clone system. Please check if the name and/or short_name are unique."
     end
     respond_to do |wants|
-      if !@new_system.nil? && @new_system.save
+      if !@new_system.nil? && !@new_system.new_record? # @new_system.save
         flash[:notice] = "Pattern System was cloned."
         wants.js {
           render :update do |page|
