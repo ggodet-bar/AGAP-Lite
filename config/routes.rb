@@ -24,6 +24,8 @@ ActionController::Routing::Routes.draw do |map|
   
   # Named routes
   map.clone_pattern_system 'pattern_systems/:id/clone', :controller => 'pattern_systems', :action => 'clone'
+  map.deploy_pattern_system 'pattern_systems/:id/deploy', :controller => 'pattern_systems', :action => 'deploy'
+  
   
     map.resources :pattern_systems do |pat_system|
        pat_system.resources :process_patterns
