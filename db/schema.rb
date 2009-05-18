@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090511091558) do
+ActiveRecord::Schema.define(:version => 20090518203605) do
 
   create_table "context_patterns", :id => false, :force => true do |t|
     t.integer "source_pattern_id"
@@ -95,24 +95,6 @@ ActiveRecord::Schema.define(:version => 20090511091558) do
     t.text     "application_case"
     t.text     "application_consequence"
     t.boolean  "is_root_pattern",         :default => false
-  end
-
-  create_table "product_patterns", :force => true do |t|
-    t.string   "identifier",        :null => false
-    t.string   "author"
-    t.string   "classification"
-    t.text     "problem"
-    t.text     "forces"
-    t.integer  "product_image_id"
-    t.string   "product_model_uri"
-    t.text     "product_solution"
-    t.string   "uses"
-    t.string   "requires"
-    t.string   "alternative"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.integer  "pattern_system_id"
   end
 
   create_table "use_patterns", :force => true do |t|

@@ -18,11 +18,11 @@
 	
 	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
 	<% unless @process_pattern.nil? %>
-		<% for ancester in @process_pattern.ancesters %>
-			<% if @process_pattern.ancesters.size > 2 %>
-				<%= link_to(shortify(ancester.name), [@pattern_system, ancester], :class => 'crawlable') + " > "%>
+		<% for ancestors in @process_pattern.ancestors %>
+			<% if @process_pattern.ancestors.size > 2 %>
+				<%= link_to(shortify(ancestors.name), [@pattern_system, ancestors], :class => 'crawlable') + " > "%>
 			<% else %>
-				<%= link_to(ancester.name, [@pattern_system, ancester], :class => 'crawlable') + " > "%>
+				<%= link_to(ancestors.name, [@pattern_system, ancestors], :class => 'crawlable') + " > "%>
 			<% end %>
 		<% end %>
 			<%= @process_pattern.name %>

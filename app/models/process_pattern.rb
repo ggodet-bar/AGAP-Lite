@@ -1,8 +1,4 @@
 class ProcessPattern < ActiveRecord::Base
- # validates_presence_of :name, :author
-
-#  TODO : Implémenter à l'aide des méthodes validate_on_create et validate
-#  validates_uniqueness_of :name, :scope => :pattern_system_id
   
   belongs_to  :pattern_system
   has_one     :image_association
@@ -16,14 +12,14 @@ class ProcessPattern < ActiveRecord::Base
                         :solution => ['process_image_id', 'process_model_url', 'process_solution', 'product_solution'],
                         :relations => ['uses', 'requires', 'alternative']}
                
-  # Returns the list of ancesters of current pattern (which is not included in the list).
-  # The ancesters are ordered from the root of the pattern system down to the most immediate pattern
+  # Returns the list of ancestors of current pattern (which is not included in the list).
+  # The ancestors are ordered from the root of the pattern system down to the most immediate pattern
   # (provided that the processContext attribute was correctly filled).             
-  def ancesters
+  def ancestors
     explored_pattern = ProcessPattern.find(context_patterns).first
-    ancesters = []
+    ancestors = []
     until explored_pattern.nil? do
-      ancesters << ProcessPattern.find(explored_pattern)
+      ancestors << ProcessPattern.find(explored_pattern)
       context_patterns_list = explored_pattern.context_patterns
       if context_patterns_list.nil?
         explored_pattern = nil
@@ -32,7 +28,7 @@ class ProcessPattern < ActiveRecord::Base
       end
     end 
     
-    ancesters.reverse
+    ancestors.reverse
   end
 
 protected
