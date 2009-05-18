@@ -9,10 +9,12 @@ Background:
 
 @clone
 Scenario: Clone a pattern system
-  When I add a pattern "A process pattern" with author "Bob le poulpe" to the pattern system "a_system"
-  And I add a pattern "Another process pattern" with author "Bob le poulpe" to the pattern system "a_system"
+  Given the following patterns for pattern system "a_system":
+	|	name					|	author			|
+	| A process pattern			|	bob le poulpe	|
+	| Another process pattern	|	bob le poulpe	|
   And I am on the edit page of the pattern with name "Another process pattern" from pattern system "a_system"
-  And I select "A process pattern" from "Process context"
+  When I select "A process pattern" from "Process context"
   And I press "Update"
   And I should see a link to pattern "A process pattern" from pattern system "a_system" in the pattern body
   And I clone the pattern system "a_system"
@@ -30,8 +32,10 @@ Scenario: Clone a pattern system
 
 @new_focus
 Scenario: Do not clone the pattern system
-  When I add a pattern "A process pattern" with author "Bob le poulpe" to the pattern system "a_system"
-  And I clone the pattern system "a_system"
+  Given the following pattern for pattern system "a_system":
+	|	name					|	author			|
+	| A process pattern			|	bob le poulpe	|
+  When I clone the pattern system "a_system"
   And I fill in "Short name" with "a_system"
   And I press "Clone system"
   Then I should not see "Pattern System was cloned"

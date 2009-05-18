@@ -1,3 +1,5 @@
+require 'tempfile'
+
 class PatternSystemsController < ApplicationController
 
   before_filter :load_system, :except => [:new, :index, :create]
@@ -101,6 +103,19 @@ class PatternSystemsController < ApplicationController
     end
   end
   
+  def deploy
+    respond_to do |wants|
+      wants.html { render :partial => "deploy_system_form", :locals => {:id => @pattern_system.short_name}}
+    end
+  end
+  
+  def do_deploy_system
+    statify_thread = Thread.new {
+      Crawler::statify(request.raw_host_with_port, @pattern_system.short_name, logger)
+    }
+    statify_thread.join
+  end
+  
   def create_cloned_system
     begin  
       @new_system = @pattern_system.clone_with(params[:name].blank? ? nil : params[:name], params[:short_name].blank? ? nil : params[:short_name], params[:author].blank? ? nil : params[:author])
@@ -108,7 +123,7 @@ class PatternSystemsController < ApplicationController
       flash[:error] = "Could not clone system. Please check if the name and/or short_name are unique."
     end
     respond_to do |wants|
-      if !@new_system.nil? && !@new_system.new_record? # @new_system.save
+      if !@new_system.nil? && !@new_system.new_record?
         flash[:notice] = "Pattern System was cloned."
         wants.js {
           render :update do |page|

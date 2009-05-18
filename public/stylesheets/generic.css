@@ -183,7 +183,7 @@ div#params {
 
 div#param_buttons {
 	position: relative;
-	background: url("/images/param_button_back.png") no-repeat;
+	background: url("/images/common_images/param_button_back.png") no-repeat;
 	width: 300px;
 	height: 50px;
 }

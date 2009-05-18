@@ -13,16 +13,6 @@ Given /^the locale is "([^\"]*)"$/ do |locale|
   I18n.locale = locale
 end
 
-When /^I add a pattern "([^\"]*)" with author "([^\"]*)" to the pattern system "([^\"]*)"$/ do |pat_name, pat_author, sys_pat_name|
-  visit new_pattern_system_process_pattern_path(PatternSystem.find_by_short_name(sys_pat_name))
-  lambda {
-    fill_in "Name", :with => pat_name
-    fill_in "Author(s)", :with => pat_author
-    click_button  "Create"
-    # On n'utilise pas la factory, qui créée automatiquement des liens vers mappable_image et pattern_system
-  }.should change(ProcessPattern, :count).by(1)
-end
-
 When /^I clone the pattern system "([^\"]*)"$/ do |short_name|
   visit clone_pattern_system_path(short_name)
 end

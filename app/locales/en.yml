@@ -38,6 +38,7 @@ en:
   clone: "Clone"
   deploy: "Deploy"
   clone_system: "Clone system"
+  deploy_system: "Deploy system"
   add_new_pattern: "Add new pattern"
   add_new_participant: "Add new participant"
   back: "Back"

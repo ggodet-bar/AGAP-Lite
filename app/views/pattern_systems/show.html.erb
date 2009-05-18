@@ -16,7 +16,7 @@
 <div class="block">
 <h2><%= t :root_pattern %></h2>
 <% if @root_pattern.nil? %>
-	<%= image_tag 'UnknownImage.png', :width  => 100 %>
+	<%= image_tag 'common_images/UnknownImage.png', :width  => 100 %>
 <% else %>
 	<%= link_to(@root_pattern.name,[@pattern_system, @root_pattern], :class  => 'crawlable') %>
 <% end %>

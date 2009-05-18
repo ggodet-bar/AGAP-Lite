@@ -1,16 +1,19 @@
-Given /^a pattern with the name "([^\"]*)" and the author "([^\"]*)" attached to the system "([^\"]*)"$/ do |name, author, pat_system|
-  visit new_pattern_system_process_pattern_path(PatternSystem.find_by_short_name(pat_system))
-  fill_in  "Name", :with  => name
-  fill_in  "Author(s)", :with => author
-  
-  click_button  "Create"
-  # pattern = ProcessPattern.find_by_name(name)
-  # sys_pat = pattern.pattern_system
-  # pattern.pattern_system.should == sys_pat
-  # sys_pat.process_patterns.should be_include(pattern)
-  # pattern.should_not be_new_record
-  # sys_pat.should_not be_new_record
-  # pattern.name.should == name
+Given /^the following patterns? for pattern system "([^\"]*)":$/ do |short_name, patterns|
+  sys = PatternSystem.find_by_short_name(short_name)
+  sys.process_patterns = [] if sys.process_patterns.blank?
+  patterns.hashes.each do |hash|
+     sys.process_patterns << ProcessPattern.create(hash)
+  end
+end
+
+When /^I add a pattern "([^\"]*)" with author "([^\"]*)" to the pattern system "([^\"]*)"$/ do |pat_name, pat_author, sys_pat_name|
+  visit new_pattern_system_process_pattern_path(PatternSystem.find_by_short_name(sys_pat_name))
+  lambda {
+    fill_in "Name", :with => pat_name
+    fill_in "Author(s)", :with => pat_author
+    click_button  "Create"
+    # On n'utilise pas la factory, qui créée automatiquement des liens vers mappable_image et pattern_system
+  }.should change(ProcessPattern, :count).by(1)
 end
 
 When /^I add a map with the coordinates "([^\"]*)" and the target pattern "([^\"]*)" to the pattern "([^\"]*)"$/ do |coords, target, source|
@@ -29,7 +32,7 @@ Then /^I should see a "([^\"]*)" tag$/ do |tag_name|
   # response.should contain("<#{tag_name}>")
 end
 
-Given /^an image "([^\"]*)" associated to the pattern with name "([^\"]*)"$/ do |filename, pattern_name|
+Given /^I add an image "([^\"]*)" associated to the pattern with name "([^\"]*)"$/ do |filename, pattern_name|
   an_image = Factory(:mappable_image, :filename => filename)
   the_pattern = ProcessPattern.find_by_name(pattern_name)
   the_pattern.mappable_image = an_image

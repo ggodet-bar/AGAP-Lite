@@ -1,204 +1,218 @@
 # Crawl the webapp to grab all the internal urls we can
 # in order to do some stress testing on the app
 
-# Crawler is limited to this domain
-DOMAIN = "0.0.0.0:3000"
-# Crawler skips any URLS that match the following regexp
-EXCLUDE = Regexp.new( /.cts/)
-
 require 'rubygems'
-require 'mechanize'
 require 'nokogiri'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 require 'highline/import'
 require 'net/sftp'
 require 'net/ssh'
-require 'tempfile'
+require 'mechanize'
+require 'fileutils'
 
-def rec_compress(aZipFile, aBasePath, anInitialPath)
-    Dir[aBasePath + '/**'].each do |file|
-        puts 'Compressing : ' + file
-        aZipFile.add(file.sub(anInitialPath + '/', ''), file)
-        if File.directory?(file)
-          rec_compress(aZipFile, file, anInitialPath)
-        end
-    end
-end
+module Crawler
 
-# Utilisé à terme pour gérer le transfert du système de patrons de manière transparente
-# temp_file = Tempfile.new('pat_system')
+# Crawler skips any URLS that match the following regexp
+# EXCLUDE = Regexp.new( /.cts/)
 
-stack = ["http://0.0.0.0:3000/pattern_systems/266846998"]
-visited = Hash.new
-hsh = Hash.new{ |hh,kk| hh[kk] = Array.new }
-fragments = Hash.new
-agent = WWW::Mechanize.new
-counter = 1
-visited["http://0.0.0.0:3000/pattern_systems/266846998"] = 'index'
-while stack.size > 0
-    url = stack.shift
+  def Crawler::statify(domain, pattern_system_short_name, logger)
+    stack = ["http://#{domain}/pattern_systems/#{pattern_system_short_name}/"]
     
-#    puts "selected url: " + url
-    rtry = true
-    address = nil
-    begin
-        page = agent.get url
-        html=page.content
-        
-        until html.sub!("|", "").nil? do end  # On supprime les caractères "|", qui servent de séparateur entre les liens dynamiques (supprimés de la version statique)
-          
-        html.each do |uri|
-            uri.each_line do |uline|
-                tmp = uline.scan( /href=.*?\>/ )
-                tmp.each{ |href|
-                    next if href =~ EXCLUDE
-                    next unless href.include?("crawlable")
-                    
-                    if href.include?( "http" )
-                        next unless href.include?( DOMAIN )
-                        address = href.split( "href=" )[1].split("\"")[1]
+    logger.info "Crawler will statify from URL: #{stack[0]}"
+    visited = Hash.new
+    agent = WWW::Mechanize.new
+    hsh = Hash.new{ |hh,kk| hh[kk] = Array.new }
+    fragments = Hash.new
+    counter = 1
+    visited[stack[0]] = 'index'
+    
+    while stack.size > 0
+        url = stack.shift
+        rtry = true
+        address = nil
+        begin
+            logger.debug "Parsing #{url}......."
+            page = agent.get(url)
+            
+            until page.content.sub!("|", "").nil? do end # On supprime les caractères "|", qui servent de séparateur entre les liens dynamiques (supprimés de la version statique)
+            
+            frag = Nokogiri::HTML(page.content)
+            # html=page.content
+            
+            # until html.sub!("|", "").nil? do end 
                         
-                    else
-                        address = "http://#{DOMAIN}#{href.split( "href=" )[1].split("\"")[1]}"
-                    end
- #                   puts 'full address : ' + address
-                    next if address.nil?
-                    if visited.has_key?( address )
-                        hsh[address].push url
-                    else
-                        stack.push address
-                        hsh[address].push url
-                        visited[address] = 'pattern_' + counter.to_s
-                        counter += 1
-                    end
-                }
+            frag.xpath("//*[@href]").each{ |node|
+                next unless node['class'] == "crawlable"
+                
+                if node['href'].include?("http")
+                    next unless node['href'].include?(domain)
+                    address = node['href']
+                else
+                    address = "http://#{domain}#{node['href']}"
+                end
+                
+                next if address.nil?
+                
+                if visited.has_key?( address )
+                    hsh[address].push url
+                else
+                    stack.push address
+                    hsh[address].push url
+                    visited[address] = 'pattern_' + counter.to_s
+                    counter += 1
+                end
+            
+              }
+
+            logger.debug "\tAdapting references to filesystem"
+            frag.xpath("//*[@href]").each{ |node|
+                add = node['href'].to_s
+                node['href'] = add[1..add.length]
+            }
+            
+            logger.debug "\tRemoving dynamic (i.e., non crawlable) references"
+            frag.xpath("//a[not(@class='crawlable')]").each{ |node|
+                node.remove()
+            }
+            
+            logger.debug "\tChanging image source references"
+            frag.xpath("//img").each{|node|
+               add = node['src'].to_s
+               if add[0..1] == '..'   # Cas des modifs d'URL par tinyMCE
+                 node['src'] = add[12..add.length]
+               else
+                 node['src'] = add[1..add.length]
+               end
+            }
+            
+            # On prend également en compte les images dans les styles background des dl !
+            frag.xpath("//dl").each{|node|
+              style = node['style'].to_s
+              
+              node['style'] = style.sub('/images', 'images')
+            }
+
+            fragments[url] = frag
+
+        rescue Timeout::Error => e
+            Kernel.sleep(5)
+            if rtry
+                rtry = false
+                retry
+            else
+                logger.error "ERROR: Failed on "#{url}"
             end
         end
-        puts "Parsing #{url}......."
-        frag = Nokogiri::HTML(html)
-        
-        puts "\tAdapting references to filesystem"
-        frag.xpath("//*[@href]").each{ |node|
-            add = node['href'].to_s
-            node['href'] = add[1..add.length]
-        }
-        
-        puts "\tRemoving dynamic (i.e., non crawlable) references"
-        frag.xpath("//a[not(@class='crawlable')]").each{ |node|
-            node.remove()
-        }
-        
-        puts "\tChanging image source references"
-        frag.xpath("//img").each{|node|
-           add = node['src'].to_s
-           if add[0..1] == '..'   # Cas des modifs d'URL par tinyMCE
-             node['src'] = add[6..add.length]
-           else
-             node['src'] = add[1..add.length]
-           end
-        }
-        
-        # On prend également en compte les images dans les styles background des dl !
-        frag.xpath("//dl").each{|node|
-          style = node['style'].to_s
-          
-          node['style'] = style.sub('/images', 'images')
-        }
-        
-        fragments[url] = frag
-
-    rescue Timeout::Error => e
-        Kernel.sleep(5)
-        if rtry
-            rtry = false
-            retry
-        else
-            puts "ERROR: Failed on "#{url}"
-        end
     end
-end
+    
+    base_path = "#{RAILS_ROOT}/tmp/PatternSystem"
+    project_path = "#{RAILS_ROOT}/public"
+    
+    # Nettoyage des fichiers temporaires (à supprimer)
+    FileUtils.rm_r base_path if File.exists?(base_path)
+    
+    # On écrit l'ensemble de la hiérarchie
+    File.makedirs "#{base_path}/images/common_images"
+    
+    fragments.each_key{|key|
+      newFrag = fragments[key]
+      newFrag.xpath("//a").each{|node|
+        # On parcourt l'ensemble des références de la page pour 
+        # les remplacer par la référence locale
+        fragments.each_key{|scannedKey|
+          if scannedKey.include? node['href']
+            node['href'] = visited[scannedKey] + ".html"
+          end
+        } 
+      }
+      
+      logger.debug "Writing #{key} to #{visited[key]}.html"
 
-fragments.each_key{|key|
-  newFrag = fragments[key]
-  newFrag.xpath("//a").each{|node|
-    # On parcourt l'ensemble des références de la page pour 
-    # les remplacer par la référence locale
-    fragments.each_key{|scannedKey|
-      if scannedKey.include? node['href']
-        node['href'] = visited[scannedKey] + ".html"
-      end
+      
+      f = File.new("#{base_path}/#{visited[key]}.html", "w+")
+      logger.debug f.path
+      f.puts(newFrag)
+      f.close()
     }
     
-  }
-  puts "Writing #{key} to #{visited[key]}.html"
-  f = File.new("/Users/godetg/Desktop/PatternSystem/#{visited[key]}.html", "w+")
-  f.puts(newFrag)
-  f.close()
-}
+    logger.debug "\n--- DONE! Wrote " + fragments.length.to_s + " patterns ---\n\n"
+    
 
-puts "\n--- DONE! Wrote " + fragments.length.to_s + " patterns ---\n\n"
+    
+    logger.debug "Copying images and stylesheets"
 
-base_path = "/Users/godetg/Desktop/PatternSystem"
-project_path = "/Users/godetg/Documents/RadAgap/public/"
-
-puts "Copying images and stylesheets"
-# Nettoyage des fichiers temporaires (à supprimer)
-FileUtils.rm_r base_path + "/images"
-FileUtils.rm_r base_path + "/stylesheets"
-# Copie des données dans le dossier temporaire
-FileUtils.cp_r project_path + "images", base_path + "/images"
-FileUtils.cp_r project_path + "stylesheets", base_path + "/stylesheets"
-
-puts "\n--- DONE! ---\n\n"
-
-puts "Compressing files into archive"
-archive_path = "/Users/godetg/Desktop/PatternSystem.zip"
-FileUtils.rm archive_path, :force  => true
-
-Zip::ZipFile.open(archive_path, 'w') do |zipfile|
-  rec_compress(zipfile, base_path, base_path)
-end
-
-puts "\n--- DONE! ---\n\n"
-
-puts "Sending to tripet"
-distant_path = "/www/godetg/PatternSystem/PatternSystem.zip"
-
-# thePassword = ask("Enter tripet password"){|q| q.echo = '*'}
-
-Net::SSH.start('tripet.imag.fr', 'godetg') do |ssh|
-  ssh.sftp.connect do |sftp|
-    sftp.upload! archive_path, distant_path
+    # Copie des données dans le dossier temporaire
+    FileUtils.cp_r project_path + "/images/common_images", base_path + "/images"
+    FileUtils.cp_r project_path + "/images/#{pattern_system_short_name}", base_path + "/images/#{pattern_system_short_name}"
+    FileUtils.cp_r project_path + "/stylesheets", base_path + "/stylesheets"
+    
+    logger.debug "\n--- DONE! ---\n\n"
+    
+    logger.debug "Compressing files into archive"
+    archive_path = "#{RAILS_ROOT}/tmp/PatternSystem.zip"
+    FileUtils.rm archive_path, :force  => true
+    
+    Zip::ZipFile.open(archive_path, 'w') do |zipfile|
+      rec_compress(zipfile, base_path, base_path)
+    end
+    
+    logger.debug "\n--- DONE! ---\n\n"
   end
-  puts "Finished uploading data"
 
-  channel = ssh.open_channel do |ch|
-    ch.exec "/usr/bin/unzip -o /www/godetg/PatternSystem/PatternSystem.zip -d /www/godetg/PatternSystem/" do |ch, success|
-           raise "could not execute command" unless success
-        # "on_data" is called when the process writes something to stdout
-           ch.on_data do |c, data|
-             print data
-           end
-
-           # "on_extended_data" is called when the process writes something to stderr
-           ch.on_extended_data do |c, type, data|
-             print data
-           end
-
-           ch.on_close { puts "done!" }
+  # Suppose que l'accès est garanti au site, via échanges de clés sécurisées par ex.
+  def Crawler::ssh_send_to(distant_site, login, distant_path)
+    local_path = "#{RAILS_ROOT}/tmp/PatternSystem.zip"
+    
+    unless File.exists?(local_path)
+      raise "Archive file not present!"
+    end
+      
+    puts "Sending to #{destination_path}"
+#    distant_path = "/www/godetg/PatternSystem/PatternSystem.zip"
+    
+    # thePassword = ask("Enter tripet password"){|q| q.echo = '*'}
+    
+    Net::SSH.start(distant_site, login) do |ssh|
+      ssh.sftp.connect do |sftp|
+        sftp.upload! archive_path, distant_path
+      end
+      puts "Finished uploading data"
+    
+      channel = ssh.open_channel do |ch|
+        ch.exec "/usr/bin/unzip -o #{distant_path}/PatternSystem.zip -d #{distant_path}" do |ch, success|
+               raise "could not execute command" unless success
+            # "on_data" is called when the process writes something to stdout
+               ch.on_data do |c, data|
+                 print data
+               end
+    
+               # "on_extended_data" is called when the process writes something to stderr
+               ch.on_extended_data do |c, type, data|
+                 print data
+               end
+    
+               ch.on_close { puts "done!" }
+        end
+      end
+      
+      channel.wait
+      ssh.exec "rm #{distant_path}/PatternSystem.zip"
+      puts ssh.exec "ls -a #{distant_path}"
+    
     end
   end
-  
-  channel.wait
-  ssh.exec "rm /www/godetg/PatternSystem/PatternSystem.zip"
-  puts ssh.exec "ls -a /www/godetg/PatternSystem"
 
+
+
+protected
+  def Crawler::rec_compress(aZipFile, aBasePath, anInitialPath)
+      Dir[aBasePath + '/**'].each do |file|
+          puts 'Compressing : ' + file
+          aZipFile.add(file.sub(anInitialPath + '/', ''), file)
+          if File.directory?(file)
+            rec_compress(aZipFile, file, anInitialPath)
+          end
+      end
+  end
 end
-
-
-# hsh.each_key do |key|
-#     val = hsh[key]
-#     puts key
-#     val.each{ |url| puts "\t" + url }
-# end

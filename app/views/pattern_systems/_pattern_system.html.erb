@@ -4,7 +4,7 @@
 	<td><%= link_to_remote t(:clone), :update => "pattern_form_#{pattern_system.short_name}", :url => clone_pattern_system_path(pattern_system) %></td>
   <td><%= link_to t(:edit), edit_pattern_system_path(pattern_system) %></td>
   <td><%= link_to t(:delete), pattern_system, :confirm => 'Are you sure?', :method => :delete %></td>
-  <td><%= link_to t(:deploy), :update => "pattern_form_#{pattern_system.short_name}", :url => deploy_pattern_system_path(pattern_system) %>
+  <td><%= link_to_remote t(:deploy), :update => "pattern_form_#{pattern_system.short_name}", :url => deploy_pattern_system_path(pattern_system) %>
 </tr>
 <tr>
 	<td>

@@ -44,7 +44,7 @@
 	<h3><%= t :process_image %></h3>
 	<% if @image.blank? %>
 
-	<%= image_tag 'UnknownImage.png', :width  => 100 %>
+	<%= image_tag 'common_images/UnknownImage.png', :width  => 100 %>
 	<% else %>
 	<dl id="method_image" style=<%= "\"background: url(\'#{ @image.public_filename}\') no-repeat; width: #{@image.width}px; height: #{@image.height}px;\""%> >
 		<% for map in @maps %>
@@ -57,7 +57,7 @@
 
 	<!-- <h3><%= t :process_model %></h3>
 	<% if @model.nil? %>
-	<%= image_tag 'UnknownImage.png', :width  => 100 %>
+	<%= image_tag 'common_images/UnknownImage.png', :width  => 100 %>
 	<% end %> -->
 
 	<h3><%= t :process_solution %></h3>

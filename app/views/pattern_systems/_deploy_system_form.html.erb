@@ -1,0 +1,8 @@
+<% form_remote_tag(:url => {:action => "do_deploy_system", :id => params[:id]}, :html => {:id => 'deploy_form'}) do %>
+	<table>
+		<tr>
+			<td>Test</td>
+		</tr>
+	</table>
+	<%= submit_tag t(:deploy_system), :id => "submit", :name => "submit" %>
+<% end -%>

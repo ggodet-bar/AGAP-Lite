@@ -35,6 +35,7 @@ fr:
     clone: "Cloner"
     deploy: "Déployer"
     clone_system: "Cloner le système"
+    deploy_system: "Déployer le système"
     add_new_pattern: "Ajouter un nouveau patron"
     add_new_participant: "Ajouter un nouveau participant"
     back: "Retour"
