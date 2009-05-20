@@ -12,6 +12,8 @@ class MappableImage < ActiveRecord::Base
 
   validates_as_attachment
   
+  # Redefines the algorithm for computing the path for each stored file.
+  # Now images are stored in a parent folder whose name corresponds to the short_name field of its parent pattern system.
   def full_filename(thumbnail = nil)
     file_system_path = (thumbnail ? thumbnail_class : self).attachment_options[:path_prefix].to_s
     File.join(RAILS_ROOT, file_system_path, self.pattern_system.short_name, *partitioned_path(thumbnail_name_for(thumbnail)))
