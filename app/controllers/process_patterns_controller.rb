@@ -1,6 +1,6 @@
 class ProcessPatternsController < ApplicationController
   
-  before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_images]  
+  before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_images, :display_parameters]  
   before_filter :load_system
   
 
