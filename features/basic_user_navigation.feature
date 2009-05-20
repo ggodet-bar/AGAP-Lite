@@ -23,7 +23,7 @@ Scenario: Add an image to the pattern definition
 	|	name			|	author			|
 	| a test pattern	|	bob le poulpe	|
   And I am on the edit page of the pattern with name "a test pattern" from pattern system "a_system"
-  And I attach the file at "/Users/godetg/Documents/RadAGAP/public/images/loading.gif" to "Upload a file"
+  And I attach the file at "/Users/godetg/Documents/RadAGAP/public/images/common_images/loading.gif" to "Upload a file"
   And I press "Update"
   Then I should see "Processpattern was successfully updated."
   And I should see an image
