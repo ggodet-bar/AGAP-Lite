@@ -1,5 +1,8 @@
 log/*.log
 tmp/**/*
+tmp/*
 doc/api
 doc/app
 db/*.sqlite3
+public/images/**/*
+!public/images/common_images/*
