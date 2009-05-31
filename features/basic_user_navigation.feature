@@ -1,6 +1,6 @@
 
 Feature: Basic User Navigation
-  In order use the basic features of the system
+  In order to use the basic features of the system
   As a user
   I want to manage and navigate the pattern systems
 

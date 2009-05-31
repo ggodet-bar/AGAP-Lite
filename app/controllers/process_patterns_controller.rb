@@ -259,6 +259,6 @@ private
 
   def load_system
         @pattern_system = PatternSystem.find_by_short_name(params[:pattern_system_id])
-        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system.id)
+        @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system.id, :order => :name)
   end
 end
