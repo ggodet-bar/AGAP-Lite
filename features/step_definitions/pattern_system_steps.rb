@@ -13,13 +13,6 @@ Given /^the locale is "([^\"]*)"$/ do |locale|
   I18n.locale = locale
 end
 
-Given /^"([^\"]*)" is a child pattern of "([^\"]*)"$/ do |child, parent|
-  child = ProcessPattern.find_by_name(child)
-  parent = ProcessPattern.find_by_name(parent)
-  parent.context_pattern = child
-  parent.save
-end
-
 
 When /^I clone the pattern system "([^\"]*)"$/ do |short_name|
   visit clone_pattern_system_path(short_name)

@@ -50,7 +50,7 @@ Scenario: Modify a text field and update the pattern
   Then I should see "Processpattern was successfully updated."
   And I should see "Another pattern"
   And I should see "A problem definition" 
-  And I should not see "a test pattern"
+  But I should not see "a test pattern"
 
 
 @focus

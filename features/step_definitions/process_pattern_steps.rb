@@ -4,6 +4,14 @@ Given /^the following patterns? for pattern system "([^\"]*)":$/ do |short_name,
   patterns.hashes.each do |hash|
      sys.process_patterns << ProcessPattern.create(hash)
   end
+  sys.save
+end
+
+Given /^"([^\"]*)" is a child pattern of "([^\"]*)"$/ do |child, parent|
+  child = ProcessPattern.find_by_name(child)
+  parent = ProcessPattern.find_by_name(parent)
+  parent.context_patterns << child
+  parent.save
 end
 
 When /^I add a pattern "([^\"]*)" with author "([^\"]*)" to the pattern system "([^\"]*)"$/ do |pat_name, pat_author, sys_pat_name|
