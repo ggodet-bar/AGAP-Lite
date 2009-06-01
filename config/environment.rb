@@ -28,8 +28,8 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   config.gem "sqlite3-ruby", :lib => "sqlite3"
-  config.gem "attachment_fu"
-  config.gem "cucumber"
+  config.gem "attachment_fu", :source  => "http://gems.github.com"
+  config.gem "cucumber", :source  => "http://gems.github.com"
   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
