@@ -26,7 +26,7 @@ namespace :agap do
         if File.exist?("public/images/#{a_name}")
           pack.package_files.include("public/images/#{a_name}/**/*")
         else
-          puts "DIR #{a_name} does not exist!"
+          print "DIR #{a_name} does not exist!"
         end
       end
     end
