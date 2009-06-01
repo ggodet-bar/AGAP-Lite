@@ -10,3 +10,6 @@
 [submodule "vendor/plugins/attachment_fu"]
 	path = vendor/plugins/attachment_fu
 	url = git://github.com/technoweenie/attachment_fu.git
+[submodule "vendor/plugins/mini_magick"]
+	path = vendor/plugins/mini_magick
+	url = git://github.com/GUI/mini_magick.git
