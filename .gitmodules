@@ -13,3 +13,6 @@
 [submodule "vendor/plugins/mini_magick"]
 	path = vendor/plugins/mini_magick
 	url = git://github.com/GUI/mini_magick.git
+[submodule "vendor/plugins/responds_to_parent"]
+	path = vendor/plugins/responds_to_parent
+	url = git://github.com/markcatley/responds_to_parent.git
