@@ -28,7 +28,7 @@ div#selection {
   border: solid thin #ff0000;
 }
 
-div#pattern_choice {
+#pattern_choice {
 	visibility: hidden;
 	width: 200px;
 	height: 200px;
@@ -38,11 +38,11 @@ div#pattern_choice {
 	border: solid thin #000000;
 }
 
-div#pattern_choice li {
+#pattern_choice li {
 	margin-left: 10px;
 }
 
-div.handle {
+.handle {
 	visibility: hidden;
 	background: #000000;
 	width: 10px;
@@ -71,7 +71,7 @@ li {
 	margin-bottom: 0.5em;
 }
 
-div#header{
+#header{
 	position: relative;
 	background-color: #353333;
 	width: 100%;
@@ -81,17 +81,17 @@ div#header{
 	height: 40px;
 }
 
-div#header span {
+#header span {
 	margin-left: 20px;
 	color: #ffffff;
 	font-size: 0.85em;
 }
 
-div#header a {
+#header a {
 	color: #37e;
 }
 
-div#content{
+#content{
 	position: relative;
 	float: left;
 	width: 55%;
@@ -106,13 +106,13 @@ div#content{
 /*	padding-left: 10%;*/
 }
 
-div.block {
+.block {
 	margin-top: 4em;
 	min-height: 100%;
 /*	margin-bottom: 1em;*/
 }
 
-div#patternList {
+#patternList {
 	position: relative;
 	float: right;
 /*	position: fixed;*/
@@ -134,20 +134,20 @@ div#patternList {
    clear: both;
 }
 
-div#copyright_notice{
+#copyright_notice{
 	height: 120px;
 	width: 100%;
 	padding-top: 20px;
 	background-color: #353333;
 }
 
-div#patternList li {
+#patternList li {
 	text-indent: 0em;
 	font-size: 0.9em;
 	text-align: left;
 }
 
-div#patternList h3 {
+#patternList h3 {
 	color: #24A;
 	font-size: 1.2em;
 }
@@ -159,11 +159,11 @@ div#patternList h3 {
 	margin-right: 1em;
 }
 
-span#param_span a {
+#param_span a {
 	color: #aaa;
 }
 
-div#params {
+#params {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -181,21 +181,21 @@ div#params {
 	z-index:20;
 }
 
-div#param_buttons {
+#param_buttons {
 	position: relative;
 	background: url("/images/common_images/param_button_back.png") no-repeat;
 	width: 300px;
 	height: 50px;
 }
 
-div#param_buttons img {
+#param_buttons img {
 	position: relative;
 	top: 2px;
 	left: 55px;
 	height: 43px;
 }
 
-div#on_position {
+#on_position {
 	position: absolute;
 	top: 0px;
 	left: 52px;
@@ -203,7 +203,7 @@ div#on_position {
 	width: 65px;
 }
 
-div#off_position {
+#off_position {
 	position: absolute;
 	top: 0px;
 	left: 167px;
@@ -211,7 +211,7 @@ div#off_position {
 	width: 65px;
 }
 
-div#params_caution {
+#params_caution {
 	margin-top: 1.2em;
 	margin-bottom: 1em;
 	padding: 1em;
@@ -220,7 +220,7 @@ div#params_caution {
 	background-color: #EEEEFF;
 }
 
-div.helper_info {
+.helper_info {
 	border: solid thin #24A;
 	background-color: #EEF;
 	padding: 0.4em;

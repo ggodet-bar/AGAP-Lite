@@ -31,14 +31,14 @@ p {
 	margin-bottom: 0.6em;
 }
 
-div.errorExplanation {
+.errorExplanation {
 	border: solid #DD0000;
 	padding: 5px;
 	background-color: #EEDDDD;
 	margin-bottom: 5em;
 }
 
-div.errorExplanation h2 {
+.errorExplanation h2 {
 	color: #DD0000;
 	float: right;
 	margin-top: -0.8em;
@@ -57,13 +57,13 @@ div.errorExplanation h2 {
 	color: #AAA;
 }
 
-div#update_field {
+#update_field {
 	border: solid thin #24A;
 	background-color: #EEEEFF;
 	padding: 10px;
 }
 
-div#update_field h3 {
+#update_field h3 {
 	color: #24A;
 	text-indent: 0px;
 	margin-bottom: 0.3em;
