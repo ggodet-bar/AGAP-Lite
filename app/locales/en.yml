@@ -56,3 +56,4 @@ en:
   successful_update: "{{model}} was successfully updated."
   successful_delete: "{{model}} was successfully deleted."
   search: Search
+  search_result: Search result
