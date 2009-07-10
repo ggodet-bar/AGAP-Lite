@@ -11,6 +11,21 @@ class ProcessPattern < ActiveRecord::Base
   @@fields_dispatch = { :interface => ['participant', 'classification', 'processContext', 'productContext', 'problem', 'forces'],
                         :solution => ['process_image_id', 'process_model_url', 'process_solution', 'product_solution'],
                         :relations => ['uses', 'requires', 'alternative']}
+      
+  # Defines the indexes that will be searched with
+  # thinking_sphinx
+  define_index do
+    indexes author
+    indexes :name, :sortable => true
+    indexes process_solution
+    indexes problem
+    indexes forces
+    indexes product_solution
+    indexes application_case
+    indexes application_consequence
+    
+    has pattern_system_id
+  end
                
   # Returns the list of ancestors of current pattern (which is not included in the list).
   # The ancestors are ordered from the root of the pattern system down to the most immediate pattern

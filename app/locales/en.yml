@@ -1,5 +1,4 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# encoding: utf-8
 
 en:
   author_name: "Author name"
@@ -56,3 +55,4 @@ en:
   successful_creation: "{{model}} was successfully created."
   successful_update: "{{model}} was successfully updated."
   successful_delete: "{{model}} was successfully deleted."
+  search: Search

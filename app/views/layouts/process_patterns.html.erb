@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title><%= @process_pattern.name %></title>
+  <title><%= @process_pattern ? @process_pattern.name : t(:search) %></title>
   <%= stylesheet_link_tag 'generic', 'styles' %>
 
   <%= javascript_include_tag :defaults %>
@@ -14,7 +14,18 @@
   <%= include_tiny_mce_if_needed %>
 </head>
 <body>
-	<div id="header"><span style="float:left">
+	<div id="header">
+	<span id="param_span">
+		<% form_tag pattern_system_process_patterns_path, :method => 'get' do %>
+		    <%= text_field_tag :search, params[:search] %>
+		    <%= submit_tag t(:search), :name => nil %>
+		<% end %>
+		| <%= link_to_remote t(:settings), :url => {:action => 'display_parameters'} %></span>
+	</div>
+	<div id="params" style="display: none">
+		
+	</div>
+	<span style="float:left; margin-left:2em;">
 	
 	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
 	<% unless @process_pattern.nil? %>
@@ -28,13 +39,10 @@
 			<%= @process_pattern.name %>
 	<% end %>
 	</span>
-	<span id="param_span">| <%= link_to_remote t(:settings), :url => {:action => 'display_parameters'} %></span>
-	</div>
-	<div id="params" style="display: none">
-		
-	</div>
 	<div id="content">
 <p style="color: green"><%= flash[:notice] %></p>
+
+
 
 <%= yield  %>
 </div>
@@ -42,7 +50,7 @@
 	<h3><%= t :patterns_list %></h3>
 	<ul>
 		<% for pattern in @patterns_list %>
-			<% if pattern.id == @process_pattern.id %>
+			<% if @process_pattern && pattern.id == @process_pattern.id %>
 		<li><%= h(pattern.name) %></li>
 			<% else %>
 		<li><%= link_to(h(pattern.name), [@pattern_system, pattern], :class  => 'crawlable') %></li>

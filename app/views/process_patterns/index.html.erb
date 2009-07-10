@@ -1,0 +1,9 @@
+<h1>Résultat de la recherche</h1>
+
+<table id="process_patterns_list">
+	<% for pattern in @patterns %>
+	<tr>
+		<td><%= pattern.name%></td><td><%= link_to t(:show), [@pattern_system, pattern] %></td>
+	</tr>
+	<% end %>
+</table>

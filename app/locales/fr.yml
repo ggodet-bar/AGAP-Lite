@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 fr:
     author_name: "Nom de l'auteur"
     author: "Auteur(s)"
@@ -53,3 +55,4 @@ fr:
     disable_helpers: "La désactivation du mode débutant supprimera l'affichage des aides !"
     enable_helpers: "L'activation du mode débutant affichera les aides."
     close: Fermer
+    search: Rechercher

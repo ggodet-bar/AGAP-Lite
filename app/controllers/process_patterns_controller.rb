@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ProcessPatternsController < ApplicationController
   
   before_filter :find_pattern, :except => [:index, :new, :create, :add_participant, :remove_participant, :tmp_images, :display_parameters]  
@@ -75,8 +77,16 @@ class ProcessPatternsController < ApplicationController
   end
   
   def index
-    respond_to do |format|
-      format.html {redirect_to @pattern_system}
+    if params[:search]
+      puts @pattern_system.id
+      @patterns = ProcessPattern.search(params[:search], :with => { :pattern_system_id => @pattern_system.id })
+      respond_to do |wants|
+        wants.html
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to @pattern_system}
+      end
     end
   end
 
