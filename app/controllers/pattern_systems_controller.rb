@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'tempfile'
+require 'json'
 
 class PatternSystemsController < ApplicationController
 
@@ -13,6 +14,7 @@ class PatternSystemsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pattern_systems }
+      format.js {render :json => @pattern_systems.inject([]){|result, element| result << {:name => element.name, :short_name => element.short_name}}.to_json}
     end
   end
 

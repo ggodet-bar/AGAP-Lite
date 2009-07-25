@@ -1,0 +1,6 @@
+%h1= t(:list_of_pattern_systems)
+
+%table#pattern_systems_list
+	= render :partial => "pattern_system", :collection => @pattern_systems
+%br
+= link_to t(:new_pattern_system), new_pattern_system_path

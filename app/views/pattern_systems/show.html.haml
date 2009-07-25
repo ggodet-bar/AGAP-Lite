@@ -1,0 +1,77 @@
+%h1= @pattern_system.name
+
+%h2= t :updates
+
+#update_field
+	= @pattern_system.update_field
+
+.block
+	%h2= t :author
+	= @pattern_system.author
+
+.block
+	%h2= t :characteristics
+	= @pattern_system.characteristics
+
+.block
+	%h2= t :root_pattern
+	- if @root_pattern.nil?
+		= image_tag 'common_images/UnknownImage.png', :width  => 100
+	- else
+		= link_to(@root_pattern.name,[@pattern_system, @root_pattern], :class  => 'crawlable')
+
+.block
+	%h2= t :patterns_list
+	%ul
+		- for pattern in @patterns_list
+			%li= link_to(pattern.name,[@pattern_system, pattern], :class  => 'crawlable')
+
+.block
+	%h2 Participants
+	- if @participant.nil?
+		%ul
+			- for participant in @pattern_system.participants
+				%li
+					%b= participant.name
+					\:
+					= link_to t(:edit_participant), edit_pattern_system_participant_path(@pattern_system, participant)
+					\|
+					= link_to t(:delete_participant), [@pattern_system, participant], :method => :delete
+					%br
+					= participant.description
+		= link_to t(:add_new_participant), new_pattern_system_participant_path(@pattern_system)
+		
+		%br
+	- else
+		- if @isEditing
+			- form_for [@pattern_system, @participant], :method => :put do |p|
+				= error_messages_for 'participant', :object => @participant
+				%label{:for => "name"}
+					= t(:name_of_participant)
+					\:
+				= p.text_field :name
+				%br
+				%label{:for => "description"}
+					= t(:description_of_participant_role)
+					\:
+				= p.text_area(:description, :class  => "mceEditor")
+				= p.submit t(:update_participant)
+				
+		- else
+			- form_for [@pattern_system, @participant], :method => :post do |p|
+				= error_messages_for 'participant', :object => @participant
+				%label{:for => "name"}
+					= t(:name_of_participant)
+					\:
+				= p.text_field :name
+				%br
+				%label{:for => "description"}
+					= t(:description_of_participant_role)
+					\:
+				= p.text_area(:description, :class  => "mceEditor")
+				= p.submit t(:create_participant)
+			
+.block
+	= link_to t(:add_new_pattern), new_pattern_system_process_pattern_path(@pattern_system)
+	%br
+	= link_to t(:edit), edit_pattern_system_path(@pattern_system)

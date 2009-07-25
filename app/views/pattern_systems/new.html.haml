@@ -1,0 +1,7 @@
+%h1= t(:new_pattern_system)
+
+- form_for(@pattern_system) do |f|
+	= f.error_messages
+	= render :partial => 'form', :locals => {:f => f}
+	%p
+		= f.submit t(:create)

@@ -52,7 +52,7 @@ class PatternSystem < ActiveRecord::Base
         image.pattern_system = new_system
         
         if image.save
-          # for each image, copy the old location to the new, using the same id partioning algorithm as attachment_fu
+          # for each image, copy the old location to the new, using the same id partitioning algorithm as attachment_fu
           FileUtils.mkdir_p( File.join(RAILS_ROOT, '/public/images', new_system.short_name, ("%08d" % image.id).scan(/..../)))
           old_path            = File.join RAILS_ROOT, '/public/', self.mappable_images.select{|old_image| old_image.filename == image.filename}.first.public_filename
           new_path            = File.join RAILS_ROOT, '/public/images/', new_system.short_name, ("%08d" % image.id).scan(/..../), image.filename
