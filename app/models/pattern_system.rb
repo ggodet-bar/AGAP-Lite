@@ -5,7 +5,6 @@ class PatternSystem < ActiveRecord::Base
   has_many  :product_patterns
   has_many  :participants, :dependent  => :destroy
   has_many  :mappable_images, :dependent => :destroy
-  has_one   :root_pattern, :class_name => "ProcessPattern", :conditions => ["is_root_pattern = ?", true]
   
   validates_presence_of :author, :name, :short_name
   validates_uniqueness_of :name
@@ -16,8 +15,13 @@ class PatternSystem < ActiveRecord::Base
       process_patterns.each{ |pat|  
         pat.update_attributes({:is_root_pattern =>  false})
       }
-      pattern.update_attributes({:is_root_pattern =>  true})
+      ProcessPattern.find(pattern).update_attributes({:is_root_pattern =>  true})
     end unless pattern.blank? || pattern == "[\"\"]"
+  end
+  
+  def root_pattern
+    patterns = process_patterns.select{ |pat| pat.is_root_pattern}
+    ProcessPattern.find(patterns.first) unless patterns.empty?
   end
   
   def to_param

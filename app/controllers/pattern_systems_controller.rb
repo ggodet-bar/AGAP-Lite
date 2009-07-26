@@ -76,7 +76,6 @@ class PatternSystemsController < ApplicationController
   # PUT /pattern_systems/1
   # PUT /pattern_systems/1.xml
   def update
-    params[:pattern_system][:root_pattern] = params[:pattern_system][:root_pattern].blank? ? nil : ProcessPattern.find(params[:pattern_system][:root_pattern])
     respond_to do |format|
       if @pattern_system.update_attributes(params[:pattern_system])
         flash[:notice] = t(:successful_update, :model => PatternSystem.human_name)
