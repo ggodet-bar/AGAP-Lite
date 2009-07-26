@@ -48,7 +48,7 @@ en:
   create_participant: "Create participant"
   description_of_participant_role: "Description of the participant's role"
   settings: Settings
-  beginer_mode: Beginner mode
+  beginner_mode: Beginner mode
   disable_helpers: "Disabling the beginner mode will turn off the display of all the application helpers!"
   enable_helpers: "Enabling the beginner mode will turn on the display of the helpers."
   close: Close
