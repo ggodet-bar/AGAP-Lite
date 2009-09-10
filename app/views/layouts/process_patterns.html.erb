@@ -35,7 +35,7 @@
 	<% unless @process_pattern.nil? %>
 		<% for ancestors in @process_pattern.ancestors %>
 			<% if @process_pattern.ancestors.size > 2 %>
-				<%= link_to(shortify(ancestors.name), [@pattern_system, ancestors], :class => 'crawlable') + " > "%>
+				<%= link_to(shortify(ancestors.name), [@pattern_system, ancestors], {:class => 'crawlable', :title => ancestors.name}) + " > "%>
 			<% else %>
 				<%= link_to(ancestors.name, [@pattern_system, ancestors], :class => 'crawlable') + " > "%>
 			<% end %>
