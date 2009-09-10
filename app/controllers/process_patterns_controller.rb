@@ -200,6 +200,8 @@ class ProcessPatternsController < ApplicationController
       }
       session[:maps] = nil
     end
+    
+    # TODO Utiliser les mécanismes d'injection!
     context_patterns = params[:process_pattern][:context_patterns]
     params[:process_pattern][:context_patterns] = []
     unless context_patterns.blank? || (context_patterns.size == 1 && context_patterns[0].include?(?[))

@@ -15,18 +15,22 @@
 </head>
 <body>
 	<div id="header">
-	<span id="param_span">
-		<% form_tag pattern_system_process_patterns_path, :method => 'get' do %>
+	<div id="top_params">
+		<span style="float:left;"><% form_tag pattern_system_process_patterns_path, :method => 'get' do %>
 		    <%= text_field_tag :search, params[:search] %>
 		    <%= submit_tag t(:search), :name => nil %>
 		<% end %>
-		| <%= link_to_remote t(:settings), :url => {:action => 'display_parameters'} %></span>
+		</span>
+		<span style="float:right;">
+		 <%= link_to_remote t(:settings), :url => {:action => 'display_parameters'} %>
+		</span>
+		</div>
 	</div>
 	<div id="params" style="display: none">
 		
 	</div>
-	<span style="float:left; margin-left:2em;">
-	
+	<div id="navigation_bar">
+	<span style="margin-left: 2em;">
 	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
 	<% unless @process_pattern.nil? %>
 		<% for ancestors in @process_pattern.ancestors %>
@@ -39,6 +43,7 @@
 			<%= @process_pattern.name %>
 	<% end %>
 	</span>
+	</div>
 	<div id="content">
 <p style="color: green"><%= flash[:notice] %></p>
 
