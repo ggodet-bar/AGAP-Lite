@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
                                 :plugins => %w{ upimage safari },
                                 :theme_advanced_buttons1_add  => 'upimage'
                               }
-  I18n.locale = :en
+  I18n.locale = :fr
   
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters

@@ -27,6 +27,15 @@
 			%li= link_to(pattern.name,[@pattern_system, pattern], :class  => 'crawlable')
 
 .block
+	%h2 Phases
+	%ul
+		%li
+			%h3 Test
+			%ul
+				%li
+					%h3 Other Test
+
+.block
 	%h2 Participants
 	- if @participant.nil?
 		%ul

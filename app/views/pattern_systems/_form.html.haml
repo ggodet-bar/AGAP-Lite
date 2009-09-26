@@ -28,4 +28,10 @@
 = f.text_area(:characteristics, :class => "mceEditor")
 
 %h3= t :root_pattern
-= collection_select(:pattern_system, :root_pattern, @pattern_system.process_patterns, :id, :name, {:include_blank => true})
+= f.collection_select(:root_pattern, @pattern_system.process_patterns, :id, :name, {:include_blank => true})
+
+
+%table(style="margin-top:2.4em;")
+	%tr
+		%td= f.label :first_level_is_phase, t(:first_level_is_phase)
+		%td= f.check_box(:first_level_is_phase)

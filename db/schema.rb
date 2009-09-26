@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090518203605) do
+ActiveRecord::Schema.define(:version => 20090917123218) do
 
   create_table "context_patterns", :id => false, :force => true do |t|
     t.integer "source_pattern_id"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20090518203605) do
     t.text     "update_field"
     t.string   "short_name"
     t.string   "version"
+    t.boolean  "first_level_is_phase"
   end
 
   create_table "process_patterns", :force => true do |t|

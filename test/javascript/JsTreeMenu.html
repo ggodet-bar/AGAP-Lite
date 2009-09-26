@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>JSTreeMenuTest</title>
+	<script type="text/javascript" src="../../public/javascripts/prototype.js"></script>
+	<script type="text/javascript" src="../../public/javascripts/effects.js"></script>
+	<script type="text/javascript" src="../../public/javascripts/treemenu.js"></script>
+</head>
+<body>
+
+<div id="patternList">
+	<h3>A Fake title</h3>
+	<ul>
+		<li id="first_pattern"><span><a href="">First pattern</a></span></li>
+		<li id="second_pattern"><span><a href="">Second pattern</a></span>
+			<ul>
+				<li id="sub_pattern_1"><span><a href="">Sub pattern 1</a></span></li>
+				<li id="sub_pattern_2"><span><a href="">Sub pattern 2</a></span></li>
+				<li id="sub_pattern_3"><span><a href="">Sub pattern 3</a></span></li>
+			</ul>
+		</li>
+		<li id="current_pattern"><span>Current pattern</span></li>
+		<li id="third_pattern"><span><a href="">Third pattern</a></span>
+			<ul>
+				<li id="sub_pattern_3bis"><span><a href="">Sub pattern 3bis</a></span></li>
+				<li id="sub_pattern_4"><span><a href="">Sub pattern 4</a></span>
+					<ul>
+						<li id="sub_pattern_21"><span><a href="">Sub pattern 1</a></span></li>
+						<li id="sub_pattern_22"><span><a href="">Sub pattern 2</a></span></li>
+					</ul>
+				</li>
+				<li id="sub_pattern_5"><span><a href="">Sub pattern 5</a></span></li>
+			</ul>
+		</li>
+		<li id="fourth_pattern"><span><a href="">Fourth pattern</a></span></li>
+	</ul>
+	
+</div>
+
+<script type="text/javascript">
+	JsTreeMenu.setCurrentNode('sub_pattern_21') ;
+</script>
+
+
+</body>
+</html>

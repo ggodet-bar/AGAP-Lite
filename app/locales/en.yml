@@ -57,3 +57,4 @@ en:
   successful_delete: "{{model}} was successfully deleted."
   search: Search
   search_result: Search result
+  first_level_is_phase: First pattern level describe phases
