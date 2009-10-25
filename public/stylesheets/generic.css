@@ -141,6 +141,11 @@ li {
 	background-color: #353333;
 }
 
+#patternList ul {
+	list-style-type: none;
+	
+}
+
 #patternList li {
 	text-indent: 0em;
 	font-size: 0.9em;
@@ -170,12 +175,12 @@ li {
 /*	padding-left: 2em;*/
 	padding-bottom: 0.2em;
 	padding-top: 0.2em;
-	color: #ccc;
+	color: #fff;
 	font-size: 0.9em;
 }
 
 #navigation_bar a {
-	color: #aaa;
+	color: #ddd;
 }
 
 #params {

@@ -33,11 +33,14 @@ var JsTreeMenu = {
 		if (node.down() && node.down().next()) {	// check whether there is a sublist
 				
 				// Modify the currentNode so that it can blind up and down
-				var link = new Element('a', {href: "#"}).update("A") ;
-				node.down().insert({'top' : " | "}) ;
-				node.down().insert({'top' : link}) ;
+				var closedTriangle = new Element('img', {src: "/images/common_images/triangle_closed.png", width: "10px", style:"border-width: 0px;"}) ;
+				// var closedTriangle = new Element('div', {style: "width: 20px; height: 20px; background: url('../../public/images/common_images/triangle_closed.png'); float: left"}) ;
+				// var link = new Element('a', {href: "javascript:void(0);"}).update(closedTriangle) ;
+				// closedTriangle.setStyle({border-width: '0px'});
+				// node.down().insert({'top' : " | "}) ;
+				node.down().insert({'top' : closedTriangle}) ;
 				
-				link.observe('click', JsTreeMenu.manageNode) ;
+				closedTriangle.observe('click', JsTreeMenu.manageNode) ;
 				JsTreeMenu.menuTopography.set(node.identify(), 'CLOSED');
 				
 				var subList = node.down().next() ;	// Get the ul of the sublist
@@ -52,9 +55,11 @@ var JsTreeMenu = {
 	manageNode : function(event) {
 		var element = event.element().up().next() ;
 		if (JsTreeMenu.menuTopography.get(element.up().identify()) == 'OPEN') {
+			event.element().writeAttribute('src', "/images/common_images/triangle_closed.png") ;
 			Effect.BlindUp(element, {duration : 0.3}) ;
 			JsTreeMenu.menuTopography.set(element.up().identify(), 'CLOSED') ;
 		} else {
+			event.element().writeAttribute('src', "/images/common_images/triangle_opened.png") ;
 			Effect.BlindDown(element, {duration : 0.3}) ;
 			JsTreeMenu.menuTopography.set(element.up().identify(), 'OPEN') ;
 		}
@@ -79,6 +84,7 @@ var JsTreeMenu = {
 		nodesList.each(function(s){
 	
 			if (JsTreeMenu.menuTopography.get(s) == 'CLOSED') {
+				$(s).down().down().writeAttribute('src', "/images/common_images/triangle_opened.png") ;
 				Effect.BlindDown($(s).down().next(), {duration : 0}) ;
 				JsTreeMenu.menuTopography.set(s, 'OPEN') ;
 			}
@@ -98,5 +104,5 @@ document.observe("dom:loaded", function() {
 	JsTreeMenu.init() ;
 	
 	// TODO Maybe get the current node in order to open it!
-	JsTreeMenu.openNode(JsTreeMenu.currentNode) ;
+	// JsTreeMenu.openNode(JsTreeMenu.currentNode) ;
 }) ;
