@@ -9,6 +9,20 @@ class PatternSystem < ActiveRecord::Base
   validates_presence_of :author, :name, :short_name
   validates_uniqueness_of :name
   validates_uniqueness_of :short_name
+
+  @registered_relations = [{:type => :requires, :is_reflexive => false}, 
+    {:type => :refines, :is_reflexive => false}, 
+    {:type => :alternative, :is_reflexive => true}, 
+    {:type => :uses, :is_reflexive =>false}]
+    
+  # Temporary hack!
+  def registered_relations
+    @registered_relations
+  end
+  
+  def registered_relations=(relations)
+    @registered_relations = relations
+  end
   
   def root_pattern=(pattern)
     PatternSystem.transaction do

@@ -26,5 +26,8 @@ Factory.define :participant do |participant|
   participant.sequence(:name) { |n|  "participant name #{n}"}
   participant.description "Any description"
   participant.association :pattern_system
-  
+end
+
+Factory.define :relation do |relation|
+  relation.name "fake_relation"
 end
