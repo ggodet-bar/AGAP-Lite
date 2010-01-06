@@ -20,18 +20,18 @@ class ProcessPattern < ActiveRecord::Base
       
   # Defines the indexes that will be searched with
   # thinking_sphinx
-  define_index do
-    indexes author
-    indexes :name, :sortable => true
-    indexes process_solution
-    indexes problem
-    indexes forces
-    indexes product_solution
-    indexes application_case
-    indexes application_consequence
-    
-    has pattern_system_id
-  end
+#  define_index do
+#    indexes author
+#    indexes :name, :sortable => true
+#    indexes process_solution
+#    indexes problem
+#    indexes forces
+#    indexes product_solution
+#    indexes application_case
+#    indexes application_consequence
+#    
+#    has pattern_system_id
+#  end
                
   # Returns the list of ancestors of current pattern (which is not included in the list).
   # The ancestors are ordered from the root of the pattern system down to the most immediate pattern

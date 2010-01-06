@@ -28,6 +28,7 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
 
+  config.gem "nokogiri"
   config.gem "sqlite3-ruby", :lib => "sqlite3"
   config.gem "haml"
   
