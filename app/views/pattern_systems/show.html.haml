@@ -1,4 +1,4 @@
-%h1= @pattern_system.name
+%h1= h @pattern_system.name
 
 %h2= t :updates
 
@@ -7,24 +7,24 @@
 
 .block
 	%h2= t :author
-	= @pattern_system.author
+	= h @pattern_system.author
 
 .block
 	%h2= t :characteristics
-	= @pattern_system.characteristics
+	= h @pattern_system.characteristics
 
 .block
 	%h2= t :root_pattern
 	- if @root_pattern.nil?
 		= image_tag 'common_images/UnknownImage.png', :width  => 100
 	- else
-		= link_to(@root_pattern.name,[@pattern_system, @root_pattern], :class  => 'crawlable')
+		= link_to(h(@root_pattern.name),[@pattern_system, @root_pattern], :class  => 'crawlable')
 
 .block
 	%h2= t :patterns_list
 	%ul
 		- for pattern in @patterns_list
-			%li= link_to(pattern.name,[@pattern_system, pattern], :class  => 'crawlable')
+			%li= link_to(h(pattern.name),[@pattern_system, pattern], :class  => 'crawlable')
 
 .block
 	%h2 Phases
@@ -41,7 +41,7 @@
 		%ul
 			- for participant in @pattern_system.participants
 				%li
-					%b= participant.name
+					%b= h participant.name
 					\:
 					= link_to t(:edit_participant), edit_pattern_system_participant_path(@pattern_system, participant)
 					\|

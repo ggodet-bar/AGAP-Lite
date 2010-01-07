@@ -1,30 +1,30 @@
-	<h1><%= @process_pattern.name %></h1>
+	<h1><%= h @process_pattern.name %></h1>
 	
 
   <p>
-	<%= t :author %> : <%= @process_pattern.author %>
+	<%= t :author %> : <%= h @process_pattern.author %>
   </p>
 
 <div class="block">
 <h2>Interface</h2>
 	<h3><%= t :name %></h3>
-	<%= @process_pattern.name %>
+	<%= h @process_pattern.name %>
 	
 	<h3>Participants</h3>
 	<ul>
 		<% for participant in @process_pattern.participants %>
-			<li><%= participant.name%></li>
+			<li><%= h participant.name%></li>
 		<% end %>
 	</ul>
 	
 	<h3>Classification</h3>
-	<%= @process_pattern.classification %>
+	<%= h @process_pattern.classification %>
 	
 	<h3><%= t :context %></h3>
 		<h4><%= t :process_context %></h4>
 		<ul>
 		<% for context_pattern in @process_pattern.context_patterns %>
-			<li><%= link_to context_pattern.name, [@pattern_system, context_pattern], :class  => 'crawlable' %></li>
+			<li><%= link_to h context_pattern.name, [@pattern_system, context_pattern], :class  => 'crawlable' %></li>
 		<% end %>
 		</ul>
 		
