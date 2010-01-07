@@ -91,15 +91,17 @@ li {
 	color: #37e;
 }
 
-#content{
-	position: relative;
-	float: left;
-	width: 55%;
-	height: 100%;
+#wrapper {
 	min-height: 100%;
 	height: auto !important;
+	height: 100%;
+	margin: 0 auto -120px;
+}
+
+#content{
+	float: left;
+	width: 55%;
 	padding-bottom: 50px;
-	margin-bottom: -120px;
 	min-width: 450px;
 	margin-left: 18em;
 	margin-top: 20px;
