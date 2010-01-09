@@ -11,6 +11,7 @@
   <%= javascript_include_tag 'livepipe' %>
   <%= javascript_include_tag 'cookie' %>
   <%= javascript_include_tag 'treemenu'%>
+  <%= javascript_include_tag 'parameters' %>
 
   <%= include_tiny_mce_if_needed %>
 </head>
@@ -23,14 +24,16 @@
 		    <%= submit_tag t(:search), :name => nil %>
 		<% end %>
 		</span>
-		<span style="float:right;">
-		 <%= link_to_remote t(:settings), :url => {:action => 'display_parameters'} %>
+		<span id="param_span" style="float:right;">
+		 <%= link_to_function t(:settings), nil  do |page|
+	page.visual_effect	:toggle_appear, 'params'
+	page.call	'manage_parameters', t(:enable_helpers) , t(:disable_helpers) 
+end%>
 		</span>
 		</div>
 	</div>
-	<div id="params" style="display: none">
+	<%= render :partial => 'shared/parameters' %>
 		
-	</div>
 	<div id="navigation_bar">
 	<span style="margin-left: 2em;">
 	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
