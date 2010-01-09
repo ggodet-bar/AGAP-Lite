@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
                                 :theme  => 'advanced',
                                 :plugins => %w{ upimage safari },
                                 :theme_advanced_buttons1_add  => 'upimage'
-                              }
+                              },
+		:only => [:new, :create, :edit, :update]
   I18n.locale = :fr
   
   # See ActionController::Base for details 
