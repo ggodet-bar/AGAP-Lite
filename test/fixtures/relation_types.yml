@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  is_reflexive: false
+  associated_field_name: MyString
+  associated_field_description: MyString
+  is_alterable: false
+
+two:
+  name: MyString
+  is_reflexive: false
+  associated_field_name: MyString
+  associated_field_description: MyString
+  is_alterable: false
