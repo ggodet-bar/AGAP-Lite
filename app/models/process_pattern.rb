@@ -9,11 +9,6 @@ class ProcessPattern < ActiveRecord::Base
   has_and_belongs_to_many :context_patterns, :class_name  => "ProcessPattern", :join_table => "context_patterns", :foreign_key => "source_pattern_id", :association_foreign_key  => "target_pattern_id"
 
   # New generic relation type
-  # has_and_belongs_to_many :related_patterns,
-  #   :class_name => "ProcessPattern",
-  #   :foreign_key => "source_pattern_id",
-  #   :association_foreign_key => "target_pattern_id",
-  #   :join_table => "relations"
   has_many  :relations, :foreign_key => 'source_pattern_id'
   has_many  :related_patterns, :through => :relations, :as => :target_pattern
 
@@ -70,7 +65,7 @@ class ProcessPattern < ActiveRecord::Base
       if registered_relation && args[0].class == Array
         # In that case we need to replace all the relationships of type :type
         
-        # We first destroy all existing relations (N.B Not the most efficient, most certainly!)
+        # We first destroy all existing relations (N.B Not the most efficient method, most certainly!)
         relations.select{|rel| rel.name.to_s.concat('=').to_sym == method}.each{|rel|  
            
            # We destroy the reflected relations too!
