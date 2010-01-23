@@ -1,3 +1,5 @@
+# encoding : UTF-8
+
 require 'nokogiri'
 
 class PatternSystem < ActiveRecord::Base
@@ -10,19 +12,45 @@ class PatternSystem < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_uniqueness_of :short_name
 
-  @registered_relations = [{:type => :requires, :is_reflexive => false}, 
-    {:type => :refines, :is_reflexive => false}, 
-    {:type => :alternative, :is_reflexive => true}, 
-    {:type => :uses, :is_reflexive =>false}]
-    
-  # Temporary hack!
-  def registered_relations
-    @registered_relations
-  end
-  
-  def registered_relations=(relations)
-    @registered_relations = relations
-  end
+  # @registered_relations = [
+  #   # Translated by 'the preceding pattern is not optional'
+  #   # {
+  #   #     :type => :requires, 
+  #   #     :is_reflexive => false, 
+  #   #     :associated_field => {
+  #   #     	:name => 'forces',
+  #   #     	:description => "Les patrons suivants traitent le même problème et favorisent les points suivants :"
+  #   # }, 
+  #   {
+  #       :type => :refines,
+  #       :is_reflexive => false,
+  #   	:associated_field =>
+  #           {
+  #   		:name => 'problem',
+  #   		:description => "Les patrons suivants traitent un problème plus spécifique :"
+  #           }	
+  #   }, 
+  #   {
+  #       :type => :alternative, 
+  #       :is_reflexive => true,
+  #   	:associated_field =>
+  #           {		
+  #   		:name => 'forces',
+  #       	:description => "D'autres patrons traitent le même problème en favorisant les points suivants :"
+  #           }
+  #   }
+  #   ]
+  #   # Should be translated by 'the visual solution or the text mentions the following patterns'
+  #   # {:type => :uses, :is_reflexive =>false}]
+  #   
+  # # Temporary hack!
+  # def registered_relations
+  #   @registered_relations
+  # end
+  # 
+  # def registered_relations=(relations)
+  #   @registered_relations = relations
+  # end
   
   def root_pattern=(pattern)
     PatternSystem.transaction do
@@ -133,6 +161,7 @@ class PatternSystem < ActiveRecord::Base
       new_system
     end
   end
+
 
 private
 

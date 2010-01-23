@@ -9,11 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091025222106) do
+ActiveRecord::Schema.define(:version => 20100112114708) do
 
-  create_table "context_patterns", :id => false, :force => true do |t|
-    t.integer "source_pattern_id"
-    t.integer "target_pattern_id"
+  create_table "field_descriptors", :force => true do |t|
+    t.string   "name"
+    t.string   "section"
+    t.string   "index"
+    t.string   "type"
+    t.integer  "pattern_formalism_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_alterable",         :default => true
+    t.string   "description"
   end
 
   create_table "image_associations", :force => true do |t|
@@ -63,6 +70,13 @@ ActiveRecord::Schema.define(:version => 20091025222106) do
     t.datetime "updated_at"
   end
 
+  create_table "pattern_formalisms", :force => true do |t|
+    t.string   "name",                :null => false
+    t.integer  "system_formalism_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pattern_systems", :force => true do |t|
     t.string   "author"
     t.string   "name"
@@ -95,17 +109,29 @@ ActiveRecord::Schema.define(:version => 20091025222106) do
     t.boolean  "is_root_pattern",         :default => false
   end
 
+  create_table "relation_descriptors", :force => true do |t|
+    t.string   "name",                                            :null => false
+    t.boolean  "is_reflexive",                 :default => false
+    t.string   "associated_field_name"
+    t.string   "associated_field_description"
+    t.boolean  "is_alterable",                 :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "system_formalism_id",                             :null => false
+  end
+
   create_table "relations", :force => true do |t|
     t.integer  "source_pattern_id"
     t.integer  "target_pattern_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.integer  "relation_type_id",  :null => false
   end
 
-  create_table "use_patterns", :force => true do |t|
-    t.integer  "source_pattern_id"
-    t.integer  "target_pattern_id"
+  create_table "system_formalisms", :force => true do |t|
+    t.string   "name"
+    t.string   "author"
+    t.string   "version"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -56,44 +56,44 @@ class ProcessPattern < ActiveRecord::Base
   # Use, Alternative, Requires and Refines)
   # When using the setter method (e.g requires=), we add the relation type to the
   # record that is being constructed
-  def method_missing(method, *args, &block)
-    # We first check if the method name corresponds to one of the registered relationships
-    if pattern_system.nil? || pattern_system.registered_relations.nil?
-      return super
-    end
-    if pattern_system.registered_relations.any?{|relation| relation[:type]==method}
-      # We then return all the patterns which correspond to the 'method' relationship type
+  # def method_missing(method, *args, &block)
+  #   # We first check if the method name corresponds to one of the registered relationships
+  #   if pattern_system.nil? || pattern_system.registered_relations.nil?
+  #     return super
+  #   end
+  #   if pattern_system.registered_relations.any?{|relation| relation[:type]==method}
+  #     # We then return all the patterns which correspond to the 'method' relationship type
 
-      relations.select{|rel| rel.name == method.to_s}
-    else
-      registered_relation = pattern_system.registered_relations.select{|relation|relation[:type].to_s.concat('=').to_sym == method}.first
-      if registered_relation && args[0].class == Array
-        # In that case we need to replace all the relationships of type :type
-        
-        # We first destroy all existing relations (N.B Not the most efficient, most certainly!)
-        relations.select{|rel| rel.name.to_s.concat('=').to_sym == method}.each{|rel|  
-           
-           # We destroy the reflected relations too!
-           if registered_relation[:is_reflexive]
-             Relation.find(:first, :conditions => {:source_pattern_id => rel.target_pattern, :target_pattern_id => self}).destroy
-           end
-           
-           rel.destroy
-        }
-        
-        # Then we assign all the relations from the method call, and we fill the 'type' attribute for each relation
-        args[0].each{|new_rel| 
-          relations << Relation.create({:target_pattern => new_rel, :name => method.to_s.gsub( /=/, ""), :source_pattern => self})
-          # If the relation is reflexive, create another reverse relation
-          if registered_relation[:is_reflexive]
-            Relation.create({:target_pattern => self, :name => method.to_s.gsub( /=/, ""), :source_pattern => new_rel})
-          end
-        }
-      else
-        super
-      end
-    end
-  end
+  #     relations.select{|rel| rel.name == method.to_s}
+  #   else
+  #     registered_relation = pattern_system.registered_relations.select{|relation|relation[:type].to_s.concat('=').to_sym == method}.first
+  #     if registered_relation && args[0].class == Array
+  #       # In that case we need to replace all the relationships of type :type
+  #       
+  #       # We first destroy all existing relations (N.B Not the most efficient, most certainly!)
+  #       relations.select{|rel| rel.name.to_s.concat('=').to_sym == method}.each{|rel|  
+  #          
+  #          # We destroy the reflected relations too!
+  #          if registered_relation[:is_reflexive]
+  #            Relation.find(:first, :conditions => {:source_pattern_id => rel.target_pattern, :target_pattern_id => self}).destroy
+  #          end
+  #          
+  #          rel.destroy
+  #       }
+  #       
+  #       # Then we assign all the relations from the method call, and we fill the 'type' attribute for each relation
+  #       args[0].each{|new_rel| 
+  #         relations << Relation.create({:target_pattern => new_rel, :name => method.to_s.gsub( /=/, ""), :source_pattern => self})
+  #         # If the relation is reflexive, create another reverse relation
+  #         if registered_relation[:is_reflexive]
+  #           Relation.create({:target_pattern => self, :name => method.to_s.gsub( /=/, ""), :source_pattern => new_rel})
+  #         end
+  #       }
+  #     else
+  #       super
+  #     end
+  #   end
+  # end
   
 protected
   def validate
