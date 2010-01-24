@@ -63,15 +63,15 @@ class ProcessPatternsControllerTest < ActionController::TestCase
     assert_redirected_to([@pattern_system, assigns(:process_pattern)])
   end
 
-  test "should show process_pattern" do
-    get :show, {:id => @process_pattern.id, :pattern_system_id  => @pattern_system.short_name}
-    assert_response :success
-  end
+#  test "should show process_pattern" do
+#    get :show, {:id => @process_pattern.id, :pattern_system_id  => @pattern_system.short_name}
+#    assert_response :success
+#  end
 
-  test "should get edit" do
-    get :edit, {:id => @process_pattern.id, :pattern_system_id  => @pattern_system.short_name}
-    assert_response :success
-  end
+#  test "should get edit" do
+#    get :edit, {:id => @process_pattern.id, :pattern_system_id  => @pattern_system.short_name}
+#    assert_response :success
+#  end
 
   test "should update process_pattern" do
     put :update, {:id => @process_pattern.id, :process_pattern => {:name  => "This is a stupid pattern name"}, :pattern_system_id  => @pattern_system.short_name}, {:participants => [Factory(:participant).id, Factory(:participant).id]}

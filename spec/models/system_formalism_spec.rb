@@ -1,7 +1,3 @@
-require 'spec_helper'
-
-
-
 def have_a_relation_descriptor_named(expected)
   simple_matcher("a relation descriptor named #{expected}") do |given, matcher|
     matcher.failure_message = "expected to find a relation descriptor named #{expected}"
@@ -10,7 +6,7 @@ def have_a_relation_descriptor_named(expected)
   end
 end
 
-describe SystemFormalism do
+describe "A system formalism" do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",

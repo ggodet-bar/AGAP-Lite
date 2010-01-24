@@ -9,13 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100112114708) do
+ActiveRecord::Schema.define(:version => 20100124214153) do
 
   create_table "field_descriptors", :force => true do |t|
     t.string   "name"
     t.string   "section"
     t.string   "index"
-    t.string   "type"
+    t.string   "field_type"
     t.integer  "pattern_formalism_id"
     t.datetime "created_at"
     t.datetime "updated_at"

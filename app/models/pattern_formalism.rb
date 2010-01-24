@@ -5,19 +5,34 @@ class PatternFormalism < ActiveRecord::Base
   # TODO Define the different field types!
   $FORMALISM_SECTIONS = %w( interface solution )
 
-  validate :must_have_base_field_descriptors
+  validate :must_have_base_field_descriptors, :all_fields_must_be_in_a_valid_section
 
   def must_have_base_field_descriptors
     errors.add_to_base("Invalid base field descriptors") \
-      unless  field_descriptors.any?{|fie| fie.name = "name"} &&
-              field_descriptors.any?{|fie| fie.name = "problem"}
+      unless  self.field_descriptors.any?{|fie| fie.name == "name"} &&
+              self.field_descriptors.any?{|fie| fie.name == "problem"}
   end 
 
-  def after_initialize
-    field_descriptors << FieldDescriptor.new({:name => 'name', :section => 'interface', :index => 0, :type => 'string', :pattern_formalism_id => id})
-
-    # TODO Maybe set some more default attributes, such as the index
-    field_descriptors << FieldDescriptor.new({:name => 'problem', :section => 'interface', :pattern_formalism_id => id})
-
+  def all_fields_must_be_in_a_valid_section
+    errors.add_to_base("Invalid field sections") \
+      unless self.field_descriptors.all{|field| $FORMALISM_SECTIONS.include?(field.section)}
   end
+
+  def after_initialize 
+    if self.field_descriptors.empty?
+      self.field_descriptors.build({:name => "name", :section => 'interface', :field_type => 'string', :is_alterable => false})
+      self.field_descriptors.build({:name => "problem", :section => 'interface', :field_type => 'text', :is_alterable => false})
+    end
+  end
+
+  # The field descriptors should not be saved directly, but
+  # should use the autosave feature of the PatternFormalism
+  # model
+  def before_save
+    # Update the index value in the attributes list
+    (1..self.field_descriptors.size).each do |i|
+      self.field_descriptors[i-1].index = i
+    end
+  end
+
 end

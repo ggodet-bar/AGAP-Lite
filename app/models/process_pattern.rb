@@ -9,11 +9,6 @@ class ProcessPattern < ActiveRecord::Base
   has_and_belongs_to_many :context_patterns, :class_name  => "ProcessPattern", :join_table => "context_patterns", :foreign_key => "source_pattern_id", :association_foreign_key  => "target_pattern_id"
 
   # New generic relation type
-  # has_and_belongs_to_many :related_patterns,
-  #   :class_name => "ProcessPattern",
-  #   :foreign_key => "source_pattern_id",
-  #   :association_foreign_key => "target_pattern_id",
-  #   :join_table => "relations"
   has_many  :relations, :foreign_key => 'source_pattern_id'
   has_many  :related_patterns, :through => :relations, :as => :target_pattern
 
@@ -63,7 +58,6 @@ class ProcessPattern < ActiveRecord::Base
   #   end
   #   if pattern_system.registered_relations.any?{|relation| relation[:type]==method}
   #     # We then return all the patterns which correspond to the 'method' relationship type
-
   #     relations.select{|rel| rel.name == method.to_s}
   #   else
   #     registered_relation = pattern_system.registered_relations.select{|relation|relation[:type].to_s.concat('=').to_sym == method}.first
