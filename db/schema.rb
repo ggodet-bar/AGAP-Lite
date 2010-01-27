@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124214153) do
+ActiveRecord::Schema.define(:version => 20100127135728) do
 
   create_table "field_descriptors", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20100124214153) do
     t.integer  "size"
     t.string   "content_type"
     t.string   "thumbnail"
+    t.integer  "field_descriptor_id"
   end
 
   create_table "maps", :force => true do |t|
@@ -71,10 +72,11 @@ ActiveRecord::Schema.define(:version => 20100124214153) do
   end
 
   create_table "pattern_formalisms", :force => true do |t|
-    t.string   "name",                :null => false
+    t.string   "name",                                   :null => false
     t.integer  "system_formalism_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_main_pattern",     :default => false
   end
 
   create_table "pattern_systems", :force => true do |t|
@@ -88,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20100124214153) do
     t.string   "short_name"
     t.string   "version"
     t.boolean  "first_level_is_phase"
+    t.integer  "system_formalism_id"
   end
 
   create_table "process_patterns", :force => true do |t|
@@ -134,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20100124214153) do
     t.string   "version"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
 end

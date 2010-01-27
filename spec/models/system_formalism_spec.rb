@@ -23,8 +23,8 @@ describe "A system formalism" do
 
   it "should have two unalterable relations named 'use' and 'require'" do
     @formalism.should have(2).relation_descriptors
-    @formalism.should have_a_relation_descriptor_named('use')
-    @formalism.should have_a_relation_descriptor_named('require')
+    @formalism.should have_a_relation_descriptor_named('Use')
+    @formalism.should have_a_relation_descriptor_named('Require')
     @formalism.relation_descriptors.all?{|rel| !rel.is_alterable}.should be_true
   end
 

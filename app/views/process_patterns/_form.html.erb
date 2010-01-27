@@ -9,29 +9,50 @@
 </table>
 
 <h2>Interface</h2>
-	<h3><%= f.label :name, t(:name) %>
+  <% @interface_fields.each do |field| %>
+    <h3><%= field.name.capitalize %>
+    <% if @noob_mode %>
+    <%= link_to_function "?", "new Effect.toggle('effect_interface_#{field.index}', 'slide', { duration : 0.2})", :class => "question_mark"%>
+    <%- end %></h3>
 	<% if @noob_mode %>
-	<%= link_to_function "?", "new Effect.toggle('effect_test1', 'slide', { duration : 0.2})", :class => "question_mark"%>
-	<% end %></h3>
-	<% if @noob_mode %>
-	<div id="effect_test1" class="helper_info" style="display:none">
-	<p>Some blah blah about the wonderful name attribute. Check it out someplace and some other time!</p>	
+	<div id=<%="effect_interface_#{field.index}"%> class="helper_info" style="display:none">
+	<p><%= field.description %></p>	
 	</div>
 	<% end %>
-	<%= f.text_field :name %>
+    <% case field.field_type 
+       when 'string' %><p><%= text_field_tag field.name, nil, :size => 60 %></p><% 
+       when 'text' %>
+        <p><%= text_area_tag field.name, nil, :class => 'mceEditor' %></p><%
+       when 'model_set' %>
+        <p>Should display a model set</p><%
+       when 'mappable_image' %>
+        <p>Should display some stuff for loading and modifying a mappable image</p>
+    <%- end %>
+  <%- end %>
 
-
-	<h3>Participants
+<h2>Solution</h2>
+  <% @solution_fields.each do |field| %>
+    <h3><%= field.name.capitalize %>
+    <% if @noob_mode %>
+      <%= link_to_function "?", "new Effect.toggle('effect_solution_#{field.index}', 'slide', { duration : 0.2})", :class => "question_mark"%>
+    <%- end %></h3>
 	<% if @noob_mode %>
-		<%= link_to_function "?", "new Effect.toggle('effect_test2', 'slide', { duration : 0.2})", :class => "question_mark"%>
-	<% end %>
-	</h3>
-	<% if @noob_mode %>
-	<div id="effect_test2" class="helper_info" style="display:none">
-	<p>Some blah blah about the wonderful participants attribute. Check it out someplace and some other time!</p>	
+	<div id=<%="effect_solution_#{field.index}"%> class="helper_info" style="display:none">
+	<p><%= field.description %></p>	
 	</div>
 	<% end %>
-	<div id="participants">
+    <% case field.field_type 
+       when 'string' %><p><%= text_field_tag field.name, nil, :size => 60 %></p><% 
+       when 'text' %>
+        <p><%= text_area_tag field.name, nil, :class => 'mceEditor' %></p><%
+       when 'model_set' %>
+        <p>Should display a model set</p><%
+       when 'mappable_image' %>
+        <p>Should display some stuff for loading and modifying a mappable_image. 
+        Find the mappable image that corresponds to this field index</p>
+    <%- end %>
+  <%- end %>
+
 		<ul>
 		<% for participant in @participants %>
 			<li><%= participant.name %> | <%= link_to_remote 'Remove', :update => 'participants', :url => {:pattern_system_id => @pattern_system.short_name, :action => 'remove_participant', :id => @process_pattern, :participant  => participant} %></li>
@@ -41,26 +62,6 @@
 		<%= select(:participant, :name, @selectable_participants.collect{|p| [p.name, p.id]}, {:include_blank => true}) %>
 		<%= link_to_remote t(:add), :update  => 'participants', :url  => {:pattern_system_id => @pattern_system.short_name, :action => "add_participant", :id  => @process_pattern}, :with  => "'participant=' + $('participant_name').value" %>
 		<% end %>
-	
-</div>	
-	<h3><%= f.label :classification, "Classification" %></h3>
-	<%= f.text_area(:classification, :class => "mceEditor") %>
-	
-	<h3><%= t :context %></h3>
-		<h4><%= f.label :context_patterns, t(:process_context) %></h4>
-<%= collection_select(:process_pattern, :context_patterns, @pattern_system.process_patterns.select{|pat| pat != @process_pattern}, :id, :name, {:include_blank => true}, :multiple => true) %>
-		
-		<h4><%= t :product_context %></h4>
-		<%= f.text_field :productContext %><br />
-	
-	<h3><%= f.label :problem, t(:problem)%></h3>
-	<%= f.text_area(:problem, :class => "mceEditor") %>
-	
-	<h3>Forces</h3>
-	<%= f.text_area(:forces, :class => "mceEditor") %>
-	
-	
-<h2>Solution</h2>
 
 	<h3><%= t :process_image %></h3>
 	<% unless @process_pattern.mappable_image.blank? %>
@@ -78,32 +79,3 @@
 		<%= m.label :uploaded_data, t(:upload_a_file) %> :</label>
 		<%= m.file_field	:uploaded_data %>
 	<% end %>
-
-
-	<h3><%= t :process_model %></h3>
-	
-	
-	<h3><%= t :process_solution %></h3>
-	<%= f.text_area(:process_solution, :class => "mceEditor") %>
-	
-	<h3><%= t :product_solution %></h3>
-	<%= f.text_area(:product_solution, :class => "mceEditor") %> 
- 
-
-	<h3><%= t :application_case %></h3>
-	<%= f.text_area(:application_case, :class => "mceEditor") %>
-	
-	<h3><%= t :application_consequence %></h3>
-	<%= f.text_area(:application_consequence, :class => "mceEditor") %>
-	
-	
-<h2>Relations</h2>
-	<h3><%= t :uses %></h3>
-	<%= collection_select(:process_pattern, :use_patterns, @pattern_system.process_patterns.select{|pat| pat != @process_pattern}, :id, :name, {:include_blank => true}, :multiple => true)%>
-	
-	<h3><%= t :requires %></h3>
-		<%= select("pattern_system", "root_pattern", @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true}, :multiple  =>  true) %>
-	
-	<h3>Alternative</h3>
-		<%= select("pattern_system", "root_pattern", @pattern_system.process_patterns.collect{|p| [p.name, p.id]}, {:include_blank => true}, :multiple  =>  true) %>
-  </p>

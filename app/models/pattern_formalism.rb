@@ -1,9 +1,9 @@
 class PatternFormalism < ActiveRecord::Base
-  has_many :field_descriptors, :autosave => true
+  has_many :field_descriptors, :autosave => true, :dependent => :destroy
   belongs_to :system_formalism
 
   # TODO Define the different field types!
-  $FORMALISM_SECTIONS = %w( interface solution )
+  FORMALISM_SECTIONS = %w( interface solution )
 
   validate :must_have_base_field_descriptors, :all_fields_must_be_in_a_valid_section
 
@@ -15,13 +15,13 @@ class PatternFormalism < ActiveRecord::Base
 
   def all_fields_must_be_in_a_valid_section
     errors.add_to_base("Invalid field sections") \
-      unless self.field_descriptors.all{|field| $FORMALISM_SECTIONS.include?(field.section)}
+      unless self.field_descriptors.all{|field| FORMALISM_SECTIONS.include?(field.section)}
   end
 
   def after_initialize 
     if self.field_descriptors.empty?
-      self.field_descriptors.build({:name => "name", :section => 'interface', :field_type => 'string', :is_alterable => false})
-      self.field_descriptors.build({:name => "problem", :section => 'interface', :field_type => 'text', :is_alterable => false})
+      self.field_descriptors.build({:name => "name", :section => 'interface', :field_type => 'string', :is_alterable => false, :description => "Name of the pattern"})
+      self.field_descriptors.build({:name => "problem", :section => 'interface', :field_type => 'text', :is_alterable => false, :description => "Problen that is addressed by the pattern"})
     end
   end
 

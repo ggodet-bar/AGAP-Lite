@@ -5,7 +5,7 @@ describe "A field descriptor" do
     @valid_attributes = {
       :name => "value for name",
       :section => "interface",
-      :field_type => "modelset"
+      :field_type => "model_set"
     }
   end
 

@@ -12,6 +12,11 @@ var Popup = {
   	var splash = new Element('div', {id : 'splash', style: 'position: fixed; left: -10px; top: -10px; width: ' + body_size.width * 1.1 + 'px;height: ' + body_size.height * 1.1 + 'px; background-color: #000; z-index: 1000' });
   	splash.setOpacity(0.5) ;
   	Element.insert(document.body,{'top' : splash}) ;
+
+
+///////////////////////////////////////
+
+
   	if (Cookie.get('noob_mode') == null) {
   	  Cookie.set('noob_mode', 'true') ;
   	}
@@ -58,7 +63,7 @@ var Popup = {
   	      }
   	    }
   	) ; 
-
+///////////////////////////////////////////
 	},
 
 	close_parameter_window : function() {

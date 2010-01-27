@@ -1,0 +1,16 @@
+%h1 Creation of new pattern system (step 1/2)
+- form_for(@pattern_system) do |f|
+  = f.error_messages
+  %table
+    %tr
+      %td= f.label :author, t(:author)
+      %td= f.text_field :author 
+    %tr
+      %td=  f.label :name, t(:name)
+      %td=  f.text_field	:name
+    %tr
+
+      %td= f.label :system_formalism, 'Pick a system metamodel: '
+      %td= collection_select(:pattern_system, :system_formalism_id, @metamodels, :id, :name, {:prompt => true})
+
+  = f.submit 'Next'

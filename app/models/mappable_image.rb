@@ -2,6 +2,7 @@ class MappableImage < ActiveRecord::Base
   has_many :maps, :dependent  => :destroy
   has_many :image_associations
   belongs_to  :pattern_system
+  belongs_to  :field_descriptor
     
 ##  has_attachment  :storage => :file_system, 
 ##                  :max_size => 1.megabytes,

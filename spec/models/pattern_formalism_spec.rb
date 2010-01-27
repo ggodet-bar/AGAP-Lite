@@ -37,7 +37,7 @@ describe "A pattern formalism" do
   it "should only have fields included either one of the main sections" do
     # TODO Add some fields
 
-    @pattern.field_descriptors.all?{|fie| $FORMALISM_SECTIONS.include?(fie.section)}.should be_true
+    @pattern.field_descriptors.all?{|fie| PatternFormalism::FORMALISM_SECTIONS.include?(fie.section)}.should be_true
   end
 
   it "should allow saving field descriptors following their order in the field_descriptors array" do

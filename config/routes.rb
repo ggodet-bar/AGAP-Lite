@@ -25,7 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   # Named routes
   map.clone_pattern_system 'pattern_systems/:id/clone', :controller => 'pattern_systems', :action => 'clone'
   map.deploy_pattern_system 'pattern_systems/:id/deploy', :controller => 'pattern_systems', :action => 'deploy'
-  
+  map.show_system_metamodels 'pattern_systems/show_metamodels', :controller => 'pattern_systems', :action => 'show_metamodels'
+#map.create_from_metamodel 'pattern
   
     map.resources :pattern_systems do |pat_system|
        pat_system.resources :process_patterns
@@ -45,8 +46,12 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "pattern_systems"
-  
+  #map.root :controller => "pattern_systems"
+  #map.resources :pages,
+  #  :controller => 'pages',
+  #  :only => [:show]
+  map.root :controller => 'high_voltage/pages', :action => 'show', :id => 'index'
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

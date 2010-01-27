@@ -4,92 +4,15 @@ namespace :agap do
   
   desc "Create some basic formalisms (GAMMA, P-SIGMA)"
   task :create_formalisms => :environment do
-    gamma = {
-      :name => "Gamma formalism",
-      :author => "Erich Gamma, Richard Helm, Ralph Johnson & John Vlissides",
-      :version => "1.0.0"  
-    }
-    gamma_pattern_formalism = {
-      :name => "Software architecture pattern",
-    }
-    gamma_field_descriptors = [ 
-      {
-        :name => "Also known as",
-        :section => "interface",
-        :field_type => "string",
-        :description => "Synonyms for the pattern name"
-      },
-      {
-        :name => "Motivation",
-        :section => "interface",
-        :field_type => "text",
-        :description => "Presents an example that highlights the requirements for the pattern"
-      },
-      {
-        :name => "Applicability",
-        :section => "interface",
-        :field_type => "text",
-        :description => "Describes the situtations for which the pattern would be relevant"
-      },
-      {
-        :name => "Structure",
-        :section => "solution",
-        :field_type => "modelset",  # A set of commented models
-        :description => "Describes formal software architecture solutions"
-      },
-      {
-        :name => "Participants",
-        :section => "solution",
-        :field_type => "text",
-        :description => "A textual solution that describes the entities of the formal solution"
-      },
-      {
-        :name => "Collaborations",
-        :section => "solution",
-        :field_type => "text",
-        :description => "A textual solution that describes the interactions between the entities of the formal solution"
-      },
-      {
-        :name => "Consequence",
-        :section => "solution",
-        :field_type => "text",
-        :description => "Presents the consequences related to the application of the pattern"
-      },
-      {
-        :name => "Implementation",
-        :section => "solution",
-        :field_type => "text",
-        :description => "Presents pragmatic, software-related elements related to the implementation of the solution's software architecture"
-      },
-      {
-        :name => "Sample code",
-        :section => "solution",
-        :field_type => "text",
-        :description => "Presents some code samples that illustrate the implementation of the pattern"
-      },
-      {
-        :name => "Known uses",
-        :section => "solution",
-        :field_type => "text",
-        :description => "Describes some actual uses of the pattern, taken from existing applications"
-      },
-      {
-        :name => "Related patterns",
-        :section => "solution",
-        :field_type => "text",
-        :description => "Enumerates some patterns from the system that are somehow related to the current pattern"
-      }
-    ]
-    system = SystemFormalism.create(gamma)
-    system.pattern_formalisms.create(gamma_pattern_formalism)
-    pattern_formalism = system.pattern_formalisms.first
-    pattern_formalism.field_descriptors.build(gamma_field_descriptors)
-
-    if pattern_formalism.save
-      print "Gamma formalism was successfully created"
-    else
-      print "Could not load the formalism. Check the logs for errors."
+    require File.dirname(__FILE__) + '/../formalism_loader.rb'
+    SystemFormalism.all.each do |sys|
+      sys.destroy
+      print '.'
     end
+    puts "Existing formalisms were destroyed"
+    obj = YAML::load_file(File.dirname(__FILE__) + '/../../config/standard_formalisms.yml')
+    FormalismLoader::load_from_yaml(obj)
+    puts "Finished loading the formalisms"
   end
 
   desc  "Deploy the pattern system to remote site"

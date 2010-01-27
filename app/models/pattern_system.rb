@@ -7,8 +7,9 @@ class PatternSystem < ActiveRecord::Base
   has_many  :product_patterns
   has_many  :participants, :dependent  => :destroy
   has_many  :mappable_images, :dependent => :destroy
+  belongs_to :system_formalism
   
-  validates_presence_of :author, :name, :short_name
+  validates_presence_of :author, :name, :short_name, :system_formalism
   validates_uniqueness_of :name
   validates_uniqueness_of :short_name
 

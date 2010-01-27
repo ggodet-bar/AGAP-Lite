@@ -18,6 +18,13 @@ class PatternSystemsController < ApplicationController
     end
   end
 
+  # GET /pattern_systems/show_metamodels
+  def show_metamodels
+    @pattern_system = PatternSystem.new
+    @metamodels = SystemFormalism.all
+    # And then render the action 
+  end
+
   # GET /pattern_systems/1
   # GET /pattern_systems/1.xml
   def show
@@ -59,15 +66,19 @@ class PatternSystemsController < ApplicationController
   # POST /pattern_systems.xml
   def create
     @pattern_system = PatternSystem.new(params[:pattern_system])
+    @metamodels = SystemFormalism.all
+    # We compute a short name, based on the full name of the pattern
+    @pattern_system.short_name = generate_short_name(params[:pattern_system][:name])
+
     @noob_mode = cookies[:noob_mode] == 'true' ? true : false
     
     respond_to do |format|
       if @pattern_system.save
         flash[:notice] = t(:successful_creation, :model => PatternSystem.human_name)
-        format.html { redirect_to(@pattern_system) }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @pattern_system, :status => :created, :location => @pattern_system }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "show_metamodels" }
         format.xml  { render :xml => @pattern_system.errors, :status => :unprocessable_entity }
       end
     end
@@ -151,4 +162,6 @@ private
   def load_system
       @pattern_system = PatternSystem.find_by_short_name(params[:id])
   end
+
+
 end

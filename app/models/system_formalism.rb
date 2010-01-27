@@ -1,6 +1,8 @@
+
+# TODO Maybe add some descriptions to the relation instances
 class SystemFormalism < ActiveRecord::Base
-  has_many :pattern_formalisms, :autosave => true
-  has_many :relation_descriptors, :autosave => true
+  has_many :pattern_formalisms, :autosave => true, :dependent => :destroy
+  has_many :relation_descriptors, :autosave => true, :dependent => :destroy
 
 
   validate  :must_have_exactly_two_unalterable_relation_descriptors
@@ -13,8 +15,10 @@ class SystemFormalism < ActiveRecord::Base
   end
 
   def after_initialize
-    relation_descriptors << RelationDescriptor.new({:name => 'use', :is_reflexive => true, :is_alterable => false, :system_formalism_id => id})
-    relation_descriptors << RelationDescriptor.new({:name => 'require', :is_reflexive => true, :is_alterable => false, :system_formalism_id => id})
+    if self.relation_descriptors.empty?
+      self.relation_descriptors.build({:name => 'Use', :is_reflexive => true, :is_alterable => false})
+      self.relation_descriptors.build({:name => 'Require', :is_reflexive => true, :is_alterable => false})
+    end
   end
 
 end

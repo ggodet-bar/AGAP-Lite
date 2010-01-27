@@ -27,3 +27,5 @@ config.gem "thoughtbot-factory_girl",
             :source => "http://gems.github.com"
 # We should be using our custom stuff !
 # config.gem "webrat"
+
+  config.gem 'rspec-rails', :version => '>= 1.3.2', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))

@@ -108,6 +108,20 @@ class ProcessPatternsController < ApplicationController
   # GET /process_patterns/new
   # GET /process_patterns/new.xml
   def new
+    # TODO Create a new pattern based on the definition
+    # provided by the formalism 
+    @metamodel = @pattern_system.system_formalism
+    # We suppose that there is only one pattern formalism
+    @interface_fields = @metamodel.pattern_formalisms.first.field_descriptors.select{|field| field.section == 'interface'}
+    @solution_fields = @metamodel.pattern_formalisms.first.field_descriptors.select{|field| field.section == 'solution'}
+
+
+
+
+
+
+
+
     @process_pattern = ProcessPattern.new
     session[:participants] = []
     session[:maps] = []
