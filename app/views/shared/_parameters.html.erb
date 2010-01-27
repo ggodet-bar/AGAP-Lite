@@ -1,4 +1,4 @@
-<div id="params" style="display: none;z-index: 2000">
+<div id="params" class="popup" style="display: none;">
 <h2 style="margin-left: 0; float: none; padding-left: 0;"><%= t(:beginner_mode)%></h2>
 <div id="param_buttons">
 	<div id="off_position"></div>
@@ -10,5 +10,9 @@
 <div id="params_caution">
 	<p id="params_caution_text"></p>
 </div>
-<p style="float:right;"><%= link_to_function t(:close), "Popup.close_parameter_window()"%></p>
+<p style="float:right;"><%= link_to_function t(:close), "Popup.close('params')"%></p>
 </div>
+
+<script type="text/javascript">
+  Popup.install_callback(Parameters.manage_parameters, [ "<%= t(:enable_helpers) %>", "<%= t(:disable_helpers) %>"]) ;
+</script>

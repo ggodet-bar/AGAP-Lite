@@ -202,7 +202,6 @@ li {
 	width: 300px;
 	height: 230px;
 	border: solid 1pt #00f;
-	z-index:20;
 }
 
 #param_buttons {
@@ -252,3 +251,8 @@ li {
 	margin-bottom: 0.6em;
 	
 }
+
+.popup {
+  z-index: 2000;
+}
+
