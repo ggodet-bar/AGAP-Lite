@@ -3,84 +3,45 @@
 %h2= t :updates
 
 #update_field
-	= @pattern_system.update_field
+  = @pattern_system.update_field
 
 .block
-	%h2= t :author
-	= h @pattern_system.author
+  %h2= t :author
+  = h @pattern_system.author
 
 .block
-	%h2= t :characteristics
-	= h @pattern_system.characteristics
+  %h2= t :characteristics
+  = h @pattern_system.characteristics
 
 .block
-	%h2= t :root_pattern
-	- if @root_pattern.nil?
-		= image_tag 'common_images/UnknownImage.png', :width  => 100
-	- else
-		= link_to(h(@root_pattern.name),[@pattern_system, @root_pattern], :class  => 'crawlable')
+  %h2= t :root_pattern
+  - if @root_pattern.nil?
+    = image_tag 'common_images/UnknownImage.png', :width  => 100
+  - else
+    = link_to(h(@root_pattern.name),[@pattern_system, @root_pattern], :class  => 'crawlable')
 
 .block
-	%h2= t :patterns_list
-	%ul
-		- for pattern in @patterns_list
-			%li= link_to(h(pattern.name),[@pattern_system, pattern], :class  => 'crawlable')
+  %h2= t :patterns_list
+  %ul
+    - for pattern in @patterns_list
+      %li= link_to(h(pattern.name),[@pattern_system, pattern], :class  => 'crawlable')
 
+- prev = -1
+- @pattern_system.classification_elements.sort_by{|el| el.field_descriptor_id}.each do |e|
+  - if e.field_descriptor_id != prev
+    .block
+      %h2= e.field_descriptor.name.capitalize
+      %ul
+    - prev = e.field_descriptor_id
+  %li
+    %b= e.name
+    %br
+    = e.description
+      
 .block
-	%h2 Phases
-	%ul
-		%li
-			%h3 Test
-			%ul
-				%li
-					%h3 Other Test
-
-.block
-	%h2 Participants
-	- if @participant.nil?
-		%ul
-			- for participant in @pattern_system.participants
-				%li
-					%b= h participant.name
-					\:
-					= link_to t(:edit_participant), edit_pattern_system_participant_path(@pattern_system, participant)
-					\|
-					= link_to t(:delete_participant), [@pattern_system, participant], :method => :delete
-					%br
-					= participant.description
-		= link_to t(:add_new_participant), new_pattern_system_participant_path(@pattern_system)
-		
-		%br
-	- else
-		- if @isEditing
-			- form_for [@pattern_system, @participant], :method => :put do |p|
-				= error_messages_for 'participant', :object => @participant
-				%label{:for => "name"}
-					= t(:name_of_participant)
-					\:
-				= p.text_field :name
-				%br
-				%label{:for => "description"}
-					= t(:description_of_participant_role)
-					\:
-				= p.text_area(:description, :class  => "mceEditor")
-				= p.submit t(:update_participant)
-				
-		- else
-			- form_for [@pattern_system, @participant], :method => :post do |p|
-				= error_messages_for 'participant', :object => @participant
-				%label{:for => "name"}
-					= t(:name_of_participant)
-					\:
-				= p.text_field :name
-				%br
-				%label{:for => "description"}
-					= t(:description_of_participant_role)
-					\:
-				= p.text_area(:description, :class  => "mceEditor")
-				= p.submit t(:create_participant)
-			
-.block
-	= link_to t(:add_new_pattern), new_pattern_system_process_pattern_path(@pattern_system)
-	%br
-	= link_to t(:edit), edit_pattern_system_path(@pattern_system)
+  - if @pattern_system.system_formalism.pattern_formalisms.count > 1
+    = link_to t(:add_new_pattern), show_pattern_types_path(@pattern_system)
+  -  else
+    = link_to t(:add_new_pattern), new_pattern_system_pattern_path(@pattern_system)
+  %br
+  = link_to t(:edit), edit_pattern_system_path(@pattern_system)

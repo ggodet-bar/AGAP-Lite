@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  field_descriptor_id: 1
+  pattern_system_id: 1
+  name: MyString
+  description: MyText
+
+two:
+  field_descriptor_id: 1
+  pattern_system_id: 1
+  name: MyString
+  description: MyText

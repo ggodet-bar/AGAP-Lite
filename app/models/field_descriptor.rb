@@ -2,7 +2,7 @@ class FieldDescriptor < ActiveRecord::Base
   belongs_to :pattern_formalism
 
   # TODO Compléter les field types!!
-  FORMALISM_FIELD_TYPES = %w( string text model_set mappable_image ) 
+  FORMALISM_FIELD_TYPES = %w( string text model_set mappable_image multi_classification classification ) 
 
   validate :field_type_must_be_valid
 

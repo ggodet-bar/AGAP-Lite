@@ -1,0 +1,23 @@
+<div class='block'>
+<h2>Interface</h2>
+    <h3><%= f.label :name, 'Name' %></h3>
+    <%= f.text_field :name, :size => 60 %>
+    <%= f.hidden_field :pattern_formalism_id %>
+  <% @interface_fields.each do |field| %>
+    <%= render :partial => 'fields', :locals => {:f => f, :field => field} %>
+  <%- end %>
+</div>
+
+<div class='block'>
+<h2>Solution</h2>
+  <% @solution_fields.each do |field| %>
+    <%= render :partial => 'fields', :locals => {:f => f, :field => field} %>
+  <%- end %>
+</div>
+
+
+  <br />
+  <% fields_for :mappable_image do |m| %>
+    <%= m.label :uploaded_data, t(:upload_a_file) %> :</label>
+    <%= m.file_field  :uploaded_data %>
+  <% end %>

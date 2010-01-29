@@ -11,6 +11,7 @@
   <%= javascript_include_tag 'livepipe' %>
   <%= javascript_include_tag 'cookie' %>
   <%= javascript_include_tag 'treemenu'%>
+  <%= javascript_include_tag 'popup' %>
   <%= javascript_include_tag 'parameters' %>
 
   <%= include_tiny_mce_if_needed %>
@@ -19,7 +20,7 @@
 <div id="wrapper">
 	<div id="header">
 	<div id="top_params">
-		<span style="float:left;"><% form_tag pattern_system_process_patterns_path, :method => 'get' do %>
+		<span style="float:left;"><% form_tag pattern_system_patterns_path, :method => 'get' do %>
 		    <%= text_field_tag :search, params[:search] %>
 		    <%= submit_tag t(:search), :name => nil %>
 		<% end %>
@@ -37,28 +38,19 @@ end%>
 	<span style="margin-left: 2em;">
 	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
 	<% unless @process_pattern.nil? %>
-		<% for ancestors in @process_pattern.ancestors %>
+		<!--<% for ancestors in [] %>
 			<% if @process_pattern.ancestors.size > 2 %>
 				<%= link_to(shortify(h(ancestors.name)), [@pattern_system, ancestors], {:class => 'crawlable', :title => ancestors.name}) + " > "%>
 			<% else %>
 				<%= link_to(h(ancestors.name), [@pattern_system, ancestors], :class => 'crawlable') + " > "%>
 			<% end %>
-		<% end %>
+		<% end %>-->
 			<%= h @process_pattern.name %>
 	<% end %>
 	</span>
 	</div>
 	<div id="content">
 <p style="color: green"><%= flash[:notice] %></p>
-
-	<!-- <li id="first_pattern"><span><a href="">First pattern</a></span></li>
-	<li id="second_pattern"><span><a href="">Second pattern</a></span>
-		<ul>
-			<li id="sub_pattern_1"><span><a href="">Sub pattern 1</a></span></li>
-			<li id="sub_pattern_2"><span><a href="">Sub pattern 2</a></span></li>
-			<li id="sub_pattern_3"><span><a href="">Sub pattern 3</a></span></li>
-		</ul>
-	</li> -->
 
 <%= yield  %>
 </div>

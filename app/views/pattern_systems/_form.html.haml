@@ -1,26 +1,38 @@
 %h3
-	= t :updates
-	- if @noob_mode
-		= link_to_function "?", "new Effect.toggle('effect_test1', 'slide', { duration : 0.2})", :class => "question_mark"
+  = t :updates
+  - if @noob_mode
+    = link_to_function "?", "new Effect.toggle('effect_test1', 'slide', { duration : 0.2})", :class => "question_mark"
 - if @noob_mode
-	%div#effect_test1.helper_info{:style => "display:none"}
-		%p Some blah blah about the wonderful updates attribute. Check it out someplace and some other time!
+  %div#effect_test1.helper_info{:style => "display:none"}
+    %p Some blah blah about the wonderful updates attribute. Check it out someplace and some other time!
 = f.text_area(:update_field, :class => "mceEditor")
 
 %h3
-	= t :characteristics
-	-if @noob_mode
-		= link_to_function "?", "new Effect.toggle('effect_test2', 'slide', { duration : 0.2})", :class => "question_mark"
+  = t :characteristics
+  -if @noob_mode
+    = link_to_function "?", "new Effect.toggle('effect_test2', 'slide', { duration : 0.2})", :class => "question_mark"
 - if @noob_mode
-	%div#effect_test2.helper_info{:style => "display:none"}
-		%p Some blah blah about the wonderful characteristics attribute. Check it out someplace and some other time!
+  %div#effect_test2.helper_info{:style => "display:none"}
+    %p Some blah blah about the wonderful characteristics attribute. Check it out someplace and some other time!
 = f.text_area(:characteristics, :class => "mceEditor")
 
-%h3= t :root_pattern
-= f.collection_select(:root_pattern, @pattern_system.process_patterns, :id, :name, {:include_blank => true})
-
-
-%table(style="margin-top:2.4em;")
-	%tr
-		%td= f.label :first_level_is_phase, t(:first_level_is_phase)
-		%td= f.check_box(:first_level_is_phase)
+- prev = -1
+- indices = @pattern_system.classification_elements.collect(&:field_descriptor_id).uniq.sort
+- classification = [] 
+- indices.collect do |i|
+  - classification << @pattern_system.classification_elements.select{|e| e.field_descriptor_id == i}
+- f.fields_for :classification_elements, classification.flatten do |classif_form|
+  - obj = classif_form.object.field_descriptor
+  - if prev != obj.id
+    %h3= obj.pattern_formalism.name + ': ' + obj.section.capitalize + ': ' + obj.name
+  - prev = obj.id
+  %p
+    = classif_form.hidden_field :field_descriptor_id
+    = classif_form.label :name, 'Name'
+    = classif_form.text_field :name
+  %p
+    = classif_form.label :description, 'Description'
+    = classif_form.text_area :description, {:class => 'mceEditor', :style => 'height: 5em; width: 40em;'}
+  %p
+    = classif_form.check_box :_destroy
+    = f.label :_destroy, 'Remove'

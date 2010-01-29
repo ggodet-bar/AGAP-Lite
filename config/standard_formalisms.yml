@@ -6,6 +6,11 @@
   :pattern_formalisms:
   - :name: Software architecture pattern
     :field_descriptors:
+    - :name: classification
+      :section: interface
+      :field_type: classification
+      :is_sorting_patterns: true
+      :description: Category the pattern belongs to
     - :name: Also known as
       :section: interface
       :field_type: string
@@ -22,7 +27,7 @@
        :section: solution
        :field_type: model_set  # A set of commented models
        :description: Describes formal software architecture solutions
-    -  :name: Participants
+    -  :name: Solution participants
        :section: solution
        :field_type: text
        :description: A textual solution that describes the entities of the formal solution
@@ -83,7 +88,7 @@
     :field_descriptors:
       - :name: Classification
         :section: interface
-        :field_type: string
+        :field_type: multi_classification
       - :name: Context
         :section: interface
         :field_type: text

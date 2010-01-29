@@ -28,16 +28,16 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/1
   # GET /pattern_systems/1.xml
   def show
-    if flash[:participant]
-      @participant=flash[:participant]
-    end
+    #if flash[:participant]
+    #  @participant=flash[:participant]
+    #end
     @isEditing = flash[:isEditing]
-    @participants_list = @pattern_system.participants
-    @patterns_list = ProcessPattern.find_all_by_pattern_system_id(@pattern_system)
-    unless @pattern_system.root_pattern.blank?
-      @root_pattern = ProcessPattern.find(@pattern_system.root_pattern)
-      @patterns_list = @patterns_list - Array(@root_pattern)
-    end
+    #@participants_list = @pattern_system.participants
+    @patterns_list = Pattern.find_all_by_pattern_system_id(@pattern_system)
+    #unless @pattern_system.root_pattern.blank?
+    #  @root_pattern = Pattern.find(@pattern_system.root_pattern)
+    #  @patterns_list = @patterns_list - Array(@root_pattern)
+    #end
     
     respond_to do |format|
       format.html # show.html.erb
@@ -49,7 +49,8 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/new.xml
   def new
     @pattern_system = PatternSystem.new
-    @participant = Participant.new
+    #@participant = Participant.new
+    @metamodel = @pattern_system.system_formalism
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @pattern_system }
@@ -58,8 +59,14 @@ class PatternSystemsController < ApplicationController
 
   # GET /pattern_systems/1/edit
   def edit
-      @root_pattern = @pattern_system.root_pattern unless @pattern_system.root_pattern.blank?
-      @noob_mode = cookies[:noob_mode] == 'true' ? true : false
+    #@root_pattern = @pattern_system.root_pattern unless @pattern_system.root_pattern.blank?
+    @noob_mode = cookies[:noob_mode] == 'true' ? true : false
+    @classifications = @pattern_system.system_formalism.pattern_formalisms.collect do |p|
+       p.field_descriptors.select{|f| f.field_type.include?('classification')}
+    end.flatten
+    @classifications.each do |classif|
+      @pattern_system.classification_elements.build({:field_descriptor_id => classif.id})
+    end
   end
 
   # POST /pattern_systems
@@ -67,6 +74,7 @@ class PatternSystemsController < ApplicationController
   def create
     @pattern_system = PatternSystem.new(params[:pattern_system])
     @metamodels = SystemFormalism.all
+    
     # We compute a short name, based on the full name of the pattern
     @pattern_system.short_name = generate_short_name(params[:pattern_system][:name])
 

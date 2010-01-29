@@ -18,18 +18,18 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
   # Sample resource route with sub-resources:
-  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_images/:id.js', :controller => 'process_patterns', :action => 'tmp_images'
-  map.connect 'pattern_systems/:pattern_system_id/process_patterns/tmp_upload/:id.js', :controller => 'process_patterns', :action => 'tmp_upload'
+  map.connect 'pattern_systems/:pattern_system_id/patterns/tmp_images/:id.js', :controller => 'patterns', :action => 'tmp_images'
+  map.connect 'pattern_systems/:pattern_system_id/patterns/tmp_upload/:id.js', :controller => 'patterns', :action => 'tmp_upload'
   
   
   # Named routes
   map.clone_pattern_system 'pattern_systems/:id/clone', :controller => 'pattern_systems', :action => 'clone'
   map.deploy_pattern_system 'pattern_systems/:id/deploy', :controller => 'pattern_systems', :action => 'deploy'
   map.show_system_metamodels 'pattern_systems/show_metamodels', :controller => 'pattern_systems', :action => 'show_metamodels'
-#map.create_from_metamodel 'pattern
-  
+  map.show_pattern_types 'pattern_system/:pattern_system_id/patterns/show_pattern_types', :controller => 'patterns', :action => 'show_pattern_types'
+
     map.resources :pattern_systems do |pat_system|
-       pat_system.resources :process_patterns
+       pat_system.resources :patterns
        pat_system.resources :participants
     end
   

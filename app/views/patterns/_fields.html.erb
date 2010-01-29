@@ -1,0 +1,33 @@
+<h3><%= field.name.capitalize %>
+<% if @noob_mode %>
+<%= link_to_function "?", "new Effect.toggle('effect_interface_#{field.index}', 'slide', { duration : 0.2})", :class => "question_mark"%>
+<%- end %></h3>
+    <% if @noob_mode %>
+    <div id=<%="effect_interface_#{field.index}"%> class="helper_info" style="display:none">
+    <p><%= field.description %></p>
+    </div>
+    <% end %>
+<% case field.field_type 
+   when 'string' %>
+   <% s_instances = @process_pattern.string_instances.select{|a| a.field_descriptor_id == field.id} %>
+   <% string_instance = s_instances.empty? ? @process_pattern.string_instances.build({:field_descriptor_id => field.id}) : s_instances.first %>
+   <% f.fields_for :string_instances, string_instance do |string_form| %>
+   <p><%= string_form.text_field :content, :size => 60 %></p>
+   <%= string_form.hidden_field :field_descriptor_id %>
+   <%- end %><% 
+   when 'text' %>
+   <% t_instances = @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id} %>
+   <% text_instance = t_instances.empty? ? @process_pattern.text_instances.build({:field_descriptor_id => field.id}) : t_instances.first %>
+   <% f.fields_for :text_instances, text_instance do |text_form| %>
+   <p><%= text_form.text_area :content, {:class => 'mceEditor', :cols => 60} %></p>
+   <%= text_form.hidden_field :field_descriptor_id %>
+   <%- end %><% 
+   when 'model_set' %>
+    <p>Should display a model set</p><%
+   when 'mappable_image' %>
+    <p>Should display some stuff for loading and modifying a mappable image</p><%
+   when 'classification' %>
+    <p>Should display some kinda selector</p><%
+   when 'multi_classification' %>
+    <p>Should display some kinda multiple selector</p>
+<%- end %>

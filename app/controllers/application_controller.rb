@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '59133f99ad2fd376b01c658aaae40434'
   
   uses_tiny_mce :options  =>  {  
-                                :width => 640,
-                                :height => 400,
                                 :encoding => 'html',
                                 :theme  => 'advanced',
                                 :plugins => %w{ upimage safari },

@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100127135728) do
+ActiveRecord::Schema.define(:version => 20100129102414) do
+
+  create_table "classification_elements", :force => true do |t|
+    t.integer  "field_descriptor_id"
+    t.integer  "pattern_system_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "classification_selections", :force => true do |t|
+    t.integer  "pattern_id"
+    t.integer  "classification_element_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "field_descriptors", :force => true do |t|
     t.string   "name"
@@ -21,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20100127135728) do
     t.datetime "updated_at"
     t.boolean  "is_alterable",         :default => true
     t.string   "description"
+    t.boolean  "is_sorting_patterns",  :default => false
   end
 
   create_table "image_associations", :force => true do |t|
@@ -93,6 +110,14 @@ ActiveRecord::Schema.define(:version => 20100127135728) do
     t.integer  "system_formalism_id"
   end
 
+  create_table "patterns", :force => true do |t|
+    t.string   "name"
+    t.integer  "pattern_system_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "pattern_formalism_id"
+  end
+
   create_table "process_patterns", :force => true do |t|
     t.string   "author"
     t.string   "classification"
@@ -131,6 +156,14 @@ ActiveRecord::Schema.define(:version => 20100127135728) do
     t.integer  "relation_type_id",  :null => false
   end
 
+  create_table "string_instances", :force => true do |t|
+    t.integer  "pattern_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "field_descriptor_id"
+  end
+
   create_table "system_formalisms", :force => true do |t|
     t.string   "name"
     t.string   "author"
@@ -138,6 +171,14 @@ ActiveRecord::Schema.define(:version => 20100127135728) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+  end
+
+  create_table "text_instances", :force => true do |t|
+    t.integer  "pattern_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "field_descriptor_id"
   end
 
 end

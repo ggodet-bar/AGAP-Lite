@@ -27,4 +27,12 @@ Scenario: Define basic properties for the new pattern system
   Then I should see a list of pattern systems
   And I should see my new pattern system
 
+Scenario: Manage the participants field
+  Given I have create a new pattern system, based on the P-SIGMA metamodel
+  And I have created a pattern formalism for representing processes
+  # In fact the participants should always be added as a basic unalterable field
+  # Except that there will be no obligation to fill in this field.
+  # Additionnally, this should be a special field type, made for classifications
+  # Classifications may be either exclusive or multi-valued. This should be 
+  # configured on an ad hoc basis
 # For the rest, which should be getting back to the usual AGAP Lite usage

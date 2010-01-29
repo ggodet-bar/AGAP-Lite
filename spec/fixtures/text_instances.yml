@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pattern_id: 1
+  content: MyText
+
+two:
+  pattern_id: 1
+  content: MyText

@@ -25,8 +25,8 @@ describe "A pattern formalism" do
 
   it "should have default unalterable field descriptors such as 'name', 'problem', which should not be allowed to be destroyed" do
     @pattern.should have(2).field_descriptors
-    @pattern.should have_a_field_descriptor_named('name')
-    @pattern.should have_a_field_descriptor_named('problem')
+    @pattern.should have_a_field_descriptor_named('Problem')
+    @pattern.should have_a_field_descriptor_named('Participants')
     lambda {
       @pattern.field_descriptors.each do |fie|
         fie.destroy
@@ -56,9 +56,9 @@ describe "A pattern formalism" do
     @pattern.save.should be_true
 
     @pattern.should have(4).field_descriptors
-    @pattern.field_descriptors[0].name.should eql("name")
+    @pattern.field_descriptors[0].name.should eql("Problem")
     @pattern.field_descriptors[0].index.should eql(1)
-    @pattern.field_descriptors[1].name.should eql("problem")
+    @pattern.field_descriptors[1].name.should eql("Participants")
     @pattern.field_descriptors[1].index.should eql(2)
     @pattern.field_descriptors[2].name.should eql("a field")
     @pattern.field_descriptors[2].index.should eql(3)
