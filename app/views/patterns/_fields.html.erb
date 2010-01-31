@@ -19,7 +19,7 @@
    <% t_instances = @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id} %>
    <% text_instance = t_instances.empty? ? @process_pattern.text_instances.build({:field_descriptor_id => field.id}) : t_instances.first %>
    <% f.fields_for :text_instances, text_instance do |text_form| %>
-   <p><%= text_form.text_area :content, {:class => 'mceEditor', :cols => 60} %></p>
+   <p><%= text_form.text_area :content, {:class => 'mcexEditor', :cols => 60} %></p>
    <%= text_form.hidden_field :field_descriptor_id %>
    <%- end %><% 
    when 'model_set' %>
@@ -27,7 +27,11 @@
    when 'mappable_image' %>
     <p>Should display some stuff for loading and modifying a mappable image</p><%
    when 'classification' %>
-    <p>Should display some kinda selector</p><%
+    <% classification = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id} %>
+    <% f.fields_for :classification_selections, @classifications[field.id] do |classif_form| %>
+      <%= classif_form.collection_select(:classification_element_id, classification, :id, :name, {:include_blank => true}, {:class => 'agap_single_selector'}) %>
+    <%- end %><%
    when 'multi_classification' %>
-    <p>Should display some kinda multiple selector</p>
+    <% multi_classif = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id} %>
+    <%= select_tag "pattern[multi_classification_selections][#{field.id}][]", options_from_collection_for_select(multi_classif, :id, :name, @classifications[field.id].map(&:classification_element_id)), {:multiple => true, :class => "agap_multiple_selector"} %>
 <%- end %>

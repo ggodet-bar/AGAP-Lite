@@ -49,6 +49,7 @@ fr:
     description_of_participant_role: "Description du rôle du participant"
     successful_creation: "Le {{model}} a été créé avec succès."
     successful_update: "Le {{model}} a été actualisé."
+    failed_update: "Le {{model}} n'a pas pu être mis à jour."
     successful_delete: "Le {{model}} a été supprimé."
     settings: "Paramètres"
     beginner_mode: "Mode débutant"
@@ -58,3 +59,4 @@ fr:
     search: Rechercher
     search_result: Résultat de la recherche
     first_level_is_phase: Le premier niveau des patrons décrit des phases
+    unclassified: Non classé(s)

@@ -1,6 +1,25 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+/* Used for pattern system edition */
+function remove_fields(link) {
+  // Set the hidden field to true
+  $(link).previous('input[type=hidden]').value = "1" ;
+  // Hide the surrounding tag 
+  $(link).up('.fields').hide() ; 
+}
+
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime() ;
+  var regexp = new RegExp("new_" + association, "g")
+  // We make sure we generate a unique id for each set of field
+  $(link).insert({
+    before: content.replace(regexp, new_id)
+  }) ;
+  // TODO Activate the mceEditor!!
+
+}
+
 function observeThisPage(pattern_system_name, current_pattern_id, image_path, width, height) {
 Event.observe(window, 'load', function(){
 	var image = $('method_image') ;

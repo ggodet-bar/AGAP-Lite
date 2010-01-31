@@ -33,12 +33,31 @@ class PatternSystemsController < ApplicationController
     #end
     @isEditing = flash[:isEditing]
     #@participants_list = @pattern_system.participants
-    @patterns_list = Pattern.find_all_by_pattern_system_id(@pattern_system)
+    #@patterns_list = Pattern.find_all_by_pattern_system_id(@pattern_system)
     #unless @pattern_system.root_pattern.blank?
     #  @root_pattern = Pattern.find(@pattern_system.root_pattern)
     #  @patterns_list = @patterns_list - Array(@root_pattern)
     #end
     
+    # Looking for a means to classify patterns
+    if @pattern_system.system_formalism.pattern_formalisms.count > 1
+      # Then we look for a main pattern
+      main_pattern = @pattern_system.system_formalism.pattern_formalisms.select{|p| p.is_main_pattern}.first
+    end 
+    main_pattern = main_pattern.blank? ? @pattern_system.system_formalism.pattern_formalisms.first : main_pattern
+    # We look for a main field type
+    main_field = main_pattern.field_descriptors.select{|f| f.is_sorting_patterns}.first
+
+    # TODO Manage unclassified patterns
+    unless main_field.blank?
+      classif_elements = @pattern_system.classification_elements.select{|c| c.field_descriptor_id == main_field.id}
+      @patterns_list = classif_elements.inject({}) do |acc, c|
+        acc[c.name] = @pattern_system.patterns.select{|p| p.classification_selections.any?{|sel| sel.classification_element_id == c.id}}
+        acc
+      end
+      puts @patterns_list
+    end
+  
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @pattern_system }
@@ -64,9 +83,9 @@ class PatternSystemsController < ApplicationController
     @classifications = @pattern_system.system_formalism.pattern_formalisms.collect do |p|
        p.field_descriptors.select{|f| f.field_type.include?('classification')}
     end.flatten
-    @classifications.each do |classif|
-      @pattern_system.classification_elements.build({:field_descriptor_id => classif.id})
-    end
+    #@classifications.each do |classif|
+    #  @pattern_system.classification_elements.build({:field_descriptor_id => classif.id})
+    #end
   end
 
   # POST /pattern_systems

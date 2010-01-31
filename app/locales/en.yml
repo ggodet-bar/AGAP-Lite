@@ -54,7 +54,9 @@ en:
   close: Close
   successful_creation: "{{model}} was successfully created."
   successful_update: "{{model}} was successfully updated."
+  failed_update: "{{model}} could not be updated."
   successful_delete: "{{model}} was successfully deleted."
   search: Search
   search_result: Search result
   first_level_is_phase: First pattern level describe phases
+  unclassified: Unclassified

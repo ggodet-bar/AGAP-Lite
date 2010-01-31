@@ -85,14 +85,16 @@ EOF
     # We get the first non nil instance that corresponds to the field id
     @interface_fields = interface_fields.collect do |field|
       @process_pattern.string_instances.select{|a| a.field_descriptor_id == field.id}.first ||
-      @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}.first 
+      @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}.first  ||
+      @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
     end
 
     solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|f| f.section == 'solution'}.sort_by{|a| a.index}
     # We get the first non nil instance that corresponds to the field id
     @solution_fields = solution_fields.collect do |field|
       @process_pattern.string_instances.select{|a| a.field_descriptor_id == field.id}.first ||
-      @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}.first 
+      @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}.first  ||
+      @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id}
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -111,12 +113,13 @@ EOF
     @interface_fields = @metamodel.pattern_formalisms.find(pattern_type_id).field_descriptors.select{|field| field.section == 'interface'}
     @solution_fields = @metamodel.pattern_formalisms.find(pattern_type_id).field_descriptors.select{|field| field.section == 'solution'}
 
-    @process_pattern = Pattern.new(:pattern_formalism_id => pattern_type_id)
-    session[:maps] = []
-    #@participants = []
-    #@selectable_participants = @pattern_system.participants
-    unless params[:id].nil?
-      session[:pattern_system_id] = params[:id]
+    @process_pattern = @pattern_system.patterns.build(:pattern_formalism_id => pattern_type_id)
+
+    # We prepare both the existing classification elements as well as blank selections
+    @classifications = @metamodel.pattern_formalisms.find(pattern_type_id).field_descriptors.select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
+      # For single classifications, we only generate a single field
+      acc[field.id] = [] << @process_pattern.classification_selections.build # if field.field_type == 'classification'
+      acc
     end
     @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true' ? true : false
     respond_to do |format|
@@ -131,24 +134,33 @@ EOF
     @interface_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'interface'}
     @solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'solution'}
     @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true' ? true : false
+    @classifications = @process_pattern.pattern_formalism.field_descriptors.select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
+      # For single classifications, we only generate a single field
+      acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
+      acc[field.id] = @process_pattern.classification_selections.build if acc[field.id].blank?
+      acc
+    end
   end
 
   # POST /process_patterns
   # POST /process_patterns.xml
   def create
-    @process_pattern = Pattern.new(params[:pattern])
-    unless params[:mappable_image].blank?
-      @mappable_image = MappableImage.new(params[:mappable_image])
-      @mappable_image.pattern_system = @pattern_system
-      @mappable_image.save
-      @process_pattern.mappable_image = @mappable_image
+    unless params[:pattern][:multi_classification_selections].blank?
+      multis = params[:pattern].delete(:multi_classification_selections) #.each do |m|
+      @process_pattern = @pattern_system.patterns.build params[:pattern]
+      @interface_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'interface'}
+      @solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'solution'}
+        # We delete all the selections that are relative to the field_id
+      multis.each do |k, v| 
+        @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == k.to_i}.map(&:destroy)
+        v.each do |val|
+          @process_pattern.classification_selections.build(:classification_element_id => val.to_i)
+        end
+      end
     end
-    
-    @pattern_system.patterns << @process_pattern
     respond_to do |format|
       if @process_pattern.save
         flash[:notice] = t(:successful_creation, :model => Pattern.human_name)
-        session[:participants] = nil
         format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { render :xml => @process_pattern, :status => :created, :location => @process_pattern }
       else
@@ -161,45 +173,28 @@ EOF
   # PUT /process_patterns/1
   # PUT /process_patterns/1.xml
   def update
-    #@process_pattern.participants = Participant.find(session[:participants])
-    #@participants = @process_pattern.participants
-    #@selectable_participants = @pattern_system.participants - @participants
-    #@mappable_image = @process_pattern.mappable_image
-    #unless session[:maps].blank?
-    #  session[:maps].each {|map|
-    #  @aMap = Map.new(map)
-    #  @mappable_image.maps << @aMap
-    #  }
-    #  session[:maps] = nil
-    #end
-    
-    respond_to do |format|
-      proceedUpdate = @process_pattern.update_attributes(params[:pattern])
-      unless params[:mappable_image].blank? || params[:mappable_image][:uploaded_data].blank?
-        if @mappable_image.blank?
-          @mappable_image = MappableImage.new(params[:mappable_image])
-          @mappable_image.pattern_system = @pattern_system
-          proceedUpdate &= @mappable_image.save
-        else 
-          logger.info 'Updating image (and maps !)'
-          proceedUpdate &= @mappable_image.update_attributes(params[:mappable_image])
+    @metamodel = @pattern_system.system_formalism
+    @interface_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'interface'}
+    @solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'solution'}
+    @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true' ? true : false
+    unless params[:pattern][:multi_classification_selections].blank?
+      multis = params[:pattern].delete(:multi_classification_selections) #.each do |m|
+        # We delete all the selections that are relative to the field_id
+      multis.each do |k, v| 
+        @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == k.to_i}.map(&:destroy)
+        v.each do |val|
+          @process_pattern.classification_selections.create(:classification_element_id => val.to_i)
         end
-        
-        unless @mappable_image.blank?
-          @process_pattern.mappable_image = @mappable_image
-          @pattern_system.mappable_images << @mappable_image
-          proceedUpdate &= @pattern_system.save
-        end
-        
       end
-      
-      if  proceedUpdate
-            flash[:notice] = t(:successful_update, :model => Pattern.human_name)
-            session[:participants] = nil
-            format.html { redirect_to([@pattern_system, @process_pattern]) }
-            format.xml  { head :ok }
+    end
+    puts params[:pattern][:classification_selections_attributes]
+    respond_to do |format|
+      if  @process_pattern.update_attributes(params[:pattern])
+        flash[:notice] = t(:successful_update, :model => Pattern.human_name)
+        format.html { redirect_to([@pattern_system, @process_pattern]) }
+        format.xml  { head :ok }
       else
-        puts @mappable_image.errors.full_messages
+        flash[:error] = t(:failed_update, :model => Pattern.human_name) 
         format.html { render :action => "edit" }
         format.xml  { render :xml => @process_pattern.errors, :status => :unprocessable_entity }
       end

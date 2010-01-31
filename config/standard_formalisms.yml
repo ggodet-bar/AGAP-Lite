@@ -6,7 +6,7 @@
   :pattern_formalisms:
   - :name: Software architecture pattern
     :field_descriptors:
-    - :name: classification
+    - :name: Classification
       :section: interface
       :field_type: classification
       :is_sorting_patterns: true

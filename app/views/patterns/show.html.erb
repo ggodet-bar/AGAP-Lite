@@ -4,9 +4,19 @@
 <div class="block">
 <h2>Interface</h2>
   <% @interface_fields.each do |f| %>
-  <% unless f.nil? %> 
-   <h3><%= f.field_descriptor.name %></h3>
-    <%= f.content %>
+  <% unless f.blank? %> 
+    <% case f
+        when TextInstance, StringInstance %>
+    <h3><%= f.field_descriptor.name %></h3>
+    <%= f.content %><%
+        when Array %>
+    <h3><%= f.first.classification_element.field_descriptor.name.capitalize %></h3>
+    <ul>
+    <% f.each do |classif| %>
+        <li><%= classif.classification_element.name %></li>
+    <%- end %>
+    </ul>
+    <%- end %>
   <%- end %>
   <%- end %> 
 
@@ -27,7 +37,7 @@
 <h2>Solution</h2>
 
   <% @solution_fields.each do |f| %>
-  <% unless f.nil? %> 
+  <% unless f.blank? %> 
    <h3><%= f.field_descriptor.name %></h3>
     <%= f.content %>
   <%- end %>

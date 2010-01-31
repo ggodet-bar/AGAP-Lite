@@ -16,23 +16,11 @@
     %p Some blah blah about the wonderful characteristics attribute. Check it out someplace and some other time!
 = f.text_area(:characteristics, :class => "mceEditor")
 
-- prev = -1
-- indices = @pattern_system.classification_elements.collect(&:field_descriptor_id).uniq.sort
-- classification = [] 
-- indices.collect do |i|
-  - classification << @pattern_system.classification_elements.select{|e| e.field_descriptor_id == i}
-- f.fields_for :classification_elements, classification.flatten do |classif_form|
-  - obj = classif_form.object.field_descriptor
-  - if prev != obj.id
-    %h3= obj.pattern_formalism.name + ': ' + obj.section.capitalize + ': ' + obj.name
-  - prev = obj.id
-  %p
-    = classif_form.hidden_field :field_descriptor_id
-    = classif_form.label :name, 'Name'
-    = classif_form.text_field :name
-  %p
-    = classif_form.label :description, 'Description'
-    = classif_form.text_area :description, {:class => 'mceEditor', :style => 'height: 5em; width: 40em;'}
-  %p
-    = classif_form.check_box :_destroy
-    = f.label :_destroy, 'Remove'
+- @classifications.each do |cl|
+  %h3= cl.pattern_formalism.name.capitalize + ':' + cl.section.capitalize + ':' + cl.name.capitalize
+  .classification
+    - selection = @pattern_system.classification_elements.select{|a| a.field_descriptor_id == cl.id}
+    - f.fields_for :classification_elements, selection do |classif_form|
+      = render 'classification_fields', :f => classif_form
+    = link_to_add_fields "add", f, :classification_elements, cl.id
+

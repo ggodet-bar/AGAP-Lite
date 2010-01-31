@@ -20,7 +20,7 @@ class PatternFormalism < ActiveRecord::Base
 
   def after_initialize 
     if self.field_descriptors.empty?
-      self.field_descriptors.build({:name => "Problem", :section => 'interface', :field_type => 'text', :is_alterable => false, :description => "Problen that is addressed by the pattern"})
+      self.field_descriptors.build({:name => "Problem", :section => 'interface', :field_type => 'text', :is_alterable => false, :description => "Problem that is addressed by the pattern"})
       self.field_descriptors.build({:name => "Participants", :section => 'interface', :field_type => 'multi_classification', :is_alterable => false, :description => "The personas involved in the realisation of the pattern's solution"})
     end
   end
