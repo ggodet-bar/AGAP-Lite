@@ -25,7 +25,7 @@
       :description: Describes the situtations for which the pattern would be relevant
     -  :name: Structure
        :section: solution
-       :field_type: model_set  # A set of commented models
+       :field_type: mappable_image  # A set of commented models
        :description: Describes formal software architecture solutions
     -  :name: Solution participants
        :section: solution
@@ -65,39 +65,42 @@
     :field_descriptors:
       - :name: Classification
         :section: interface
-        :field_type: string
+        :field_type: multi_classification
       - :name: Context
         :section: interface
         :field_type: text
+        :description: Describes the organisational context in which the activity should take place
+      - :name: Strengths
+        :section: interface
+        :field_type: text
+        :description: The specific assets of the pattern, given the context
+      - :name: Visual solution
+        :section: solution
+        :field_type: mappable_image
+        :description: A visual description of the sub-activities organization
+      - :name: Text solution
+        :section: solution
+        :field_type: text
+        :description: A textual description of each sub-activity
+      - :name: Application cases
+        :section: solution
+        :field_type: text
+        :description: Describes an actual use of the pattern, taken from existing project instances.
+      - :name: Application consequences
+        :section: solution
+        :field_type: text
+        :description: Describes the consequences that follow the realization of the pattern's activities.
+  - :name: Product pattern
+    :field_descriptors:
+      - :name: Classification
+        :section: interface
+        :field_type: multi_classification
       - :name: Strengths
         :section: interface
         :field_type: text
       - :name: Visual solution
         :section: solution
         :field_type: mappable_image
-      - :name: Text solution
-        :section: solution
-        :field_type: text
-      - :name: Application cases
-        :section: solution
-        :field_type: text
-      - :name: Application consequences
-        :section: solution
-        :field_type: text
-  - :name: Product pattern
-    :field_descriptors:
-      - :name: Classification
-        :section: interface
-        :field_type: multi_classification
-      - :name: Context
-        :section: interface
-        :field_type: text
-      - :name: Strengths
-        :section: interface
-        :field_type: text
-      - :name: Visual solution
-        :section: solution
-        :field_type: model_set
       - :name: Text solution
         :section: solution
         :field_type: text

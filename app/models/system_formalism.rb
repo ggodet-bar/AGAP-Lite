@@ -17,7 +17,7 @@ class SystemFormalism < ActiveRecord::Base
   def after_initialize
     if self.relation_descriptors.empty?
       self.relation_descriptors.build({:name => 'Use', :is_reflexive => true, :is_alterable => false})
-      self.relation_descriptors.build({:name => 'Require', :is_reflexive => true, :is_alterable => false})
+      self.relation_descriptors.build({:name => 'Require', :is_reflexive => false, :is_alterable => false})
     end
   end
 

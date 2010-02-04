@@ -11,14 +11,7 @@
 
 .block
   %h2= t :characteristics
-  = h @pattern_system.characteristics
-
-.block
-  %h2= t :root_pattern
-  - if @root_pattern.nil?
-    = image_tag 'common_images/UnknownImage.png', :width  => 100
-  - else
-    = link_to(h(@root_pattern.name),[@pattern_system, @root_pattern], :class  => 'crawlable')
+  = @pattern_system.characteristics
 
 .block
   %h2= t :patterns_list

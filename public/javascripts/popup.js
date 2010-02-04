@@ -20,7 +20,7 @@ var Popup = {
         },
 
 	open : function(popup_id) {
-		document.body.style.overflow = "hidden" ;
+	document.body.style.overflow = "hidden" ;
   	window.onscroll=function() { window.scrollTo(0,0) }
   	var body_size = null ;
   	if (document.documentElement) {
@@ -39,9 +39,10 @@ var Popup = {
 
         // Add a key observer for exiting the popup
         document.observe('keydown', function(event) {
-          document.stopObserving('keydown', this) ;  
-          Popup.close(popup_id) ;
-           
+          if (event.keyCode == 27) {
+            document.stopObserving('keydown', this) ;  
+            Popup.close(popup_id) ;
+          }
         }) ;
 
         // The popup should be appearing

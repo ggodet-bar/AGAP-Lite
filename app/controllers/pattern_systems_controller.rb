@@ -28,36 +28,8 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/1
   # GET /pattern_systems/1.xml
   def show
-    #if flash[:participant]
-    #  @participant=flash[:participant]
-    #end
     @isEditing = flash[:isEditing]
-    #@participants_list = @pattern_system.participants
-    #@patterns_list = Pattern.find_all_by_pattern_system_id(@pattern_system)
-    #unless @pattern_system.root_pattern.blank?
-    #  @root_pattern = Pattern.find(@pattern_system.root_pattern)
-    #  @patterns_list = @patterns_list - Array(@root_pattern)
-    #end
-    
-    # Looking for a means to classify patterns
-    if @pattern_system.system_formalism.pattern_formalisms.count > 1
-      # Then we look for a main pattern
-      main_pattern = @pattern_system.system_formalism.pattern_formalisms.select{|p| p.is_main_pattern}.first
-    end 
-    main_pattern = main_pattern.blank? ? @pattern_system.system_formalism.pattern_formalisms.first : main_pattern
-    # We look for a main field type
-    main_field = main_pattern.field_descriptors.select{|f| f.is_sorting_patterns}.first
-
-    # TODO Manage unclassified patterns
-    unless main_field.blank?
-      classif_elements = @pattern_system.classification_elements.select{|c| c.field_descriptor_id == main_field.id}
-      @patterns_list = classif_elements.inject({}) do |acc, c|
-        acc[c.name] = @pattern_system.patterns.select{|p| p.classification_selections.any?{|sel| sel.classification_element_id == c.id}}
-        acc
-      end
-      puts @patterns_list
-    end
-  
+    @patterns_list = @pattern_system.structured_pattern_list 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @pattern_system }
@@ -68,7 +40,6 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/new.xml
   def new
     @pattern_system = PatternSystem.new
-    #@participant = Participant.new
     @metamodel = @pattern_system.system_formalism
     respond_to do |format|
       format.html # new.html.erb
@@ -95,14 +66,17 @@ class PatternSystemsController < ApplicationController
     @metamodels = SystemFormalism.all
     
     # We compute a short name, based on the full name of the pattern
-    @pattern_system.short_name = generate_short_name(params[:pattern_system][:name])
-
+    begin
+      @pattern_system.short_name = generate_short_name(params[:pattern_system][:name])
+    rescue
+      logger.info "Could not generate a short name for the pattern system"
+    end
     @noob_mode = cookies[:noob_mode] == 'true' ? true : false
     
     respond_to do |format|
       if @pattern_system.save
         flash[:notice] = t(:successful_creation, :model => PatternSystem.human_name)
-        format.html { render :action => 'edit' }
+        format.html { redirect_to :action => 'edit', :id => @pattern_system.short_name, :from_create => true }
         format.xml  { render :xml => @pattern_system, :status => :created, :location => @pattern_system }
       else
         format.html { render :action => "show_metamodels" }

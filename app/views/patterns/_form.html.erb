@@ -14,10 +14,3 @@
     <%= render :partial => 'fields', :locals => {:f => f, :field => field} %>
   <%- end %>
 </div>
-
-
-  <br />
-  <% fields_for :mappable_image do |m| %>
-    <%= m.label :uploaded_data, t(:upload_a_file) %> :</label>
-    <%= m.file_field  :uploaded_data %>
-  <% end %>

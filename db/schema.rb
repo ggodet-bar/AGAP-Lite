@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100129102414) do
+ActiveRecord::Schema.define(:version => 20100203212146) do
 
   create_table "classification_elements", :force => true do |t|
     t.integer  "field_descriptor_id"
@@ -41,51 +41,35 @@ ActiveRecord::Schema.define(:version => 20100129102414) do
   end
 
   create_table "image_associations", :force => true do |t|
-    t.integer  "process_pattern_id", :null => false
-    t.integer  "mappable_image_id",  :null => false
+    t.integer  "pattern_id",        :null => false
+    t.integer  "mappable_image_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "mappable_images", :force => true do |t|
-    t.string   "filename"
-    t.integer  "width"
-    t.integer  "height"
+    t.string   "image_file_name"
     t.integer  "pattern_system_id"
-    t.integer  "map_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "size"
-    t.string   "content_type"
-    t.string   "thumbnail"
+    t.integer  "image_file_size"
+    t.string   "image_content_type"
     t.integer  "field_descriptor_id"
+    t.datetime "image_updated_at"
+    t.integer  "image_width"
+    t.integer  "image_height"
   end
 
   create_table "maps", :force => true do |t|
-    t.integer  "mappable_image_id"
     t.integer  "x_corner"
     t.integer  "y_corner"
     t.integer  "width"
     t.integer  "height"
-    t.integer  "target_pattern_id"
+    t.integer  "relation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "process_pattern_id"
-  end
-
-  create_table "participants", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "pattern_system_id"
-  end
-
-  create_table "participations", :id => false, :force => true do |t|
-    t.integer  "participant_id"
-    t.integer  "process_pattern_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "pattern_id"
+    t.integer  "mappable_image_id"
   end
 
   create_table "pattern_formalisms", :force => true do |t|
@@ -153,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20100129102414) do
     t.integer  "target_pattern_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "relation_type_id",  :null => false
+    t.integer  "relation_descriptor_id"
   end
 
   create_table "string_instances", :force => true do |t|

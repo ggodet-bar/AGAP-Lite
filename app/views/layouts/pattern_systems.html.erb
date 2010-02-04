@@ -27,7 +27,7 @@ end%>
 </div>
 <%= render :partial => 'shared/parameters' %>
 <div id="content">
-<p style="color: green" id="notices"><%= flash[:notice] %></p>
+<p style="color: green" id="notices"><%= h flash[:notice] %></p>
 
 <%= yield  %>
 

@@ -1,2 +1,0 @@
-class MappableImageController < ApplicationController
-end

@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
                                 :theme_advanced_buttons1_add  => 'upimage'
                               },
 		:only => [:new, :create, :edit, :update]
-  I18n.locale = :fr
+  I18n.locale = :en
   
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters

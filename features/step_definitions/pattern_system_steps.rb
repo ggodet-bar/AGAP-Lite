@@ -1,5 +1,9 @@
 # coding: utf-8
 
+Given /^I have (\d+) pattern systems?$/ do |n|
+  pending
+end
+
 Given /^a pattern system "([^\"]*)" with the name "([^\"]*)" and the author "([^\"]*)"$/ do |short_name, name, author|
   PatternSystem.transaction do
     PatternSystem.destroy_all

@@ -4,7 +4,7 @@
     = link_to_function "?", "new Effect.toggle('effect_test1', 'slide', { duration : 0.2})", :class => "question_mark"
 - if @noob_mode
   %div#effect_test1.helper_info{:style => "display:none"}
-    %p Some blah blah about the wonderful updates attribute. Check it out someplace and some other time!
+    %p Describe the latest updates concerning your pattern system
 = f.text_area(:update_field, :class => "mceEditor")
 
 %h3
@@ -13,11 +13,17 @@
     = link_to_function "?", "new Effect.toggle('effect_test2', 'slide', { duration : 0.2})", :class => "question_mark"
 - if @noob_mode
   %div#effect_test2.helper_info{:style => "display:none"}
-    %p Some blah blah about the wonderful characteristics attribute. Check it out someplace and some other time!
+    %p Describe the specificities of your pattern system, who it is addressed to, should it be used following specific time constraints etc.
 = f.text_area(:characteristics, :class => "mceEditor")
 
 - @classifications.each do |cl|
-  %h3= cl.pattern_formalism.name.capitalize + ':' + cl.section.capitalize + ':' + cl.name.capitalize
+  %h3
+    = cl.pattern_formalism.name.capitalize + ':' + cl.section.capitalize + ':' + cl.name.capitalize
+    - if @noob_mode
+      = link_to_function "?", "new Effect.toggle(\"classif_#{cl.id}\", 'slide', { duration : 0.2})", :class => "question_mark"
+  - if @noob_mode
+    %div.helper_info{:id => "classif_#{cl.id}", :style => "display: none"}
+      %p= cl.description
   .classification
     - selection = @pattern_system.classification_elements.select{|a| a.field_descriptor_id == cl.id}
     - f.fields_for :classification_elements, selection do |classif_form|

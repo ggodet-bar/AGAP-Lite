@@ -1,3 +1,14 @@
+Factory.define :mono_system_formalism do |sys|
+  sys.name "Mono system formalism"
+  sys.author "Bob le poulpe"
+  sys.association :pattern_formalism, :factory => :pattern_formalism
+end
+
+Factory.define :pattern_formalism do |pat|
+  pat.name "A pattern formalism"
+  #pat.association :field_descriptors, :factory => :field_descriptor
+end
+
 Factory.define :process_pattern do |pat|
   pat.sequence(:name) { |n| "pattern name #{n}" }
   pat.author  "Bob le poulpe"

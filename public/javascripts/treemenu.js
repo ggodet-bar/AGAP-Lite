@@ -18,11 +18,15 @@ var JsTreeMenu = {
 		 *	We parse the list as a structured list (and sublists), which is passed to menuTopography
 		 */
 		// Get the pattern list in the patternList navigation bar
-		thePatterns = $('patternList').down().next() ;	// Get the ul of the pattern list
-		thePatterns.childElements().each(function(s) {	// Get all the li elements of the pattern list
+		thePatterns = $('patternList').down('ul') ;	// Get the ul of the pattern list
+                console.log(thePatterns) ;
+		if (thePatterns)
+                {
+                  thePatterns.childElements().each(function(s) {	// Get all the li elements of the pattern list
 			JsTreeMenu.recParseNode(s, true) ;
 
 		}) ;
+                }
 	},
 
 	setCurrentNode : function(theNode) {

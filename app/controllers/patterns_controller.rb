@@ -2,9 +2,19 @@
 
 class PatternsController < ApplicationController
   
-  before_filter :find_pattern, :except => [:index, :new, :create, :tmp_images, :show_pattern_types]  
+  before_filter :find_pattern, :except => [:index, :new, :create, :tmp_images, :show_pattern_types, :create_relation]
   before_filter :load_system
   
+  def create_relation
+    puts params
+    @relation = Relation.new params[:relation]
+    if @relation.save
+      render :update do |page|
+        page.call 'Popup.close', 'pattern_selector'
+        page.call 'AgapImageManager.validate_map', @relation.id
+      end
+    end
+  end
 
   def show_pattern_types
     content = <<EOF
@@ -27,6 +37,22 @@ EOF
     end
   end
   
+  def upload_file
+    image_params = params[:mappable_image].merge({:pattern_system_id => @pattern_system.id})
+    mappable_image = MappableImage.create image_params
+    @process_pattern.mappable_images << mappable_image
+    
+    responds_to_parent do 
+      render :update do |page|
+        page.replace_html 'mappable_image_' + mappable_image.field_descriptor_id.to_s, <<EOF
+<dl id=\"mappable_image_image_#{mappable_image.field_descriptor_id}\" class=\"mappable_image\"  style=\"background: url(#{mappable_image.image.url}) no-repeat; height: #{mappable_image.image_height}px; width: #{mappable_image.image_width}px;\"></dl><script>AgapImageManager.install_image_observer($(\"mappable_image_image_#{mappable_image.field_descriptor_id}\"))</script>
+EOF
+
+      end
+    end
+#    render :inline => "<%= image_tag(mappable_image.image.path) %>", :locals => {:mappable_image => mappable_image}
+  end
+
   def tmp_upload
     puts 'tmp_upload called'
     @image = MappableImage.new(params[:image])
@@ -81,21 +107,17 @@ EOF
   # GET /process_patterns/1.xml
   def show
     # We should be creating an array of fields
-    interface_fields = @process_pattern.pattern_formalism.field_descriptors.select{|f| f.section == 'interface'}.sort_by{|a| a.index}
+    interface_fields, solution_fields = @process_pattern.pattern_formalism.field_descriptors.partition{|f| f.section == 'interface'}.collect{|a| a.sort_by{|b| b.index}}
     # We get the first non nil instance that corresponds to the field id
-    @interface_fields = interface_fields.collect do |field|
+    
+    muster = lambda do |field| 
       @process_pattern.string_instances.select{|a| a.field_descriptor_id == field.id}.first ||
       @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}.first  ||
+      @process_pattern.mappable_images.select{|a| a.field_descriptor_id == field.id}.first ||
       @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
     end
 
-    solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|f| f.section == 'solution'}.sort_by{|a| a.index}
-    # We get the first non nil instance that corresponds to the field id
-    @solution_fields = solution_fields.collect do |field|
-      @process_pattern.string_instances.select{|a| a.field_descriptor_id == field.id}.first ||
-      @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}.first  ||
-      @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id}
-    end
+    @interface_fields, @solution_fields = [interface_fields, solution_fields].map{|f| f.map(&muster)}
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @process_pattern }
@@ -137,7 +159,7 @@ EOF
     @classifications = @process_pattern.pattern_formalism.field_descriptors.select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
       # For single classifications, we only generate a single field
       acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
-      acc[field.id] = @process_pattern.classification_selections.build if acc[field.id].blank?
+      acc[field.id] = [@process_pattern.classification_selections.build] if acc[field.id].blank?
       acc
     end
   end
@@ -145,17 +167,21 @@ EOF
   # POST /process_patterns
   # POST /process_patterns.xml
   def create
+    multis = []
     unless params[:pattern][:multi_classification_selections].blank?
       multis = params[:pattern].delete(:multi_classification_selections) #.each do |m|
-      @process_pattern = @pattern_system.patterns.build params[:pattern]
-      @interface_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'interface'}
-      @solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'solution'}
-        # We delete all the selections that are relative to the field_id
-      multis.each do |k, v| 
-        @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == k.to_i}.map(&:destroy)
-        v.each do |val|
-          @process_pattern.classification_selections.build(:classification_element_id => val.to_i)
-        end
+    end
+    if params[:pattern][:mappable_images] && params[:pattern][:mappable_images][:image_file_name].blank?
+      params[:pattern].delete(:mappable_images)
+    end
+    @process_pattern = @pattern_system.patterns.build params[:pattern]
+    @interface_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'interface'}
+    @solution_fields = @process_pattern.pattern_formalism.field_descriptors.select{|field| field.section == 'solution'}
+      # We delete all the selections that are relative to the field_id
+    multis.each do |k, v| 
+      @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == k.to_i}.map(&:destroy)
+      v.each do |val|
+        @process_pattern.classification_selections.build(:classification_element_id => val.to_i)
       end
     end
     respond_to do |format|
@@ -187,7 +213,10 @@ EOF
         end
       end
     end
-    puts params[:pattern][:classification_selections_attributes]
+    image_params = params[:pattern].delete(:mappable_images)
+    puts image_params
+    image = @process_pattern.mappable_images.create image_params.merge({:pattern_system_id => @pattern_system.id}) \
+      unless image_params.blank?
     respond_to do |format|
       if  @process_pattern.update_attributes(params[:pattern])
         flash[:notice] = t(:successful_update, :model => Pattern.human_name)

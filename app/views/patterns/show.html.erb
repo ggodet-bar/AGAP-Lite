@@ -4,25 +4,13 @@
 <div class="block">
 <h2>Interface</h2>
   <% @interface_fields.each do |f| %>
-  <% unless f.blank? %> 
-    <% case f
-        when TextInstance, StringInstance %>
-    <h3><%= f.field_descriptor.name %></h3>
-    <%= f.content %><%
-        when Array %>
-    <h3><%= f.first.classification_element.field_descriptor.name.capitalize %></h3>
-    <ul>
-    <% f.each do |classif| %>
-        <li><%= classif.classification_element.name %></li>
-    <%- end %>
-    </ul>
-    <%- end %>
-  <%- end %>
-  <%- end %> 
+  <%= render :partial => 'show_field', :locals => {:f => f} %>
+<%- end %>
+
+  </div>
 
 
-
-  <div style="border: dashed thin #666;background-color: #eee; padding: 0.5em; margin-left: 3em; color: #666">
+ <!-- <div style="border: dashed thin #666;background-color: #eee; padding: 0.5em; margin-left: 3em; color: #666">
   <h4><a style="color: #666;" href="#" onclick="Effect.toggle('toggle_appear', 'slide'); return false;">D'autres patrons traitent le même problème :</a></h4>
   <div id="toggle_appear" style="display: none">
   <ul>
@@ -30,31 +18,14 @@
     <li>Améliore la puissande d... > <a href="">Voiture puissante</a></li>
   </ul>
   </div>
-  </div>
-</div>  
+</div>  -->
 
 <div class="block">
 <h2>Solution</h2>
 
-  <% @solution_fields.each do |f| %>
-  <% unless f.blank? %> 
-   <h3><%= f.field_descriptor.name %></h3>
-    <%= f.content %>
-  <%- end %>
-  <%- end %> 
-  <h3><%= t :process_image %></h3>
-  <% if @image.blank? %>
-
-  <%= image_tag 'common_images/UnknownImage.png', :width  => 100 %>
-  <% else %>
-  <dl id="method_image" style=<%= "\"background: url(\'#{ @image.public_filename}\') no-repeat; width: #{@image.width}px; height: #{@image.height}px;\""%> >
-    <% for map in @maps %>
-      <dd style=<%= "\"left: #{map.x_corner}px; top: #{map.y_corner}px;width: #{map.width}px; height: #{map.height}px;\"" %>>
-      <a style=<%= "\"display: block; width: #{map.width}px; height: #{map.height}px;text-decoration: none;\" href= \"/pattern_systems/#{@pattern_system.short_name}/process_patterns/#{map.target_pattern_id}\" class=\"crawlable\""%>></a>
-      </dd>
-    <% end %>
-  </dl>
-  <% end %>
+<% @solution_fields.each do |f| %>
+  <%= render :partial => 'show_field', :locals => {:f => f} %>
+<%- end %>
 </div>
 <%= link_to t(:edit), edit_pattern_system_pattern_path(@pattern_system, @process_pattern) %> |
 <%= link_to t(:delete), [@pattern_system, @process_pattern], :confirm => 'Are you sure?', :method => :delete%>

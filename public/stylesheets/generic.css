@@ -187,8 +187,8 @@ li {
 	color: #ddd;
 }
 
-#params {
-	position: absolute;
+#params, #pattern_selector {
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;

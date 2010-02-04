@@ -1,11 +1,14 @@
-%h1 Editing pattern system
+- if params[:from_create]
+  %h1 Creation of a new pattern system (step 2/2)
+- else
+  %h1 Editing pattern system
 - form_for(@pattern_system) do |f|
-	= f.error_messages
+  = f.error_messages
 
-	= render :partial => 'form', :locals => {:f => f}
+  = render :partial => 'form', :locals => {:f => f}
 
-	%p
-		%br
-		= f.submit "Update"
-	
+  %p
+    %br
+    = f.submit "Update"
+  
 = link_to 'Show', @pattern_system

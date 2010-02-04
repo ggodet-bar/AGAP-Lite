@@ -15,6 +15,7 @@
   <%= javascript_include_tag 'parameters' %>
   <%= javascript_include_tag 'state_machine' %>
   <%= javascript_include_tag 'selector' %>
+  <%= javascript_include_tag 'image_mapper' %>
 
   <%= include_tiny_mce_if_needed %>
 </head>
@@ -35,7 +36,9 @@ end%>
 		</div>
 	</div>
 	<%= render :partial => 'shared/parameters' %>
-		
+        <% if @process_pattern %>
+        <%= render :partial => 'patterns_selection' %>
+        <%- end %>
 	<div id="navigation_bar">
 	<span style="margin-left: 2em;">
 	<%= link_to((t :back_to_system), @pattern_system, :class  => 'crawlable') %> | 
@@ -58,7 +61,22 @@ end%>
 </div>
 <div id="patternList">
 	<h3><%= t :patterns_list %></h3>
+          <% patterns_list = @pattern_system.structured_pattern_list %>
+          <% patterns_list.each_key do |key| %> 
+          <% unless patterns_list[key].empty? %>
+            <b><%= key %></b>
 	<ul style="margin-left: -3.4em;">
+              <% patterns_list[key].each do |pat| %>
+                <% if pat == @process_pattern %>
+                  <li id=<%="pat_item_#{pat.id}" %>><span><%= pat.name %></span></li>
+                <% else %>
+                  <li id=<%="pat_item_#{pat.id}" %>><span><%= link_to pat.name, [@pattern_system, pat] %></span></li>
+                <%- end %>
+              <%- end %>
+        </ul>
+          <%- end %>
+          <%- end %>
+	<!--<ul style="margin-left: -3.4em;">
 		<li id="a1"><span><a href="javascript:void(0);">Phase d'étude préalable</a></span>
 			<ul>
 				<li id="a2"><span><a href="javascript:void(0)">Test</a></span></li>
@@ -90,14 +108,7 @@ end%>
 				<li id="a14"><span><a href="javascript:void(0)">Test</a></span></li>
 			</ul>	
 		</li>
-		<!-- <% for pattern in @patterns_list %>
-			<% if @process_pattern && pattern.id == @process_pattern.id %>
-		<li><%= h(pattern.name) %></li>
-			<% else %>
-		<li><%= link_to(h(pattern.name), [@pattern_system, pattern], {:class  => 'crawlable', :id => "process_#{pattern.id}"}) %></li>
-			<% end %>
-		<% end %> -->
-	</ul>
+	</ul>-->
 </div>
  <div class="clearfooter"></div>
  </div>
