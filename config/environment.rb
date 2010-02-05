@@ -33,6 +33,7 @@ Rails::Initializer.run do |config|
   config.gem "sqlite3-ruby", :lib => "sqlite3"
   config.gem "haml"
   config.gem "paperclip", :source => "http://gemcutter.org"
+  config.gem "responds_to_parent", :source => "http://gemcutter.org"
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
