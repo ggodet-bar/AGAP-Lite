@@ -8,7 +8,8 @@ class MappableImage < ActiveRecord::Base
                     :style => {:medium => "700x800>"},
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-                    :path => ":pattern_system/:basename.:extension"
+                    :path => ":pattern_system/:basename.:extension",
+                    :url => :s3_domain_url
   else if %w(test development cucumber).include? RAILS_ENV
       has_attached_file :image,
                     :styles => {:medium => "700x800>"},
