@@ -9,7 +9,10 @@ class MappableImage < ActiveRecord::Base
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :path => ":pattern_system/:basename.:extension",
-                    :url => :s3_domain_url
+                    :url => ':s3_domain_url',
+                    :s3_protocol => 'http',
+                    :s3_permissions => 'public-read-write'
+                    
   else if %w(test development cucumber).include? RAILS_ENV
       has_attached_file :image,
                     :styles => {:medium => "700x800>"},
@@ -18,7 +21,7 @@ class MappableImage < ActiveRecord::Base
       end
   end
 
-  before_save :save_dimensions
+  after_validation_on_create :save_dimensions
 
   Paperclip.interpolates :pattern_system do |attachment, style|
     attachment.instance.pattern_system.short_name
@@ -28,6 +31,7 @@ class MappableImage < ActiveRecord::Base
     if ["image/jpeg", "image/tiff", "image/png", "image/gif", "image/bmp"].include?(image.content_type)
       self.image_width = image.width(:medium)
       self.image_height = image.height(:medium)
+      self.save(false)
    end
   end
   
