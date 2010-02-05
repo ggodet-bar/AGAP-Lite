@@ -2,10 +2,20 @@ class MappableImage < ActiveRecord::Base
   belongs_to  :pattern_system
   belongs_to  :field_descriptor
     
-  has_attached_file :image,
+  
+  if RAILS_ENV == "production"
+    has_attached_file :image,
+                    :style => {:medium => "700x800>"},
+                    :storage => :s3,
+                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                    :path => ":pattern_system/:basename.:extension"
+  else if %w(test development cucumber).include? RAILS_ENV
+      has_attached_file :image,
                     :styles => {:medium => "700x800>"},
                     :url => "/images/:pattern_system/:basename.:extension",
                     :path => ":rails_root/public/images/:pattern_system/:basename.:extension"
+      end
+  end
 
   before_save :save_dimensions
 

@@ -40,6 +40,8 @@ EOF
   def upload_file
     image_params = params[:mappable_image].merge({:pattern_system_id => @pattern_system.id})
     mappable_image = MappableImage.create image_params
+    # TODO We should specify this association as a hidden
+    # field in the form...
     @process_pattern.mappable_images << mappable_image
     
     responds_to_parent do 
