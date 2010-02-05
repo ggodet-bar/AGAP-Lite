@@ -21,7 +21,7 @@ class MappableImage < ActiveRecord::Base
       end
   end
 
-  after_validation_on_create :save_dimensions
+  after_create :save_dimensions
 
   Paperclip.interpolates :pattern_system do |attachment, style|
     attachment.instance.pattern_system.short_name
