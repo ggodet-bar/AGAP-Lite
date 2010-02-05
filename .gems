@@ -3,3 +3,4 @@ haml
 sqlite3-ruby
 aws-s3
 paperclip
+responds_to_parent
