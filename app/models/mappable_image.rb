@@ -21,14 +21,14 @@ class MappableImage < ActiveRecord::Base
       end
   end
 
-  after_create :save_dimensions
+  after_save :save_dimensions
 
   Paperclip.interpolates :pattern_system do |attachment, style|
     attachment.instance.pattern_system.short_name
   end
 
   def save_dimensions
-    if ["image/jpeg", "image/tiff", "image/png", "image/gif", "image/bmp"].include?(image.content_type)
+    if self.image_width.blank? && self.image_height.blank? && ["image/jpeg", "image/tiff", "image/png", "image/gif", "image/bmp"].include?(image.content_type)
       self.image_width = image.width(:medium)
       self.image_height = image.height(:medium)
       self.save(false)
