@@ -286,9 +286,9 @@ var AgapImageManager = {
     var default_width = 120, default_height = 80 ;
     var pos = {top: (image.getHeight() - default_height) / 2, left: (image.getWidth() - default_width)/2} ;
     var new_dd = new Element('dd', {
-      class: 'map active_map',
       style: "cursor: move; position: absolute; display: block; width: " + default_width + "px; height: " + default_height + "px; left: " + pos.left + "px; top: " + pos.top + "px; border: 1px dashed black; margin: 0; padding: 0"
     }) ;
+    new_dd.addClassName("map active_map") ;
     new_dd.insert({'top': AgapImageManager.create_control_block("NW", -4, -4)}) ;
     new_dd.insert({'top': AgapImageManager.create_control_block("SW", default_height - 4, -4)}) ;
     new_dd.insert({'top': AgapImageManager.create_control_block("NE", -4, default_width - 4)}) ;
@@ -366,9 +366,9 @@ var AgapImageManager = {
         alt: "delete image"
     }) ;
       var the_map =  new Element('dd', {
-            class: 'map',
             style: "position: absolute; display: block; width: " + width + "px; height: " + height + "px; left: " + x_corner + "px; top: " + y_corner + "px; border: 1px solid red; margin: 0; padding: 0"
             }) ;
+      the_map.addClassName("map") ;
       the_map.insert({'top' : del_img}) ;
       image.insert({'top': the_map}) ;    
       del_img.observe('click', function(event){

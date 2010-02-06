@@ -63,7 +63,8 @@ AgapSelector.prototype.update = function(div) {
 
 AgapSelector.prototype.selected = function(multi_i) {
     var index = multi_i >= 0 ? multi_i : this.selector.selectedIndex ;
-    var div = new Element('div', {class: "selector_item"}).update(this.selector.options[index].text) ;
+    var div = new Element('div').update(this.selector.options[index].text) ;
+    div.addClassName("selector_item") ;
     var a = new Element('a', {href: "#", style: "float: right"}).update('remove') ;
     var hidden = new Element('input', {type: 'hidden', value: index}) ;
     div.insert({'bottom': a}) ;
