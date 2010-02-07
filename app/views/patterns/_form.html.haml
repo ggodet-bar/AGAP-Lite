@@ -1,0 +1,13 @@
+.block
+  %h2 Interface
+  
+  %h3= f.label :name, 'Name'
+  = f.text_field :name, :size => 60
+  = f.hidden_field :pattern_formalism_id
+  -@interface_fields.each do |field|
+    = render :partial => 'fields', :locals => {:f => f, :field => field}
+
+.block
+  %h2 Solution
+  -@solution_fields.each do |field|
+    = render :partial => 'fields', :locals => {:f => f, :field => field}

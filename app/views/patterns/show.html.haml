@@ -1,0 +1,15 @@
+%h1= h @process_pattern.name
+  
+.block
+  %h2 Interface
+  - @interface_fields.each do |f|
+    = render :partial => 'show_field', :locals => {:f => f}
+
+.block
+  %h2 Solution
+  - @solution_fields.each do |f|
+    = render :partial => 'show_field', :locals => {:f => f}
+
+= link_to t(:edit), edit_pattern_system_pattern_path(@pattern_system, @process_pattern)
+|
+= link_to t(:delete), [@pattern_system, @process_pattern], :confirm => 'Are you sure?', :method => :delete

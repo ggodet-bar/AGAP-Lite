@@ -1,8 +1,0 @@
-<ul>
-<% for image in @images %>
-	<% puts 'yeah' %>
-	<li><a href="javascript:void(0)" onclick="<%="ExampleDialog.insert_image('#{image.public_filename()}');" %>">
-    <%= image_tag image.public_filename, :width =>  200 %> </a></li>
-<% end %>
-
-</ul>

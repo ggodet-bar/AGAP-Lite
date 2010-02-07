@@ -1,0 +1,13 @@
+#params.popup{:style=>"display: none;"}
+  %h2{:style=>"margin-left: 0; float: none; padding-left: 0;"}= t(:beginner_mode)
+  #param_buttons
+    #off_position
+    #on_position
+    = image_tag "/images/common_images/param_button_front.png", :id => "param_front_button"
+
+  #params_caution
+    %p{:id=>"params_caution_text"}
+  %p{:style=>"float:right;"}= link_to_function t(:close), "Popup.close('params')"
+
+%script{:type=>"text/javascript"}
+  = "Popup.install_callback(Parameters.manage_parameters, [ \"#{t(:enable_helpers)}\", \"#{t(:disable_helpers)}\"]) ;"

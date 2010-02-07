@@ -1,0 +1,2 @@
+-multi_classif = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id}
+=select_tag "pattern[multi_classification_selections][#{field.id}][]", options_from_collection_for_select(multi_classif, :id, :name, @classifications[field.id].map(&:classification_element_id)), {:multiple => true, :class => "agap_multiple_selector"}

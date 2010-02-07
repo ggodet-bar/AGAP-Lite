@@ -1,0 +1,19 @@
+%div{:id=>"mappable_image_#{field.id}"}
+  -image_instance = @process_pattern.mappable_images.select{|a| a.field_descriptor_id == field.id}.first
+  -image_instance = image_instance.blank? ? @process_pattern.mappable_images.build(:field_descriptor_id => field.id) : image_instance
+  -f.fields_for :mappable_images, image_instance do |img_form|
+    = img_form.file_field :image
+    = img_form.hidden_field :field_descriptor_id
+
+%div{:id=>"image_associations_#{field.id}"}
+  -f.fields_for :image_association, @process_pattern.image_associations.build do |assoc_form|
+    = assoc_form.hidden_field :mappable_image_id
+    = assoc_form.hidden_field :pattern_id 
+
+-unless image_instance.new_record?
+  %dl{:id=>"mappable_image_image_#{field.id}", :class=>"mappable_image", :style=>"background: url(#{image_instance.image.url}) no-repeat; height: #{image_instance.image_height}px; width: #{image_instance.image_width}px;"}
+  -the_maps = @process_pattern.maps
+  -f.fields_for :maps, the_maps do |map_form|
+    = render :partial => "map_fields", :locals => {:f => map_form}
+  -f.fields_for :maps, @process_pattern.maps.build(:mappable_image_id => image_instance.id), :child_index => "blank_map_record" do |map_form|
+    = render :partial => "map_fields", :locals => {:f => map_form}
