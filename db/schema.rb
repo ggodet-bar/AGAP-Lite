@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100203212146) do
+ActiveRecord::Schema.define(:version => 20100208084721) do
 
   create_table "classification_elements", :force => true do |t|
     t.integer  "field_descriptor_id"
@@ -41,10 +41,11 @@ ActiveRecord::Schema.define(:version => 20100203212146) do
   end
 
   create_table "image_associations", :force => true do |t|
-    t.integer  "pattern_id",        :null => false
-    t.integer  "mappable_image_id", :null => false
+    t.integer  "pattern_id",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "field_descriptor_id"
+    t.integer  "mappable_image_id"
   end
 
   create_table "mappable_images", :force => true do |t|
@@ -54,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20100203212146) do
     t.datetime "updated_at"
     t.integer  "image_file_size"
     t.string   "image_content_type"
-    t.integer  "field_descriptor_id"
     t.datetime "image_updated_at"
     t.integer  "image_width"
     t.integer  "image_height"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20100203212146) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pattern_id"
-    t.integer  "mappable_image_id"
+    t.integer  "image_association_id"
   end
 
   create_table "pattern_formalisms", :force => true do |t|

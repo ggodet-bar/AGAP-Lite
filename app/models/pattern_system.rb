@@ -4,7 +4,6 @@ require 'nokogiri'
 
 class PatternSystem < ActiveRecord::Base
   
-  # New stuff!!
   has_many  :classification_elements, :dependent => :destroy
   accepts_nested_attributes_for :classification_elements, :reject_if => lambda {|a| a[:name].blank?}, :allow_destroy => true
   has_many :patterns, :dependent => :destroy

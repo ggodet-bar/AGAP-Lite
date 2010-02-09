@@ -1,3 +1,9 @@
+
+/*
+ * TODO Manage image deletion (i.e. replace the image by
+ * our custom form).
+ * TODO Manage relations within the map forms
+ */
 var AgapImageManager = {
   pattern: undefined,
   pattern_system: undefined,
@@ -9,8 +15,12 @@ var AgapImageManager = {
   current_control: undefined,
   mouse_pos: undefined,
 
+  /**
+   * Sets a number of general purpose variables, such as 
+   * the location of the current page, the authenticity
+   * token (from the Rails form).
+   */
   get_page_data : function() {
-
     var loc = location.href ;
     var partial_loc_array = loc.split('/pattern_systems/', 2)[1].split('/') ;
     AgapImageManager.pattern_system = partial_loc_array[0] ;
@@ -25,13 +35,26 @@ var AgapImageManager = {
     console.log("Fetched page data") ;
   }, 
 
+  /**
+   * Looks for a file input field that corresponds to
+   * a mappable image (as defined by AgapLite). It
+   * replaces the current field by a some form, which
+   * sends an asynchronous request to the server when
+   * submitted. It should be used within a file upload
+   * and display workflow, and as such should precede 
+   * a call to 'install_image_observer' (usually made
+   * by the server.
+   */
   install_form_observer: function() {
     $$('input[type=file]').each(function(el) {
-        var field_id = el.next("input[name='pattern[mappable_images][field_descriptor_id]']").value ;
+        var field_id = el.up().previous("input[type=hidden]").value ;
+        console.log("Field descriptor id: " + field_id) ;
         // If there is already an image, install the
         // image observer and hide the existing form
         var existing_image = $("mappable_image_image_" + field_id) ;
-        
+       
+        // If there an image has already been uploaded,
+        // install an image observer instead 
         if (existing_image) {
           el.remove() ;
           AgapImageManager.install_image_observer(existing_image) ;
@@ -51,7 +74,7 @@ var AgapImageManager = {
         }) ;
         var token = new Element('input', {type: "hidden", name: "authenticity_token", value: AgapImageManager.token_value}) ;
         var input = new Element('input', {type: "file", size: 30, name: "mappable_image[image]"}) ;
-        var hidden = new Element('input', {type: "hidden", name: "mappable_image[field_descriptor_id]", value: field_id}) ;
+        var field_desc_id = new Element('input', {type: "hidden", name:"field_id", value: field_id}) ;
         var submit =  new Element('input', {type: 'submit', value: 'submit', style: "display: none"}) ;
         var iframe = new Element('iframe', {
           id: "upload_iframe_" + field_id,
@@ -60,8 +83,8 @@ var AgapImageManager = {
           src: "about:blank"  
         }) ;
         el.replace(form) ;
-        form.insert({'top': hidden}) ;
         form.insert({'top': input}) ;
+        form.insert({'top': field_desc_id}) ;
         form.insert({'top': token}) ;
         form.insert({'bottom': submit}) ;
         form.insert({'after': iframe}) ;
@@ -75,7 +98,22 @@ var AgapImageManager = {
     });
   },
 
-  install_image_observer: function(image) {
+  /**
+   * Prepares the mappable image (that was just uploaded
+   * or as displayed by an edit action) for adding maps.
+   */
+  install_image_observer: function(image, image_id) {
+    // TODO Add a hidden field pointing to the mappable image id
+    if (image_id) {
+      // In this case, add a hidden field
+      // First, get a known hidden field, that will be
+      // cloned then transformed to fit our needs
+      var clonedNode = image.up().previous().previous().cloneNode(false) ; // should be the pattern_id field
+      clonedNode.id = clonedNode.id.replace(/pattern_id/,"mappable_image_id") ;
+      clonedNode.name = clonedNode.name.replace(/pattern_id/,"mappable_image_id") ;
+      clonedNode.value = image_id ;
+      image.up().insert({'before': clonedNode});
+    }
     // Add a delete sign on the top right corner of the image
 
     // First get the position of the image on the layout
@@ -201,10 +239,13 @@ var AgapImageManager = {
     //}) ;
   },
 
-  pre_validation_cleanup : function(map) {
-
-  },
-
+  /**
+   * Updates the position and size of the current
+   * active map, based on the mouse movement delta.
+   * @argument image : the mappable image on which
+   * to execute the resize
+   * @argument diff : the mouse movement delta
+   */
   resize_map: function(image, diff) {
     var control = AgapImageManager.current_control ;
     var map = control.obj.up("dd") ;
@@ -278,6 +319,11 @@ var AgapImageManager = {
 
   },
 
+  /**
+   * Creates a new active map on the current image, with
+   * the corresponding control blocks and semi-transparent
+   * dark caches.
+   */
   create_new_map: function(image) {
     // We hide inactive maps
     image.childElements().select(function(el){if (el.classNames().include("map")) {el.hide() ;}}) ;
@@ -313,6 +359,12 @@ var AgapImageManager = {
     }) ;
   },
 
+  /**
+   * Creates a control block on the current map, that
+   * is, a small square for resizing the map. Specific cursor
+   * styles are set up, depending
+   * on the <code>resize_type</code> argument
+   */
   create_control_block: function(resize_type, top, left) {
     var default_size = 8 ;
     var control = new Element('div', {
@@ -334,6 +386,10 @@ var AgapImageManager = {
     return control ;
   },
 
+  /**
+   * Creates a semi-transparent block, used as a cache when
+   * setting up the active map's size, position etc.
+   */
   create_opacity_block: function(block_type, top, left, width, height) {
     return new Element('div', {
       id: block_type + "_block",
@@ -341,9 +397,14 @@ var AgapImageManager = {
     }) ;
   },
 
+  /**
+   * Gets all the existing map fields for the current image
+   * and displays the corresponding maps with a delete icon
+   * on the top right corner.
+   */
   update_maps: function(image) {
     // Get all the maps from the image
-    var maps = image.up().childElements().select(function(el){
+    var maps = image.up().up().childElements().select(function(el){
         return el.classNames().include("map_fields") &&
                   !el.childElements().any(function(a){return a.name.include("blank_map_record")}) &&
                   !el.childElements().any(function(a){return a.name.include("_destroy") && a.value == 1})
@@ -380,6 +441,12 @@ var AgapImageManager = {
   },
 
 
+  /**
+   * Creates a new map form field, filled with the 
+   * current active map's attributes, and then
+   * removes the active map before updating the
+   * list of existing maps.
+   */
   validate_map: function(relation_id) {
     var map = $$(".active_map").first() ;
     var m_pos = map.positionedOffset() ;
@@ -420,6 +487,9 @@ var AgapImageManager = {
 } ;
 
 
+/*
+ * Initialization block
+ */
 document.observe('dom:loaded', function(){
   AgapImageManager.get_page_data() ;
   AgapImageManager.install_form_observer() ;

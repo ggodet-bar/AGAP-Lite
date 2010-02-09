@@ -1,6 +1,5 @@
 class MappableImage < ActiveRecord::Base
   belongs_to  :pattern_system
-  belongs_to  :field_descriptor
     
   
   if RAILS_ENV == "production"

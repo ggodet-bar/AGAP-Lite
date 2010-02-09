@@ -35,4 +35,8 @@ class PatternFormalism < ActiveRecord::Base
     end
   end
 
+  # Returns parallel arrays that include the field descriptors
+  def fields
+    self.field_descriptors.partition{|field| field.section == 'interface'}
+  end
 end

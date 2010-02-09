@@ -1,19 +1,21 @@
-%div{:id=>"mappable_image_#{field.id}"}
-  -image_instance = @process_pattern.mappable_images.select{|a| a.field_descriptor_id == field.id}.first
-  -image_instance = image_instance.blank? ? @process_pattern.mappable_images.build(:field_descriptor_id => field.id) : image_instance
-  -f.fields_for :mappable_images, image_instance do |img_form|
-    = img_form.file_field :image
-    = img_form.hidden_field :field_descriptor_id
+- image_instance = @process_pattern.image_associations.select{|a| a.field_descriptor_id == field.id}.map(&:mappable_image).first
+- association_instance = image_instance.blank? ? @process_pattern.image_associations.build(:field_descriptor_id => field.id) : ImageAssociation.find(:first, :conditions => {:pattern_id => @process_pattern.id, :field_descriptor_id => field.id})
+- the_maps = association_instance.maps
+- image_instance = image_instance.blank? ? association_instance.build_mappable_image(:pattern_system => @pattern_system) : image_instance
 
 %div{:id=>"image_associations_#{field.id}"}
-  -f.fields_for :image_association, @process_pattern.image_associations.build do |assoc_form|
-    = assoc_form.hidden_field :mappable_image_id
+  -f.fields_for :image_associations, association_instance do |assoc_form|
     = assoc_form.hidden_field :pattern_id 
+    = assoc_form.hidden_field :field_descriptor_id
+    %div{:id=>"mappable_image_#{field.id}"}
+      - assoc_form.fields_for :mappable_image, image_instance do |img_form|
+        = img_form.file_field :image
+        = img_form.hidden_field :pattern_system_id
+    -unless association_instance.new_record?
+      -assoc_form.fields_for :maps, the_maps do |map_form|
+        = render :partial => "map_fields", :locals => {:f => map_form}
+    -assoc_form.fields_for :maps, association_instance.maps.build, :child_index => "blank_map_record" do |map_form|
+      = render :partial => "map_fields", :locals => {:f => map_form}
 
 -unless image_instance.new_record?
   %dl{:id=>"mappable_image_image_#{field.id}", :class=>"mappable_image", :style=>"background: url(#{image_instance.image.url}) no-repeat; height: #{image_instance.image_height}px; width: #{image_instance.image_width}px;"}
-  -the_maps = @process_pattern.maps
-  -f.fields_for :maps, the_maps do |map_form|
-    = render :partial => "map_fields", :locals => {:f => map_form}
-  -f.fields_for :maps, @process_pattern.maps.build(:mappable_image_id => image_instance.id), :child_index => "blank_map_record" do |map_form|
-    = render :partial => "map_fields", :locals => {:f => map_form}
