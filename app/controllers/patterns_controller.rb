@@ -30,7 +30,7 @@ EOF
   
   def upload_file
     image_params = params[:mappable_image].merge({:pattern_system_id => @pattern_system.id})
-    mappable_image = MappableImage.create image_params
+    mappable_image = MappableImage.create image_params.merge({:is_temporary => true})
     field_id = params[:field_id]
     # Use javascript for setting the mappable_image_id in the
     # hidden fields of the image association, in the view
@@ -123,6 +123,11 @@ EOF
     end
     respond_to do |format|
       if @process_pattern.save
+        # If the update was successful, update all the mappable images of this process
+        # pattern and make them non temporary
+        @process_pattern.image_associations.each do |im|
+          im.mappable_image.update_attribute(:is_temporary, false)
+        end
         flash[:notice] = t(:successful_creation, :model => Pattern.human_name)
         format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { render :xml => @process_pattern, :status => :created, :location => @process_pattern }
@@ -154,6 +159,11 @@ EOF
       unless image_params.blank?
     respond_to do |format|
       if  @process_pattern.update_attributes(params[:pattern])
+        # If the update was successful, update all the mappable images of this process
+        # pattern and make them non temporary
+        @process_pattern.image_associations.each do |im|
+          im.mappable_image.update_attribute(:is_temporary, false)
+        end
         flash[:notice] = t(:successful_update, :model => Pattern.human_name)
         format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { head :ok }

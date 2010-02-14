@@ -31,6 +31,14 @@ namespace :agap do
   desc "Backup the system"
   task  :backup_system => [:backup, :package] do
   end
+
+  desc "Delete unused temporary images"
+  task :clean_tmp_images => :environment do
+    tmp_images = MappableImage.find(:all, :conditions => {:is_temporary => true})
+    count = tmp_images.count
+    tmp_images.each(&:destroy)
+    puts "Deleted #{count} image(s)"
+  end
   
   Rake::PackageTask.new("backup_#{Time.now.strftime('%y%m%d_%H%M')}", :noversion) do |pack|
     pack.need_zip = true

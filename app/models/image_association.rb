@@ -6,4 +6,5 @@ class ImageAssociation < ActiveRecord::Base
   belongs_to  :field_descriptor
   has_many :maps
   accepts_nested_attributes_for :maps, :reject_if => lambda {|a| a[:relation_id].blank?}
+
 end

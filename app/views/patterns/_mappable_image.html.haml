@@ -11,11 +11,11 @@
       - assoc_form.fields_for :mappable_image, image_instance do |img_form|
         = img_form.file_field :image
         = img_form.hidden_field :pattern_system_id
+        -unless image_instance.new_record?
+          %dl{:id=>"mappable_image_image_#{field.id}", :class=>"mappable_image", :style=>"background: url(#{image_instance.image.url}) no-repeat; height: #{image_instance.image_height}px; width: #{image_instance.image_width}px;"}
     -unless association_instance.new_record?
       -assoc_form.fields_for :maps, the_maps do |map_form|
         = render :partial => "map_fields", :locals => {:f => map_form}
     -assoc_form.fields_for :maps, association_instance.maps.build, :child_index => "blank_map_record" do |map_form|
       = render :partial => "map_fields", :locals => {:f => map_form}
 
--unless image_instance.new_record?
-  %dl{:id=>"mappable_image_image_#{field.id}", :class=>"mappable_image", :style=>"background: url(#{image_instance.image.url}) no-repeat; height: #{image_instance.image_height}px; width: #{image_instance.image_width}px;"}

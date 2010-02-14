@@ -1,7 +1,12 @@
 
 /*
  * TODO Manage image deletion (i.e. replace the image by
- * our custom form).
+ * our custom form). If the image is finally deleted, add
+ * a destroy field. Additionally, the images created during
+ * the upload_file action should be marked as temporary and
+ * deleted when the user saves the pattern, or on regular 
+ * occasions using delayed jobs. The image that is finally
+ * validated should have it temporary field blanked out.
  * TODO Manage relations within the map forms
  */
 var AgapImageManager = {
@@ -49,17 +54,7 @@ var AgapImageManager = {
     $$('input[type=file]').each(function(el) {
         var field_id = el.up().previous("input[type=hidden]").value ;
         console.log("Field descriptor id: " + field_id) ;
-        // If there is already an image, install the
-        // image observer and hide the existing form
-        var existing_image = $("mappable_image_image_" + field_id) ;
        
-        // If there an image has already been uploaded,
-        // install an image observer instead 
-        if (existing_image) {
-          el.remove() ;
-          AgapImageManager.install_image_observer(existing_image) ;
-          return ;
-        }
 
         var requestURI = encodeURI("/pattern_systems/" + AgapImageManager.pattern_system + "/patterns/upload_file/" + AgapImageManager.pattern) ;
         console.log("The request will be sent to: \n" + requestURI) ;
@@ -82,7 +77,10 @@ var AgapImageManager = {
           style: "width:1px; height:1px; border:0px;",
           src: "about:blank"  
         }) ;
-        el.replace(form) ;
+        var form_div = new Element('div', {id: "form_div_" + field_id}) ;
+        el.up().insert({'after': form_div}) ;
+        el.remove() ;
+        form_div.insert({'top': form}) ;
         form.insert({'top': input}) ;
         form.insert({'top': field_desc_id}) ;
         form.insert({'top': token}) ;
@@ -95,6 +93,14 @@ var AgapImageManager = {
           event.stop() ;
        }) ;
        console.log("Installed file field observer") ;
+        
+        // If there an image has already been uploaded,
+        // install the image observer right away
+        var existing_image = $("mappable_image_image_" + field_id) ;
+        if (existing_image) {
+          AgapImageManager.install_image_observer(existing_image) ;
+          return ;
+        }
     });
   },
 
@@ -103,12 +109,16 @@ var AgapImageManager = {
    * or as displayed by an edit action) for adding maps.
    */
   install_image_observer: function(image, image_id) {
-    // TODO Add a hidden field pointing to the mappable image id
+    // First we hide the form div (which is right after the image div)
+    var form_div = image.up().next() ;
+    form_div.hide() ;
+    
     if (image_id) {
       // In this case, add a hidden field
       // First, get a known hidden field, that will be
       // cloned then transformed to fit our needs
-      var clonedNode = image.up().previous().previous().cloneNode(false) ; // should be the pattern_id field
+      var pattern_id_field = image.up().up().down() ;
+      var clonedNode = pattern_id_field.cloneNode(false) ;
       clonedNode.id = clonedNode.id.replace(/pattern_id/,"mappable_image_id") ;
       clonedNode.name = clonedNode.name.replace(/pattern_id/,"mappable_image_id") ;
       clonedNode.value = image_id ;
@@ -146,9 +156,21 @@ var AgapImageManager = {
     AgapImageManager.update_maps(image) ;
 
     del_img.observe('click', function(event) {
-      alert("delete this image!!") ;    
-      // TODO Deleting the image should make the
+      // Deleting the image should make the
       // previous form reappear
+      form_div.show() ;
+      if (form_div.down("img")) {
+        form_div.down("img").hide() ;
+      }
+      form_div.down("form").reset() ;
+      form_div.down("form").show() ;
+
+      // We should hide the image
+      image.up().childElements().each(function(el){el.remove()}) ;
+
+      // Delete the hidden field that corresponds to the image id!
+      var mappable_image_id_field = form_div.previous().previous() ;
+      mappable_image_id_field.remove() ;
       event.stop() ;
     }) ;
     add_link.observe('click', function(event) {
