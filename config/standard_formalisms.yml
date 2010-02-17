@@ -115,6 +115,6 @@
       :is_reflexive: true
       :associated_field_name: Strengths
       :associated_field_description: The following pattern(s) address the same issue(s), but focus on the following intents
-    - :name: Refines
+    - :name: Refine
       :associated_field_name: Problem
       :associated_field_description: The following pattern(s) address a more specific problem

@@ -11,8 +11,17 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
    
-     when /pattern systems list/
+    when /pattern systems list/
       '/pattern_systems/' 
+
+    when /show page of the pattern system/
+      "/pattern_systems/#{@pattern_system.short_name}/"
+
+    when /edit page of the pattern system/
+      "/pattern_systems/#{@pattern_system.short_name}/edit"
+
+    when /edit page of the pattern named "(.+)"/
+      "/pattern_systems/#{@pattern_system.short_name}/patterns/#{Pattern.find_by_name($1).id}/edit"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

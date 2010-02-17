@@ -1,3 +1,7 @@
 -classification = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id}
--f.fields_for :classification_selections, @classifications[field.id] do |classif_form|
-  = classif_form.collection_select(:classification_element_id, classification, :id, :name, {:include_blank => true}, {:class => 'agap_single_selector'})
+- if classification.empty?
+  %p
+    = "No element was specified for classification field \"#{field.name}\"."
+- else
+  -f.fields_for :classification_selections, @classifications[field.id] do |classif_form|
+    = classif_form.collection_select(:classification_element_id, classification, :id, :name, {:include_blank => true}, {:class => 'agap_single_selector'})

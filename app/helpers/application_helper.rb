@@ -9,15 +9,4 @@ module ApplicationHelper
     end
   end
 
-
-  MINIMUM_NAME_LENGTH = 4
-  MAXIMUM_NAME_LENGTH = 12
-
-  def generate_short_name(str)
-    raise 'Invalid string' if str.strip == '' or str.strip.length < MINIMUM_NAME_LENGTH
-    first_pass = str.strip.unpack('U*').select{|cp| cp < 127}.pack('U*')
-    first_pass.downcase.slice(0..MAXIMUM_NAME_LENGTH-1).gsub(/\s/, '_')
-
-  end
-
 end
