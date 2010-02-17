@@ -134,6 +134,10 @@ Then /^I should see (\d+) (.+) elements?$/ do |n, element_type|
   BROWSER.send(element_type.gsub(/\s/,"_").concat("s").to_sym).select{|el| el.visible?}.count.should == n.to_i
 end
 
+Then /^I should see a valid image$/ do
+  BROWSER.dls.first.style.should =~ /18\.jpg/
+end
+
 Then /^the select list for field "([^\"]*)" should include the following options:$/ do |field_name, table|
   field = FieldDescriptor.find_by_name(field_name)
   field_array = FieldDescriptor.find_all_by_field_type(field.field_type).map(&:id)

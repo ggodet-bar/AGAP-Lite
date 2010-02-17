@@ -23,6 +23,7 @@ Scenario: Create a new pattern with an existing mappable image
     And I upload a file with valid data for the image named "The image"
     Then I should wait 2 seconds
     And I should see the text "Add a map"
+    And I should see a valid image
 
 @ok
 Scenario: Edit a pattern with an empty mappable image
@@ -44,6 +45,7 @@ Scenario: Edit a pattern with an existing mappable image
     Then I should see 0 file field element
     And I should see the text "Add a map"
     And I should see 1 dl element
+    And I should see a valid image
 
 @ok
 Scenario: Delete an existing image
@@ -84,3 +86,18 @@ Scenario: Add an image then delete it then add it again
     Then I should see 0 file field element
     And I should see the text "Add a map"
     And I should see 1 dl element
+    And I should see a valid image
+
+@ok
+Scenario: Add an image then update the existing pattern
+    Given I have a pattern system named "My pattern system"
+    And the pattern system formalism has a mappable image named "The image"
+    And I have a pattern named "My pattern"
+    When I browse to the edit page of the pattern named "My pattern"
+    And I upload a file with valid data for the image named "The image"
+    And I should wait 3 second
+    And I press the "Update" button
+    Then I should see the text "Pattern was successfully updated"
+    And I should see the text "The image"
+    And I should see 1 dl element
+    And I should see a valid image
