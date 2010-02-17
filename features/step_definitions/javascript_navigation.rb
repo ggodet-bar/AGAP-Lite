@@ -109,6 +109,9 @@ When /^I should wait (\d+) seconds?$/ do |n|
   sleep n.to_i 
 end
 
+When /^I click on the "([^\"]*)" image$/ do |alt_name|
+  BROWSER.image(:alt, alt_name).click
+end
 
 
 ###########################################
@@ -146,5 +149,4 @@ Then /^the select list for field "([^\"]*)" should include the following options
     end.should be_true
   end
 end
-
 

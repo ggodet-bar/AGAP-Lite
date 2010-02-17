@@ -47,10 +47,6 @@ Given /^I add an image "([^\"]*)" associated to the pattern with name "([^\"]*)"
   the_pattern.save
 end
 
-Then /^I should see an image$/ do
-  response.should have_xpath("//*[@id='method_image']")
-end
-
 When /^I should see a link to pattern "([^\"]*)" from pattern system "([^\"]*)" in the pattern body$/ do |pat_name, sys_pat|
   the_pattern = PatternSystem.find_by_short_name(sys_pat).process_patterns.select{ |pattern|  pattern.name == pat_name}.first
   response.should have_xpath("//div[contains(@class,'block')]/ul/li/a[contains(@href, #{the_pattern.id.to_s})]")
