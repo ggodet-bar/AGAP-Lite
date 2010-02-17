@@ -3,6 +3,10 @@ Feature: Image management
   In order to add, delete and modify images in AGAP Lite
   I need to access the desired functionality
 
+Background:
+  Given the locale is "en"
+  And we need a javascript browser
+
 @ok
 Scenario: Create a new pattern with an empty mappable image
     Given I have a pattern system

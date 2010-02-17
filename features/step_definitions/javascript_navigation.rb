@@ -39,8 +39,12 @@ end
 #
 ###########################################
 
+Given /^we need a javascript browser$/ do
+    $BROWSER = Watir::Browser.new :firefox
+end
+
 Given /^I browse to (.+)$/ do |dest|
-  BROWSER.goto WEB_ROOT + path_to(dest)
+  $BROWSER.goto WEB_ROOT + path_to(dest)
 end
 
 
@@ -79,7 +83,7 @@ Given /^I have a mappable image attached to the pattern "([^\"]*)" for the field
 end
 
 Given /^I follow the "(.+)" link$/ do |link_text|
-  BROWSER.link(:text, link_text).click
+  $BROWSER.link(:text, link_text).click
 end
 
 
@@ -91,18 +95,18 @@ end
 ###########################################
 
 When /^I fill the (\d+)(st|nd|rd|th) text field with "(.+)"$/ do |index, _, content|
-  #BROWSER.text_field(:xpath, "//input[@type=\"text\"][#{index}]").should exist
-  #BROWSER.text_field(:xpath, "//input[@type=\"text\"][#{index}]").click
-  BROWSER.text_field(:index, index.to_i).set(content)
+  #$BROWSER.text_field(:xpath, "//input[@type=\"text\"][#{index}]").should exist
+  #$BROWSER.text_field(:xpath, "//input[@type=\"text\"][#{index}]").click
+  $BROWSER.text_field(:index, index.to_i).set(content)
 end
 
 
 When /^I press the "(.+)" button$/ do |name|
-  BROWSER.button(:value, name).click
+  $BROWSER.button(:value, name).click
 end
 
 When /^I upload a file with valid data for the image named "([^\"]*)"$/ do |arg1|
-  BROWSER.file_fields.first.set(File.join(RAILS_ROOT, 'features', 'upload-files','18.jpg'))
+  $BROWSER.file_fields.first.set(File.join(RAILS_ROOT, 'features', 'upload-files','18.jpg'))
 end
 
 When /^I should wait (\d+) seconds?$/ do |n|
@@ -110,7 +114,7 @@ When /^I should wait (\d+) seconds?$/ do |n|
 end
 
 When /^I click on the "([^\"]*)" image$/ do |alt_name|
-  BROWSER.image(:alt, alt_name).click
+  $BROWSER.image(:alt, alt_name).click
 end
 
 
@@ -121,21 +125,21 @@ end
 ###########################################
 
 Then /^I should see the text "(.+)"$/ do |text|
-  BROWSER.text.should include(text)
+  $BROWSER.text.should include(text)
 end
 
 Then /^I should not see the text "(.+)"$/ do |text|
-  BROWSER.text.should_not include(text)
+  $BROWSER.text.should_not include(text)
 end
 
 Then /^I should see (\d+) (.+) elements?$/ do |n, element_type|
-  #n.to_i.times{|i| BROWSER.send(element_type.gsub(/\s/,"_").to_sym, :index, i + 1).should exist}
-  #BROWSER.should have(n.to_i).send(element_type.gsub(/\s/,"_").concat("s").to_sym)
-  BROWSER.send(element_type.gsub(/\s/,"_").concat("s").to_sym).select{|el| el.visible?}.count.should == n.to_i
+  #n.to_i.times{|i| $BROWSER.send(element_type.gsub(/\s/,"_").to_sym, :index, i + 1).should exist}
+  #$BROWSER.should have(n.to_i).send(element_type.gsub(/\s/,"_").concat("s").to_sym)
+  $BROWSER.send(element_type.gsub(/\s/,"_").concat("s").to_sym).select{|el| el.visible?}.count.should == n.to_i
 end
 
 Then /^I should see a valid image$/ do
-  BROWSER.dls.first.style.should =~ /18\.jpg/
+  $BROWSER.dls.first.style.should =~ /18\.jpg/
 end
 
 Then /^the select list for field "([^\"]*)" should include the following options:$/ do |field_name, table|
@@ -145,7 +149,7 @@ Then /^the select list for field "([^\"]*)" should include the following options
   table.hashes.each do |entry|
     is_selected = entry['selected'] == "true" ? true : false
     is_disabled = entry['disabled'] == "true" ? true : false
-    list = BROWSER.select_lists.select{|l| l.visible?}[index - 1]
+    list = $BROWSER.select_lists.select{|l| l.visible?}[index - 1]
     list.options.any? do |el|
       el.text == entry['name'] &&
       list.option(:text, el.text).selected? == is_selected && 

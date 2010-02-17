@@ -3,6 +3,10 @@ Feature: Javascript Navigation
   In order to use the full functionality of AGAP Lite
   I need to use JavaScript assisted navigation
 
+Background:
+  Given the locale is "en"
+  And we need a javascript browser
+
 @ok
 Scenario: Add classification elements
     Given I have a pattern system

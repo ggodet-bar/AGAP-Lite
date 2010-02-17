@@ -60,12 +60,16 @@ Spork.each_run do
   require 'database_cleaner'
   DatabaseCleaner.strategy = :truncation
 
-  Before do
-    BROWSER = Watir::Browser.new :firefox
-  end
-
+  #Before do
+  #  if $javascript_test
+  #    BROWSER = Watir::Browser.new :firefox
+  #  end
+  #end
 
   After do
-    BROWSER.close
+    if $BROWSER
+      $BROWSER.close
+      $BROWSER = nil
+    end
   end
 end
