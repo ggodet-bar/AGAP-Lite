@@ -1,0 +1,14 @@
+#tabs{:style => "position: absolute; bottom: 0px; margin-left: 1em; padding: 0;"}
+  - %w{pattern_systems system_formalisms}.each do |tab|
+    - if tab == params[:controller]
+      %div{:style => "float:left; margin-left: 1.2em; margin-top: 33px"}
+        =image_tag("common_images/white_border_left.png", :style => "position: relative; float: left; margin-left: -6px;")
+        %div{:style => "position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background-color: white; font-weight: bold;color: black; white-space: nowrap"}=tab.gsub(/_/, ' ').capitalize
+        = image_tag("common_images/white_border_right.png", :style => "position: relative; float: right; margin-right: -5px; margin-top: -33px")
+    - else
+      %div{:style => "float:left; margin-left: 1.2em; margin-top: 33px"}
+        = image_tag("common_images/blue_border_left.png", :style => "position: relative; margin-left: -5px; float: left")
+        %div{:style => "position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background: #fff url('/images/common_images/blue_background.png') repeat-x top left; font-weight: bold; white-space: nowrap"}
+          = link_to tab.gsub(/_/, ' ').capitalize, send((tab + '_path').to_sym), :style => "text-decoration: none; color: white"
+        = image_tag("common_images/blue_border_right.png", :style => "position: relative; float: right; margin-right: -5px; margin-top: -33px")
+

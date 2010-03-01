@@ -13,16 +13,7 @@
     #wrapper
       #header
         = render 'shared/params_button'
-        #tabs{:style => "position: absolute; bottom: 0px; margin-left: 1em; padding: 0;"}
-          #pattern_systems_tab{:style => "float: left"}
-            = image_tag("common_images/blue_border_left.png", :style => "position: relative; margin: 0; float: left")
-            %div{:style => "position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background: #fff url('/images/common_images/blue_background.png') repeat-x top left; font-weight: bold;"}
-              = link_to "Pattern systems", pattern_systems_path, :style => "text-decoration: none; color: white"
-            = image_tag("common_images/blue_border_right.png", :style => "position: relative; float: right; margin-right: -5px; margin-top: -33px")
-          #system_formalisms_tab{:style => "float:left; margin-left: 0.8em"}
-            =image_tag("common_images/white_border_left.png", :style => "position: relative; margin: 0; float: left")
-            %div{:style => "position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background-color: white; font-weight: bold;color: black"}System formalisms
-            = image_tag("common_images/white_border_right.png", :style => "position: relative; float: right; margin-right: -5px; margin-top: -33px")
+        = render 'shared/tabs'
       = render 'shared/parameters'
       #content
         %p#notices{:style => "color:green"}= h flash[:notice]
