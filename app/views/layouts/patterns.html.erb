@@ -22,14 +22,14 @@
 <body>
 <div id="wrapper">
 	<div id="header">
-	<div id="top_params">
+	<div id="top_params" style="margin:0">
 		<span style="float:left;"><% form_tag pattern_system_patterns_path, :method => 'get' do %>
 		    <%= text_field_tag :search, params[:search] %>
 		    <%= submit_tag t(:search), :name => nil %>
 		<% end %>
 		</span>
-		<span id="param_span" style="float:right;">
-		 <%= link_to_function t(:settings), nil  do |page|
+		<span id="param_span" style="float:right; margin-right: 1em;">
+		 <%= link_to_function image_tag("common_images/settings_btn.png"),  nil  do |page|
 	page.call	'Popup.toggle', "params"
 end%>
 		</span>

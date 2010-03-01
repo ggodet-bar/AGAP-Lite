@@ -20,10 +20,22 @@
 		<%= link_to((t :back_to_systems_list), pattern_systems_path) %>
 	<% end %>
 </span>
-<span id="param_span">| <%= link_to_function t(:settings), nil  do |page|
+<span id="param_span" style="float:right; margin-right: 1em;"> <%= link_to_function image_tag("common_images/settings_btn.png"), nil  do |page|
 	page.call	"Popup.toggle", "params"
 end%>
 </span>
+<div id="tabs" style="position: absolute; bottom: 0px; margin-left: 1em; padding: 0;">
+  <div id="pattern_systems_tab" style="float: left">
+  <%= image_tag("common_images/white_border_left.png", :style => "position: relative; margin: 0; float: left") %>
+<div style="position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background-color: white; font-weight: bold;color: black"><%= "Pattern systems" %></div>
+<%= image_tag("common_images/white_border_right.png", :style => "position: relative; float: right; margin-right: -5px; margin-top: -33px") %>
+  </div>
+  <div id="pattern_formalisms_tab" style="float: left; margin-left: 0.8em">
+  <%= image_tag("common_images/blue_border_left.png", :style => "position: relative; margin: 0; float: left") %>
+  <div style="position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background: #fff url('/images/common_images/blue_background.png') repeat-x top left; font-weight: bold;"><%= link_to "System formalisms", "#", :style => "text-decoration: none; color: white;" %></div>
+<%= image_tag("common_images/blue_border_right.png", :style => "position: relative; float: right; margin-right: -5px; margin-top: -33px") %>
+  </div>
+</div>
 </div>
 <%= render :partial => 'shared/parameters' %>
 <div id="content">
