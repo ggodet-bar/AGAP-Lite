@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
        pat_system.resources :patterns
        pat_system.resources :participants
     end
+
+    map.resources :system_formalisms
   
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|

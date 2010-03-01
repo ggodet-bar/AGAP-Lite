@@ -1,0 +1,7 @@
+%h1 List of system formalisms
+
+%table#pattern_systems_list
+  = render :partial => "system_formalism", :collection => @system_formalisms
+
+%br
+= link_to "New system formalism", new_system_formalism_path
