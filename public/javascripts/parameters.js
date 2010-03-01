@@ -18,6 +18,9 @@ var Parameters = {
   	       for (var i = 0, element ; element = $$('.question_mark')[i]; i++) {
   	           element.hide() ;
   	       }
+               if ($('tabs')) {
+                  $('tabs').show() ;
+               }
   	    }
   	 });
   	} else {
@@ -30,8 +33,13 @@ var Parameters = {
   	       Droppables.remove('on_position') ;
   	       Cookie.set('noob_mode', 'true') ;
   	       for (var i = 0, element ; element = $$('.question_mark')[i]; i++) {
-  	          element.setStyle({display: 'inline'}) ;
+  	          element.show() ;
   	       }
+
+               // Hide the tabs
+               if ($('tabs')) {
+                  $('tabs').hide() ;
+               }
   	     }
   	 });
   	 }

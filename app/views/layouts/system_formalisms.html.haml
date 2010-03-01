@@ -28,7 +28,4 @@
         %p#notices{:style => "color:green"}= h flash[:notice]
         = yield
       .clearfooter
-    #copyright_notice
-      ©2010, Guillaume Godet-Bar
-      %br
-      Contact: guillaume dot godetbar at gmail dot com
+    = render 'shared/copyright'

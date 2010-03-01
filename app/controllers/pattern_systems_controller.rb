@@ -6,6 +6,7 @@ require 'json'
 class PatternSystemsController < ApplicationController
 
   before_filter :load_system, :except => [:new, :index, :create]
+  before_filter :check_noob_mode
 
   # GET /pattern_systems
   # GET /pattern_systems.xml
@@ -50,7 +51,6 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems/1/edit
   def edit
     #@root_pattern = @pattern_system.root_pattern unless @pattern_system.root_pattern.blank?
-    @noob_mode = cookies[:noob_mode] == 'true' ? true : false
     @classifications = @pattern_system.system_formalism.pattern_formalisms.collect do |p|
        p.field_descriptors.select{|f| f.field_type.include?('classification')}
     end.flatten
@@ -71,7 +71,6 @@ class PatternSystemsController < ApplicationController
     rescue
       logger.info "Could not generate a short name for the pattern system"
     end
-    @noob_mode = cookies[:noob_mode] == 'true' ? true : false
     
     respond_to do |format|
       if @pattern_system.save
@@ -164,5 +163,7 @@ private
       @pattern_system = PatternSystem.find_by_short_name(params[:id])
   end
 
-
+  def check_noob_mode
+      @noob_mode = cookies[:noob_mode] == 'true' ? true : false
+  end
 end

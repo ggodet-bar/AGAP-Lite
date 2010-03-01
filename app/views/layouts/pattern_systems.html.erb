@@ -21,7 +21,7 @@
 	<% end %>
 </span>
 <%= render 'shared/params_button' %>
-<div id="tabs" style="position: absolute; bottom: 0px; margin-left: 1em; padding: 0;">
+<div id="tabs" style="position: absolute; bottom: 0px; margin-left: 1em; padding: 0;<%=  "display: none" if @noob_mode %>">
   <div id="pattern_systems_tab" style="float: left">
   <%= image_tag("common_images/white_border_left.png", :style => "position: relative; margin: 0; float: left") %>
 <div style="position: relative; display: table-cell; vertical-align: middle; height: 33px; padding-left: 3px; padding-right: 3px; margin-top: -33px; text-align: center; background-color: white; font-weight: bold;color: black"><%= "Pattern systems" %></div>
@@ -43,7 +43,7 @@
 </div>
 <div class="clearfooter"></div>
 </div>
-<div id="copyright_notice">©2009, Guillaume Godet-Bar<br />Contact: guillaume dot godetbar at gmail dot com</div>
+<%= render 'shared/copyright' %>
 
 </body>
 </html>
