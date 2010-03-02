@@ -164,6 +164,7 @@ private
   end
 
   def check_noob_mode
+      cookies[:noob_mode] ||= 'true'
       @noob_mode = cookies[:noob_mode] == 'true' ? true : false
   end
 end

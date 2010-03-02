@@ -12,12 +12,8 @@ var Parameters = {
   	       Popup.close('params') ; 
   	       Droppables.remove('off_position') ;
   	       Cookie.set('noob_mode', 'false') ;
-  	       for (var i = 0, element ; element = $$('.helper_info')[i]; i++) {
-  	           element.hide() ;
-  	       }
-  	       for (var i = 0, element ; element = $$('.question_mark')[i]; i++) {
-  	           element.hide() ;
-  	       }
+               $$('.helper_info').each(function(el){el.hide();});
+               $$('.question_mark').each(function(el){el.hide();});
                if ($('tabs')) {
                   $('tabs').show() ;
                }
@@ -32,9 +28,7 @@ var Parameters = {
   	       Popup.close('params') ; 
   	       Droppables.remove('on_position') ;
   	       Cookie.set('noob_mode', 'true') ;
-  	       for (var i = 0, element ; element = $$('.question_mark')[i]; i++) {
-  	          element.show() ;
-  	       }
+               $$('.question_mark').each(function(el){el.show();});
 
                // Hide the tabs
                if ($('tabs')) {

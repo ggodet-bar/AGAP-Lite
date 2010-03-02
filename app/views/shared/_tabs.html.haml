@@ -1,4 +1,4 @@
-#tabs{:style => "position: absolute; bottom: 0px; margin-left: 1em; padding: 0;"}
+#tabs{:style => "position: absolute; bottom: 0px; margin-left: 1em; padding: 0;#{@noob_mode ? 'display: none' : ''}"}
   - %w{pattern_systems system_formalisms}.each do |tab|
     - if tab == params[:controller]
       %div{:style => "float:left; margin-left: 1.2em; margin-top: 33px"}
