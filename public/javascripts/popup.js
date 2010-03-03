@@ -50,7 +50,9 @@ var Popup = {
 	},
 
 	close : function(popup_id) {
-		Effect.Fade(popup_id, {afterFinish : function() {
+                // N.B The fadeout is triggered once all the preceding Effects
+                // have been resolved (hence the queue parameter)
+		Effect.Fade(popup_id, {queue: 'end', afterFinish : function() {
 	 		document.body.style.overflow= 'auto' ;
 	 		if ($('splash_137')) {
                           $('splash_137').remove() ;
