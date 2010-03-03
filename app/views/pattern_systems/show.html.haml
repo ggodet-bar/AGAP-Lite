@@ -45,7 +45,7 @@
 
 .block
   - if @pattern_system.system_formalism.pattern_formalisms.count > 1
-    = link_to t(:add_new_pattern), show_pattern_types_path(@pattern_system)
+    = link_to t(:add_new_pattern), show_pattern_types_pattern_system_patterns_path(@pattern_system)
   -  else
     = link_to t(:add_new_pattern), new_pattern_system_pattern_path(@pattern_system)
   %br
