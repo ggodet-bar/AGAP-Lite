@@ -1,22 +1,26 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
   %head
-    %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
-    %title System formalisms
+    %meta{"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
+    %title Pattern systems: #{controller.action_name}
     = stylesheet_link_tag 'generic', 'styles'
     = javascript_include_tag :defaults
     = javascript_include_tag 'livepipe'
     = javascript_include_tag 'cookie'
     = javascript_include_tag 'parameters'
     = javascript_include_tag 'popup'
+    = include_tiny_mce_if_needed
   %body
     #wrapper
       #header
-        = render 'shared/params_button'
-        = render 'shared/tabs'
-      = render 'shared/parameters'
+        %span
+          - unless controller.action_name == 'index'
+            = link_to t(:back_systems_list), pattern_systems_path
+        = render "shared/params_button"
+        = render "shared/tabs"
+      = render "shared/parameters"
       #content
         %p#notices{:style => "color:green"}= h flash[:notice]
         = yield
       .clearfooter
-    = render 'shared/copyright'
+    = render "shared/copyright"
