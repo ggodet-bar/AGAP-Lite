@@ -27,7 +27,7 @@ Scenario: Create a new pattern with an existing mappable image
     And I browse to the show page of the pattern system "My pattern system"
     When I follow the "Add new pattern" link
     And I upload a file with valid data for the image named "The image"
-    Then I should wait 2 seconds
+    Then I should wait 4 seconds
     And I should see the text "Add a map"
     And I should see a valid image
 

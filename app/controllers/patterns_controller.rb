@@ -164,12 +164,12 @@ EOF
         @process_pattern.image_associations.each do |im|
           im.mappable_image.update_attribute(:is_temporary, false)
         end
-        flash[:notice] = t(:successful_update, :model => Pattern.human_name)
+        flash[:notice] = t(:successful_update, :model => Pattern.model_name.human)
         format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { head :ok }
       else
         logger.debug  @process_pattern.errors.full_messages
-        flash[:error] = t(:failed_update, :model => Pattern.human_name) 
+        flash[:error] = t(:failed_update, :model => Pattern.model_name.human) 
         format.html { render :action => "edit" }
         format.xml  { render :xml => @process_pattern.errors, :status => :unprocessable_entity }
       end

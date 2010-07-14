@@ -37,7 +37,7 @@ var AgapImageManager = {
     } else if ($('new_pattern')) {
       AgapImageManager.token_value = $('new_pattern').down('input[name=authenticity_token]').value ;
     }
-    console.log("Fetched page data") ;
+    console.log("[ImageMapper]Fetched page data") ;
   }, 
 
   /**
@@ -53,11 +53,11 @@ var AgapImageManager = {
   install_form_observer: function() {
     $$('input[type=file]').each(function(el) {
         var field_id = el.up().previous("input[type=hidden]").value ;
-        console.log("Field descriptor id: " + field_id) ;
+        console.log("[ImageMapper]Field descriptor id: " + field_id) ;
        
 
         var requestURI = encodeURI("/pattern_systems/" + AgapImageManager.pattern_system + "/patterns/" + AgapImageManager.pattern + "/upload_file") ;
-        console.log("The request will be sent to: \n" + requestURI) ;
+        console.log("[ImageMapper]The request will be sent to: \n" + requestURI) ;
         var loading = undefined ;
         
         var form = new Element('form', {
@@ -81,23 +81,24 @@ var AgapImageManager = {
         el.up().insert({'after': form_div}) ;
         el.remove() ;
         form_div.insert({'top': form}) ;
-        form.insert({'top': input}) ;
-        form.insert({'top': field_desc_id}) ;
-        form.insert({'top': token}) ;
-        form.insert({'bottom': submit}) ;
-        form.insert({'after': iframe}) ;
+        form.insert({'top': input})
+            .insert({'top': field_desc_id})
+            .insert({'top': token})
+            .insert({'bottom': submit})
+            .insert({'after': iframe}) ;
         input.observe('change', function(event) {
           var params =  {mappable_image_file_name: $F(input), mappable_image_field_descriptor_id: field_id} ;
           form.target = "upload_iframe_" + field_id;
           submit.click() ;
           event.stop() ;
        }) ;
-       console.log("Installed file field observer") ;
+       console.log("[ImageMapper]Installed file field observer") ;
         
         // If there an image has already been uploaded,
         // install the image observer right away
         var existing_image = $("mappable_image_image_" + field_id) ;
         if (existing_image) {
+          console.log("[ImageMapper]An image was already uploaded.");
           AgapImageManager.install_image_observer(existing_image) ;
           return ;
         }
@@ -431,7 +432,7 @@ var AgapImageManager = {
                   !el.childElements().any(function(a){return a.name.include("blank_map_record")}) &&
                   !el.childElements().any(function(a){return a.name.include("_destroy") && a.value == 1})
         });
-    console.log(maps.size()) ;
+    console.log("[ImageMapper]Maps size: " + maps.size()) ;
     maps.each(function(el){
       var x_corner = el.down().value ;
       var y_corner = el.down().next().value ;
@@ -500,7 +501,6 @@ var AgapImageManager = {
     relation.value = relation_id ;
     blank_map.insert({'after': clone}) ;
     clone.id = "map_fields_" + sub_id   ;
-    console.log(clone) ;
     var image = map.up("dl") ;
     map.remove() ;
 

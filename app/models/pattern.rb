@@ -9,7 +9,7 @@ class Pattern < ActiveRecord::Base
   accepts_nested_attributes_for :text_instances, :reject_if => lambda {|a| a[:content].blank?}
 
   has_many     :image_associations, :dependent => :destroy
-  accepts_nested_attributes_for :image_associations, :reject_if => lambda {|a| a[:field_descriptor_id].blank?}
+  accepts_nested_attributes_for :image_associations, :reject_if => lambda {|a| a[:field_descriptor_id].blank? || a[:mappable_image_id].blank?}
   has_many     :mappable_images, :through => :image_associations
 
   has_many  :relations, :dependent => :destroy, :foreign_key => 'source_pattern_id'

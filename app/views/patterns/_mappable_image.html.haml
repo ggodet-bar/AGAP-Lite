@@ -1,6 +1,7 @@
 - image_instance = @process_pattern.image_associations.select{|a| a.field_descriptor_id == field.id}.map(&:mappable_image).first
 - association_instance = image_instance.blank? ? @process_pattern.image_associations.build(:field_descriptor_id => field.id) : ImageAssociation.where(:pattern_id => @process_pattern.id, :field_descriptor_id => field.id).first
 - the_maps = association_instance.maps
+= debug image_instance
 - image_instance = image_instance.blank? ? association_instance.build_mappable_image(:pattern_system => @pattern_system) : image_instance
 
 %div{:id=>"image_associations_#{field.id}"}

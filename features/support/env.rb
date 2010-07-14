@@ -70,6 +70,7 @@ Spork.each_run do
       $BROWSER.close
       $BROWSER = nil
     end
+    DatabaseCleaner.clean
   end
 
 end
