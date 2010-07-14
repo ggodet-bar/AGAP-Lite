@@ -106,8 +106,8 @@ module Crawler
         end
     end
     
-    base_path = "#{RAILS_ROOT}/tmp/PatternSystem"
-    project_path = "#{RAILS_ROOT}/public"
+    base_path = Rails.root.join("tmp", "PatternSystem").to_s
+    project_path = Rails.root.join("public").to_s
     
     # Nettoyage des fichiers temporaires (à supprimer)
     FileUtils.rm_r base_path if File.exists?(base_path)
@@ -150,7 +150,7 @@ module Crawler
     logger.debug "\n--- DONE! ---\n\n"
     
     logger.debug "Compressing files into archive"
-    archive_path = "#{RAILS_ROOT}/tmp/PatternSystem.zip"
+    archive_path = Rails.root.join("tmp", "PatternSystem.zip").to_s
     FileUtils.rm archive_path, :force  => true
     
     Zip::ZipFile.open(archive_path, 'w') do |zipfile|
@@ -162,7 +162,7 @@ module Crawler
 
   # Suppose que l'accès est garanti au site, via échanges de clés sécurisées par ex.
   def Crawler::ssh_send_to(distant_site, login, distant_path)
-    local_path = "#{RAILS_ROOT}/tmp/PatternSystem.zip"
+    local_path = Rails.root.join("tmp", "PatternSystem.zip").to_s
     
     unless File.exists?(local_path)
       raise "Archive file not present!"

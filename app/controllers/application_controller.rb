@@ -8,15 +8,6 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '59133f99ad2fd376b01c658aaae40434'
   
-  uses_tiny_mce :options  =>  {  
-                                :encoding => 'html',
-                                :theme  => 'advanced',
-                                :plugins => %w{ upimage safari },
-                                :theme_advanced_buttons1_add  => 'upimage'
-                              },
-		:only => [:new, :create, :edit, :update]
-  I18n.locale = :en
-  
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 

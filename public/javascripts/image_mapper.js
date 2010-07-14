@@ -56,7 +56,7 @@ var AgapImageManager = {
         console.log("Field descriptor id: " + field_id) ;
        
 
-        var requestURI = encodeURI("/pattern_systems/" + AgapImageManager.pattern_system + "/patterns/upload_file/" + AgapImageManager.pattern) ;
+        var requestURI = encodeURI("/pattern_systems/" + AgapImageManager.pattern_system + "/patterns/" + AgapImageManager.pattern + "/upload_file") ;
         console.log("The request will be sent to: \n" + requestURI) ;
         var loading = undefined ;
         

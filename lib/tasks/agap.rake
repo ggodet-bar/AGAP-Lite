@@ -42,7 +42,7 @@ namespace :agap do
   
   Rake::PackageTask.new("backup_#{Time.now.strftime('%y%m%d_%H%M')}", :noversion) do |pack|
     pack.need_zip = true
-    pack.package_dir = "#{RAILS_ROOT}/backups"
+    pack.package_dir = Rails.root.join("backups").to_s
     unless ENV['names'].nil?
       ENV['names'].split(',').each do |a_name|
         if File.exist?("public/images/#{a_name}")

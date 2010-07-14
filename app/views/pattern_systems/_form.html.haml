@@ -5,7 +5,7 @@
 - if @noob_mode
   %div#effect_test1.helper_info{:style => "display:none"}
     %p Describe the latest updates concerning your pattern system
-= f.text_area(:update_field, :class => "mceEditor")
+= f.tinymce :update_field
 
 %h3
   = t :characteristics
@@ -14,7 +14,7 @@
 - if @noob_mode
   %div#effect_test2.helper_info{:style => "display:none"}
     %p Describe the specificities of your pattern system, who it is addressed to, should it be used following specific time constraints etc.
-= f.text_area(:characteristics, :class => "mceEditor")
+= f.tinymce :characteristics
 
 - @classifications.each do |cl|
   %h3
@@ -26,7 +26,7 @@
       %p= cl.description
   .classification
     - selection = @pattern_system.classification_elements.select{|a| a.field_descriptor_id == cl.id}
-    - f.fields_for :classification_elements, selection do |classif_form|
+    = f.fields_for :classification_elements, selection do |classif_form|
       = render 'classification_fields', :f => classif_form
     = link_to_add_fields "add", f, :classification_elements, cl.id
 

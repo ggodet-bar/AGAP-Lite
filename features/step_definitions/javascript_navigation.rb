@@ -77,7 +77,7 @@ Given /^I have a pattern named "(.+)"$/ do |name|
 end
 
 Given /^I have a mappable image attached to the pattern "([^\"]*)" for the field "(.+)"$/ do |name, field_name|
-  file = File.new(File.join(RAILS_ROOT, "features", "upload-files", "18.jpg"))
+  file = File.new(Rails.root.join("features", "upload-files", "18.jpg"))
   image = Factory(:mappable_image, :image => file, :pattern_system => @pattern_system)
   Factory(:image_association, :mappable_image => image, :pattern => Pattern.find_by_name(name), :field_descriptor => FieldDescriptor.find_by_name(field_name))
 end
@@ -106,7 +106,7 @@ When /^I press the "(.+)" button$/ do |name|
 end
 
 When /^I upload a file with valid data for the image named "([^\"]*)"$/ do |arg1|
-  $BROWSER.file_fields.first.set(File.join(RAILS_ROOT, 'features', 'upload-files','18.jpg'))
+  $BROWSER.file_fields.first.set(Rails.root.join('features', 'upload-files','18.jpg'))
 end
 
 When /^I should wait (\d+) seconds?$/ do |n|

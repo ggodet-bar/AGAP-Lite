@@ -13,13 +13,13 @@
     = javascript_include_tag 'state_machine'
     = javascript_include_tag 'selector'
     = javascript_include_tag 'image_mapper'
-    = include_tiny_mce_if_needed
+    = init_tinymce_hammer_if_required
   %body
     #wrapper
       #header
         #top_params{:style=>"margin:0"}
           %span{:style => "float:left"}
-            - form_tag pattern_system_patterns_path, :method => 'get' do
+            = form_tag pattern_system_patterns_path, :method => 'get' do
               = text_field_tag :search, params[:search]
               = submit_tag t(:search), :name => nil
           %span#param_span{:style => "float:right; margin-right: 1em;"}

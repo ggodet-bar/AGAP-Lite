@@ -1,8 +1,18 @@
-def have_a_field_descriptor_named(expected)
-  simple_matcher("a field descriptor named #{expected}") do |given, matcher|
-    matcher.failure_message = "expected to find a field descriptor named #{expected}"
-    matcher.negative_failure_message = "did not expect to find a field descriptor named #{expected}"
-    given.field_descriptors.any?{|fie| fie.name == expected}
+Spec::Matchers.define :have_a_field_descriptor_named do |expected|
+  match do |actual|
+    actual.field_descriptors.any?{|fie| fie.name == expected}
+  end
+
+  failure_message_for_should do |actual|
+    "expected to find a field descriptor named #{expected}"
+  end
+
+  failure_message_for_should_not do |actual|
+    "did not expect to find a field descriptor named #{expected}"
+  end
+
+  description do
+    "a field descriptor named #{expected}"
   end
 end
 

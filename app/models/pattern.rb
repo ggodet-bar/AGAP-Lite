@@ -19,7 +19,6 @@ class Pattern < ActiveRecord::Base
   # Returns a parallel array of instances for each field
   # described by the pattern formalism
   def field_instances
-    # We should be creating an array of fields
     interface_fields, solution_fields = self.pattern_formalism.fields
 
     # We get the first non nil instance that corresponds to the field id

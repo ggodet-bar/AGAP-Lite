@@ -1,6 +1,6 @@
 %div{:id=>"pattern_selector", :class=>"popup", :style=>"position: fixed; height: 230px; display: none;"}
   %h2{:style=>"margin-left: 0; float: none; padding-left: 0;"}Pattern selector
-  - remote_form_for Relation.new(:source_pattern_id => @process_pattern.id), :url => {:action => 'create_relation'}, :html=> {:id => 'pattern_selector_form'} do |relation_form| 
+  = form_for Relation.new(:source_pattern_id => @process_pattern.id), :remote => true, :url => create_relation_path, :html=> {:id => 'pattern_selector_form'} do |relation_form| 
     %div
       %p Please choose pattern to link to (from the current pattern):
       %p= relation_form.collection_select :target_pattern_id, @pattern_system.patterns - [@process_pattern], :id, :name

@@ -11,7 +11,7 @@ class PatternSystemsController < ApplicationController
   # GET /pattern_systems
   # GET /pattern_systems.xml
   def index
-    @pattern_systems = PatternSystem.find(:all)
+    @pattern_systems = PatternSystem.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pattern_systems }
@@ -74,7 +74,7 @@ class PatternSystemsController < ApplicationController
     
     respond_to do |format|
       if @pattern_system.save
-        flash[:notice] = t(:successful_creation, :model => PatternSystem.human_name)
+        flash[:notice] = t(:successful_creation, :model => PatternSystem.model_name.human)
         format.html { redirect_to :action => 'edit', :id => @pattern_system.short_name, :from_create => true }
         format.xml  { render :xml => @pattern_system, :status => :created, :location => @pattern_system }
       else
@@ -89,7 +89,7 @@ class PatternSystemsController < ApplicationController
   def update
     respond_to do |format|
       if @pattern_system.update_attributes(params[:pattern_system])
-        flash[:notice] = t(:successful_update, :model => PatternSystem.human_name)
+        flash[:notice] = t(:successful_update, :model => PatternSystem.model_name.human)
         format.html { redirect_to(@pattern_system) }
         format.xml  { head :ok }
       else
@@ -104,7 +104,7 @@ class PatternSystemsController < ApplicationController
   def destroy
     @pattern_system.destroy
     respond_to do |format|
-      flash[:notice] = t(:successful_delete, :model => PatternSystem.human_name)
+      flash[:notice] = t(:successful_delete, :model => PatternSystem.model_name.human)
       format.html { redirect_to(pattern_systems_url) }
       format.xml  { head :ok }
     end
@@ -160,7 +160,7 @@ class PatternSystemsController < ApplicationController
   end
 private
   def load_system
-      @pattern_system = PatternSystem.find_by_short_name(params[:id])
+      @pattern_system = PatternSystem.where(:short_name => params[:id]).first
   end
 
   def check_noob_mode

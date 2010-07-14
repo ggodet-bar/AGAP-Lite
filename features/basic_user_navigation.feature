@@ -10,7 +10,7 @@ Background:
 @ok
 Scenario: Blank list of pattern systems
   Given I am on the homepage
-  When I follow "enter"
+  # When I follow "enter"
   Then I should see "New pattern system"
 
 @ok
@@ -36,7 +36,7 @@ Scenario: Create a pattern system with one pattern type
   And I fill in "Name" with "A test system"
   And I select "First form" from "pattern_system[system_formalism_id]"
   And I press "Next"
-  Then I should see "Patternsystem was successfully created"
+  Then I should see "Pattern system was successfully created"
   And I should see "Creation of a new pattern system (step 2/2)"
 
 @ok
@@ -51,7 +51,7 @@ Scenario: Create a pattern system with several pattern types
   And I fill in "Name" with "A test system"
   And I select "Second form" from "pattern_system[system_formalism_id]"
   And I press "Next"
-  Then I should see "Patternsystem was successfully created"
+  Then I should see "Pattern system was successfully created"
 
 @ok
 Scenario: Edit an existing pattern system

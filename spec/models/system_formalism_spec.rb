@@ -1,8 +1,18 @@
-def have_a_relation_descriptor_named(expected)
-  simple_matcher("a relation descriptor named #{expected}") do |given, matcher|
-    matcher.failure_message = "expected to find a relation descriptor named #{expected}"
-    matcher.negative_failure_message = "did not expect to find a relation descriptor named #{expected}"
-    given.relation_descriptors.any?{|rel| rel.name == expected}
+Spec::Matchers.define :have_a_relation_descriptor_named do |expected|
+  match do |actual|
+    actual.relation_descriptors.any?{|rel| rel.name == expected}
+  end
+
+  failure_message_for_should do
+    "expected to find a relation descriptor named #{expected}"
+  end
+
+  failure_message_for_should_not do
+    "did not expect to find a relation descriptor named #{expected}"
+  end
+
+  description do
+    "a relation descriptor named #{expected}"
   end
 end
 
@@ -39,13 +49,15 @@ describe "A system formalism" do
   it "should not allow adding unalterable relation descriptors" do
       @formalism.relation_descriptors << RelationDescriptor.new({:name => "Unalterable relation", :is_alterable => false, :system_formalism_id => @formalism.id})
       @formalism.save
-      @formalism.errors.on_base.should include("Invalid number of unalterable relation descriptors")
+      @formalism.errors[:base].should include("Invalid number of unalterable relation descriptors")
   end
 
   it "should allow adding alterable relation descriptors" do
-    lambda {
-      @formalism.relation_descriptors << RelationDescriptor.new({:name => "Alterable relation", :is_alterable => true, :system_formalism_id => @formalism.id})
-    }.should change(@formalism, :relation_descriptors)
+    @formalism.should have(2).relation_descriptors
+    #lambda {
+      @formalism.relation_descriptors.build(:name => "Alterable relation", :is_alterable => true, :system_formalism_id => @formalism.id)
+    #}.should change(@formalism, :relation_descriptors)
+    @formalism.should have(3).relation_descriptors
   end
 
   

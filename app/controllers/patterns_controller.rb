@@ -3,7 +3,7 @@
 class PatternsController < ApplicationController
   
   before_filter :find_pattern, :except => [:index, :new, :create, :tmp_images, :show_pattern_types, :create_relation, :upload_file]
-  before_filter :load_system
+  before_filter :load_system, :except => [:create_relation]
   
   def create_relation
     puts params
@@ -128,7 +128,7 @@ EOF
         @process_pattern.image_associations.each do |im|
           im.mappable_image.update_attribute(:is_temporary, false)
         end
-        flash[:notice] = t(:successful_creation, :model => Pattern.human_name)
+        flash[:notice] = t(:successful_creation, :model => Pattern.model_name.human)
         format.html { redirect_to([@pattern_system, @process_pattern]) }
         format.xml  { render :xml => @process_pattern, :status => :created, :location => @process_pattern }
       else

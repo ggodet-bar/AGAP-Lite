@@ -3,7 +3,7 @@
   \:
   = @process_pattern.pattern_formalism.name + ':' + @process_pattern.name
 
--form_for([@pattern_system, @process_pattern], :html => {:multipart => true}) do |f|
+=form_for([@pattern_system, @process_pattern], :html => {:multipart => true}) do |f|
   = f.error_messages
   = render :partial => 'form', :locals => {:f => f}
   %p

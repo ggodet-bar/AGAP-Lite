@@ -4,7 +4,7 @@
       %h3= f.field_descriptor.name
       = f.content
     -when MappableImage
-      - image_association = ImageAssociation.find(:first, :conditions => {:pattern_id => @process_pattern.id, :mappable_image_id => f.id})
+      - image_association = ImageAssociation.where(:pattern_id => @process_pattern.id, :mappable_image_id => f.id).first
       %h3= image_association.field_descriptor.name 
       %dl{:id =>"mappable_image_image_#{image_association.field_descriptor.id}", :class=>"mappable_image",:style=>"position: relative; background: url(#{f.image.url}) no-repeat; height: #{f.image_height}px; width: #{f.image_width}px;"}
         -maps = image_association.maps

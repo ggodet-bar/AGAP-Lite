@@ -77,11 +77,11 @@ class PatternSystem < ActiveRecord::Base
         
         if image.save
           # for each image, copy the old location to the new, using the same id partitioning algorithm as attachment_fu
-          FileUtils.mkdir_p( File.join(RAILS_ROOT, '/public/images', new_system.short_name, ("%08d" % image.id).scan(/..../)))
-          old_path            = File.join RAILS_ROOT, '/public/', self.mappable_images.select{|old_image| old_image.filename == image.filename}.first.public_filename
-          new_path            = File.join RAILS_ROOT, '/public/images/', new_system.short_name, ("%08d" % image.id).scan(/..../), image.filename
+          FileUtils.mkdir_p( Rails.root.join('public', 'images', new_system.short_name, ("%08d" % image.id).scan(/..../)))
+          old_path            = Rails.root.join('public', self.mappable_images.select{|old_image| old_image.filename == image.filename}.first.public_filename)
+          new_path            = Rails.root.join('public', 'images', new_system.short_name, ("%08d" % image.id).scan(/..../), image.filename)
 
-          image_ref[image.filename] = File.join '../../../../images/', new_system.short_name, ("%08d" % image.id).scan(/..../), image.filename
+          image_ref[image.filename] = Rails.root.join 'public', 'images', new_system.short_name, ("%08d" % image.id).scan(/..../), image.filename
 
           logger.debug "Copying file with path : " + old_path + " to : " + new_path
           FileUtils.cp_r old_path, new_path

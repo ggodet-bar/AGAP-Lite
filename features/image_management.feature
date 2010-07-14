@@ -8,6 +8,7 @@ Background:
   And we need a javascript browser
 
 @ok
+@javascript
 Scenario: Create a new pattern with an empty mappable image
     Given I have a pattern system
     And the pattern system formalism has an anonymous mappable image
@@ -18,7 +19,8 @@ Scenario: Create a new pattern with an empty mappable image
     And I should see the text "No element was specified for classification field "Participants""
     But I should not see the text "Add a map"
 
-@ok
+@wip
+@javascript
 Scenario: Create a new pattern with an existing mappable image
     Given I have a pattern system named "My pattern system"
     And the pattern system formalism has a mappable image named "The image"
@@ -30,6 +32,7 @@ Scenario: Create a new pattern with an existing mappable image
     And I should see a valid image
 
 @ok
+@javascript
 Scenario: Edit a pattern with an empty mappable image
     Given I have a pattern system
     And the pattern system formalism has an anonymous mappable image
@@ -38,7 +41,8 @@ Scenario: Edit a pattern with an empty mappable image
     Then I should see 1 file field element
     And I should not see the text "Add a map"
 
-@ok
+@wip
+@javascript
 Scenario: Edit a pattern with an existing mappable image
     Given I have a pattern system
     And the pattern system formalism has a mappable image named "The image"
@@ -51,7 +55,8 @@ Scenario: Edit a pattern with an existing mappable image
     And I should see 1 dl element
     And I should see a valid image
 
-@ok
+@wip
+@javascript
 Scenario: Delete an existing image
     Given I have a pattern system
     And the pattern system formalism has a mappable image named "The image"
@@ -63,7 +68,8 @@ Scenario: Delete an existing image
     But I should not see the text "Add a map"
     And I should see 0 dl element
 
-@ok
+@wip
+@javascript
 Scenario: Add an image then delete it
     Given I have a pattern system named "My pattern system"
     And the pattern system formalism has a mappable image named "The image"
@@ -76,7 +82,8 @@ Scenario: Add an image then delete it
     But I should not see the text "Add a map"
     And I should see 0 dl element
 
-@ok
+@wip
+@javascript
 Scenario: Add an image then delete it then add it again
     Given I have a pattern system named "My pattern system"
     And the pattern system formalism has a mappable image named "The image"
@@ -93,6 +100,7 @@ Scenario: Add an image then delete it then add it again
     And I should see a valid image
 
 @ok
+@javascript
 Scenario: Add an image then update the existing pattern
     Given I have a pattern system named "My pattern system"
     And the pattern system formalism has a mappable image named "The image"

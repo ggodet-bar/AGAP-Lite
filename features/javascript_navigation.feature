@@ -8,6 +8,7 @@ Background:
   And we need a javascript browser
 
 @ok
+@javascript
 Scenario: Add classification elements
     Given I have a pattern system
     And the pattern system formalism has an anonymous simple classification
@@ -16,10 +17,11 @@ Scenario: Add classification elements
     And I follow the "add" link
     And I fill the 2nd text field with "A classification element"
     And I press the "Update" button
-    Then I should see the text "Patternsystem was successfully updated"
+    Then I should see the text "Pattern system was successfully updated"
     And I should see the text "A classification element"
 
 @ok
+@javascript
 Scenario: Create a new pattern with no participant
     Given I have a pattern system
     And I browse to the pattern systems list
@@ -29,6 +31,7 @@ Scenario: Create a new pattern with no participant
     And I should see the text "No element was specified for classification field "Participants""
 
 @ok
+@javascript
 Scenario: Create 2 participants
     Given I have a pattern system
     And I browse to the pattern systems list
@@ -43,6 +46,7 @@ Scenario: Create 2 participants
 
 
 @ok
+@javascript
 Scenario: Create a new pattern with an empty multi classification
     Given I have a pattern system
     And the pattern system formalism has a multi classification named "A classification"
@@ -52,6 +56,7 @@ Scenario: Create a new pattern with an empty multi classification
     Then I should see the text "No element was specified for classification field "A classification""
 
 @ok
+@javascript
 Scenario: Create a new pattern with a multi classification that has a few classification elements
     Given I have a pattern system
     And the pattern system formalism has a multi classification named "My classification"

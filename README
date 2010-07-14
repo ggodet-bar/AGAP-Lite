@@ -1,0 +1,23 @@
+CSS: style.css
+
+Patterns for documenting processes ?
+====================================
+
+Patterns are a specific type of documentation format, which focuses on three aspects:
+
+- describing the circumstances under which the pattern should be used (i.e., the
+  problem that the pattern could solve),
+- describing the solution to the aforementioned problem,
+- optionnally describing means to adapt the solution, e.g. depending on specific
+  problem occurrences.
+
+Thus, patterns enable building clear, straight to the point documentation. They allow 
+for different styles of structure, from the informal -- e.g., a few paragraphs for
+describing each category -- to the quasi formal -- e.g. using
+classifications based on strict ontologies, which can actually be described using AGAPLite.
+
+[Patterns for documenting processes]
+
+[Patterns as a means to provide designers with tools, which may be included in any type
+of methodology, _à la_ Agile or more rigid development approaches]
+

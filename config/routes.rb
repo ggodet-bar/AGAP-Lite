@@ -1,21 +1,25 @@
-ActionController::Routing::Routes.draw do |map|
+AgapLiteApp::Application.routes.draw do
+  resources :pattern_systems do
 
-  map.resources :pattern_systems, :collection => {:show_metamodels => :get} do |pat_system|
-     pat_system.resources :patterns, :collection => {:show_pattern_types => :get}
-     pat_system.resources :participants
+    collection do
+      get :show_metamodels
+    end
+
+    resources :patterns do
+      collection do
+        get :show_pattern_types
+      end
+
+      member do
+        # post :create_relation
+        post  :upload_file
+      end
+    end
+
+    resources :participants
   end
 
-  map.resources :system_formalisms
+  resources :system_formalisms
 
-  map.root :controller => 'high_voltage/pages', :action => 'show', :id => 'index'
-
-  map.connect '/pattern_systems/:pattern_system_id/:controller/:action'
-  map.connect '/pattern_systems/:pattern_system_id/:controller/:action.format'
-  map.connect '/pattern_systems/:pattern_system_id/:controller/:action/:id'
-  map.connect '/pattern_systems/:pattern_system_id/:controller/:action/:id.format'
-  
-  map.connect ':controller/:action'
-  map.connect ':controller/:action.:format'
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  match "/create_relation" => "patterns#create_relation", :as => :create_relation
 end

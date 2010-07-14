@@ -1,5 +1,5 @@
 -s_instances = @process_pattern.string_instances.select{|a| a.field_descriptor_id == field.id}
 -string_instance = s_instances.empty? ? @process_pattern.string_instances.build({:field_descriptor_id => field.id}) : s_instances.first
--f.fields_for :string_instances, string_instance do |string_form|
+= f.fields_for :string_instances, string_instance do |string_form|
   %p= string_form.text_field :content, :size => 60
   = string_form.hidden_field :field_descriptor_id
