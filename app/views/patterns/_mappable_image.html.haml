@@ -1,13 +1,13 @@
 - image_instance = @process_pattern.image_associations.select{|a| a.field_descriptor_id == field.id}.map(&:mappable_image).first
 - association_instance = image_instance.blank? ? @process_pattern.image_associations.build(:field_descriptor_id => field.id) : ImageAssociation.where(:pattern_id => @process_pattern.id, :field_descriptor_id => field.id).first
 - the_maps = association_instance.maps
-= debug image_instance
 - image_instance = image_instance.blank? ? association_instance.build_mappable_image(:pattern_system => @pattern_system) : image_instance
 
 %div{:id=>"image_associations_#{field.id}"}
   =f.fields_for :image_associations, association_instance do |assoc_form|
-    = assoc_form.hidden_field :pattern_id 
-    = assoc_form.hidden_field :field_descriptor_id
+    = assoc_form.hidden_field :_destroy, :class => 'destroyField'
+    = assoc_form.hidden_field :pattern_id, :class => 'patternIdField' 
+    = assoc_form.hidden_field :field_descriptor_id, :class => 'fieldDescriptorIdField'
     %div{:id=>"mappable_image_#{field.id}"}
       = assoc_form.fields_for :mappable_image, image_instance do |img_form|
         = img_form.file_field :image

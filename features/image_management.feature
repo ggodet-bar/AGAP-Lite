@@ -99,7 +99,7 @@ Scenario: Add an image then delete it then add it again
     And I should see 1 dl element
     And I should see a valid image
 
-@ok
+@wip
 @javascript
 Scenario: Add an image then update the existing pattern
     Given I have a pattern system named "My pattern system"

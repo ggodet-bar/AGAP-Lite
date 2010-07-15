@@ -115,17 +115,17 @@ var AgapImageManager = {
     form_div.hide() ;
     
     if (image_id) {
+      var destroy_field = image.up().up().down(".destroyField").value = false ;
       // In this case, add a hidden field
       // First, get a known hidden field, that will be
       // cloned then transformed to fit our needs
-      var pattern_id_field = image.up().up().down() ;
+      var pattern_id_field = image.up().up().down(".patternIdField") ;
       var clonedNode = pattern_id_field.cloneNode(false) ;
       clonedNode.id = clonedNode.id.replace(/pattern_id/,"mappable_image_id") ;
       clonedNode.name = clonedNode.name.replace(/pattern_id/,"mappable_image_id") ;
       clonedNode.value = image_id ;
       image.up().insert({'before': clonedNode});
     }
-    // Add a delete sign on the top right corner of the image
 
     // First get the position of the image on the layout
     var img_pos = image.cumulativeOffset() ;
@@ -171,6 +171,7 @@ var AgapImageManager = {
 
       // Delete the hidden field that corresponds to the image id!
       var mappable_image_id_field = form_div.previous().previous() ;
+      var destroy_field = form_div.previous(".destroyField").value = true ;
       mappable_image_id_field.remove() ;
       event.stop() ;
     }) ;
