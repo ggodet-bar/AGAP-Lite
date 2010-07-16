@@ -431,7 +431,7 @@ var AgapImageManager = {
     var maps = image.up().up().childElements().select(function(el){
         return el.classNames().include("map_fields") &&
                   !el.childElements().any(function(a){return a.name.include("blank_map_record")}) &&
-                  !el.childElements().any(function(a){return a.name.include("_destroy") && a.value == 1})
+                  !el.childElements().any(function(a){return a.name.include("_destroy") && a.value == true})
         });
     console.log("[ImageMapper]Maps size: " + maps.size()) ;
     maps.each(function(el){
@@ -458,7 +458,7 @@ var AgapImageManager = {
       image.insert({'top': the_map}) ;    
       del_img.observe('click', function(event){
          // We get the map which corresponds to this id
-        $("map_fields_" + map_id).childElements().last().value = 1 ;
+        $("map_fields_" + map_id).childElements().last().value = true ;
         the_map.remove() ;
       }) ;
     }) ;

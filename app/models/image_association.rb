@@ -4,7 +4,7 @@ class ImageAssociation < ActiveRecord::Base
   belongs_to  :mappable_image
   accepts_nested_attributes_for :mappable_image, :reject_if => lambda {|a| a[:image_file_name].blank?}
   belongs_to  :field_descriptor
-  has_many :maps
-  accepts_nested_attributes_for :maps, :reject_if => lambda {|a| a[:relation_id].blank?}
+  has_many :maps, :dependent => :destroy
+  accepts_nested_attributes_for :maps, :reject_if => lambda {|a| a[:relation_id].blank?}, :allow_destroy => true
 
 end
