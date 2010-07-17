@@ -315,10 +315,6 @@ var AgapImageManager = {
     } 
 
     AgapImageManager.update_opacity_block(m_pos, m_dim, i_dim);
-    // Update the position of the controls
-    $("NE_resize").setStyle({left: m_dim.width - diff.x - 4 + "px"}) ;
-    $("SE_resize").setStyle({left: m_dim.width - diff.x - 4 + "px", top: m_dim.height - diff.y - 4 + "px"}) ;
-    $("SW_resize").setStyle({top: m_dim.height - diff.y -4 + "px"}) ;
   },
 
   update_opacity_block : function(map_pos, map_dim, image_dim) {
@@ -359,10 +355,10 @@ var AgapImageManager = {
       style: "cursor: move; position: absolute; display: block; width: " + default_width + "px; height: " + default_height + "px; left: " + pos.left + "px; top: " + pos.top + "px; border: 1px dashed black; margin: 0; padding: 0"
     }) ;
     new_dd.addClassName("map active_map") ;
-    new_dd.insert({'top': AgapImageManager.create_control_block("NW", -4, -4)}) ;
-    new_dd.insert({'top': AgapImageManager.create_control_block("SW", default_height - 4, -4)}) ;
-    new_dd.insert({'top': AgapImageManager.create_control_block("NE", -4, default_width - 4)}) ;
-    new_dd.insert({'top': AgapImageManager.create_control_block("SE", default_height - 4, default_width - 4)}) ;
+    new_dd.insert({'top': AgapImageManager.create_control_block("NW")}) ;
+    new_dd.insert({'top': AgapImageManager.create_control_block("SW")}) ;
+    new_dd.insert({'top': AgapImageManager.create_control_block("NE")}) ;
+    new_dd.insert({'top': AgapImageManager.create_control_block("SE")}) ;
     image.insert({'top': AgapImageManager.create_opacity_block("top", 0, 0, image.getWidth(), pos.top)}) ;
     image.insert({'top': AgapImageManager.create_opacity_block("left", pos.top, 0, pos.left, default_height)}) ;
     image.insert({'top': AgapImageManager.create_opacity_block("bottom", pos.top + default_height, 0, image.getWidth(), image.getHeight() - default_height - pos.top)}) ;
@@ -389,11 +385,11 @@ var AgapImageManager = {
    * styles are set up, depending
    * on the <code>resize_type</code> argument
    */
-  create_control_block: function(resize_type, top, left) {
+  create_control_block: function(resize_type) {
     var default_size = 8 ;
     var control = new Element('div', {
-      style: "cursor: " + resize_type + "-resize; position: absolute; border: 1px solid black; left: " + left + "px; top: " + top + "px; width: " + default_size + "px; height: " + default_size+ "px;", 
-      id: resize_type + "_resize"
+      id: resize_type + "_resize",
+      'class': 'mapControl'
     }) ;
     // Install the observers for resizing the map
     control.observe('mousedown', function(event) {

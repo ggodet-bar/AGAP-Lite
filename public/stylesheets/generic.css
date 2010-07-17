@@ -256,3 +256,35 @@ li {
   z-index: 2000;
 }
 
+
+.mapControl {
+  position: absolute ;
+  width: 8px ;
+  height: 8px ;
+  border: 1px solid red ;
+  z-index: 10 ;
+}
+
+#NE_resize {
+  right: -4px ;
+  top: -4px ;
+  cursor: NE-resize ;
+}
+
+#NW_resize {
+  left: -4px ;
+  top: -4px ;
+  cursor: NW-resize ;
+}
+
+#SE_resize {
+  right: -4px ;
+  bottom: -4px ;
+  cursor: SE-resize ;
+}
+
+#SW_resize {
+  left: -4px ;
+  bottom: -4px ;
+  cursor: SW-resize ;
+}
