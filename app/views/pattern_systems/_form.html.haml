@@ -5,7 +5,7 @@
 - if @noob_mode
   %div#effect_test1.helper_info{:style => "display:none"}
     %p Describe the latest updates concerning your pattern system
-= f.tinymce :update_field
+= f.tinymce :update_field, :rows => 4
 
 %h3
   = t :characteristics
@@ -14,7 +14,7 @@
 - if @noob_mode
   %div#effect_test2.helper_info{:style => "display:none"}
     %p Describe the specificities of your pattern system, who it is addressed to, should it be used following specific time constraints etc.
-= f.tinymce :characteristics
+= f.tinymce :characteristics, :rows => 4
 
 - @classifications.each do |cl|
   %h3

@@ -46,5 +46,12 @@
               - patterns_list[key].each do |pat|
                 %li{:id => "pat_item_#{pat.id}"}
                   %span= pat == @process_pattern ? pat.name : link_to(pat.name, [@pattern_system, pat])
+        - unclassified = Pattern.all - patterns_list.values.flatten
+        - unless unclassified.empty?
+          %b= t(:unclassified)
+          %ul{:style=>"margin-left: -3.4em;"}
+            - unclassified.each do |pat|
+              %li{:id => "pat_item_#{pat.id}"}
+                %span= pat == @process_pattern ? pat.name : link_to(pat.name, [@pattern_system, pat])
       .clearfooter
     = render "shared/copyright"

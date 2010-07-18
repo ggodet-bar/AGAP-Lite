@@ -36,14 +36,12 @@ class PatternSystem < ActiveRecord::Base
     # We look for a main field type
     main_field = main_pattern.field_descriptors.select{|f| f.is_sorting_patterns}.first
 
-    # TODO Manage unclassified patterns
     unless main_field.blank?
       classif_elements = classification_elements.select{|c| c.field_descriptor_id == main_field.id}
       patterns_list = classif_elements.inject({}) do |acc, c|
         acc[c.name] = patterns.select{|p| p.classification_selections.any?{|sel| sel.classification_element_id == c.id}}
         acc
       end
-      puts patterns_list
     end
     patterns_list
   end
