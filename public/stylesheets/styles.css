@@ -102,3 +102,80 @@ li.item {
     padding: 0.4em;
     width: 35em;
 }
+
+#header_buttons_bar {
+  margin-bottom: 1em ;
+}
+
+#back_to_systems_list {
+  position: absolute ;
+}
+
+#param_span {
+  position: absolute ;
+  right: 1em ;
+}
+
+#tabs {
+  position: absolute ;
+  margin-left: 1em ;
+  bottom: 0;
+}
+
+.headerTab {
+  display: inline-block ;
+  bottom: 0 ;
+  margin-left: 0.4em ;
+}
+
+.leftTabPart {
+  display: inline-block ;
+  vertical-align: bottom ;
+  left: 0 ;
+  width: 5px ;
+  height: 33px ;
+}
+
+.centralTabPart {
+  display: inline-block ;
+  vertical-align: bottom ;
+  font-weight: bold ;
+  white-space: nowrap ;
+  height: 33px ;
+}
+
+.rightTabPart {
+  display: inline-block ;
+  vertical-align: bottom ;
+  width: 5px ;
+  height: 33px ;
+}
+
+.leftTabWhite {
+  background: url('/images/common_images/white_border_left.png') no-repeat ;
+}
+
+.leftTabBlue {
+  background: url('/images/common_images/blue_border_left.png') no-repeat ;
+}
+
+.centralTabWhite {
+  background: #fff url('/images/common_images/white_background.png') repeat-x top left;
+}
+
+.centralTabBlue {
+  background: #fff url('/images/common_images/blue_background.png') repeat-x top left;
+}
+
+.centralTabBlue a {
+  text-decoration: none ;
+  color: white !important ;
+}
+
+.rightTabWhite {
+  background: url('/images/common_images/white_border_right.png') no-repeat ;
+}
+
+.rightTabBlue {
+  background: url('/images/common_images/blue_border_right.png') no-repeat ;
+}

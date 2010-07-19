@@ -13,10 +13,11 @@
   %body
     #wrapper
       #header
-        %span
-          - unless controller.action_name == 'index'
-            = link_to t(:back_systems_list), pattern_systems_path
-        = render "shared/params_button"
+        #header_buttons_bar
+          %span#back_to_systems_list
+            - unless controller.action_name == 'index'
+              = link_to t(:back_to_systems_list), pattern_systems_path
+          = render "shared/params_button"
         = render "shared/tabs"
       = render "shared/parameters"
       #content

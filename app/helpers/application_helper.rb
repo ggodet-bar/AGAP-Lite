@@ -10,4 +10,7 @@ module ApplicationHelper
     end
   end
 
+  def human_name(controller_name)
+    controller_name.gsub(/_/, ' ').capitalize
+  end
 end
