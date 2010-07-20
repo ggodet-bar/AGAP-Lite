@@ -160,7 +160,7 @@ li.item {
 }
 
 .centralTabWhite {
-  background: #fff url('/images/common_images/white_background.png') repeat-x top left;
+  background: #fff ;
 }
 
 .centralTabBlue {
