@@ -143,17 +143,18 @@ Then /^I should see a valid image$/ do
 end
 
 Then /^the select list for field "([^\"]*)" should include the following options:$/ do |field_name, table|
-  field = FieldDescriptor.find_by_name(field_name)
-  field_array = FieldDescriptor.find_all_by_field_type(field.field_type).map(&:id)
+  field = FieldDescriptor.where(:name => field_name).first
+  field_array = FieldDescriptor.where(:field_type => field.field_type).map(&:id)
   index = field_array.index(field.id)
   table.hashes.each do |entry|
-    is_selected = entry['selected'] == "true" ? true : false
-    is_disabled = entry['disabled'] == "true" ? true : false
+    is_selected = entry['selected'] == "true"
+    is_disabled = entry['disabled'] == "true"
+
     list = $BROWSER.select_lists.select{|l| l.visible?}[index - 1]
     list.options.any? do |el|
-      el.text == entry['name'] &&
-      list.option(:text, el.text).selected? == is_selected && 
-      list.option(:text, el.text).disabled? == is_disabled
+      el.element.text == entry['name'] &&
+      list.option(:text, el.element.text).selected? == is_selected && 
+      list.option(:text, el.element.text).disabled? == is_disabled
     end.should be_true
   end
 end
