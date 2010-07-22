@@ -179,3 +179,30 @@ li.item {
 .rightTabBlue {
   background: url('/images/common_images/blue_border_right.png') no-repeat ;
 }
+
+
+
+/*
+ * Pattern System
+ */
+.patternSystemClassification {
+  position: relative ;
+  border: 4px solid gray ;
+  padding: 1.4em ;
+  width: 32em ;
+  margin: 1.8em 0;
+}
+
+.patternSystemClassification p {
+  width: 31.7em ;
+  margin: 0 auto 0.6em auto ;
+}
+
+.patternSystemClassification .delete {
+  width: 30px ;
+  height: 30px ;
+  position: absolute ;
+  right: -16px ;
+  top: -16px ;
+  border: none ;
+}

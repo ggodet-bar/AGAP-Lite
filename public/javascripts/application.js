@@ -4,9 +4,9 @@
 /* Used for pattern system edition */
 function remove_fields(link) {
   // Set the hidden field to true
-  $(link).previous('input[type=hidden]').value = "1" ;
+  $(link).next('input[type=hidden]').value = "1" ;
   // Hide the surrounding tag 
-  $(link).up('.fields').hide() ; 
+  $(link).up('.patternSystemClassification').hide() ; 
 }
 
 function add_fields(link, association, content) {
