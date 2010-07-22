@@ -8,10 +8,10 @@ gem "responds_to_parent",
 gem "rails", "3.0.0.beta4"
 gem "test-unit", "1.2.3"
 gem "mysql"
-gem 'thinking-sphinx',
-  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
-  :branch  => 'rails3',
-  :require => 'thinking_sphinx'
+# gem 'thinking-sphinx',
+#   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
+#   :branch  => 'rails3',
+#   :require => 'thinking_sphinx'
 
 group :test, :cucumber do
   gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
