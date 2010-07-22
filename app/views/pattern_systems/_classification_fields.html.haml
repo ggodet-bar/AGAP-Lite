@@ -4,8 +4,9 @@
   %p
     = f.hidden_field :field_descriptor_id
     = f.label :name, 'Name'
-    = f.text_field :name
+    %br
+    = f.text_field :name, :class => 'classificationName'
   %p
     = f.label :description, 'Description'
-    = f.tinymce :description, {:style => 'height: 5em; width: 30em;'}
+    = f.tinymce :description, {:style => 'height: 5em; width: 100%;'}
   = javascript_tag "tinyMCE.execCommand('mceAddControl', false, \"pattern_system_classification_elements_attributes_new_classification_elements_description\")"

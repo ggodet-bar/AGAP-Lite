@@ -195,7 +195,7 @@ li.item {
 
 .patternSystemClassification p {
   width: 31.7em ;
-  margin: 0 auto 0.6em auto ;
+  margin: 0 auto 1em auto ;
 }
 
 .patternSystemClassification .delete {
@@ -205,4 +205,21 @@ li.item {
   right: -16px ;
   top: -16px ;
   border: none ;
+}
+
+.patternSystemClassification .classificationName {
+  font-size: 140% ;
+  width: 100% ;
+}
+
+/*
+ * Pattern
+ */
+#pattern_name {
+  font-size: 140% ;
+  width: 100% ;
+}
+
+.clear {
+  clear: both ;
 }
