@@ -223,3 +223,8 @@ li.item {
 .clear {
   clear: both ;
 }
+
+#search_form {
+  float: right ;
+  margin-right: 1em ;
+}

@@ -17,14 +17,8 @@
   %body
     #wrapper
       #header
-        #top_params{:style=>"margin:0"}
-          %span{:style => "float:left"}
-            = form_tag pattern_system_patterns_path, :method => 'get' do
-              = text_field_tag :search, params[:search]
-              = submit_tag t(:search), :name => nil
-          %span#param_span{:style => "float:right; margin-right: 1em;"}
-            = link_to_function(image_tag("common_images/settings_btn.png"), nil) {|page| page.call "Popup.toggle", "params"}
-      = render "shared/parameters"
+        = render "shared/params_button"
+        = render "shared/parameters"
       - if @process_pattern
         = render "patterns_selection"
       #navigation_bar
@@ -33,6 +27,7 @@
           - unless @process_pattern.nil?
             |
             = h @process_pattern.name
+            = render "search_form"
       #content
         %p#notices{:style => "color:green"}= h flash[:notice]
         = yield

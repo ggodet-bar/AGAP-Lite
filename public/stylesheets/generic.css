@@ -77,8 +77,7 @@ li {
 	width: 100%;
 	margin-top: 0;
 	padding-top: 15px;
-/*	padding-left: 10px;*/
-	height: 80px;
+	height: 60px;
 }
 
 #header span {
@@ -161,16 +160,6 @@ li {
 	font-size: 1.2em;
 }
 
-#top_params {
-/*	float: right;*/
-	position: absolute;
-	right: 0;
-	margin-right: 1em;
-}
-
-#top_params a {
-	color: #aaa;
-}
 
 #navigation_bar {
 	position: relative;
@@ -181,6 +170,7 @@ li {
 	padding-top: 0.2em;
 	color: #fff;
 	font-size: 0.9em;
+  height: 2em ;
 }
 
 #navigation_bar a {
