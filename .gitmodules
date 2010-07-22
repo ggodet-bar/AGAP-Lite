@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/webrat"]
-	path = vendor/plugins/webrat
-	url = git@github.com:ggodet-bar/webrat.git
