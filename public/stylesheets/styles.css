@@ -142,6 +142,7 @@ li.item {
   font-weight: bold ;
   white-space: nowrap ;
   height: 33px ;
+  line-height: 33px ;
 }
 
 .rightTabPart {
