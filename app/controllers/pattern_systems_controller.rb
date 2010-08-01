@@ -50,13 +50,13 @@ class PatternSystemsController < ApplicationController
 
   # GET /pattern_systems/1/edit
   def edit
-    #@root_pattern = @pattern_system.root_pattern unless @pattern_system.root_pattern.blank?
+    @common_classifications = @pattern_system.system_formalism.field_descriptors
+                                    .select{|f| f.field_type.include?('classification')}
+
     @classifications = @pattern_system.system_formalism.pattern_formalisms.collect do |p|
        p.field_descriptors.select{|f| f.field_type.include?('classification')}
     end.flatten
-    #@classifications.each do |classif|
-    #  @pattern_system.classification_elements.build({:field_descriptor_id => classif.id})
-    #end
+
   end
 
   # POST /pattern_systems

@@ -15,13 +15,16 @@ module FormalismLoader
 
         # Once all the arrays are replaced, we may create
         # the pattern formalism
-        pattern = PatternFormalism.create pattern_desc
-        pattern.field_descriptors.create fields
+        pattern = PatternFormalism.new pattern_desc
+        pattern.field_descriptors << fields.collect{|fie| FieldDescriptor.new fie}
         pattern
       end
       # Next we parse the relation descriptors
       relations_desc = system_desc[:relation_descriptors] || []
       relations = relations_desc.collect{|rel| RelationDescriptor.new(rel)}
+      fields = system_desc[:field_descriptors] || []
+  
+      system_desc[:field_descriptors] = []
       system_desc[:relation_descriptors] = []
       system_desc[:pattern_formalisms] = []
 
@@ -29,6 +32,7 @@ module FormalismLoader
       a_system = SystemFormalism.new system_desc
       a_system.pattern_formalisms << patterns
       a_system.relation_descriptors << relations
+      a_system.field_descriptors << fields.collect{|fie| FieldDescriptor.new fie}
       if a_system.save
         puts "Successfully created the system formalism: #{a_system.name}"
       else

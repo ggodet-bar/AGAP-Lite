@@ -2,7 +2,6 @@ class PatternFormalism < ActiveRecord::Base
   has_many :field_descriptors, :autosave => true, :dependent => :destroy
   belongs_to :system_formalism
 
-  # TODO Define the different field types!
   FORMALISM_SECTIONS = %w( interface solution )
 
   validate :must_have_base_field_descriptors, :all_fields_must_be_in_a_valid_section
@@ -11,8 +10,7 @@ class PatternFormalism < ActiveRecord::Base
 
   def must_have_base_field_descriptors
     errors[:base] << "Invalid base field descriptors" \
-      unless  self.field_descriptors.any?{|fie| fie.name == "Problem"} &&
-              self.field_descriptors.any?{|fie| fie.name == "Participants"}
+      unless  self.field_descriptors.any?{|fie| fie.name == "Problem"}
   end 
 
   def all_fields_must_be_in_a_valid_section
@@ -23,7 +21,6 @@ class PatternFormalism < ActiveRecord::Base
   def add_default_field_descriptors 
     if self.field_descriptors.empty?
       self.field_descriptors.build({:name => "Problem", :section => 'interface', :field_type => 'text', :is_alterable => false, :description => "Problem that is addressed by the pattern"})
-      self.field_descriptors.build({:name => "Participants", :section => 'interface', :field_type => 'multi_classification', :is_alterable => false, :description => "The personas involved in the realisation of the pattern's solution"})
     end
   end
 

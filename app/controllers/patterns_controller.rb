@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class PatternsController < ApplicationController
-  
+
   before_filter :find_pattern, :except => [:index, :new, :create, :tmp_images, :show_pattern_types, :create_relation, :upload_file]
   before_filter :load_system, :except => [:create_relation]
   

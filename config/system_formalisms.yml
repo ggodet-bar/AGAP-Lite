@@ -1,6 +1,6 @@
 ---
 - :name: Gamma formalism
-  :author: Erich Gamma Richard Helm Ralph Johnson & John Vlissides
+  :author: "Erich Gamma Richard Helm Ralph Johnson & John Vlissides"
   :version: 1.0.0
   :description: The classic formalism designed by the Gang of Four. Should be used for describing software architectures.
   :pattern_formalisms:
@@ -23,42 +23,47 @@
       :section: interface
       :field_type: text
       :description: Describes the situtations for which the pattern would be relevant
-    -  :name: Structure
-       :section: solution
-       :field_type: mappable_image  # A set of commented models
-       :description: Describes formal software architecture solutions
-    -  :name: Solution participants
-       :section: solution
-       :field_type: text
-       :description: A textual solution that describes the entities of the formal solution
-    -  :name: Collaborations
-       :section: solution
-       :field_type: text
-       :description: A textual solution that describes the interactions between the entities of the formal solution
-    -  :name: Consequence
-       :section: solution
-       :field_type: text
-       :description: Presents the consequences related to the application of the pattern
-    -  :name: Implementation
-       :section: solution
-       :field_type: text
-       :description: Presents pragmatic software-related elements related to the implementation of the solution's software architecture
-    -  :name: Sample code
-       :section: solution
-       :field_type: text
-       :description: Presents some code samples that illustrate the implementation of the pattern
-    -  :name: Known uses
-       :section: solution
-       :field_type: text
-       :description: Describes some actual uses of the pattern taken from existing applications
-    -  :name: Related patterns
-       :section: solution
-       :field_type: text
-       :description: Enumerates some patterns from the system that are somehow related to the current pattern
+    - :name: Structure
+      :section: solution
+      :field_type: mappable_image  # A set of commented models
+      :description: Describes formal software architecture solutions
+    - :name: Solution participants
+      :section: solution
+      :field_type: text
+      :description: A textual solution that describes the entities of the formal solution
+    - :name: Collaborations
+      :section: solution
+      :field_type: text
+      :description: A textual solution that describes the interactions between the entities of the formal solution
+    - :name: Consequence
+      :section: solution
+      :field_type: text
+      :description: Presents the consequences related to the application of the pattern
+    - :name: Implementation
+      :section: solution
+      :field_type: text
+      :description: Presents pragmatic software-related elements related to the implementation of the solution's software architecture
+    - :name: Sample code
+      :section: solution
+      :field_type: text
+      :description: Presents some code samples that illustrate the implementation of the pattern
+    - :name: Known uses
+      :section: solution
+      :field_type: text
+      :description: Describes some actual uses of the pattern taken from existing applications
+    - :name: Related patterns
+      :section: solution
+      :field_type: text
+      :description: Enumerates some patterns from the system that are somehow related to the current pattern
 - :name: P-SIGMA formalism
   :author: SIGMA team, LIG Laboratory, Grenoble
   :version: 1.0.0
   :description: A formalism adapted to the description of complex processes. Also includes product patterns.
+  :field_descriptors:
+  - :name: Participants
+    :section: interface
+    :field_type: multi_classification
+    :description: The personas involved in the realisation of the pattern's solution
   :pattern_formalisms:
   - :name: Process pattern
     :is_main_pattern: true

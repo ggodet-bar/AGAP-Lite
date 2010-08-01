@@ -3,6 +3,7 @@
 class SystemFormalism < ActiveRecord::Base
   has_many :pattern_formalisms, :autosave => true, :dependent => :destroy
   has_many :relation_descriptors, :autosave => true, :dependent => :destroy
+  has_many :field_descriptors, :autosave => true, :dependent => :destroy
 
 
   validate  :must_have_exactly_two_unalterable_relation_descriptors

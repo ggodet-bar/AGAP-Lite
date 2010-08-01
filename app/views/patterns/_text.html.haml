@@ -1,5 +1,5 @@
 -t_instances = @process_pattern.text_instances.select{|a| a.field_descriptor_id == field.id}
 -text_instance = t_instances.empty? ? @process_pattern.text_instances.build({:field_descriptor_id => field.id}) : t_instances.first
 =f.fields_for :text_instances, text_instance do |text_form|
-  %p= text_form.tinymce :content, :cols => 60, :rows => 4
+  %p= text_form.text_area :content, :cols => 60, :rows => 4, :class => 'mceEditor'
   = text_form.hidden_field :field_descriptor_id
