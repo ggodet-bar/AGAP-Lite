@@ -75,9 +75,6 @@ AgapSelector.prototype.selected = function(multi_i) {
     div.identify() ;
 
     // We get the last item and insert our div just after
-    // var pos_div = this.selector.next() ;
-    // while (pos_div.classNames().include('selector_item')) { pos_div = pos_div.next(); } ;
-    // pos_div.insert({'before': div}) ;
     var container = this.selector.next(".selectorContainer")
                                  .insert({"bottom": div}) ;
     
