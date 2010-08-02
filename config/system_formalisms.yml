@@ -64,13 +64,13 @@
     :section: interface
     :field_type: multi_classification
     :description: The personas involved in the realisation of the pattern's solution
+  - :name: Classification
+    :section: interface
+    :field_type: multi_classification
   :pattern_formalisms:
   - :name: Process pattern
     :is_main_pattern: true
     :field_descriptors:
-      - :name: Classification
-        :section: interface
-        :field_type: multi_classification
       - :name: Context
         :section: interface
         :field_type: text
@@ -97,9 +97,6 @@
         :description: Describes the consequences that follow the realization of the pattern's activities.
   - :name: Product pattern
     :field_descriptors:
-      - :name: Classification
-        :section: interface
-        :field_type: multi_classification
       - :name: Strengths
         :section: interface
         :field_type: text

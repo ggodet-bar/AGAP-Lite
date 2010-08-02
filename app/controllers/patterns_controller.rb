@@ -78,7 +78,7 @@ EOF
     @interface_fields, @solution_fields = @metamodel.pattern_formalisms.find(pattern_type_id).fields
     @process_pattern = @pattern_system.patterns.build(:pattern_formalism_id => pattern_type_id)
     # We prepare both the existing classification elements as well as blank selections
-    @classifications = @metamodel.pattern_formalisms.find(pattern_type_id).field_descriptors.select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
+    @classifications = (@metamodel.pattern_formalisms.find(pattern_type_id).field_descriptors + (@metamodel.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
       # For single classifications, we only generate a single field
       acc[field.id] = [] << @process_pattern.classification_selections.build 
       acc
@@ -94,7 +94,7 @@ EOF
     @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true' ? true : false
     @metamodel = @pattern_system.system_formalism
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
-    @classifications = @process_pattern.pattern_formalism.field_descriptors.select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
+    @classifications = (@process_pattern.pattern_formalism.field_descriptors + (@process_pattern.pattern_formalism.system_formalism.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
       # For single classifications, we only generate a single field
       acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
       acc[field.id] = [@process_pattern.classification_selections.build] if acc[field.id].blank?
