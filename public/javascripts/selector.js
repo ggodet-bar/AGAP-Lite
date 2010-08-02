@@ -26,6 +26,9 @@ AgapSelector.prototype.install_multi_selector = function() {
     // We replace the existing selector by a dropdown
     this.dropdown = new Element('select') ;
     this.selector.insert({'before' : this.dropdown}) ;
+
+    this.selector.insert({'after' : new Element("div", {'class': 'selectorContainer'})}) ;
+
     var the_prompt = new Element('option', {value: ""}).update('Please select') ;
     this.dropdown.insert({'top' : the_prompt}) ;
     // We use the same options as the existing multi selector
@@ -72,9 +75,11 @@ AgapSelector.prototype.selected = function(multi_i) {
     div.identify() ;
 
     // We get the last item and insert our div just after
-    var pos_div = this.selector.next() ;
-    while (pos_div.classNames().include('selector_item')) { pos_div = pos_div.next(); } ;
-    pos_div.insert({'before': div}) ;
+    // var pos_div = this.selector.next() ;
+    // while (pos_div.classNames().include('selector_item')) { pos_div = pos_div.next(); } ;
+    // pos_div.insert({'before': div}) ;
+    var container = this.selector.next(".selectorContainer")
+                                 .insert({"bottom": div}) ;
     
     var s_m = this.state_machine ;
     a.observe('click', function(event) {

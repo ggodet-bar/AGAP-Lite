@@ -6,7 +6,7 @@ gem "paperclip",
 gem "responds_to_parent",
     :git => 'git://github.com/JSilva/responds_to_parent.git'
 gem "rails", "3.0.0.rc"
-gem "mysql2"
+gem "mysql"
 gem "ruby-debug19"
 gem "tiny_mce"
 # gem 'thinking-sphinx',
