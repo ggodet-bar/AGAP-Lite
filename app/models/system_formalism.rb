@@ -11,6 +11,7 @@ class SystemFormalism < ActiveRecord::Base
   validates_uniqueness_of :name
 
   after_initialize :create_default_relation_descriptors
+  before_save :update_field_descriptor_indexes
 
   def must_have_exactly_two_unalterable_relation_descriptors
      errors[:base] << "Invalid number of unalterable relation descriptors" \
@@ -24,4 +25,9 @@ class SystemFormalism < ActiveRecord::Base
     end
   end
 
+  def update_field_descriptor_indexes
+    self.field_descriptors.each_with_index do |field, i|
+      field.index = 100 + i # System formalism field descriptors are, by default, the last elements
+    end
+  end
 end

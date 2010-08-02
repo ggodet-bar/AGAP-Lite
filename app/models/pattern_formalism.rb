@@ -29,8 +29,8 @@ class PatternFormalism < ActiveRecord::Base
   # model
   def update_field_descriptor_indexes
     # Update the index value in the attributes list
-    (1..self.field_descriptors.size).each do |i|
-      self.field_descriptors[i-1].index = i
+    self.field_descriptors.each_with_index do |field, i|
+      field.index = i + 1
     end
   end
 
