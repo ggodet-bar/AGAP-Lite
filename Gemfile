@@ -7,7 +7,7 @@ gem "responds_to_parent",
     :git => 'git://github.com/stonefield/responds_to_parent.git'
 gem "rails", "3.0.0.rc"
 gem "mysql"
-gem "ruby-debug19"
+# gem "ruby-debug19"
 gem "tiny_mce"
 # gem 'thinking-sphinx',
 #   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
