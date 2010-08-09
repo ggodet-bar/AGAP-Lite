@@ -4,7 +4,7 @@ gem "haml"
 gem "paperclip",
     :git => 'git://github.com/thoughtbot/paperclip.git'
 gem "responds_to_parent",
-    :git => 'git://github.com/JSilva/responds_to_parent.git'
+    :git => 'git://github.com/stonefield/responds_to_parent.git'
 gem "rails", "3.0.0.rc"
 gem "mysql"
 gem "ruby-debug19"
