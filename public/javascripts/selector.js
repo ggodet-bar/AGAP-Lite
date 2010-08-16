@@ -88,20 +88,20 @@ AgapSelector.prototype.selected = function(multi_i) {
       this.selector.options[index].selected = true ;
       this.dropdown.selectedIndex = 0 ;
     } else {
-      this.selector.hide() ;
+      this.dropdown.hide() ;
     }
 }
 
 AgapSelector.prototype.unselected = function(item) {
     var index = parseInt(item.down('input[type=hidden]').value) ;  
     item.remove() ;
-    if (this.dropdown) {
+    // if (this.dropdown) {
       this.dropdown.options[index + 1].disabled = false ;
       this.selector.options[index].selected = false ;
-    } else {
-      this.selector.selectedIndex = 0 ;
-      this.selector.show() ;
-    }
+    // } else {
+    //   this.selector.selectedIndex = 0 ;
+    //   this.dropdown.show() ;
+    // }
 }
 
 AgapSelector.mono_states = [
