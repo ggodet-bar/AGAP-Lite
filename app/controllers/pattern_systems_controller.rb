@@ -50,7 +50,7 @@ class PatternSystemsController < ApplicationController
 
   # GET /pattern_systems/1/edit
   def edit
-    @common_classifications = @pattern_system.system_formalism.field_descriptors
+    @common_classifications = @pattern_system.system_formalism.field_descriptors \
                                     .select{|f| f.field_type.include?('classification')}
 
     @classifications = @pattern_system.system_formalism.pattern_formalisms.collect do |p|
