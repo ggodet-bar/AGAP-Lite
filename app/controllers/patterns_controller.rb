@@ -78,11 +78,7 @@ EOF
     @interface_fields, @solution_fields = @metamodel.pattern_formalisms.find(pattern_type_id).fields
     @process_pattern = @pattern_system.patterns.build(:pattern_formalism_id => pattern_type_id)
     # We prepare both the existing classification elements as well as blank selections
-    @classifications = (@metamodel.pattern_formalisms.find(pattern_type_id).field_descriptors + (@metamodel.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
-      # For single classifications, we only generate a single field
-      acc[field.id] = [] << @process_pattern.classification_selections.build 
-      acc
-    end
+    @classifications = pattern_classifications(@metamodel.pattern_formalisms.find(pattern_type_id))
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @process_pattern }
@@ -94,12 +90,7 @@ EOF
     @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true'
     @metamodel = @pattern_system.system_formalism
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
-    @classifications = (@process_pattern.pattern_formalism.field_descriptors + (@process_pattern.pattern_formalism.system_formalism.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
-      # For single classifications, we only generate a single field
-      acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
-      acc[field.id] = [@process_pattern.classification_selections.build] if acc[field.id].blank?
-      acc
-    end
+    @classifications = pattern_classifications(@process_pattern.pattern_formalism)
   end
 
   # POST /process_patterns
@@ -133,6 +124,8 @@ EOF
         format.xml  { render :xml => @process_pattern, :status => :created, :location => @process_pattern }
       else
         logger.debug @process_pattern.errors.full_messages
+        @metamodel = @pattern_system.system_formalism
+        @classifications = pattern_classifications(@process_pattern.pattern_formalism)
         format.html { render :action => "new" }
         format.xml  { render :xml => @process_pattern.errors, :status => :unprocessable_entity }
       end
@@ -201,7 +194,16 @@ private
   end
 
   def load_system
-        @pattern_system = PatternSystem.find_by_short_name(params[:pattern_system_id])
-        @patterns_list = Pattern.find_all_by_pattern_system_id(@pattern_system.id, :order => :name)
+    @pattern_system = PatternSystem.find_by_short_name(params[:pattern_system_id])
+    @patterns_list = Pattern.find_all_by_pattern_system_id(@pattern_system.id, :order => :name)
+  end
+
+  def pattern_classifications(pattern_formalism)
+    (pattern_formalism.field_descriptors + (pattern_formalism.system_formalism.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
+      # For single classifications, we only generate a single field
+      acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
+      acc[field.id] = [@process_pattern.classification_selections.build] if acc[field.id].blank?
+      acc
+    end
   end
 end

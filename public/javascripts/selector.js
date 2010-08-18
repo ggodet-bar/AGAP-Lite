@@ -14,6 +14,8 @@ AgapSelector.prototype.install_mono_selector = function() {
       this.state_machine.currentState = 'unselected' ;
     }
     this.selector.selectedIndex = 0 ;
+
+    this.selector.insert({'after': new Element('did', {'class': 'selectorContainer'})});
     var s_m = this.state_machine ;
     this.selector.observe('change', function(event){
           s_m.next('select') ;
