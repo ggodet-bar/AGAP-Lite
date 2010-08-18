@@ -6,6 +6,7 @@ function AgapSelector(sel, states, transitions) {
 
 
 AgapSelector.prototype.install_mono_selector = function() {
+    this.selector.insert({'after': new Element('did', {'class': 'selectorContainer'})});
     this.selector.options[0].text = 'Please select' ;
     if (this.selector.selectedIndex != 0) {
       this.selected() ;
@@ -15,7 +16,6 @@ AgapSelector.prototype.install_mono_selector = function() {
     }
     this.selector.selectedIndex = 0 ;
 
-    this.selector.insert({'after': new Element('did', {'class': 'selectorContainer'})});
     var s_m = this.state_machine ;
     this.selector.observe('change', function(event){
           s_m.next('select') ;
@@ -48,6 +48,7 @@ AgapSelector.prototype.install_multi_selector = function() {
     var s_m = this.state_machine ;
     this.dropdown.observe('change', function(event){
        s_m.next('select', drop.selectedIndex) ;
+       event.stop() ;
     }) ;
     this.dropdown.selectedIndex = 0 ;
   },
@@ -90,20 +91,20 @@ AgapSelector.prototype.selected = function(multi_i) {
       this.selector.options[index].selected = true ;
       this.dropdown.selectedIndex = 0 ;
     } else {
-      this.dropdown.hide() ;
+      this.selector.hide() ;
     }
 }
 
 AgapSelector.prototype.unselected = function(item) {
     var index = parseInt(item.down('input[type=hidden]').value) ;  
     item.remove() ;
-    // if (this.dropdown) {
+    if (this.dropdown) {
       this.dropdown.options[index + 1].disabled = false ;
       this.selector.options[index].selected = false ;
-    // } else {
-    //   this.selector.selectedIndex = 0 ;
-    //   this.dropdown.show() ;
-    // }
+    } else {
+      this.selector.selectedIndex = 0 ;
+      this.selector.show() ;
+    }
 }
 
 AgapSelector.mono_states = [
