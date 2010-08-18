@@ -1,5 +1,5 @@
 require File.expand_path('../boot', __FILE__)
-
+ 
 require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
@@ -48,3 +48,6 @@ module AgapLiteApp
   end
 end
 
+require 'haml'
+require 'haml/template'
+Haml::Template.options[:escape_html] = false
