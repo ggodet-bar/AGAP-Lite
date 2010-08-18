@@ -40,7 +40,7 @@ module AgapLiteApp
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
     config.time_zone = 'Paris'
-    config.i18n.load_path << Dir[Rails.root.join('app', 'locales', '*.{rb,yml}')]
+    config.i18n.load_path += Dir[Rails.root.join('app', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :en
 
     # Configure sensitive parameters which will be filtered from the log file.
