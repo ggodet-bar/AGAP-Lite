@@ -96,22 +96,19 @@ EOF
   # POST /process_patterns
   # POST /process_patterns.xml
   def create
-    multis = []
-    unless params[:pattern][:multi_classification_selections].blank?
-      multis = params[:pattern].delete(:multi_classification_selections) #.each do |m|
+    classification_selections = []
+    unless params[:pattern][:classification_selections].blank?
+      multi_classif_params = params[:pattern].delete(:classification_selections)
+      multi_classif_params.values.collect{|a| a['classification_element_id']}.flatten.each do |classif_element_id|
+        classification_selections << ClassificationSelection.new(:classification_element_id => classif_element_id)
+      end
     end
     if params[:pattern][:mappable_images] && params[:pattern][:mappable_images][:image_file_name].blank?
       params[:pattern].delete(:mappable_images)
     end
     @process_pattern = @pattern_system.patterns.build params[:pattern]
+    @process_pattern.classification_selections << classification_selections
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
-      # We delete all the selections that are relative to the field_id
-    multis.each do |k, v| 
-      @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == k.to_i}.map(&:destroy)
-      v.each do |val|
-        @process_pattern.classification_selections.build(:classification_element_id => val.to_i)
-      end
-    end
     respond_to do |format|
       if @process_pattern.save
         # If the update was successful, update all the mappable images of this process
