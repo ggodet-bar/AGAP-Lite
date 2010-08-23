@@ -2,7 +2,7 @@
 require "rubygems"
 require "watir-webdriver"
 
-WEB_ROOT = "http://localhost:3000"
+WEB_ROOT = "http://0.0.0.0:3000"
 
 
 ###########################################

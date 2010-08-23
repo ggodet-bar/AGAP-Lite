@@ -67,8 +67,8 @@ AgapSelector.prototype.update = function(div) {
  } 
 }
 
-AgapSelector.prototype.selected = function(multi_i) {
-    var index = multi_i >= 0 ? multi_i : this.selector.selectedIndex ;
+AgapSelector.prototype.selected = function(force_index_nb) {
+    var index = force_index_nb >= 0 ? force_index_nb : this.selector.selectedIndex ;
     var div = new Element('div').update(this.selector.options[index].text) ;
     div.addClassName("selector_item") ;
     var a = new Element('a', {href: "#", style: "float: right"}).update('remove') ;
@@ -86,7 +86,7 @@ AgapSelector.prototype.selected = function(multi_i) {
           s_m.next('unselect', div) ;
           event.stop() ;
     }) ;
-    if (multi_i >= 0) {
+    if (force_index_nb >= 0) {
       this.dropdown.options[index + 1].disabled = true ;
       this.selector.options[index].selected = true ;
       this.dropdown.selectedIndex = 0 ;

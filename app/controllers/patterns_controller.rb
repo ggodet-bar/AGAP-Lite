@@ -138,22 +138,14 @@ EOF
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
     # Destroy existing multi classifications
     @process_pattern.classification_selections.select{|a| a.classification_element.field_descriptor.field_type == "multi_classification"}.map(&:destroy)
-#     #unless params[:pattern][:multi_classification_selections].blank?
-#     multis = params[:pattern].delete(:multi_classification_selections) || [] #.each do |m|
-# 
-#     pre_destroy_multi_classif_selections = multi_classif_selections - multis.keys.collect{|key| ClassificationSelection.find(key.to_i)}
-#     pre_destroy_multi_classif_selections.map(&:destroy)
-# 
-#         # We delete all the selections that are relative to the field_id
-#       multis.each do |k, v| 
-#         #@process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == k.to_i}.map(&:destroy)
-#         v.each do |val|
-#           @process_pattern.classification_selections.create(:classification_element_id => val.to_i)
-#         end
-#       end
-#     #end
+    
+    unless params[:pattern][:classification_selections].blank?
+      multi_classif_params = params[:pattern].delete(:classification_selections)
+      multi_classif_params.values.collect{|a| a['classification_element_id']}.flatten.each do |classif_element_id|
+        @process_pattern.classification_selections.build(:classification_element_id => classif_element_id)
+      end
+    end
     image_params = params[:pattern].delete(:mappable_images)
-    puts image_params
     image = @process_pattern.mappable_images.create image_params.merge({:pattern_system_id => @pattern_system.id}) \
       unless image_params.blank?
     respond_to do |format|
@@ -201,8 +193,8 @@ private
   def pattern_classifications(pattern_formalism)
     (pattern_formalism.field_descriptors + (pattern_formalism.system_formalism.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
       # For single classifications, we only generate a single field
-      acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
-      acc[field.id] = [@process_pattern.classification_selections.build] if acc[field.id].blank?
+      acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id}
+      # acc[field.id] = [@process_pattern.classification_selections.build] if acc[field.id].blank?
       acc
     end
   end

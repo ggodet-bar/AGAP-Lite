@@ -24,6 +24,7 @@ group :test, :cucumber do
 # gem 'webrat'
   gem 'cucumber-rails'
   gem 'cucumber'
+  gem 'gherkin', '2.1.5'
   gem 'spork'
   gem 'launchy'    # So you can do Then show me the page
   gem 'watir-webdriver',

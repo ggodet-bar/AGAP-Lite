@@ -3,4 +3,4 @@
   %p
     = "No element was specified for classification field \"#{field.name}\"."
 - else
-  =select_tag "pattern[classification_selections_attributes][#{field.id}][]", options_from_collection_for_select(multi_classif, :id, :name, @classifications[field.id].map(&:classification_element_id)), {:multiple => true, :class => "agap_multiple_selector"}
+  = select_tag "pattern[classification_selections][#{field.id}][classification_element_id][]", options_from_collection_for_select(multi_classif, :id, :name, @classifications[field.id].map(&:classification_element_id)), {:multiple => true, :class => "agap_multiple_selector"}
