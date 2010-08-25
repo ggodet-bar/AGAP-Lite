@@ -7,6 +7,7 @@ gem "rails", "3.0.0.rc2"
 gem "mysql2"
 # gem "ruby-debug19"
 gem "tiny_mce"
+gem "aws-s3"
 # gem 'thinking-sphinx',
 #   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
 #   :branch  => 'rails3',
