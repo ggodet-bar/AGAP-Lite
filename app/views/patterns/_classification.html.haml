@@ -3,5 +3,5 @@
   %p
     = "No element was specified for classification field \"#{field.name}\"."
 - else
-  =f.fields_for :classification_selections, (@classifications[field.id].blank? ? @process_pattern.classification_selections.build : @classifications[field.id]) do |classif_form|
+  =f.fields_for :classification_selections, (@classifications[field.id].blank? ? @process_pattern.classification_selections.build : @classifications[field.id].first) do |classif_form|
     = classif_form.collection_select(:classification_element_id, classification, :id, :name, {:include_blank => true}, {:class => 'agap_single_selector'})

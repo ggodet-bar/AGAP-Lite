@@ -14,7 +14,6 @@ AgapSelector.prototype.install_mono_selector = function() {
     } else {
       this.state_machine.currentState = 'unselected' ;
     }
-    this.selector.selectedIndex = 0 ;
 
     var s_m = this.state_machine ;
     this.selector.observe('change', function(event){
