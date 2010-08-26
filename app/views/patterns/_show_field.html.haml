@@ -10,7 +10,7 @@
         -maps = image_association.maps
         -unless maps.empty?
           -maps.each do |map|
-            %dd{:class=>"map", :style=>"position: absolute; display: block; width: #{map.width}px; height: #{map.height}px; top: #{map.y_corner}px; left: #{map.x_corner}px; border: 1px solid red; margin: 0; padding: 0"}
+            %dd{:class=>"map", :style=>"position: absolute; display: block; width: #{map.width}px; height: #{map.height}px; top: #{map.y_corner}px; left: #{map.x_corner}px; border: 1px solid #{map.color_code}; margin: 0; padding: 0"}
               = link_to "", [@pattern_system, map.relation.target_pattern], {:style => "position: absolute; display: block; width: 100%; height: 100%; top: 0; left: 0;"}
     -when Array
       %h3= f.first.classification_element.field_descriptor.name.capitalize

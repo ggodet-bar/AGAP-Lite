@@ -302,10 +302,6 @@ li {
   display: block ;
 }
 
-.validatedMap {
-  border: 1px solid red ;
-}
-
 .activeMap {
   cursor: move ;
   border: 1px dashed black ;

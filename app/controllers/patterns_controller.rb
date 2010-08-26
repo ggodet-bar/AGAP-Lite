@@ -11,7 +11,7 @@ class PatternsController < ApplicationController
     if @relation.save
       render :update do |page|
         page.call 'Popup.close', 'pattern_selector'
-        page.call 'AgapImageManager.validate_map', @relation.id
+        page.call 'AgapImageManager.validate_map', @relation.id, @relation.relation_descriptor.color_code
       end
     end
   end

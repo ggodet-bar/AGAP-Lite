@@ -436,6 +436,7 @@ var AgapImageManager = {
       var y_corner = el.down().next().value ;
       var width = el.down().next().next().value ;
       var height = el.down().next().next().next().value ;
+      var color_code = el.down().next().next().next().next().next().next().value ;
       var map_id = el.id.split("map_fields_")[1] ;
       // We generate an id for the map, if necessary
       if (map_id == undefined) {
@@ -448,8 +449,9 @@ var AgapImageManager = {
         alt: "delete image"
     }) ;
       var the_map =  new Element('dd', {
-            'class': 'map validatedMap',
-            style: "width: " + width + "px; height: " + height + "px; left: " + x_corner + "px; top: " + y_corner + "px;"
+              'class': 'map',
+              style: "width: " + width + "px; height: " + height + "px; left: " + x_corner + "px; top: " + y_corner + "px;"
+                  +  "border: 1px solid " + color_code
             }) ;
       the_map.insert({'top' : del_img}) ;
       image.insert({'top': the_map}) ;    
@@ -468,7 +470,7 @@ var AgapImageManager = {
    * removes the active map before updating the
    * list of existing maps.
    */
-  validate_map: function(relation_id) {
+  validate_map: function(relation_id, color_code) {
     var map = $$(".activeMap").first() ;
     var m_pos = map.positionedOffset() ;
     var m_dim = {width: parseInt(map.getStyle('width').split("px")[0]), height: parseInt(map.getStyle("height").split("px")[0])} ;
@@ -497,6 +499,8 @@ var AgapImageManager = {
     height.value = m_dim.height ;
     var relation = height.next() ;
     relation.value = relation_id ;
+    var color_code_field = relation.next().next() ;
+    color_code_field.value = color_code ;
     blank_map.insert({'after': clone}) ;
     clone.id = "map_fields_" + sub_id   ;
     var image = map.up("dl") ;
