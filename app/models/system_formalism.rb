@@ -1,9 +1,11 @@
 
-# TODO Maybe add some descriptions to the relation instances
 class SystemFormalism < ActiveRecord::Base
   has_many :pattern_formalisms, :autosave => true, :dependent => :destroy
+  accepts_nested_attributes_for :pattern_formalisms, :reject_if => lambda {|a| a[:name].blank?}, :allow_destroy => true
   has_many :relation_descriptors, :autosave => true, :dependent => :destroy
+  accepts_nested_attributes_for :relation_descriptors, :reject_if => lambda {|a| a[:name].blank?}, :allow_destroy => true
   has_many :field_descriptors, :autosave => true, :dependent => :destroy
+  accepts_nested_attributes_for :field_descriptors, :reject_if => lambda {|a| a[:name].blank?}, :allow_destroy => true
 
 
   validate  :must_have_exactly_two_unalterable_relation_descriptors

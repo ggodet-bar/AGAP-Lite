@@ -1,0 +1,12 @@
+%h4 Pattern formalism
+%h5= f.label :name, t(:name)
+%p= f.text_field :name
+
+- pattern_interface_fields, pattern_solution_fields = @pattern_formalism_fields[f.object.name]
+%h5 Field descriptors (Interface section)
+= f.fields_for :field_descriptors, pattern_interface_fields do |field_descriptor_fields|
+  = render :partial => 'field_descriptor', :locals => {:f => field_descriptor_fields, :section => 'interface'}
+
+%h5 Field descriptors (Solution section)
+= f.fields_for :field_descriptors, pattern_solution_fields do |field_descriptor_fields|
+  = render :partial => 'field_descriptor', :locals => {:f => field_descriptor_fields, :section => 'solution'}

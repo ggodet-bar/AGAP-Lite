@@ -1,0 +1,7 @@
+%h1 New system formalism
+
+= form_for(@system_formalism) do |f|
+  = f.error_messages
+  = render :partial => 'form', :locals => {:f => f}
+  %p
+    = f.submit t(:create)

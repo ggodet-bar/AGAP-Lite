@@ -1,5 +1,6 @@
 class PatternFormalism < ActiveRecord::Base
   has_many :field_descriptors, :autosave => true, :dependent => :destroy
+  accepts_nested_attributes_for :field_descriptors, :reject_if => lambda{|a| a[:name].blank?}, :allow_destroy => true
   belongs_to :system_formalism
 
   FORMALISM_SECTIONS = %w( interface solution )

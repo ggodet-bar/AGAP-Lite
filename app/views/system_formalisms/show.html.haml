@@ -1,0 +1,25 @@
+%h1= @system_formalism.name + " (v#{@system_formalism.version})"
+
+%h3 Author(s)
+%p= @system_formalism.author
+
+%h3 Description
+%p= @system_formalism.description
+
+%h3 Pattern formalisms
+- @system_formalism.pattern_formalisms.each do |pattern_formalism|
+  %h4= pattern_formalism.name
+  %ul
+    - pattern_formalism.field_descriptors.each do |field_descriptor|
+      %li
+        %b= field_descriptor.name
+        = field_descriptor.description
+
+%h3 Relation descriptors
+%ul
+  - @system_formalism.relation_descriptors.each do |relation_descriptor|
+    %li
+      %b= relation_descriptor.name
+      = relation_descriptor.associated_field_description
+
+= link_to t(:edit), edit_system_formalism_path(@system_formalism)
