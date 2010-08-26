@@ -319,3 +319,29 @@ li {
   height: 1px ;
   border: 0px ;
 }
+
+.relationsLegend {
+  margin-top: 1em ;
+  background-color: #EEEEFF ;
+  padding: 5px ;
+  border: 1px solid #9999FF ;
+}
+
+.relationLegend {
+  display: inline-block ;
+  width: 30% ;
+  margin-right: 3% ;
+  height: 28px ;
+}
+
+.relationSquare {
+  display: inline-block ;
+  width: 22px ;
+  height: 22px ;
+  border-width: 3px ;
+  border-style: solid ;
+}
+
+.relationLegend > span {
+  vertical-align: 40% ;
+}
