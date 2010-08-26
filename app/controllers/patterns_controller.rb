@@ -6,7 +6,6 @@ class PatternsController < ApplicationController
   before_filter :load_system, :except => [:create_relation]
   
   def create_relation
-    puts params
     @relation = Relation.new params[:relation]
     if @relation.save
       render :update do |page|

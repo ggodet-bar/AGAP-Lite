@@ -1,14 +1,3 @@
-
-/*
- * TODO Manage image deletion (i.e. replace the image by
- * our custom form). If the image is finally deleted, add
- * a destroy field. Additionally, the images created during
- * the upload_file action should be marked as temporary and
- * deleted when the user saves the pattern, or on regular 
- * occasions using delayed jobs. The image that is finally
- * validated should have it temporary field blanked out.
- * TODO Manage relations within the map forms
- */
 var AgapImageManager = {
   pattern: undefined,
   pattern_system: undefined,
@@ -501,6 +490,8 @@ var AgapImageManager = {
     relation.value = relation_id ;
     var color_code_field = relation.next().next() ;
     color_code_field.value = color_code ;
+    var pattern_id_field = color_code_field.next() ;
+    pattern_id_field.value = AgapImageManager.pattern ;
     blank_map.insert({'after': clone}) ;
     clone.id = "map_fields_" + sub_id   ;
     var image = map.up("dl") ;
