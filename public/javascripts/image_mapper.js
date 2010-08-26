@@ -73,8 +73,8 @@ var AgapImageManager = {
         var submit =  new Element('input', {type: 'submit', value: 'submit', style: "display: none"}) ;
         var iframe = new Element('iframe', {
           id: "upload_iframe_" + field_id,
+          'class': 'fileUploadIFrame',
           name: "upload_iframe_" + field_id,
-          style: "width:1px; height:1px; border:0px;",
           src: "about:blank"  
         }) ;
         var form_div = new Element('div', {id: "form_div_" + field_id}) ;
@@ -133,12 +133,12 @@ var AgapImageManager = {
     var cancel_link = new Element('a', {href: "#"}).update("Cancel mapping") ;
     var del_img = new Element('img', {
       src: "/images/common_images/delete.png",
-      style: "position: relative; float: right; top: " + -22 + "px; left: " + 22 +"px; width: 45px;height: 45px; z-index: 10",
+      'class': 'imageFieldTopRight',
       alt: "delete image"
     }) ;
     var ok_img = new Element('img', {
       src: "/images/common_images/validate.png",
-      style: "position: relative; float: right; top: " + -22 + "px; left: " + 22 +"px; width: 45px;height: 45px; z-index: 10",
+      'class': 'imageFieldTopRight',
       alt: "validate map"
     }) ;
     image.insert({'top': del_img}) ;
@@ -208,7 +208,7 @@ var AgapImageManager = {
 
     cancel_link.observe("click", function(event) {
       AgapImageManager.active_map = false ;
-      $$(".active_map").first().remove() ; 
+      $$(".activeMap").first().remove() ; 
 
       $("top_block").remove() ;
       $("left_block").remove() ;
@@ -352,9 +352,9 @@ var AgapImageManager = {
     var default_width = 120, default_height = 80 ;
     var pos = {top: (image.getHeight() - default_height) / 2, left: (image.getWidth() - default_width)/2} ;
     var new_dd = new Element('dd', {
-      style: "cursor: move; position: absolute; display: block; width: " + default_width + "px; height: " + default_height + "px; left: " + pos.left + "px; top: " + pos.top + "px; border: 1px dashed black; margin: 0; padding: 0"
+      class: 'map activeMap',
+      style: "width: " + default_width + "px; height: " + default_height + "px; left: " + pos.left + "px; top: " + pos.top + "px;"
     }) ;
-    new_dd.addClassName("map active_map") ;
     new_dd.insert({'top': AgapImageManager.create_control_block("NW")}) ;
     new_dd.insert({'top': AgapImageManager.create_control_block("SW")}) ;
     new_dd.insert({'top': AgapImageManager.create_control_block("NE")}) ;
@@ -413,7 +413,8 @@ var AgapImageManager = {
   create_opacity_block: function(block_type, top, left, width, height) {
     return new Element('div', {
       id: block_type + "_block",
-      style: "position: absolute; top: " + top + "px; left: " + left + "px; width: " + width + "px; height: " + height + "px; z-index: 5; background-color: #000; opacity: 0.5"
+      'class': 'opacityBlock',
+      style: "top: " + top + "px; left: " + left + "px; width: " + width + "px; height: " + height + "px;"
     }) ;
   },
 
@@ -443,13 +444,13 @@ var AgapImageManager = {
       }
       var del_img = new Element('img', {
         src: "/images/common_images/delete.png",
-        style: "position: relative; float: right; top: " + -12 + "px; left: " + 12 +"px; width: 25px;height: 25px; z-index: 10",
+        'class': 'deleteMapImg',
         alt: "delete image"
     }) ;
       var the_map =  new Element('dd', {
-            style: "position: absolute; display: block; width: " + width + "px; height: " + height + "px; left: " + x_corner + "px; top: " + y_corner + "px; border: 1px solid red; margin: 0; padding: 0"
+            'class': 'map validatedMap',
+            style: "width: " + width + "px; height: " + height + "px; left: " + x_corner + "px; top: " + y_corner + "px;"
             }) ;
-      the_map.addClassName("map") ;
       the_map.insert({'top' : del_img}) ;
       image.insert({'top': the_map}) ;    
       del_img.observe('click', function(event){
@@ -468,7 +469,7 @@ var AgapImageManager = {
    * list of existing maps.
    */
   validate_map: function(relation_id) {
-    var map = $$(".active_map").first() ;
+    var map = $$(".activeMap").first() ;
     var m_pos = map.positionedOffset() ;
     var m_dim = {width: parseInt(map.getStyle('width').split("px")[0]), height: parseInt(map.getStyle("height").split("px")[0])} ;
 

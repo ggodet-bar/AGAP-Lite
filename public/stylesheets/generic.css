@@ -278,3 +278,48 @@ li {
   bottom: -4px ;
   cursor: SW-resize ;
 }
+
+.imageFieldTopRight {
+  position: absolute ;
+  top: -22px ;
+  right: -22px ;
+  width: 45px ;
+  height: 45px ;
+  z-index: 10 ;
+}
+
+.deleteMapImg {
+  position: absolute ;
+  top: -12px ;
+  right: -12px ;
+  width: 25px ;
+  height: 25px ;
+  z-index: 10 ;
+}
+
+.map {
+  position: absolute ;
+  display: block ;
+}
+
+.validatedMap {
+  border: 1px solid red ;
+}
+
+.activeMap {
+  cursor: move ;
+  border: 1px dashed black ;
+}
+
+.opacityBlock {
+  position: absolute ;
+  z-index: 5 ;
+  background-color: #000 ;
+  opacity: 0.5 ;
+}
+
+.fileUploadIFrame {
+  width: 1px ;
+  height: 1px ;
+  border: 0px ;
+}
