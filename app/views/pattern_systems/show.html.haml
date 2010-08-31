@@ -5,48 +5,43 @@
 #update_field
   = @pattern_system.update_field
 
-.block
-  %h2= t :author
-  = h @pattern_system.author
+%h2= t :author
+= h @pattern_system.author
 
-.block
-  %h2= t :characteristics
-  = @pattern_system.characteristics
+%h2= t :characteristics
+= @pattern_system.characteristics
 
-.block
-  %h2= t :patterns_list
-  %ul
-    - @patterns_list.each_key do |key|
-      %li
-        %b= key
-        %br
-        %ul
-          - @patterns_list[key].each do |pat|
-            %li= pat.name + ' | ' + link_to(t(:show), [@pattern_system, pat]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, pat)) + ' | ' + link_to(t(:delete), [@pattern_system, pat], :confirm => 'Are you sure?', :method => :delete)
+%h2= t :patterns_list
+%ul
+  - @patterns_list.each_key do |key|
     %li
-      %b= t(:unclassified)  
+      %b= key
+      %br
       %ul
-        - unclassified = @pattern_system.patterns - @patterns_list.values.flatten
-        - unclassified.each do |u|
-          %li= u.name + ' | ' + link_to(t(:show), [@pattern_system, u]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, u)) + ' | ' + link_to(t(:delete), [@pattern_system, u], :confirm => 'Are you sure?', :method => :delete)
+        - @patterns_list[key].each do |pat|
+          %li= pat.name + ' | ' + link_to(t(:show), [@pattern_system, pat]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, pat)) + ' | ' + link_to(t(:delete), [@pattern_system, pat], :confirm => 'Are you sure?', :method => :delete)
+  %li
+    %b= t(:unclassified)  
+    %ul
+      - unclassified = @pattern_system.patterns - @patterns_list.values.flatten
+      - unclassified.each do |u|
+        %li= u.name + ' | ' + link_to(t(:show), [@pattern_system, u]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, u)) + ' | ' + link_to(t(:delete), [@pattern_system, u], :confirm => 'Are you sure?', :method => :delete)
 
 
 
 - @pattern_system.system_formalism.pattern_formalisms.collect{|a| a.field_descriptors.select{|f| f.field_type.include?("classification")}}.flatten.sort_by{|a| a.name.capitalize}.each do |cl|
-  .block
-    %h2= cl.name.capitalize
+  %h2= cl.name.capitalize
 
-    %ul
-      - @pattern_system.classification_elements.select{|a| a.field_descriptor_id == cl.id}.each do |e|
-        %li
-          %b= e.name
-          %br
-          = e.description
+  %ul
+    - @pattern_system.classification_elements.select{|a| a.field_descriptor_id == cl.id}.each do |e|
+      %li
+        %b= e.name
+        %br
+        = e.description
 
-.block
-  - if @pattern_system.system_formalism.pattern_formalisms.count > 1
-    = link_to t(:add_new_pattern), show_pattern_types_pattern_system_patterns_path(@pattern_system)
-  -  else
-    = link_to t(:add_new_pattern), new_pattern_system_pattern_path(@pattern_system)
-  %br
-  = link_to t(:edit), edit_pattern_system_path(@pattern_system)
+- if @pattern_system.system_formalism.pattern_formalisms.count > 1
+  = link_to t(:add_new_pattern), show_pattern_types_pattern_system_patterns_path(@pattern_system)
+-  else
+  = link_to t(:add_new_pattern), new_pattern_system_pattern_path(@pattern_system)
+%br
+= link_to t(:edit), edit_pattern_system_path(@pattern_system)

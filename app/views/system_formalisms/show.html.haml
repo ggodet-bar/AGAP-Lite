@@ -1,25 +1,38 @@
 %h1= @system_formalism.name + " (v#{@system_formalism.version})"
 
-%h3 Author(s)
+%h2 Author(s)
 %p= @system_formalism.author
 
-%h3 Description
-%p= @system_formalism.description
+%h2 Description
+= @system_formalism.description
 
-%h3 Pattern formalisms
-- @system_formalism.pattern_formalisms.each do |pattern_formalism|
-  %h4= pattern_formalism.name
-  %ul
-    - pattern_formalism.field_descriptors.each do |field_descriptor|
-      %li
-        %b= field_descriptor.name
-        = field_descriptor.description
+%h2 Pattern formalisms
+%ul
+  - @system_formalism.pattern_formalisms.each do |pattern_formalism|
+    %li
+      = pattern_formalism.name
+      |
+      = link_to t(:show), [@system_formalism, pattern_formalism]
+      |
+      = link_to t(:edit), edit_system_formalism_pattern_formalism_path(@system_formalism, pattern_formalism)
+      |
+      = link_to t(:delete), [@system_formalism, pattern_formalism], :confirm => 'Are you sure?', :method => :delete
 
-%h3 Relation descriptors
+%p= link_to 'Add a pattern formalism', new_system_formalism_pattern_formalism_path(@system_formalism)
+
+%h2 Relation descriptors
 %ul
   - @system_formalism.relation_descriptors.each do |relation_descriptor|
     %li
-      %b= relation_descriptor.name
-      = relation_descriptor.associated_field_description
+      = relation_descriptor.name
+      |
+      = link_to t(:show), [@system_formalism, relation_descriptor]
+      - if relation_descriptor.is_alterable
+        |
+        = link_to t(:edit), edit_system_formalism_relation_descriptor_path(relation_descriptor)
+        |
+        = link_to t(:delete), [@system_formalism, relation_descriptor], :confirm => 'Are you sure?', :method => :delete
 
-= link_to t(:edit), edit_system_formalism_path(@system_formalism)
+%p= link_to 'Add a relation descriptor', new_system_formalism_relation_descriptor_path(@system_formalism)
+
+%p= link_to t(:edit), edit_system_formalism_path(@system_formalism)

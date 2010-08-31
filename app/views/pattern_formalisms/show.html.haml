@@ -1,1 +1,12 @@
 %h1= @pattern_formalism.name
+
+%h2 Interface fields
+
+%ul
+  = render :partial => 'field_descriptor', :collection => @interface_fields
+
+%h2 Solution fields
+%ul
+  = render :partial => 'field_descriptor', :collection => @solution_fields
+
+= link_to 'Edit', edit_system_formalism_pattern_formalism_path(@pattern_formalism)

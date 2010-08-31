@@ -1,18 +1,15 @@
-.block
-  %h2 Interface
-  
-  %h3= f.label :name, 'Name'
-  = f.text_field :name, :size => 60
-  = f.hidden_field :pattern_formalism_id
-  -@interface_fields.each do |field|
-    = render :partial => 'fields', :locals => {:f => f, :field => field}
+%h2 Interface
 
-.block
-  %h2 Solution
-  -@solution_fields.each do |field|
-    = render :partial => 'fields', :locals => {:f => f, :field => field}
+%h3= f.label :name, 'Name'
+= f.text_field :name, :size => 60
+= f.hidden_field :pattern_formalism_id
+-@interface_fields.each do |field|
+  = render :partial => 'fields', :locals => {:f => f, :field => field}
 
-.block
-  %h2 Relations
-  -@metamodel.relation_descriptors.each do |rel|
-    %h3= rel.name
+%h2 Solution
+-@solution_fields.each do |field|
+  = render :partial => 'fields', :locals => {:f => f, :field => field}
+
+%h2 Relations
+-@metamodel.relation_descriptors.each do |rel|
+  %h3= rel.name

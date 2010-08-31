@@ -3,7 +3,7 @@ source "http://gemcutter.org"
 gem "haml"
 gem "paperclip",
     :git => 'git://github.com/thoughtbot/paperclip.git'
-gem "rails", "3.0.0.rc2"
+gem "rails", "3.0.0"
 gem "mysql2"
 # gem "ruby-debug19"
 gem "tiny_mce"

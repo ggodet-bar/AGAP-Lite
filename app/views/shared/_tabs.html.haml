@@ -1,7 +1,7 @@
 #tabs{:style => "#{@noob_mode ? 'display: none' : ''}"}
   - %w{pattern_systems system_formalisms}.each do |tab|
     .headerTab<
-    - if tab == params[:controller]
+    - if associated_controllers(tab).include?(params[:controller])
       .leftTabPart.leftTabWhite
       .centralTabPart.centralTabWhite>= human_name(tab)
       .rightTabPart.rightTabWhite

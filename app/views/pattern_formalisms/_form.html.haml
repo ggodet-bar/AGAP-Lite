@@ -1,0 +1,18 @@
+%h3
+  = f.label :name, t(:name)
+= f.text_field :name, :size => 60
+
+%h2 Interface field descriptors
+
+- f.fields_for :field_descriptors, @interface_fields do |field_descriptor_form|
+  = field_descriptor_form.text_field :name
+  = field_descriptor_form.text_field :field_type
+  = field_descriptor_form.text_area  :description, {:class => 'mceEditor', :rows => 6}
+
+%h2 Solution field descriptors 
+
+- f.fields_for :field_descriptors, @solution_fields do |field_descriptor_form|
+  = field_descriptor_form.text_field :name
+  = field_descriptor_form.text_field :field_type
+  = field_descriptor_form.text_area  :description, {:class => 'mceEditor', :rows => 6}
+

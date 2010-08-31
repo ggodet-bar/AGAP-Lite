@@ -30,7 +30,7 @@ class SystemFormalismsController < ApplicationController
         format.html { redirect_to system_formalisms_path }
         format.xml  { render :xml => @system_formalism, :status => :created, :location => @system_formalism }
       else
-        format.html { render :action => 'edit' }
+        format.html { render :action => 'new' }
         format.xml  { render :xml => @system_formalism.errors, :status => :unprocessable_entity }
       end
     end

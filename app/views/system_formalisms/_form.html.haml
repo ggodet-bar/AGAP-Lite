@@ -21,23 +21,3 @@
 %h3 Field descriptors (Solution section)
 = f.fields_for :field_descriptors, @system_solution_fields do |field_descriptor_fields|
   = render :partial => 'field_descriptor', :locals => {:f => field_descriptor_fields}
-
-%h3 Pattern formalisms
-%ul
-  - @system_formalism.pattern_formalisms.each do |pattern_formalism|
-    %li
-      = pattern_formalism.name
-      |
-      = link_to t(:show), [@system_formalism, pattern_formalism]
-      |
-      = link_to t(:edit), edit_system_formalism_pattern_formalism_path(pattern_formalism)
-      |
-      = link_to t(:delete), [@system_formalism, pattern_formalism], :confirm => 'Are you sure?', :method => :delete
-
-
-= f.fields_for :pattern_formalisms do |pattern_formalism_fields|
-  = render :partial => 'pattern_formalism', :locals => {:f => pattern_formalism_fields}
-
-%h3 Relation descriptors
-= f.fields_for :relation_descriptors do |relation_descriptor_fields|
-  = render :partial => 'relation_descriptor', :locals => {:f => relation_descriptor_fields}
