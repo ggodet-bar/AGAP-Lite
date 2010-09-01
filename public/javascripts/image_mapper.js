@@ -417,7 +417,7 @@ var AgapImageManager = {
     var maps = image.up().up().childElements().select(function(el){
         return el.classNames().include("map_fields") &&
                   !el.childElements().any(function(a){return a.name.include("blank_map_record")}) &&
-                  !el.childElements().any(function(a){return a.name.include("_destroy") && a.value == true})
+                  !el.childElements().any(function(a){return a.name.include("_destroy") && a.value == "true"})
         });
     console.log("[ImageMapper]Maps size: " + maps.size()) ;
     maps.each(function(el){
