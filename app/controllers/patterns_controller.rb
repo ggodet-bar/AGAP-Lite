@@ -77,7 +77,7 @@ EOF
     end
     @relations = @relation_descriptors.inject({}) do |acc,relation_descriptor|
       acc[relation_descriptor.name] = @process_pattern.relations \
-                                                          .select{|r| r.relation_descriptor.associated_field_id.blank? &&
+                                                          .select{|r| #r.relation_descriptor.associated_field_id.blank? &&
                                                                       r.relation_descriptor == relation_descriptor}
       acc
     end

@@ -21,9 +21,10 @@
   - @relation_descriptors.each do |rd|
     - unless @relations[rd.name].empty?
       %h3= rd.name
-      %ul
-        - @relations[rd.name].each do |r|
-          %li= link_to r.target_pattern.name, [@pattern_system, r.target_pattern]
+      .field
+        %ul
+          - @relations[rd.name].each do |r|
+            %li= link_to r.target_pattern.name, [@pattern_system, r.target_pattern]
 
 
 .clear
