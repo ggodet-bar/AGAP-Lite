@@ -25,14 +25,4 @@
         %ul
           -f.each do |classif|
             %li= classif.classification_element.name
-
-    - if f.respond_to?(:field_descriptor) && @field_relations[f.field_descriptor.id] && !@field_relations[f.field_descriptor.id][:patterns].empty?
-      .fieldRelations
-        %p
-          %b= @field_relations[f.field_descriptor.id][:relation_descriptor].name + ': ' + @field_relations[f.field_descriptor.id][:relation_descriptor].associated_field_description
-          = link_to 'more', '#', :class => 'fieldRelationsMore', :id => "field_relations_#{f.field_descriptor.id}"
-        %ul
-          - @field_relations[f.field_descriptor.id][:patterns].each do |linked_pattern|
-            %li
-              %p= link_to linked_pattern.name, [@pattern_system, linked_pattern]
-              = linked_pattern.text_instances.select{|t| t.field_descriptor == f.field_descriptor}.first.content
+    = render :partial => 'field_relations', :locals => {:f => f}
