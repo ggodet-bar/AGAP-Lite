@@ -5,16 +5,17 @@
 -if @noob_mode
   .helper_info{:id=>"effect_interface_#{field.index}", :style=>"display:none"}
     %p= field.description
--case field.field_type 
-  -when 'string'
-    = render :partial => 'string', :locals => {:f => f, :field => field} 
-  -when 'text'
-    = render :partial => 'text', :locals => {:f => f, :field => field}
-  -when 'model_set'
-    %p Should display a model set
-  -when 'mappable_image'
-    = render :partial => 'mappable_image', :locals => {:f => f, :field => field}
-  -when 'classification'
-    = render :partial => "classification", :locals => {:f => f, :field => field}
-  -when 'multi_classification'
-    = render :partial => 'multi_classification', :locals => {:f => f, :field => field}
+.field
+  -case field.field_type 
+    -when 'string'
+      = render :partial => 'string', :locals => {:f => f, :field => field} 
+    -when 'text'
+      = render :partial => 'text', :locals => {:f => f, :field => field}
+    -when 'model_set'
+      %p Should display a model set
+    -when 'mappable_image'
+      = render :partial => 'mappable_image', :locals => {:f => f, :field => field}
+    -when 'classification'
+      = render :partial => "classification", :locals => {:f => f, :field => field}
+    -when 'multi_classification'
+      = render :partial => 'multi_classification', :locals => {:f => f, :field => field}

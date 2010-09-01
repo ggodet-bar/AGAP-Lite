@@ -1,14 +1,21 @@
 %h1= h @process_pattern.name
   
 %h2 Interface
-- @interface_fields.each do |f|
-  = render :partial => 'show_field', :locals => {:f => f}
+- if @interface_fields.all?{|f| f.blank?}
+  No interface was specified for this pattern.
+- else
+  - @interface_fields.each do |f|
+    = render :partial => 'show_field', :locals => {:f => f}
 
 %h2 Solution
-- @solution_fields.each do |f|
-  = render :partial => 'show_field', :locals => {:f => f}
+- if @solution_fields.all?{|f| f.blank?}
+  No solution was specified for this pattern.
+-else
+  - @solution_fields.each do |f|
+    = render :partial => 'show_field', :locals => {:f => f}
 
 .clear
-= link_to t(:edit), edit_pattern_system_pattern_path(@pattern_system, @process_pattern)
-|
-= link_to t(:delete), [@pattern_system, @process_pattern], :confirm => 'Are you sure?', :method => :delete
+.commands
+  = link_to t(:edit), edit_pattern_system_pattern_path(@pattern_system, @process_pattern)
+  |
+  = link_to t(:delete), [@pattern_system, @process_pattern], :confirm => 'Are you sure?', :method => :delete

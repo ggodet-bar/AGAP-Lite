@@ -6,7 +6,7 @@
   = @pattern_system.update_field
 
 %h2= t :author
-= h @pattern_system.author
+= @pattern_system.author
 
 %h2= t :characteristics
 = @pattern_system.characteristics
@@ -43,5 +43,6 @@
   = link_to t(:add_new_pattern), show_pattern_types_pattern_system_patterns_path(@pattern_system)
 -  else
   = link_to t(:add_new_pattern), new_pattern_system_pattern_path(@pattern_system)
-%br
-= link_to t(:edit), edit_pattern_system_path(@pattern_system)
+
+.commands
+  = link_to t(:edit), edit_pattern_system_path(@pattern_system)

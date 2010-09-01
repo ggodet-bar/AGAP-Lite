@@ -51,6 +51,10 @@ p {
 	margin-right: -8.7em;
 }
 
+.commands {
+  margin-top: 1.4em ;
+}
+
 #copyright_notice {
 /*	margin-top: 10em;*/
 	text-align: center;
@@ -76,9 +80,8 @@ h3 {
 	font-weight: bold;
 	color: #555;
 /*	text-indent: 1.8em;*/
-	margin-top: 1.2em;
 	margin-bottom: 0.6em;
-	}
+}
 
 dd {
 	font-size: 1.3em;
@@ -100,6 +103,9 @@ li.item {
 	list-style-type: disc;
 }
 
+.field {
+  margin-bottom: 1.6em ;
+}
 
 .selector_item {
     background-color: #eee;

@@ -1,26 +1,27 @@
--unless f.blank? 
-  -case f
-    -when TextInstance, StringInstance
-      %h3= f.field_descriptor.name
-      = f.content
-    -when MappableImage
-      - image_association = ImageAssociation.where(:pattern_id => @process_pattern.id, :mappable_image_id => f.id).first
-      %h3= image_association.field_descriptor.name 
-      %dl{:id =>"mappable_image_image_#{image_association.field_descriptor.id}", :class=>"mappable_image",:style=>"position: relative; background: url(#{f.image.url}) no-repeat; height: #{f.image_height}px; width: #{f.image_width}px;"}
-        -maps = image_association.maps
-        -unless maps.empty?
-          -maps.each do |map|
-            %dd{:class=>"map", :style=>"position: absolute; display: block; width: #{map.width}px; height: #{map.height}px; top: #{map.y_corner}px; left: #{map.x_corner}px; border: 1px solid #{map.color_code}; margin: 0; padding: 0"}
-              = link_to "", [@pattern_system, map.relation.target_pattern], {:style => "position: absolute; display: block; width: 100%; height: 100%; top: 0; left: 0;"}
-      - unless maps.empty?
-        .relationsLegend
-          %h4 Legend
-          - @pattern_system.system_formalism.relation_descriptors.each do |rel_desc|
-            .relationLegend
-              .relationSquare{:style => 'border-color: ' + rel_desc.color_code}
-              %span= rel_desc.name
-    -when Array
-      %h3= f.first.classification_element.field_descriptor.name.capitalize
-      %ul
-        -f.each do |classif|
-          %li= classif.classification_element.name
+.field
+  -unless f.blank? 
+    -case f
+      -when TextInstance, StringInstance
+        %h3= f.field_descriptor.name
+        = f.content
+      -when MappableImage
+        - image_association = ImageAssociation.where(:pattern_id => @process_pattern.id, :mappable_image_id => f.id).first
+        %h3= image_association.field_descriptor.name 
+        %dl{:id =>"mappable_image_image_#{image_association.field_descriptor.id}", :class=>"mappable_image",:style=>"position: relative; background: url(#{f.image.url}) no-repeat; height: #{f.image_height}px; width: #{f.image_width}px;"}
+          -maps = image_association.maps
+          -unless maps.empty?
+            -maps.each do |map|
+              %dd{:class=>"map", :style=>"position: absolute; display: block; width: #{map.width}px; height: #{map.height}px; top: #{map.y_corner}px; left: #{map.x_corner}px; border: 1px solid #{map.color_code}; margin: 0; padding: 0"}
+                = link_to "", [@pattern_system, map.relation.target_pattern], {:style => "position: absolute; display: block; width: 100%; height: 100%; top: 0; left: 0;"}
+        - unless maps.empty?
+          .relationsLegend
+            %h4 Legend
+            - @pattern_system.system_formalism.relation_descriptors.each do |rel_desc|
+              .relationLegend
+                .relationSquare{:style => 'border-color: ' + rel_desc.color_code}
+                %span= rel_desc.name
+      -when Array
+        %h3= f.first.classification_element.field_descriptor.name.capitalize
+        %ul
+          -f.each do |classif|
+            %li= classif.classification_element.name
