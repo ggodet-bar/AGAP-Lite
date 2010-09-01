@@ -1,6 +1,31 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+/* Add a blind-up / blind-down option to field relations */
+document.observe('dom:loaded', function() {
+  if ($$('.fieldRelations').length > 0)
+  {
+    $$('.fieldRelations').each(function(fieldRelation) {
+      var link = fieldRelation.down('a') ;
+      fieldRelation.down('ul').hide() ;
+      link.observe('click', function(event){
+        Effect.toggle(fieldRelation.down('ul'), 'blind', {
+          afterFinish: function() {
+            if (link.innerHTML == 'more')
+            {
+              link.innerHTML = 'less' ;
+            } else {
+              link.innerHTML = 'more' ;
+            }
+          }  
+        }) ;
+        event.stop() ;
+      }) ;
+    }) ;
+  }
+}) ;
+
+
 /* Used for pattern system edition */
 function remove_fields(link) {
   // Set the hidden field to true
