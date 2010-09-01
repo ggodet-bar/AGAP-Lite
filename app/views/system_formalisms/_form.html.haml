@@ -14,10 +14,3 @@
   = f.label :description, "Description"
 = f.text_area :description, :rows => 4, :class => "mceEditor"
 
-%h3 Field descriptors (Interface section)
-= f.fields_for :field_descriptors, @system_interface_fields do |field_descriptor_fields|
-  = render :partial => 'field_descriptor', :locals => {:f => field_descriptor_fields}
-
-%h3 Field descriptors (Solution section)
-= f.fields_for :field_descriptors, @system_solution_fields do |field_descriptor_fields|
-  = render :partial => 'field_descriptor', :locals => {:f => field_descriptor_fields}

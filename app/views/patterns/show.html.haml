@@ -1,5 +1,5 @@
 %h1= h @process_pattern.name
-  
+
 %h2 Interface
 - if @interface_fields.all?{|f| f.blank?}
   No interface was specified for this pattern.
@@ -13,6 +13,18 @@
 -else
   - @solution_fields.each do |f|
     = render :partial => 'show_field', :locals => {:f => f}
+
+%h2 Relations
+- if @relations.empty?
+  No relation was specified for this pattern.
+- else
+  - @relation_descriptors.each do |rd|
+    - unless @relations[rd.name].empty?
+      %h3= rd.name
+      %ul
+        - @relations[rd.name].each do |r|
+          %li= link_to r.target_pattern.name, [@pattern_system, r.target_pattern]
+
 
 .clear
 .commands

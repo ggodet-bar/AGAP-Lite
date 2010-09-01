@@ -59,6 +59,28 @@ EOF
   # GET /process_patterns/1.xml
   def show
     @interface_fields, @solution_fields = @process_pattern.field_instances
+    @relation_descriptors = @process_pattern.pattern_formalism.system_formalism.relation_descriptors
+    @field_relations = @relation_descriptors.inject({}) do |acc, relation_descriptor|
+      if relation_descriptor.associated_field_id.present?
+        associated_patterns = @process_pattern.relations.select{|r| r.relation_descriptor.associated_field_id == \
+                                                                    relation_descriptor.associated_field_id} \
+                                                        .collect{|r| r.target_pattern}
+
+        if relation_descriptor.is_reflexive
+          associated_patterns += Relation.where(:relation_descriptor_id => relation_descriptor.id)
+                                         .where(:target_pattern_id => @process_pattern.id)
+                                         .collect{|r| r.source_pattern}
+        end
+        acc[relation_descriptor.associated_field_id] = {:relation_descriptor => relation_descriptor, :patterns => associated_patterns}
+      end
+      acc
+    end
+    @relations = @relation_descriptors.inject({}) do |acc,relation_descriptor|
+      acc[relation_descriptor.name] = @process_pattern.relations \
+                                                          .select{|r| r.relation_descriptor.associated_field_id.blank? &&
+                                                                      r.relation_descriptor == relation_descriptor}
+      acc
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @process_pattern }

@@ -65,6 +65,10 @@ Spork.each_run do
     end
   end
 
+  Before do
+    DatabaseCleaner.start
+  end
+
   After do 
     if $BROWSER
       $BROWSER.close

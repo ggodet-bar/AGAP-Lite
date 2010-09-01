@@ -3,5 +3,5 @@
 = form_for(@system_formalism) do |f|
   = f.error_messages
   = render :partial => 'form', :locals => {:f => f}
-  %p
+  .commands
     = f.submit t(:update)

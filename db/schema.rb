@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100826125732) do
+ActiveRecord::Schema.define(:version => 20100901142453) do
 
   create_table "classification_elements", :force => true do |t|
     t.integer  "field_descriptor_id"
@@ -128,13 +128,13 @@ ActiveRecord::Schema.define(:version => 20100826125732) do
   create_table "relation_descriptors", :force => true do |t|
     t.string   "name",                                            :null => false
     t.boolean  "is_reflexive",                 :default => false
-    t.string   "associated_field_name"
     t.string   "associated_field_description"
     t.boolean  "is_alterable",                 :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "system_formalism_id",                             :null => false
     t.string   "color_code",                   :default => "red"
+    t.integer  "associated_field_id"
   end
 
   create_table "relations", :force => true do |t|
