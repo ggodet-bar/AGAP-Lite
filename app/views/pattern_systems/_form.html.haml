@@ -1,6 +1,7 @@
 %h3
   = f.label :name, t(:name)
-= f.text_field :name, :size => 60
+.field
+  = f.text_field :name, :size => 60
 
 %h3
   = f.label :short_name, t(:short_name)
@@ -9,7 +10,8 @@
 - if @noob_mode
   #effect_short_name.helper_info{:style => "display: none"}
     %p Please define a short name for the pattern system (between 6 and 12 characters)
-%p= f.text_field :short_name
+.field
+  %p= f.text_field :short_name
 
 %h3
   = t :updates
@@ -18,7 +20,8 @@
 - if @noob_mode
   #effect_update.helper_info{:style => "display:none"}
     %p Describe the latest updates concerning your pattern system
-= f.text_area :update_field, :rows => 4, :class => 'mceEditor'
+.field
+  = f.text_area :update_field, :rows => 4, :class => 'mceEditor'
 
 %h3
   = t :characteristics
@@ -27,7 +30,8 @@
 - if @noob_mode
   #effect_characteristics.helper_info{:style => "display:none"}
     %p Describe the specificities of your pattern system, who it is addressed to, should it be used following specific time constraints etc.
-= f.text_area :characteristics, :rows => 4, :class => 'mceEditor'
+.field
+  = f.text_area :characteristics, :rows => 4, :class => 'mceEditor'
 
 - @common_classifications.each do |common_cl|
   = render :partial => 'classification', :locals => {:f => f, :cl => common_cl, :pattern_system => @pattern_system}

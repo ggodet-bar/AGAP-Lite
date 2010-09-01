@@ -5,7 +5,7 @@
 - if @noob_mode
   %div.helper_info{:id => "classif_#{cl.id}", :style => "display: none"}
     %p= cl.description
-.classification
+.classification.field
   - selection = pattern_system.classification_elements.select{|a| a.field_descriptor_id == cl.id}
   = f.fields_for :classification_elements, selection do |classif_form|
     = render 'classification_fields', :f => classif_form
