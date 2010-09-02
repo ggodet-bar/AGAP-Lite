@@ -117,6 +117,19 @@ EOF
     @metamodel = @pattern_system.system_formalism
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
     @classifications = prepare_pattern_classifications(@process_pattern.pattern_formalism)
+    @relations = @metamodel.relation_descriptors.inject({}) do |acc, relation_descriptor|
+      selected_relations = @process_pattern.relations.select{|r| r.relation_descriptor == relation_descriptor}
+      if relation_descriptor.is_reflexive
+        selected_relations += Relation.where(:relation_descriptor_id => relation_descriptor.id) \
+                                     .where(:target_pattern_id => @process_pattern)
+      end
+      acc[relation_descriptor.id] = {
+        :available => @pattern_system.patterns.select{|p| p != @process_pattern},
+        :selected =>  selected_relations
+      }
+      # acc[relation_descriptor.id] = @process_pattern.relations.select{|r| r.relation_descriptor_id == relation_descriptor.id}
+      acc
+    end
   end
 
   # POST /process_patterns
@@ -168,6 +181,7 @@ EOF
         @process_pattern.classification_selections.build(:classification_element_id => classif_element_id)
       end
     end
+
     image_params = params[:pattern].delete(:mappable_images)
     image = @process_pattern.mappable_images.create image_params.merge({:pattern_system_id => @pattern_system.id}) \
       unless image_params.blank?

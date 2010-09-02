@@ -12,6 +12,11 @@
   = render :partial => 'fields', :locals => {:f => f, :field => field}
 
 %h2 Relations
--@metamodel.relation_descriptors.each do |rel|
+- @metamodel.relation_descriptors.each do |rel|
+  - relations = @relations[rel.id]
   %h3= rel.name
   .field
+    = select_tag "relation_selector[#{rel.id}]", options_from_collection_for_select(relations[:available], :id, :name, relations[:selected].map(&:target_pattern).map(&:id)), {:multiple => true, :class => 'agap_multiple_selector'}
+    = render :partial => 'relation_fields', :locals => {:f => f, :relations => relations[:selected]}
+
+
