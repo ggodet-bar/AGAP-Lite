@@ -66,11 +66,6 @@ EOF
                                                                     relation_descriptor.associated_field_id} \
                                                         .collect{|r| r.target_pattern}
 
-        if relation_descriptor.is_reflexive
-          associated_patterns += Relation.where(:relation_descriptor_id => relation_descriptor.id) \
-                                         .where(:target_pattern_id => @process_pattern.id)         \
-                                         .collect{|r| r.source_pattern}
-        end
         acc[relation_descriptor.associated_field_id] = {:relation_descriptor => relation_descriptor, :patterns => associated_patterns}
       end
       acc
@@ -78,12 +73,6 @@ EOF
     @relations = @relation_descriptors.inject({}) do |acc,relation_descriptor|
       associated_patterns = @process_pattern.relations.select{|r| r.relation_descriptor == relation_descriptor} \
                                                       .collect{|r| r.target_pattern}
-
-      if relation_descriptor.is_reflexive
-        associated_patterns += Relation.where(:relation_descriptor_id => relation_descriptor.id) \
-                                       .where(:target_pattern_id => @process_pattern.id)         \
-                                       .collect{|r| r.source_pattern}
-      end
       acc[relation_descriptor.name] = associated_patterns
       acc
     end
@@ -119,10 +108,6 @@ EOF
     @classifications = prepare_pattern_classifications(@process_pattern.pattern_formalism)
     @relations = @metamodel.relation_descriptors.inject({}) do |acc, relation_descriptor|
       selected_relations = @process_pattern.relations.select{|r| r.relation_descriptor == relation_descriptor}
-      if relation_descriptor.is_reflexive
-        selected_relations += Relation.where(:relation_descriptor_id => relation_descriptor.id) \
-                                     .where(:target_pattern_id => @process_pattern)
-      end
       acc[relation_descriptor.id] = {
         :available => @pattern_system.patterns.select{|p| p != @process_pattern},
         :selected =>  selected_relations
