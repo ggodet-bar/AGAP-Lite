@@ -16,9 +16,4 @@
   - relations = @relations[rel.id]
   %h3= rel.name
   .field
-    = select_tag "relation_selector[#{rel.id}]", options_from_collection_for_select(relations[:available], :id, :name, relations[:selected].map(&:target_pattern).map(&:id)), {:multiple => true, :class => 'agap_multiple_selector'}
-    = f.fields_for :relations, relations[:selected] do |rel_builder|
-      = render 'relation_fields', :f => rel_builder
-    = f.fields_for :relations, @process_pattern.relations.build(:relation_descriptor_id => rel.id), :child_index => "new_#{rel.name.downcase.underscore}" do |rel_builder|
-      = render 'relation_fields', :f => rel_builder
-
+    = render 'agap_select', :name => "relation_selector[#{rel.id}]", :f => f, :association => :relations, :available => relations[:available], :selected => relations[:selected], :selected_value_method => :target_pattern_id, :relation_descriptor => rel

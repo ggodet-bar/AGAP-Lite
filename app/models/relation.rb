@@ -5,10 +5,11 @@ class Relation < ActiveRecord::Base
 
   after_create do |relation|
     if relation_descriptor.is_reflexive &&
-      !Relation.where(:source_pattern_id => target_pattern_id)
-               .where(:target_pattern_id => source_pattern_id)
-               .where(:relation_descriptor_id => relation_descriptor_id)
-               .present?
+      Relation.where(:source_pattern_id => target_pattern_id)
+              .where(:target_pattern_id => source_pattern_id)
+              .where(:relation_descriptor_id => relation_descriptor_id)
+              .empty?
+      puts "Create new relation!"
       Relation.create({
         :source_pattern_id => target_pattern_id,
         :target_pattern_id => source_pattern_id,
@@ -26,5 +27,13 @@ class Relation < ActiveRecord::Base
         reflexive_relation.map(&:destroy)
       end
     end
+  end
+
+  def target_pattern_name
+    target_pattern.present? ? target_pattern.name : ""
+  end
+
+  def target_pattern_name=(*args)
+
   end
 end

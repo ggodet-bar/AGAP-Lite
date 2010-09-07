@@ -13,7 +13,8 @@ class Pattern < ActiveRecord::Base
   has_many     :mappable_images, :through => :image_associations
 
   has_many  :relations, :dependent => :destroy, :foreign_key => 'source_pattern_id'
-  accepts_nested_attributes_for :relations, :reject_if => lambda{|a| a[:target_pattern_id].blank?}
+  accepts_nested_attributes_for :relations, :reject_if => lambda{|a| a['target_pattern_id'].blank?}, :allow_destroy => true
+
   validates_presence_of :name
 
 
@@ -33,23 +34,4 @@ class Pattern < ActiveRecord::Base
     [interface_fields, solution_fields].map{|f| f.map(&muster)}
   end
 
-  # def method_missing(m, *args, &block)
-  #   begin
-  #     super
-  #   rescue
-  #     if m.to_s =~ /_relations$/
-  #       relation_descriptor_name = m.to_s.split(/_relations$/)[0].gsub(/_/, ' ')
-  #       relation_descriptor = RelationDescriptor.where('name = lower(?)', relation_descriptor_name).first
-  #       raise 'Invalid relation name' if relation_descriptor.blank?
-
-  #       relations.select{|r| r.relation_descriptor_id == relation_descriptor.id}
-  #     elsif m.to_s =~ /_relations=$/
-  #       relation_descriptor_name = m.to_s.split(/_relations$/)[0].gsub(/_/, ' ')
-  #       relation_descriptor = RelationDescriptor.where('name = lower(?)', relation_descriptor_name)
-  #       raise 'Invalid relation name' if relation_descriptor.blank?
-  #       
-  #       puts args.inspect
-  #     end
-  #   end
-  # end
 end

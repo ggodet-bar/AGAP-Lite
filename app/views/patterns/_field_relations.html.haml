@@ -7,4 +7,5 @@
       - @field_relations[f.field_descriptor.id][:patterns].each do |linked_pattern|
         %li
           %p= link_to linked_pattern.name, [@pattern_system, linked_pattern]
-          = linked_pattern.text_instances.select{|t| t.field_descriptor == f.field_descriptor}.first.content
+          - target_text_instance = linked_pattern.text_instances.select{|t| t.field_descriptor == f.field_descriptor}.first
+          = target_text_instance.present? ? target_text_instance.content : "<p class='fieldRelationsMore'>No content was specified.</p>"
