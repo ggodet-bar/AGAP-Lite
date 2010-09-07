@@ -37,7 +37,6 @@ class PatternFormalism < ActiveRecord::Base
 
   # Returns parallel arrays that include the field descriptors
   def fields
-    puts self.system_formalism.field_descriptors.inspect
     (self.field_descriptors + (self.system_formalism.field_descriptors || [])).partition{|field| field.section == 'interface'}
   end
 end

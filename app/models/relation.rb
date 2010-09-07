@@ -9,7 +9,6 @@ class Relation < ActiveRecord::Base
               .where(:target_pattern_id => source_pattern_id) \
               .where(:relation_descriptor_id => relation_descriptor_id) \
               .empty?
-      puts "Create new relation!"
       Relation.create({
         :source_pattern_id => target_pattern_id,
         :target_pattern_id => source_pattern_id,
