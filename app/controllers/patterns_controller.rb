@@ -94,6 +94,13 @@ EOF
     @interface_fields, @solution_fields = @metamodel.pattern_formalisms.find(pattern_type_id).fields
     @process_pattern = @pattern_system.patterns.build(:pattern_formalism_id => pattern_type_id)
     @classifications = prepare_pattern_classifications(@metamodel.pattern_formalisms.find(pattern_type_id))
+    @relations = @metamodel.relation_descriptors.inject({}) do |acc, relation_descriptor|
+      acc[relation_descriptor.id] = {
+        :available => @pattern_system.patterns.select{|p| p != @process_pattern},
+        :selected =>  []
+      }
+      acc
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @process_pattern }
@@ -112,7 +119,6 @@ EOF
         :available => @pattern_system.patterns.select{|p| p != @process_pattern},
         :selected =>  selected_relations
       }
-      # acc[relation_descriptor.id] = @process_pattern.relations.select{|r| r.relation_descriptor_id == relation_descriptor.id}
       acc
     end
   end
