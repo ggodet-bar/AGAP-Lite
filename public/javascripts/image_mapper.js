@@ -447,6 +447,7 @@ var AgapImageManager = {
       del_img.observe('click', function(event){
          // We get the map which corresponds to this id
         $("map_fields_" + map_id).childElements().last().value = true ;
+        
         the_map.remove() ;
       }) ;
     }) ;

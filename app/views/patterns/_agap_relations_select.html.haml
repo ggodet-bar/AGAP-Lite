@@ -1,0 +1,15 @@
+= select_tag("relation_selector[#{relation_descriptor.id}]", options_from_collection_for_select(available, :id, :name, selected.map(&:target_pattern_id)), :multiple => true)
+- local_relation_name = relation_descriptor.name.gsub(/\s+/,'_').downcase
+.associationFields{:id => "#{local_relation_name}_#{relation_descriptor.id}"}
+  = f.fields_for(:relations, selected) do |builder|
+    = render 'relation_fields', :f => builder
+:ruby
+  new_object = f.object.relations.build(:relation_descriptor_id => relation_descriptor.id)
+  new_fields = nil
+  f.fields_for(:relations, new_object, :child_index => "new_#{local_relation_name}") do |builder|
+    new_fields = render 'relation_fields', :f => builder
+  end
+:javascript
+  document.observe("dom:loaded", function() {
+    new AgapSelector($("relation_selector_#{relation_descriptor.id}"), AgapSelector.multi_states, AgapSelector.multi_transitions, "#{escape_javascript(new_fields)}", "#{local_relation_name}") ;
+  }) ;

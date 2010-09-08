@@ -16,4 +16,4 @@
   - relations = @relations[rel.id]
   %h3= rel.name
   .field
-    = render 'agap_select', :name => "relation_selector[#{rel.id}]", :f => f, :association => :relations, :available => relations[:available], :selected => relations[:selected], :selected_value_method => :target_pattern_id, :relation_descriptor => rel
+    = render 'agap_relations_select', :f => f, :available => relations[:available], :selected => relations[:selected], :relation_descriptor => rel
