@@ -10,6 +10,4 @@
     new_fields = render 'relation_fields', :f => builder
   end
 :javascript
-  document.observe("dom:loaded", function() {
     new AgapSelector($("relation_selector_#{relation_descriptor.id}"), AgapSelector.multi_states, AgapSelector.multi_transitions, "#{escape_javascript(new_fields)}", "#{local_relation_name}") ;
-  }) ;

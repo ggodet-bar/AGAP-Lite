@@ -1,6 +1,15 @@
--multi_classif = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id}
+- multi_classif = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id}
 - if multi_classif.empty?
   %p
     = "No element was specified for classification field \"#{field.name}\"."
 - else
-  = select_tag "pattern[classification_selections][#{field.id}][classification_element_id][]", options_from_collection_for_select(multi_classif, :id, :name, @classifications[field.id].map(&:classification_element_id)), {:multiple => true, :class => "agap_multiple_selector"}
+  - new_object = f.object.classification_selections.build
+  - new_fields = nil
+  - f.fields_for(:classification_selections, new_object, :child_index => "new_#{field.name.downcase}") do |builder|
+    - new_fields = render 'classification_fields', :f => builder
+  = select_tag "classification_selector[#{field.id}]", options_from_collection_for_select(multi_classif, :id, :name, @classifications[field.id].map(&:classification_element_id)), {:multiple => true}
+  .associationFields{:id => "#{field.name.downcase}_#{field.id}"}
+    = f.fields_for(:classification_selections, @classifications[field.id]) do |builder|
+      = render 'classification_fields', :f => builder
+  :javascript
+    new AgapSelector($("classification_selector_#{field.id}"), AgapSelector.multi_states, AgapSelector.multi_transitions, "#{escape_javascript(new_fields)}", "#{field.name.downcase}") ;

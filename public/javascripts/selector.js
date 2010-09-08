@@ -204,13 +204,3 @@ AgapSelector.multi_transitions = [
         }
       ] ;
 
-document.observe("dom:loaded", function(){
-    var single_selectors = $$('.agap_single_selector') ;
-    var multi_selectors = $$('.agap_multiple_selector') ;
-    single_selectors.each(function(el){
-        new AgapSelector(el, AgapSelector.mono_states, AgapSelector.mono_transitions)  ;
-    });
-    multi_selectors.each(function(el){
-        new AgapSelector(el, AgapSelector.multi_states, AgapSelector.multi_transitions) ;
-    }) ;
-}) ;

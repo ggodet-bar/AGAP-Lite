@@ -120,13 +120,6 @@ EOF
   # POST /process_patterns
   # POST /process_patterns.xml
   def create
-    classification_selections = []
-    unless params[:pattern][:classification_selections].blank?
-      multi_classif_params = params[:pattern].delete(:classification_selections)
-      multi_classif_params.values.collect{|a| a['classification_element_id']}.flatten.each do |classif_element_id|
-        classification_selections << ClassificationSelection.new(:classification_element_id => classif_element_id)
-      end
-    end
     if params[:pattern][:mappable_images] && params[:pattern][:mappable_images][:image_file_name].blank?
       params[:pattern].delete(:mappable_images)
     end
@@ -157,15 +150,6 @@ EOF
   # PUT /process_patterns/1.xml
   def update
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
-    # Destroy existing multi classifications
-    @process_pattern.classification_selections.select{|a| a.classification_element.field_descriptor.field_type == "multi_classification"}.map(&:destroy)
-    
-    unless params[:pattern][:classification_selections].blank?
-      multi_classif_params = params[:pattern].delete(:classification_selections)
-      multi_classif_params.values.collect{|a| a['classification_element_id']}.flatten.each do |classif_element_id|
-        @process_pattern.classification_selections.build(:classification_element_id => classif_element_id)
-      end
-    end
 
     image_params = params[:pattern].delete(:mappable_images)
     image = @process_pattern.mappable_images.create image_params.merge({:pattern_system_id => @pattern_system.id}) \
