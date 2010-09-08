@@ -341,7 +341,7 @@ var AgapImageManager = {
     var default_width = 120, default_height = 80 ;
     var pos = {top: (image.getHeight() - default_height) / 2, left: (image.getWidth() - default_width)/2} ;
     var new_dd = new Element('dd', {
-      class: 'map activeMap',
+      'class': 'map activeMap',
       style: "width: " + default_width + "px; height: " + default_height + "px; left: " + pos.left + "px; top: " + pos.top + "px;"
     }) ;
     new_dd.insert({'top': AgapImageManager.create_control_block("NW")}) ;
