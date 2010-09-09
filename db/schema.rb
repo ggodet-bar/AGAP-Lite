@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100901142453) do
+ActiveRecord::Schema.define(:version => 20100909153706) do
 
   create_table "classification_elements", :force => true do |t|
     t.integer  "field_descriptor_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20100901142453) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "system_formalism_id"
+    t.boolean  "is_active",           :default => true
   end
 
   create_table "classification_selections", :force => true do |t|
@@ -44,11 +45,12 @@ ActiveRecord::Schema.define(:version => 20100901142453) do
   end
 
   create_table "image_associations", :force => true do |t|
-    t.integer  "pattern_id",          :null => false
+    t.integer  "pattern_id",                            :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "field_descriptor_id"
     t.integer  "mappable_image_id"
+    t.boolean  "is_active",           :default => true
   end
 
   create_table "mappable_images", :force => true do |t|
@@ -151,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20100901142453) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "field_descriptor_id"
+    t.boolean  "is_active",           :default => true
   end
 
   create_table "system_formalisms", :force => true do |t|
@@ -168,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20100901142453) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "field_descriptor_id"
+    t.boolean  "is_active",           :default => true
   end
 
 end

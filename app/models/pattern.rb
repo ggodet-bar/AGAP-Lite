@@ -25,10 +25,10 @@ class Pattern < ActiveRecord::Base
 
     # We get the first non nil instance that corresponds to the field id
     muster = lambda do |field| 
-      self.string_instances.select{|a| a.field_descriptor_id == field.id}.first ||
-      self.text_instances.select{|a| a.field_descriptor_id == field.id}.first  ||
-      self.image_associations.select{|a| a.field_descriptor_id == field.id}.map(&:mappable_image).first ||
-      self.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id} 
+      self.string_instances.select{|a| a.field_descriptor_id == field.id && a.is_active}.first ||
+      self.text_instances.select{|a| a.field_descriptor_id == field.id && a.is_active}.first  ||
+      self.image_associations.select{|a| a.field_descriptor_id == field.id && a.is_active}.map(&:mappable_image).first ||
+      self.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.is_active && a.classification_element.field_descriptor_id == field.id} 
     end
 
     [interface_fields, solution_fields].map{|f| f.map(&muster)}
