@@ -209,7 +209,7 @@ li.item {
 /*
  * Pattern System
  */
-.patternSystemClassification {
+.patternSystemClassification, .fieldDescriptorField {
   position: relative ;
   border: 4px solid gray ;
   padding: 1.4em ;
@@ -222,7 +222,7 @@ li.item {
   margin: 0 auto 1em auto ;
 }
 
-.patternSystemClassification .delete {
+.patternSystemClassification .delete, .fieldDescriptorField .delete {
   width: 30px ;
   height: 30px ;
   position: absolute ;

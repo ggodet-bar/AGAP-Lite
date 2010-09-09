@@ -1,0 +1,20 @@
+.fieldDescriptorField
+  %p
+    = f.label :name, t(:name)
+    %br
+    = f.text_field :name, {:disabled => !f.object.is_alterable}
+  %p
+    = f.label :field_type, "Field type"
+    %br
+    = f.select     :field_type, FieldDescriptor::FORMALISM_FIELD_TYPES.collect{|p| [p.gsub(/_/, ' ').capitalize, p]}, {}, {:disabled => !f.object.is_alterable}
+  %p
+    = f.label :description, "Description"
+    %br
+    - if f.object.is_alterable
+      = f.text_area  :description, {:style => 'height: 5em; width: 100%', :class => 'mceEditor', :rows => 6}
+      = link_to_function(image_tag('common_images/delete.png', :class => 'delete'), 'remove_fields(this)')
+    - else
+      = f.object.description
+  = f.hidden_field :section
+  = f.hidden_field :_destroy
+  = javascript_tag "tinyMCE.execCommand('mceAddControl', false, \"pattern_formalism_field_descriptors_attributes_new_field_descriptors_description\")"

@@ -29,9 +29,12 @@ document.observe('dom:loaded', function() {
 /* Used for pattern system edition */
 function remove_fields(link) {
   // Set the hidden field to true
-  $(link).next('input[type=hidden]').value = "1" ;
+  var surrounding_div = $(link).up("div") ;
+  surrounding_div.childElements().find(function(el) {
+    return el.type == 'hidden' && el.name.include("[_destroy]") ;    
+  }).value = true ;
   // Hide the surrounding tag 
-  $(link).up('.patternSystemClassification').hide() ; 
+  surrounding_div.hide() ; 
 }
 
 function add_fields(link, association, content) {

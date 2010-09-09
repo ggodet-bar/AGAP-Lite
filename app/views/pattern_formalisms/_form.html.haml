@@ -5,14 +5,12 @@
 %h2 Interface field descriptors
 
 - f.fields_for :field_descriptors, @interface_fields do |field_descriptor_form|
-  = field_descriptor_form.text_field :name
-  = field_descriptor_form.text_field :field_type
-  = field_descriptor_form.text_area  :description, {:class => 'mceEditor', :rows => 6}
+  = render 'field_descriptor_form', :f => field_descriptor_form
+= link_to_add_fields "add", f, :field_descriptors, 'field_descriptor_form', {:section => "solution"}
 
 %h2 Solution field descriptors 
 
 - f.fields_for :field_descriptors, @solution_fields do |field_descriptor_form|
-  = field_descriptor_form.text_field :name
-  = field_descriptor_form.text_field :field_type
-  = field_descriptor_form.text_area  :description, {:class => 'mceEditor', :rows => 6}
+  = render 'field_descriptor_form', :f => field_descriptor_form
+= link_to_add_fields "add", f, :field_descriptors, 'field_descriptor_form', {:section => "solution"}
 
