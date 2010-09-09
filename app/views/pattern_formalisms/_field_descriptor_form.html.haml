@@ -2,11 +2,12 @@
   %p
     = f.label :name, t(:name)
     %br
-    = f.text_field :name, {:disabled => !f.object.is_alterable}
+    = f.text_field :name, {:readonly => !f.object.is_alterable}
   %p
     = f.label :field_type, "Field type"
     %br
     = f.select     :field_type, FieldDescriptor::FORMALISM_FIELD_TYPES.collect{|p| [p.gsub(/_/, ' ').capitalize, p]}, {}, {:disabled => !f.object.is_alterable}
+    = f.hidden_field :field_type if !f.object.is_alterable
   %p
     = f.label :description, "Description"
     %br
@@ -18,4 +19,5 @@
       = f.object.description
       = f.hidden_field :description
   = f.hidden_field :section
+  = f.hidden_field :is_alterable
   = f.hidden_field :_destroy

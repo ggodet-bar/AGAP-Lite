@@ -20,13 +20,14 @@ class PatternFormalismsController < ApplicationController
   end
 
   def create
-    @system_formalism = SystemFormalism.find(params[:system_formalism_id])
     @pattern_formalism = PatternFormalism.new(params[:pattern_formalism])
+    @system_formalism = @pattern_formalism.system_formalism
 
     if @pattern_formalism.save
       flash[:notice] = "Successfully created a new pattern formalism."
       redirect_to [@system_formalism, @pattern_formalism]
     else
+      @interface_fields, @solution_fields = @pattern_formalism.field_descriptors.partition{|field| field.section == 'interface'}
       render 'edit'
     end
   end
@@ -38,6 +39,7 @@ class PatternFormalismsController < ApplicationController
       flash[:notice] = "Successfully updated pattern formalism."
       redirect_to [@system_formalism, @pattern_formalism]
     else
+      @interface_fields, @solution_fields = @pattern_formalism.field_descriptors.partition{|field| field.section == 'interface'}
       render 'edit'
     end
   end

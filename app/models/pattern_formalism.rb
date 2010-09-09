@@ -5,6 +5,7 @@ class PatternFormalism < ActiveRecord::Base
 
   FORMALISM_SECTIONS = %w( interface solution )
 
+  validates_presence_of :name
   validate :must_have_base_field_descriptors, :all_fields_must_be_in_a_valid_section
   after_initialize :add_default_field_descriptors
   before_save :update_field_descriptor_indexes
