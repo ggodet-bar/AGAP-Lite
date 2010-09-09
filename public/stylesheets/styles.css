@@ -54,6 +54,8 @@ p {
 	float: right;
 	margin-top: -0.8em;
 	margin-right: -8.7em;
+  border: none ;
+  left: 0 ;
 }
 
 .commands {
