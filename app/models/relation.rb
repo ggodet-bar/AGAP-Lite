@@ -26,6 +26,8 @@ class Relation < ActiveRecord::Base
         reflexive_relation.map(&:destroy)
       end
     end
+
+    Map.where(:relation_id => id).map(&:destroy)
   end
 
 end
