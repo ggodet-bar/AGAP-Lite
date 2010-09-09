@@ -24,7 +24,12 @@ h2 {
 	border-bottom: 1px solid #A0A0A0;
   margin-top: 1em ;
   margin-bottom: -0.4em ;
-	}
+}
+
+#params > h2 {
+  left: 0 ;
+  border: none ;
+}
 
 p {
 /*	clear: left ;*/
