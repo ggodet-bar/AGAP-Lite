@@ -112,12 +112,13 @@ li {
   position: absolute ;
   top: 0;
   right: 0;
-	width: 18%;
-	padding-right: 50px;
-	padding-bottom: 80px;
-	padding-left: 8px;
-	border-left: solid #CCCCCC;
+	width: 22%;
 /*	overflow: auto;*/
+}
+
+#patternList > #list-content {
+  padding: 1em 1em 2em 0.6em ;
+	border-left: solid #CCCCCC;
 }
 
 .clearfooter {

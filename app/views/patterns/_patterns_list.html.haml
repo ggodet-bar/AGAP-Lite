@@ -1,17 +1,18 @@
 #patternList
-  %h3= t(:patterns_list)
-  - patterns_list = @pattern_system.structured_pattern_list
-  - patterns_list.each_key do |key| 
-    - unless patterns_list[key].empty?
-      %b= key
+  #list-content
+    %h3= t(:patterns_list)
+    - patterns_list = @pattern_system.structured_pattern_list
+    - patterns_list.each_key do |key| 
+      - unless patterns_list[key].empty?
+        %b= key
+        %ul{:style=>"margin-left: -3.4em;"}
+          - patterns_list[key].each do |pat|
+            %li{:id => "pat_item_#{pat.id}"}
+              %span= pat == @process_pattern ? pat.name : link_to(pat.name, [@pattern_system, pat])
+    - unclassified = @pattern_system.patterns - patterns_list.values.flatten
+    - unless unclassified.empty?
+      %b= t(:unclassified)
       %ul{:style=>"margin-left: -3.4em;"}
-        - patterns_list[key].each do |pat|
+        - unclassified.each do |pat|
           %li{:id => "pat_item_#{pat.id}"}
             %span= pat == @process_pattern ? pat.name : link_to(pat.name, [@pattern_system, pat])
-  - unclassified = @pattern_system.patterns - patterns_list.values.flatten
-  - unless unclassified.empty?
-    %b= t(:unclassified)
-    %ul{:style=>"margin-left: -3.4em;"}
-      - unclassified.each do |pat|
-        %li{:id => "pat_item_#{pat.id}"}
-          %span= pat == @process_pattern ? pat.name : link_to(pat.name, [@pattern_system, pat])
