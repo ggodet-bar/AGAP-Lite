@@ -1,3 +1,5 @@
+= f.hidden_field :system_formalism_id
+
 %h3
   = f.label :name, t(:name)
 = f.text_field :name, :size => 60
@@ -6,7 +8,7 @@
 
 - f.fields_for :field_descriptors, @interface_fields do |field_descriptor_form|
   = render 'field_descriptor_form', :f => field_descriptor_form
-= link_to_add_fields "add", f, :field_descriptors, 'field_descriptor_form', {:section => "solution"}
+= link_to_add_fields "add", f, :field_descriptors, 'field_descriptor_form', {:section => "interface"}
 
 %h2 Solution field descriptors 
 
