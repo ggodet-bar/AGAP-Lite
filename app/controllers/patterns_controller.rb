@@ -127,7 +127,6 @@ EOF
       params[:pattern].delete(:mappable_images)
     end
     @process_pattern = @pattern_system.patterns.build params[:pattern]
-    @process_pattern.classification_selections << classification_selections
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
     respond_to do |format|
       if @process_pattern.save
