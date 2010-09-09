@@ -41,4 +41,13 @@ class PatternFormalismsController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    @pattern_formalism = PatternFormalism.find(params[:id])
+    @system_formalism = @pattern_formalism.system_formalism
+    @pattern_formalism.destroy
+
+    flash[:notice] = t(:successful_delete, :model => PatternFormalism.model_name.human)
+    redirect_to @system_formalism
+  end
 end
