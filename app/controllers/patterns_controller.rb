@@ -86,11 +86,8 @@ EOF
   # GET /process_patterns/new.xml
   def new
     @noob_mode = cookies[:noob_mode].blank? || cookies[:noob_mode] == 'true'
-    # Create a new pattern based on the definition
-    # provided by the formalism 
     @metamodel = @pattern_system.system_formalism
     pattern_type_id = params[:pattern_type] || @metamodel.pattern_formalisms.first.id
-    # We suppose that there is only one pattern formalism
     @interface_fields, @solution_fields = @metamodel.pattern_formalisms.find(pattern_type_id).fields
     @process_pattern = @pattern_system.patterns.build(:pattern_formalism_id => pattern_type_id)
     @classifications = prepare_pattern_classifications(@metamodel.pattern_formalisms.find(pattern_type_id))
@@ -134,8 +131,6 @@ EOF
     @interface_fields, @solution_fields = @process_pattern.pattern_formalism.fields
     respond_to do |format|
       if @process_pattern.save
-        # If the update was successful, update all the mappable images of this process
-        # pattern and make them non temporary
         @process_pattern.image_associations.each do |im|
           im.mappable_image.update_attribute(:is_temporary, false)
         end
@@ -162,8 +157,6 @@ EOF
       unless image_params.blank?
     respond_to do |format|
       if  @process_pattern.update_attributes(params[:pattern])
-        # If the update was successful, update all the mappable images of this process
-        # pattern and make them non temporary
         @process_pattern.image_associations.each do |im|
           im.mappable_image.update_attribute(:is_temporary, false)
         end
@@ -204,7 +197,6 @@ private
 
   def prepare_pattern_classifications(pattern_formalism)
     (pattern_formalism.field_descriptors + (pattern_formalism.system_formalism.field_descriptors || [])).select{|a| a.field_type.include?("classification")}.inject({}) do |acc, field|
-      # For single classifications, we only generate a single field
       acc[field.id] = @process_pattern.classification_selections.select{|a| !a.classification_element.blank? && a.classification_element.field_descriptor_id == field.id}
       acc
     end
