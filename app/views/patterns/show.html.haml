@@ -2,14 +2,14 @@
 
 %h2 Interface
 - if @interface_fields.all?{|f| f.blank?}
-  No interface was specified for this pattern.
+  %p{:class => 'fieldRelationsMore'}No interface was specified for this pattern.
 - else
   - @interface_fields.each do |f|
     = render :partial => 'show_field', :locals => {:f => f}
 
 %h2 Solution
 - if @solution_fields.all?{|f| f.blank?}
-  No solution was specified for this pattern.
+  %p{:class => 'fieldRelationsMore'}No solution was specified for this pattern.
 -else
   - @solution_fields.each do |f|
     = render :partial => 'show_field', :locals => {:f => f}

@@ -1,6 +1,6 @@
 - multi_classif = @process_pattern.pattern_system.classification_elements.select{|a| a.field_descriptor_id == field.id}
 - if multi_classif.empty?
-  %p
+  %p{:class => 'fieldRelationsMore'}
     = "No element was specified for classification field \"#{field.name}\"."
 - else
   - new_object = f.object.classification_selections.build
