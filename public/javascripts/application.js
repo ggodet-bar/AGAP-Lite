@@ -23,8 +23,17 @@ document.observe('dom:loaded', function() {
       }) ;
     }) ;
   }
-}) ;
 
+  // Create color observers
+  $$(".colorPicker").each(function(color_picker) {
+    new Form.Element.Observer(
+      color_picker.down('input'),
+      0.2,
+      function(el, value) {
+      el.next(".relationSquare").setStyle("border-color: " + value) ;
+    }) ;
+  }) ;
+}) ;
 
 /* Used for pattern system edition */
 function remove_fields(link) {

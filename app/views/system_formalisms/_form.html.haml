@@ -1,16 +1,25 @@
 %h3
   = f.label :name, t(:name)
-= f.text_field :name, :size => 60
+.field
+  = f.text_field :name, :size => 60
 
 %h3
   = f.label :author, t(:author)
-= f.text_field :author
+.field
+  = f.text_field :author
 
 %h3
   = f.label :version, "Version"
-= f.text_field :version
+.field
+  = f.text_field :version
 
 %h3
   = f.label :description, "Description"
-= f.text_area :description, :rows => 4, :class => "mceEditor"
+.field
+  = f.text_area :description, :rows => 4, :class => "mceEditor"
 
+%h3
+  = f.label :relation_descriptors, "Relation descriptors"
+= f.fields_for :relation_descriptors do |relation_descriptor_form|
+  = render 'relation_descriptor_form', :f => relation_descriptor_form
+= link_to_add_fields 'add', f, :relation_descriptors, 'relation_descriptor_form'

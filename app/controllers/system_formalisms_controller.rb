@@ -10,11 +10,13 @@ class SystemFormalismsController < ApplicationController
 
   def new
     @system_formalism = SystemFormalism.new
+    @relation_descriptors = prepare_associated_fields
   end
 
   def edit
     @system_formalism = SystemFormalism.find(params[:id])
     @system_interface_fields, @system_solution_fields = @system_formalism.field_descriptors.partition{|field| field.section == 'interface'}
+    @relation_descriptors = prepare_associated_fields
 
     @pattern_formalism_fields = @system_formalism.pattern_formalisms.inject({}) do |acc, pattern_formalism|
       acc[pattern_formalism.name] = pattern_formalism.field_descriptors.partition{|field| field.section == 'interface'}
@@ -58,5 +60,20 @@ class SystemFormalismsController < ApplicationController
       format.html {redirect_to(system_formalisms_path)}
       format.xml  {head :ok}
     end
+  end
+
+private
+  def prepare_associated_fields
+    pattern_formalism_fields = []
+    @system_formalism.pattern_formalisms.each do |p|
+      p.field_descriptors.each do |f|
+        pattern_formalism_fields << ["#{p.name}:#{f.name}", f.id]
+      end
+    end
+    system_formalism_fields = @system_formalism.field_descriptors.collect do |f|
+        ["#{f.name}", f.id]
+    end
+
+    pattern_formalism_fields + system_formalism_fields
   end
 end

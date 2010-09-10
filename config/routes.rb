@@ -21,7 +21,6 @@ AgapLiteApp::Application.routes.draw do
 
   resources :system_formalisms do
     resources :pattern_formalisms
-    resources :relation_descriptors
   end
 
   match "/create_relation" => "patterns#create_relation", :as => :create_relation

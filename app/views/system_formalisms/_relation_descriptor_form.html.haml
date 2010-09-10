@@ -1,0 +1,29 @@
+.fieldDescriptorField
+  %p
+    = f.label :name, t(:name)
+    %br
+    = f.text_field :name, {:readonly => !f.object.is_alterable}
+  %p
+    = f.label :associated_field_id, 'Associated field'
+    %br
+    = f.select  :associated_field_id, @relation_descriptors, {:include_blank => true}, {:disabled => !f.object.is_alterable}
+  %p
+    = f.label :associated_field_description, 'Associated field description'
+    %br
+    - if f.object.is_alterable
+      = f.text_area :associated_field_description, {:style => 'height: 5em; width: 100%', :rows => 6}
+      = link_to_function(image_tag('common_images/delete.png', :class => 'delete'), 'remove_fields(this)')
+    - else
+      - if f.object.associated_field_description.strip.empty?
+        .fieldRelationsMore No description given
+      - else
+        = f.text_area :associated_field_description, {:style => 'height: 5em; width: 100%', :rows => 6, :disabled => true}
+  %p
+    = f.label :is_reflexive, 'Reflexive association'
+    = f.check_box :is_reflexive, :disabled => !f.object.is_alterable
+  %p
+    .colorPicker
+      = f.label :color_code, 'Color code (CSS valid)'
+      = f.text_field :color_code, {:size => 8, :readonly => !f.object.is_alterable}
+      .relationSquare{:style => "margin-left: 1em; width: 1em; height: 1em; border-color: #{(f.object.color_code || '')} ;"}
+  = f.hidden_field :_destroy

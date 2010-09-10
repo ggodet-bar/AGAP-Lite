@@ -46,6 +46,15 @@ a:hover {
   color: #C00 ;
 }
 
+.color {
+  display: inline-block ;
+  height: 2em ;
+  width: 2em ;
+  border: thin solid black ;
+  vertical-align: middle ;
+  margin-left: 1em ;
+}
+
 #notices {
   color: green ;
   padding-top: 0.6em ;

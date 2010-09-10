@@ -25,15 +25,11 @@
   - @system_formalism.relation_descriptors.each do |relation_descriptor|
     %li
       = relation_descriptor.name
-      |
-      = link_to t(:show), [@system_formalism, relation_descriptor]
-      - if relation_descriptor.is_alterable
-        |
-        = link_to t(:edit), edit_system_formalism_relation_descriptor_path(relation_descriptor)
-        |
-        = link_to t(:delete), [@system_formalism, relation_descriptor], :confirm => 'Are you sure?', :method => :delete
+      .relationSquare{:style => "border-color: #{relation_descriptor.color_code}; width: 1em; height: 1em;"}
+      - if relation_descriptor.associated_field.present?
+        .fieldRelationsMore{:style => "display: inline-block"}= "(associated with field \"#{relation_descriptor.associated_field.name}\")"
 
-%p= link_to 'Add a relation descriptor', new_system_formalism_relation_descriptor_path(@system_formalism)
 
 .commands
-  %p= link_to t(:edit), edit_system_formalism_path(@system_formalism)
+  %p
+    = link_to t(:edit), edit_system_formalism_path(@system_formalism)

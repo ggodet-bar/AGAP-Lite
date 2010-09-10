@@ -10,7 +10,7 @@ module ApplicationHelper
     CONTROLLER_TAB_ASSOCIATION[tab_name]
   end
 
-  def link_to_add_fields(name, f, association, partial_name, initial_params)
+  def link_to_add_fields(name, f, association, partial_name, initial_params = {})
     new_object = f.object.class.reflect_on_association(association).klass.new(initial_params)
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render partial_name, :f => builder
