@@ -36,6 +36,16 @@ p {
 	margin-bottom: 0.6em;
 }
 
+a:visited, a:link {
+  text-decoration: underline ;
+  color: #24A ;
+}
+
+a:hover {
+  text-decoration: none ;
+  color: #C00 ;
+}
+
 #notices {
   color: green ;
   padding-top: 0.6em ;
