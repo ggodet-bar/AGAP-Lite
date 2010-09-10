@@ -14,7 +14,7 @@
       = f.text_area :associated_field_description, {:style => 'height: 5em; width: 100%', :rows => 6}
       = link_to_function(image_tag('common_images/delete.png', :class => 'delete'), 'remove_fields(this)')
     - else
-      - if f.object.associated_field_description.strip.empty?
+      - if f.object.associated_field_description.nil? || f.object.associated_field_description.strip.empty?
         .fieldRelationsMore No description given
       - else
         = f.text_area :associated_field_description, {:style => 'height: 5em; width: 100%', :rows => 6, :disabled => true}
