@@ -4,4 +4,7 @@
   = f.error_messages
   = render :partial => 'form', :locals => {:f => f}
   .commands
-    = f.submit t(:create)
+    %p
+      = f.submit t(:create)
+      |
+      = link_to 'Cancel', system_formalisms_path

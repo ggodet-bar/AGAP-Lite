@@ -7,8 +7,8 @@
 
   = render :partial => 'form', :locals => {:f => f}
 
-  %p
-    %br
-    = f.submit "Update"
-  
-= link_to 'Show', @pattern_system
+  .commands
+    %p
+      = f.submit t(:update)
+      |
+      = link_to t(:back), @pattern_system

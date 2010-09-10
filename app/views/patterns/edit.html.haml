@@ -6,7 +6,9 @@
 =form_for([@pattern_system, @process_pattern], :html => {:multipart => true}) do |f|
   = f.error_messages
   = render :partial => 'form', :locals => {:f => f}
-  %p
-    = f.submit t(:update)
 
-= link_to t(:back), [@pattern_system, @process_pattern]
+  .commands
+    %p
+      = f.submit t(:update)
+      |
+      = link_to t(:back), [@pattern_system, @process_pattern]

@@ -3,5 +3,8 @@
 = form_for([@system_formalism, @pattern_formalism]) do |f|
   = f.error_messages
   = render :partial => 'form', :locals => {:f => f}
-  %p
-    = f.submit t(:create)
+  .commands
+    %p
+      = f.submit t(:create)
+      |
+      = link_to 'Cancel', @system_formalism

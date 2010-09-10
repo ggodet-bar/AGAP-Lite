@@ -4,4 +4,7 @@
   = f.error_messages
   = render :partial => 'form', :locals => {:f => f}
   .commands
-    = f.submit t(:update)
+    %p
+      = f.submit t(:update)
+      |
+      = link_to t(:back), @system_formalism
