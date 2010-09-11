@@ -14,7 +14,9 @@ describe Pattern do
   end
 
   it "should create a new instance given valid attributes" do
-    Pattern.create!(@valid_attributes)
+    new_pattern = Pattern.create(@valid_attributes)
+    new_pattern.should be_valid
+    new_pattern.should_not be_new_record
   end
 
   it "should allow adding mappable images" do
