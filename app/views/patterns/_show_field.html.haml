@@ -1,7 +1,9 @@
--unless f.blank? 
+- unless f.blank? 
   -case f
     -when TextInstance, StringInstance
-      - unless f.content.strip.empty?
+      - if f.content.strip.empty?
+        - blank_content = true
+      - else
         .field
           %h3= f.field_descriptor.name
           = f.content
@@ -23,10 +25,13 @@
                 .relationSquare{:style => 'border-color: ' + rel_desc.color_code}
                 %span= rel_desc.name
     -when Array
-      - unless f.empty?
+      - if f.empty?
+        - blank_content = true
+      - else
         .field
           %h3= f.first.classification_element.field_descriptor.name.capitalize
           %ul
             -f.each do |classif|
               %li= classif.classification_element.name
-  = render :partial => 'field_relations', :locals => {:f => f}
+  - unless blank_content
+    = render :partial => 'field_relations', :locals => {:f => f}
