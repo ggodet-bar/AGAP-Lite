@@ -2,8 +2,9 @@
   -unless f.blank? 
     -case f
       -when TextInstance, StringInstance
-        %h3= f.field_descriptor.name
-        = f.content
+        - unless f.content.strip.empty?
+          %h3= f.field_descriptor.name
+          = f.content
       -when MappableImage
         - image_association = ImageAssociation.where(:pattern_id => @process_pattern.id, :mappable_image_id => f.id).first
         %h3= image_association.field_descriptor.name 
