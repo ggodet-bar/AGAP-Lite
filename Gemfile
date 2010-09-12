@@ -17,7 +17,7 @@ group :test, :cucumber do
   gem "test-unit", "1.2.3"
   gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
   gem "factory_girl_rails"
-  gem 'rspec-rails', '>= 2.0.0.beta.10'
+  gem 'rspec-rails', '>= 2.0.0.beta.20'
   gem 'capybara'
   gem 'database_cleaner'
 # gem 'webrat'

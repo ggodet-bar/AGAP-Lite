@@ -166,7 +166,7 @@ DEPENDENCIES
   mysql2
   paperclip!
   rails (= 3.0.0)
-  rspec-rails (>= 2.0.0.beta.10)
+  rspec-rails (>= 2.0.0.beta.20)
   spork
   sqlite3-ruby (= 1.2.5)
   test-unit (= 1.2.3)
