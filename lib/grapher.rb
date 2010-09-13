@@ -66,10 +66,9 @@ module Grapher
       found_assoc = false
       current_partition.each do |sub_partition|
         sub_partition.each do |edge_set|
-          if !found_assoc &&
-             edge_set[0] == current_edge[0] ||
-             edge_set[1] == current_edge[0] ||
-             edge_set[0] == current_edge[1]
+          if !found_assoc && (edge_set[0] == current_edge[0] ||
+                              edge_set[1] == current_edge[0] ||
+                              edge_set[0] == current_edge[1])
             sub_partition << current_edge
             found_assoc = true
           end

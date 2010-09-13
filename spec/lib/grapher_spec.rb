@@ -64,6 +64,16 @@ describe Grapher do
     end
   end
 
+  context "Graph with multiple edges from same vertex" do
+    it "should return a single array for 4 connected pairs" do
+      Grapher.identify_complete_subgraphs([['a', 'b'], ['a', 'd'], ['a', 'f'], ['f', 'g']]).should == [[['a', 'b'], ['a', 'd'], ['a', 'f'], ['f', 'g']]]
+    end
+
+    it "should return a single array for 4 connected pairs (1 connected pair that would connect to the common vertex (which appears as target) is at the array's tail)" do
+      Grapher.identify_complete_subgraphs([['a', 'b'], ['a', 'd'], ['a', 'f'], ['e', 'a']]).should == [[['a', 'b'], ['a', 'd'], ['a', 'f'], ['e', 'a']]]
+    end
+  end
+
   context "Oriented graph partition" do
     it "should return 2 arrays for 2 pairs that share a common 'target'" do
       Grapher.identify_complete_subgraphs([['a', 'b'], ['c', 'b']]).should == [[['a', 'b']], [['c', 'b']]]
