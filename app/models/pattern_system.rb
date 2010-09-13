@@ -27,9 +27,13 @@ class PatternSystem < ActiveRecord::Base
     end 
     main_pattern = main_pattern.blank? ? system_formalism.pattern_formalisms.first : main_pattern
     
+    # We get the first relation type that is not reflexive
+    main_relation = system_formalism.relation_descriptors.select{|r| !r.is_reflexive}.first
+
     # We create a patterns list based on the pattern formalism names
     patterns_list = system_formalism.pattern_formalisms.inject({}) do |acc, p|
-      acc[p.name] = patterns.select{|a| a.pattern_formalism == p}
+      sub_patterns_list = patterns.select{|a| a.pattern_formalism == p}
+      acc[p.name] = order_patterns(sub_patterns_list, main_relation)
       acc
     end
 
@@ -44,6 +48,26 @@ class PatternSystem < ActiveRecord::Base
       end
     end
     patterns_list
+  end
+
+  # This method tries to create a tree structure, based on the relations
+  # between patterns. Returns a list of sub-trees if not all patterns are
+  # related.
+  def order_patterns(patterns_list, sort_relation)
+    existing_relations = Relation.where(:relation_descriptor_id => sort_relation.id) \
+                                 .where({:source_pattern_id => patterns_list.map(&:id)}) \
+                                 .where({:target_pattern_id => patterns_list.map(&:id)})
+    edges = existing_relations.collect{|rel| [rel.source_pattern_id, rel.target_pattern_id]}
+
+    complete_graphs = Grapher::identify_complete_subgraphs(edges).sort_by{|graph| graph.size}
+    puts complete_graphs.inspect
+
+    if complete_graphs.empty?
+      {}
+    else
+      Grapher::treeify_complete_graph(complete_graphs.first)
+    end
+
   end
 
   def clone_with(name = nil, short_name = nil, author = nil)

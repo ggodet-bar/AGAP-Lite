@@ -12,20 +12,20 @@
 = @pattern_system.characteristics
 
 %h2= t :patterns_list
+= debug @patterns_list
 %ul
   - @patterns_list.each_key do |key|
     %li
       %b= key
-      %br
-      %ul
-        - @patterns_list[key].each do |pat|
-          %li= pat.name + ' | ' + link_to(t(:show), [@pattern_system, pat]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, pat)) + ' | ' + link_to(t(:delete), [@pattern_system, pat], :confirm => 'Are you sure?', :method => :delete)
-  %li
-    %b= t(:unclassified)  
-    %ul
-      - unclassified = @pattern_system.patterns - @patterns_list.values.flatten
-      - unclassified.each do |u|
-        %li= u.name + ' | ' + link_to(t(:show), [@pattern_system, u]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, u)) + ' | ' + link_to(t(:delete), [@pattern_system, u], :confirm => 'Are you sure?', :method => :delete)
+      = render 'sub_patterns', :elements => @patterns_list[key]
+-#         - @patterns_list[key].each do |pat|
+-#           %li= pat.name + ' | ' + link_to(t(:show), [@pattern_system, pat]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, pat)) + ' | ' + link_to(t(:delete), [@pattern_system, pat], :confirm => 'Are you sure?', :method => :delete)
+-#   %li
+-#     %b= t(:unclassified)  
+-#     %ul
+-#       - unclassified = @pattern_system.patterns - @patterns_list.values.flatten
+-#       - unclassified.each do |u|
+-#         %li= u.name + ' | ' + link_to(t(:show), [@pattern_system, u]) + ' | ' + link_to(t(:edit), edit_pattern_system_pattern_path(@pattern_system, u)) + ' | ' + link_to(t(:delete), [@pattern_system, u], :confirm => 'Are you sure?', :method => :delete)
 
 
 

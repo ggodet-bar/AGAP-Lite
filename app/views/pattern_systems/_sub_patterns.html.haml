@@ -1,0 +1,13 @@
+%ul
+  - if elements.is_a?(Hash) 
+    - if elements.has_key?(:node)
+      %li
+        - pattern = Pattern.find(elements[:node])
+        = link_to pattern.name, [@pattern_system, pattern]
+        %ul
+          - elements[:children].each do |sub_element|
+            = render 'sub_patterns', :elements => sub_element
+  - else
+    %li
+      - pattern = Pattern.find(elements)
+      = link_to pattern.name, [@pattern_system, pattern]
