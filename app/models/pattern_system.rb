@@ -27,8 +27,8 @@ class PatternSystem < ActiveRecord::Base
     end 
     main_pattern = main_pattern.blank? ? system_formalism.pattern_formalisms.first : main_pattern
     
-    # We get the first relation type that is not reflexive
-    main_relation = system_formalism.relation_descriptors.select{|r| !r.is_reflexive}.first
+    # We get the first relation type that is used for sorting patterns
+    main_relation = system_formalism.relation_descriptors.select{|r| r.is_sorting}.first
 
     # We create a patterns list based on the pattern formalism names
     patterns_list = system_formalism.pattern_formalisms.inject({}) do |acc, p|

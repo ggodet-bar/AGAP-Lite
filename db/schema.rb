@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100909153706) do
+ActiveRecord::Schema.define(:version => 20100913210915) do
 
   create_table "classification_elements", :force => true do |t|
     t.integer  "field_descriptor_id"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20100909153706) do
     t.integer  "system_formalism_id",                             :null => false
     t.string   "color_code",                   :default => "red"
     t.integer  "associated_field_id"
+    t.boolean  "is_sorting",                   :default => false
   end
 
   create_table "relations", :force => true do |t|
