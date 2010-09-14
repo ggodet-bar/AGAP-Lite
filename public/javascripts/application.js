@@ -26,14 +26,22 @@ document.observe('dom:loaded', function() {
 
   // Create color observers
   $$(".colorPicker").each(function(color_picker) {
-    new Form.Element.Observer(
-      color_picker.down('input'),
-      0.2,
-      function(el, value) {
-      el.next(".relationSquare").setStyle("border-color: " + value) ;
-    }) ;
+      create_color_picker(color_picker) ;
   }) ;
 }) ;
+
+function new_color_picker(top_div) {
+  create_color_picker(top_div.down(".colorPicker")) ;
+}
+
+function create_color_picker(color_picker_div) {
+    new Form.Element.Observer(
+      color_picker_div.down('input'),
+      0.2,
+      function(el, value) {
+        el.next(".relationSquare").setStyle("border-color: " + value) ;
+    }) ;
+}
 
 /* Used for pattern system edition */
 function remove_fields(link) {
@@ -46,13 +54,18 @@ function remove_fields(link) {
   surrounding_div.hide() ; 
 }
 
-function add_fields(link, association, content) {
+function add_fields(link, association, content, event_callback) {
   var new_id = new Date().getTime() ;
   var regexp = new RegExp("new_" + association, "g")
   // We make sure we generate a unique id for each set of field
   $(link).insert({
     before: content.replace(regexp, new_id)
   }) ;
+
+  if (event_callback) {
+    var new_element = $(link).previous() ;
+    event_callback.call(this, new_element) ;
+  }
 
 }
 

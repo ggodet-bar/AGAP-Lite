@@ -22,4 +22,4 @@
   = f.label :relation_descriptors, "Relation descriptors"
 = f.fields_for :relation_descriptors do |relation_descriptor_form|
   = render 'relation_descriptor_form', :f => relation_descriptor_form
-= link_to_add_fields 'add', f, :relation_descriptors, 'relation_descriptor_form'
+= link_to_add_fields 'add', f, :relation_descriptors, 'relation_descriptor_form', nil, 'new_color_picker'
