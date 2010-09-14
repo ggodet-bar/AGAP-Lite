@@ -1,13 +1,30 @@
 %ul
   - if elements.is_a?(Hash) 
     - if elements.has_key?(:node)
-      %li
-        - pattern = Pattern.find(elements[:node])
-        = link_to pattern.name, [@pattern_system, pattern]
-        %ul
-          - elements[:children].each do |sub_element|
-            = render 'sub_patterns', :elements => sub_element
+      - if elements[:node].present?
+        %li
+          - pattern = Pattern.find(elements[:node])
+          = pattern.name 
+          |
+          = link_to t(:show), [@pattern_system, pattern]
+          |
+          = link_to t(:edit), edit_pattern_system_pattern_path(@pattern_system, pattern)
+          |
+          = link_to t(:delete), [@pattern_system, pattern], :confirm => 'Are you sure?', :method => :delete
+          %ul
+            - elements[:children].each do |sub_element|
+              = render 'sub_patterns', :elements => sub_element
+      - else
+        - elements[:children].each do |sub_element|
+          = render 'sub_patterns', :elements => sub_element
+
   - else
     %li
       - pattern = Pattern.find(elements)
-      = link_to pattern.name, [@pattern_system, pattern]
+      = pattern.name
+      |
+      = link_to t(:show), [@pattern_system, pattern]
+      |
+      = link_to t(:edit), edit_pattern_system_pattern_path(@pattern_system, pattern)
+      |
+      = link_to t(:delete), [@pattern_system, pattern], :confirm => 'Are you sure?', :method => :delete

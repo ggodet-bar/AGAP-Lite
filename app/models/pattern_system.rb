@@ -43,16 +43,28 @@ class PatternSystem < ActiveRecord::Base
     unless main_field.blank?
       classif_elements = classification_elements.select{|c| c.field_descriptor_id == main_field.id}
       patterns_list = classif_elements.inject({}) do |acc, c|
-        acc[c.name] = patterns.select{|p| p.classification_selections.any?{|sel| sel.classification_element_id == c.id}}
+        acc[c.name] = [{:node => nil, :children => patterns.select{|p| p.classification_selections.any?{|sel| sel.classification_element_id == c.id}}.map(&:id)}, []]
         acc
       end
+
+      unordered_patterns = patterns.map(&:id) - patterns_list.values.collect{|l| l[0][:children]}.flatten.uniq
+      unless unordered_patterns.empty?
+        patterns_list["Unordered patterns"] = [{:node => nil, :children => unordered_patterns}, []]
+      end
     end
+
+
     patterns_list
   end
 
   # This method tries to create a tree structure, based on the relations
   # between patterns. Returns a list of sub-trees if not all patterns are
   # related.
+  #
+  # Returns an Array of two elements, the first one being the result of
+  #   pattern ordering algorithm, the second one the remaining (unordered)
+  #   patterns.
+  #
   def order_patterns(patterns_list, sort_relation)
     existing_relations = Relation.where(:relation_descriptor_id => sort_relation.id) \
                                  .where({:source_pattern_id => patterns_list.map(&:id)}) \
@@ -60,12 +72,15 @@ class PatternSystem < ActiveRecord::Base
     edges = existing_relations.collect{|rel| [rel.source_pattern_id, rel.target_pattern_id]}
 
     complete_graphs = Grapher::identify_complete_subgraphs(edges).sort_by{|graph| graph.size}
-    puts complete_graphs.inspect
+
+    flattened_graphs = complete_graphs.dup
+    ordered_patterns = flattened_graphs.shift.flatten.uniq
+    unordered_patterns = patterns.map(&:id) - ordered_patterns
 
     if complete_graphs.empty?
-      {}
+      [nil, unordered_patterns]
     else
-      Grapher::treeify_complete_graph(complete_graphs.first)
+      [Grapher::treeify_complete_graph(complete_graphs.first), unordered_patterns]
     end
 
   end
